@@ -1,0 +1,89 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+nav, .content {
+    padding: 0 50px !important;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar-brand #logo {
+    width: 100px;
+    margin-top: -10px;
+}
+
+.navbar-toggler {
+    color: white !important;
+}
+.navbar-toggler:hover, .navbar-toggler:focus {
+    color: rgb(33, 37, 41) !important;
+    background-color: white;
+}
+
+.nav-item .nav-link {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 5px;
+}
+.nav-item .nav-link:hover {
+    background-color: rgb(227, 232, 0);
+}
+.nav-item .nav-link:focus {
+    color: rgb(33, 37, 41);
+    background-color: white;
+}
+
+.nav-item .dropdown-menu {
+    margin: 0 5px;
+}
+
+.nav-item .dropdown-item {
+    color: rgb(33, 37, 41);
+}
+.nav-item .dropdown-item:hover {
+    background-color: rgb(227, 232, 0);
+}
+
+.navbar form {
+    margin: 0 5px;
+}
+.navbar form button {
+    color: white;
+    border-color: white;
+}
+.navbar form button:hover, .navbar form button:focus {
+    background-color: white !important;
+    color: rgb(33, 37, 41) !important;
+}
+
+.profileButton .nav-item .nav-link {
+    border: 0px;
+}
+
+#profileImg {
+    width: 50px;
+}
+
+#profileName {
+    color: rgb(33, 37, 41);
+    background-color: white;
+}
+
+@media (max-width: 992px) {
+    .nav-item .nav-link, .nav-item .dropdown-item {
+        text-align: center;
+    }
+
+    .navbar form {
+        margin-bottom: 15px;
+    }
+
+    .profileButton {
+        display: none !important;
+    }
+}
