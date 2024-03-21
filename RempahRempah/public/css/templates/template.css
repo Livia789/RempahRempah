@@ -3,7 +3,7 @@ body {
     margin: 0;
 }
 
-nav, .content {
+nav {
     padding: 0 50px !important;
 }
 
@@ -63,6 +63,7 @@ nav, .content {
 
 .profileButton .nav-item .nav-link {
     border: 0px;
+    padding: 5px;
 }
 
 #profileImg {
@@ -74,16 +75,23 @@ nav, .content {
     background-color: white;
 }
 
+.content {
+    margin: 20px 0;
+    padding: 0 70px !important;
+}
+
 @media (max-width: 992px) {
     .nav-item .nav-link, .nav-item .dropdown-item {
         text-align: center;
     }
 
-    .navbar form {
-        margin-bottom: 15px;
+    .profileButton {
+        margin-top: 5px;
+        margin-bottom: 15px !important;
     }
 
-    .profileButton {
-        display: none !important;
+    .profileButton .profileDropdown {
+        display: flex;
+        justify-content: space-evenly;
     }
 }

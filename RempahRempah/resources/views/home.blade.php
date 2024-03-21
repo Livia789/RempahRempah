@@ -7,7 +7,5 @@
 @section('title', 'RempahRempah | Home')
 
 @section('content')
-
+    test
 @endsection
-
-@include('templates\footer')
