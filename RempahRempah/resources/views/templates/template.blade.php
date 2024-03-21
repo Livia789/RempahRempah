@@ -60,7 +60,7 @@
                 </form>
                 <ul class="navbar-nav profileButton">
                     <li class="nav-item dropdown">
-                        <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if (Auth::check())
                                 <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url('public/users/'.$user->img) }}" alt="profile image">
                             @else
@@ -96,6 +96,7 @@
     </div>
     <footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        @include('templates\footer')
     </footer>
 </body>
 </html>
