@@ -90,7 +90,7 @@
     <div class="footerContainer">
         <div class="footerContentContainer">
             <div class="footerSectionContainer">
-                <img src="/storage/logo.png" class="footerLogo">
+                <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
                 <a class="roundedBox yellow" href="\tentangKami">Tentang Kami</a>
             </div>
@@ -104,9 +104,9 @@
             <div class="footerSectionContainer">
                     <p>Media sosial kami</p>
                     <div class="socialMediaIconContainer">
-                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/storage/instagramIcon.png" class="footerLogo"></a>
-                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/storage/xIcon.png" class="footerLogo"></a>
-                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/storage/facebookIcon.png" class="footerLogo"></a>
+                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
+                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
+                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
                     </div>
                     <p class="roundedBox yellow">@rempah-rempah</p>
             </div>
