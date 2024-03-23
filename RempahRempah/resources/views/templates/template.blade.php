@@ -11,88 +11,86 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    @auth
-        <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/home"><img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 210px;">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Kategori
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Padang Padang Padang</a></li>
-                                <li><a class="dropdown-item" href="#">a</a></li>
-                                <li><a class="dropdown-item" href="#">a</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hari Spesial
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">a</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Masakan Khas
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">a</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Durasi
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">a</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Cari resep" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class='fa fa-search'></i></button>
-                    </form>
-                    <ul class="navbar-nav profileButton">
-                        <li class="nav-item dropdown">
-                            <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                @if (Auth::check())
-                                    <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url('users/'.Auth::user()->profile_img) }}" alt="profile image">
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home"><img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 210px;">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategori
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Padang Padang Padang</a></li>
+                            <li><a class="dropdown-item" href="#">a</a></li>
+                            <li><a class="dropdown-item" href="#">a</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hari Spesial
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">a</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Masakan Khas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">a</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Durasi
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">a</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Cari resep" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class='fa fa-search'></i></button>
+                </form>
+                <ul class="navbar-nav profileButton">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (Auth::check())
+                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url('users/'.Auth::user()->profile_img) }}" alt="profile image">
+                            @else
+                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ asset('assets/default_profile_img.png') }}" alt="profile image">
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            @if (Auth::check())
+                                <li class="dropdown-item" id="profileName">
+                                    {{Auth::user()->name}}
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                @if (Auth::user()->role == 'member')
+                                    <li><a class="dropdown-item" href="#">Edit Profil</a></li>
+                                    <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
+                                    <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else
-                                    <img class="nav-link dropdown-toggle" id="profileImg" src="{{ asset('assets/default_profile_img.png') }}" alt="profile image">
+                                    <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>
                                 @endif
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                @if (Auth::check())
-                                    <li class="dropdown-item" id="profileName">
-                                        {{Auth::user()->name}}
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    @if (Auth::user()->role == 'member')
-                                        <li><a class="dropdown-item" href="#">Edit Profil</a></li>
-                                        <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
-                                        <li><a class="dropdown-item" href="#">Markah</a></li>
-                                    @else
-                                        <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>
-                                    @endif
-                                    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-                                @else
-                                    <li><a class="dropdown-item" href="/login">Log In</a></li>
-                                    <li><a class="dropdown-item" href="/register">Register</a></li>
-                                @endif
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="/login">Log In</a></li>
+                                <li><a class="dropdown-item" href="/register">Register</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    @endauth
+        </div>
+    </nav>
     <div>
         @yield('content')
     </div>
