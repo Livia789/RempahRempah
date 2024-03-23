@@ -1,0 +1,52 @@
+.banner, .form {
+    width: 50%;
+}
+
+.banner {
+    height: auto;
+    padding-top: calc(1024 / 684 * 50%);
+    background-size: cover;
+    background-position: center;
+    background-image: url('/assets/banner1.png');
+}
+
+.form {
+    padding: 25px;
+    color: white;
+    background-color: rgb(33, 37, 41);
+}
+
+.form #logo, .form h6 {
+    margin-bottom: 25px;
+}
+
+.form #logo {
+    width: 100px;
+}
+
+form .col{
+    margin-bottom: 15px;
+}
+
+.urlText {
+    color: rgb(227, 232, 0);
+    font-weight: bold;
+}
+.urlText:hover {
+    background-color: rgb(227, 232, 0);
+    color: rgb(33, 37, 41);
+}
+
+.errorMsg {
+    color: red;
+}
+
+@media (max-width: 992px) {
+    .banner {
+        visibility: hidden;
+        width: 0;
+    }
+    .form {
+        width: 100%;
+    }
+}

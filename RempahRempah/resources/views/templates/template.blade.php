@@ -62,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if (Auth::check())
-                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url('public/users/'.$user->img) }}" alt="profile image">
+                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url('users/'.Auth::user()->profile_img) }}" alt="profile image">
                             @else
                                 <img class="nav-link dropdown-toggle" id="profileImg" src="{{ asset('assets/default_profile_img.png') }}" alt="profile image">
                             @endif
@@ -70,20 +70,20 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             @if (Auth::check())
                                 <li class="dropdown-item" id="profileName">
-                                    {{$user->name}}
+                                    {{Auth::user()->name}}
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                                @if ($user->role == 'member')
+                                @if (Auth::user()->role == 'member')
                                     <li><a class="dropdown-item" href="#">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
                                     <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else
                                     <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>
                                 @endif
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                             @else
-                                <li><a class="dropdown-item" href="#">Log In</a></li>
-                                <li><a class="dropdown-item" href="#">Register</a></li>
+                                <li><a class="dropdown-item" href="/login">Log In</a></li>
+                                <li><a class="dropdown-item" href="/register">Register</a></li>
                             @endif
                         </ul>
                     </li>
