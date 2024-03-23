@@ -63,6 +63,18 @@
         .yellow{
             color:#E3E800;
             border:2px solid #E3E800;
+            transition:all 0.3s;
+        }
+
+        a.yellow:hover{
+            color:#e8a200;
+            border:2px solid #e8a200;
+            background-color:#000000;
+        }
+
+        a.yellow:hover::after{
+            content:' 👨‍🍳 →';
+            transition:all 0.3s;
         }
 
         .socialMediaIcon{
@@ -83,6 +95,34 @@
             width:80%
         }
 
+        @media (max-width: 992px) {
+            .footerContentContainer{
+                flex-direction:column;
+                justify-content: center;
+            }
+
+            .footerSectionContainer{
+                max-width:100%;
+                text-align:center;
+                justify-content: center;
+            }
+
+            p{
+                margin:20px auto;
+            }
+
+            .socialMediaIconContainer{
+                width:50%;
+                margin:auto;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+            .footerContainer{
+                padding:10px;
+            }
+        }
     </style>
 </head>
 
@@ -90,7 +130,7 @@
     <div class="footerContainer">
         <div class="footerContentContainer">
             <div class="footerSectionContainer">
-                <img src="/storage/logo.png" class="footerLogo">
+                <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
                 <a class="roundedBox yellow" href="\tentangKami">Tentang Kami</a>
             </div>
@@ -104,9 +144,9 @@
             <div class="footerSectionContainer">
                     <p>Media sosial kami</p>
                     <div class="socialMediaIconContainer">
-                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/storage/instagramIcon.png" class="footerLogo"></a>
-                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/storage/xIcon.png" class="footerLogo"></a>
-                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/storage/facebookIcon.png" class="footerLogo"></a>
+                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
+                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
+                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
                     </div>
                     <p class="roundedBox yellow">@rempah-rempah</p>
             </div>
