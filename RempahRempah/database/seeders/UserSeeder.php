@@ -27,10 +27,10 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Ahli 1',
-            'email' => 'ahli1@gmail.com',
+            'name' => 'Ahli Gizi 1',
+            'email' => 'ahligizi1@gmail.com',
             'password' => bcrypt('wadimor'),
-            'role' => 'ahli_gizi',
+            'role' => 'ahligizi',
             'isVerified' => true,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
