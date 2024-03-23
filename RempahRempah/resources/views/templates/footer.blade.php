@@ -63,6 +63,18 @@
         .yellow{
             color:#E3E800;
             border:2px solid #E3E800;
+            transition:all 0.3s;
+        }
+
+        a.yellow:hover{
+            color:#e8a200;
+            border:2px solid #e8a200;
+            background-color:#000000;
+        }
+
+        a.yellow:hover::after{
+            content:' 👨‍🍳 →';
+            transition:all 0.3s;
         }
 
         .socialMediaIcon{
@@ -83,6 +95,34 @@
             width:80%
         }
 
+        @media (max-width: 992px) {
+            .footerContentContainer{
+                flex-direction:column;
+                justify-content: center;
+            }
+
+            .footerSectionContainer{
+                max-width:100%;
+                text-align:center;
+                justify-content: center;
+            }
+
+            p{
+                margin:20px auto;
+            }
+
+            .socialMediaIconContainer{
+                width:50%;
+                margin:auto;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+            .footerContainer{
+                padding:10px;
+            }
+        }
     </style>
 </head>
 
