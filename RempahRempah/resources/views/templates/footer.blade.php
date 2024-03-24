@@ -13,6 +13,7 @@
 
         a{
             text-decoration: none;
+            color:white;
         }
 
         p{
@@ -43,7 +44,6 @@
             padding:25px 0px;
             width:auto;
             max-width: 25%;
-            {{--  border:2px solid white;  --}}
             text-align:left;
         }
 
@@ -62,19 +62,23 @@
 
         .yellow{
             color:#E3E800;
+            border-color: #E3E800;
+        }
+
+        .white{
+            color:white;
+            border-color:white;
+        }
+
+        a:hover{
+            color:#E3E800;
             border:2px solid #E3E800;
-            transition:all 0.3s;
         }
 
-        a.yellow:hover{
-            color:#e8a200;
-            border:2px solid #e8a200;
-            background-color:#000000;
-        }
-
-        a.yellow:hover::after{
+        a.roundedBox:hover::after{
             content:' 👨‍🍳 →';
             transition:all 0.3s;
+            color:#E3E800;
         }
 
         .socialMediaIcon{
@@ -132,7 +136,7 @@
             <div class="footerSectionContainer">
                 <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
-                <a class="roundedBox yellow" href="\tentangKami">Tentang Kami</a>
+                <a class="roundedBox white" href="\tentangKami">Tentang Kami</a>
             </div>
             <div class="footerSectionContainer">
                 <p>Hubungi Kami:</p>

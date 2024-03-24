@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,6 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
 });
+
+Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage'])->middleware('loggedin');
+Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage'])->middleware('loggedin');
