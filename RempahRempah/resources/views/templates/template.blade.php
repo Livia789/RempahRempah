@@ -74,9 +74,9 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 @if (Auth::user()->role == 'member')
-                                    <li><a class="dropdown-item" href="#">Edit Profil</a></li>
+                                    <li><a class="dropdown-item" href="/temp/avoidedIngredients">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
-                                    <li><a class="dropdown-item" href="#">Markah</a></li>
+                                    <li><a class="dropdown-item" href="/temp/bookmarks">Markah</a></li>
                                 @else
                                     <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>
                                 @endif

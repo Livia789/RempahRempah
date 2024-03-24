@@ -21,7 +21,25 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
+            AvoidedIngredientSeeder::class,
+            SpecialOccasionSeeder::class,
+            DaerahSeeder::class,
+            CategorySeeder::class,
+            RecipeSeeder::class,
+            ReviewSeeder::class,
+            BookmarkSeeder::class,
+            StepHeaderSeeder::class,
+            StepSeeder::class,
+            IngredientHeaderSeeder::class,
+            IngredientSeeder::class,
+            IngredientIngredientHeaderSeeder::class,
+            ToolSeeder::class,
+            RecipeToolSeeder::class,
+            NutritionSeeder::class,
+            NutritionRecipeSeeder::class,
+            TagsSeeder::class,
+            RecipeTagSeeder::class,
         ]);
     }
 }
