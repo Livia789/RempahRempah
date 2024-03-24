@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     use HasFactory;
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function creator(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function specialOccasion(){
@@ -22,6 +22,10 @@ class Recipe extends Model
 
     public function admin(){
         return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function ahli_gizi(){
+        return $this->belongsTo(User::class, 'ahli_gizi_id');
     }
 
     public function category(){

@@ -27,8 +27,10 @@ class DatabaseSeeder extends Seeder
             DaerahSeeder::class,
             CategorySeeder::class,
             RecipeSeeder::class,
-
             ReviewSeeder::class,
+            BookmarkSeeder::class,
+            StepHeaderSeeder::class,
+
         ]);
     }
 }

@@ -24,4 +24,10 @@ class PageController extends Controller
         $myReviews = $user->reviews;
         return view('temp/myReviews', compact('user', 'myReviews'));
     }
+
+    public function showMyBookmarksPage(){
+        $user = Auth::user();
+        $bookmarks = $user->bookmarks;
+        return view('temp/bookmarks', compact('user', 'bookmarks'));
+    }
 }
