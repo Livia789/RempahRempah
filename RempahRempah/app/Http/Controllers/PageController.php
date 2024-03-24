@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Recipe;
 
 class PageController extends Controller
 {
@@ -30,4 +31,15 @@ class PageController extends Controller
         $bookmarks = $user->bookmarks;
         return view('temp/bookmarks', compact('user', 'bookmarks'));
     }
+
+    public function showRecipeDetailPage($recipe_id){
+        $user = Auth::user();
+        $recipe = Recipe::find($recipe_id);
+        if ($recipe->user_id === $user->id || $recipe->isPublic()) {
+            return view('temp/recipeDetail', compact('recipe'));
+        } else {
+            echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
+        }
+    }
+
 }

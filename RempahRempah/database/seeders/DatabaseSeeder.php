@@ -30,7 +30,10 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             BookmarkSeeder::class,
             StepHeaderSeeder::class,
-
+            StepSeeder::class,
+            IngredientHeaderSeeder::class,
+            IngredientSeeder::class,
+            IngredientIngredientHeaderSeeder::class,
         ]);
     }
 }

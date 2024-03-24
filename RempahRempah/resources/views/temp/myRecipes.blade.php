@@ -23,6 +23,9 @@
 
     @foreach($myRecipes as $myRecipe)
         <h1>{{$myRecipe->recipe_name}}</h1>
+        <button style="margin:20px; padding:5px 10px">
+            <a href="/temp/recipeDetail/{{ $myRecipe->id }}" style="color:black;">lihat detail resep</a>
+        </button>
         <p>{{ $myRecipe->recipe_description }}</p>
         <p>
             @if(!$myRecipe->admin)

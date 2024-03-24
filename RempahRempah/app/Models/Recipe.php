@@ -31,4 +31,16 @@ class Recipe extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    public function isPublic(){
+        return $this->ahli_gizi_id !== null && $this->ahli_gizi_id !== null;
+    }
+
+    public function stepHeaders(){
+        return $this->hasMany(StepHeader::class);
+    }
+
+    public function ingredientHeaders(){
+        return $this->hasMany(IngredientHeader::class);
+    }
 }

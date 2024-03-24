@@ -32,3 +32,4 @@ Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngre
 Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage'])->middleware('loggedin');
 Route::get('/temp/myReviews', [PageController::class, 'showMyReviewsPage'])->middleware('loggedin');
 Route::get('/temp/bookmarks', [PageController::class, 'showMyBookmarksPage'])->middleware('loggedin');
+Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage'])->middleware('loggedin');
