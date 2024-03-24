@@ -30,3 +30,4 @@ Route::group(['middleware' => ['loggedin']], function () {
 
 Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage'])->middleware('loggedin');
 Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage'])->middleware('loggedin');
+Route::get('/temp/myReviews', [PageController::class, 'showMyReviewsPage'])->middleware('loggedin');

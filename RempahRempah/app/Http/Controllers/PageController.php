@@ -18,4 +18,10 @@ class PageController extends Controller
         $myRecipes = $user->recipes;
         return view('temp/myRecipes', compact('user', 'myRecipes'));
     }
+
+    public function showMyReviewsPage(){
+        $user = Auth::user();
+        $myReviews = $user->reviews;
+        return view('temp/myReviews', compact('user', 'myReviews'));
+    }
 }

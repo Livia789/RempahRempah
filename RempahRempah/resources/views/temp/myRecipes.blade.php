@@ -31,11 +31,12 @@
         </p>
         <p>
             @if(!$myRecipe->specialOccasion)
-                <p>daerah : Belum ada daerah</p>
+                <p>masakan (event) : Belum ada</p>
             @else
-                <p>daerah : {{ $myRecipe->specialOccasion  }}</p>
+                <p>masakan (event) : {{ $myRecipe->specialOccasion->name  }}</p>
             @endif
         </p>
+        <p>kategori : {{ $myRecipe->category->name }}</p>
     @endforeach
 </div>
 @endsection

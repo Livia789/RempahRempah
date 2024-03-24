@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
             AvoidedIngredientSeeder::class,
             SpecialOccasionSeeder::class,
             DaerahSeeder::class,
+            CategorySeeder::class,
             RecipeSeeder::class,
+
+            ReviewSeeder::class,
         ]);
     }
 }
