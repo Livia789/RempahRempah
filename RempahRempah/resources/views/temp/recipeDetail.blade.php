@@ -32,7 +32,9 @@
 
     <br><br><br>
     <h1>NUTRISINYA</h1>
-    <p>{{ $recipe->nutritions }}</p>
+    @foreach($recipe->nutrition as $nutrition)
+        <p>{{ $nutrition->name.' : '.$nutrition->pivot->quantity.' '.$nutrition->pivot->unit }}</p>
+    @endforeach
 
     <br><br><br>
     <h1>INGREDIENTSNYA</h1>
