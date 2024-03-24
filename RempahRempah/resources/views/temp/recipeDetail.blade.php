@@ -22,6 +22,15 @@
     <h1>Recipe Detail : {{ $recipe->recipe_name }}</h1>
 
     <br><br><br>
+
+    <h1>TOOLSNYA</h1>
+    <p>
+        @foreach($recipe->tools as $tool)
+            <p>{{$loop->iteration.' . '. $tool->name }}</p>
+        @endforeach
+    </p>
+
+    <br><br><br>
     <h1>INGREDIENTSNYA</h1>
     @foreach($recipe->ingredientHeaders as $ingredientHeader)
         <h4>{{ $ingredientHeader->name }}</h4>

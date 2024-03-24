@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
             IngredientHeaderSeeder::class,
             IngredientSeeder::class,
             IngredientIngredientHeaderSeeder::class,
+            ToolSeeder::class,
+            RecipeToolSeeder::class,
+            NutritionSeeder::class,
         ]);
     }
 }

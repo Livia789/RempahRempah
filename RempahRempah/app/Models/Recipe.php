@@ -43,4 +43,8 @@ class Recipe extends Model
     public function ingredientHeaders(){
         return $this->hasMany(IngredientHeader::class);
     }
+
+    public function tools(){
+        return $this->belongsToMany(Tool::class);
+    }
 }
