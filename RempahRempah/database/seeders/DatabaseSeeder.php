@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
             RecipeToolSeeder::class,
             NutritionSeeder::class,
             NutritionRecipeSeeder::class,
+            TagsSeeder::class,
+            RecipeTagSeeder::class,
         ]);
     }
 }

@@ -63,7 +63,12 @@
         @endif
     @endforeach
 
-    <br><br>
-
+    <br><br><br>
+    <h1>TAGS RECIPE INI</h1>
+    @foreach($recipe->tags as $tag)
+        <p>
+            {{ $loop->iteration.'. ' .$tag->name }}
+        </p>
+    @endforeach
 </div>
 @endsection

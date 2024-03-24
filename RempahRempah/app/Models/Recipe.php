@@ -51,4 +51,8 @@ class Recipe extends Model
     public function nutrition(){
         return $this->belongsToMany(Nutrition::class)->withPivot('quantity', 'unit');
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
 }
