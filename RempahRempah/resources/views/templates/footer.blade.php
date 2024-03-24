@@ -13,6 +13,7 @@
 
         a{
             text-decoration: none;
+            color:white;
         }
 
         p{
@@ -43,7 +44,6 @@
             padding:25px 0px;
             width:auto;
             max-width: 25%;
-            {{--  border:2px solid white;  --}}
             text-align:left;
         }
 
@@ -62,7 +62,23 @@
 
         .yellow{
             color:#E3E800;
+            border-color: #E3E800;
+        }
+
+        .white{
+            color:white;
+            border-color:white;
+        }
+
+        a:hover{
+            color:#E3E800;
             border:2px solid #E3E800;
+        }
+
+        a.roundedBox:hover::after{
+            content:' 👨‍🍳 →';
+            transition:all 0.3s;
+            color:#E3E800;
         }
 
         .socialMediaIcon{
@@ -83,6 +99,34 @@
             width:80%
         }
 
+        @media (max-width: 992px) {
+            .footerContentContainer{
+                flex-direction:column;
+                justify-content: center;
+            }
+
+            .footerSectionContainer{
+                max-width:100%;
+                text-align:center;
+                justify-content: center;
+            }
+
+            p{
+                margin:20px auto;
+            }
+
+            .socialMediaIconContainer{
+                width:50%;
+                margin:auto;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+            .footerContainer{
+                padding:10px;
+            }
+        }
     </style>
 </head>
 
@@ -92,7 +136,7 @@
             <div class="footerSectionContainer">
                 <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
-                <a class="roundedBox yellow" href="\tentangKami">Tentang Kami</a>
+                <a class="roundedBox white" href="\tentangKami">Tentang Kami</a>
             </div>
             <div class="footerSectionContainer">
                 <p>Hubungi Kami:</p>
