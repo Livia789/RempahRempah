@@ -31,6 +31,10 @@
     </p>
 
     <br><br><br>
+    <h1>NUTRISINYA</h1>
+    <p>{{ $recipe->nutritions }}</p>
+
+    <br><br><br>
     <h1>INGREDIENTSNYA</h1>
     @foreach($recipe->ingredientHeaders as $ingredientHeader)
         <h4>{{ $ingredientHeader->name }}</h4>
