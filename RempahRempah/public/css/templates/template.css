@@ -4,7 +4,9 @@ body {
 }
 
 nav {
+    position: fixed;
     padding: 0 50px !important;
+    border-bottom: 1px solid grey;
 }
 
 .navbar a {

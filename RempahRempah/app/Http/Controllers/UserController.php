@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
-    public function viewLogin () {
-        return view('login');
-    }
-
     public function login (Request $req) {
         $credentials = [
             'email' =>  $req->email,

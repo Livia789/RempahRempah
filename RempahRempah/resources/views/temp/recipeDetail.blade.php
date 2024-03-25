@@ -70,5 +70,15 @@
             {{ $loop->iteration.'. ' .$tag->name }}
         </p>
     @endforeach
+
+    <br><br><br>
+    <h1>REVIEWS RECIPE INI</h1>
+    @foreach($recipe->reviews as $reviews)
+        {{$reviews->user->name}}
+        {{$reviews->rating}}
+        <p>
+            {{ $loop->iteration.'. ' .$reviews->comment}}
+        </p>
+    @endforeach
 </div>
 @endsection
