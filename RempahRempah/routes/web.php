@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 
 /*
@@ -16,20 +15,22 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/', [Controller::class, 'home']);
+Route::get('/', [PageController::class, 'showHomePage']);
+Route::get('/home', [PageController::class, 'showHomePage']);
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', [UserController::class, 'viewLogin']);
+    Route::get('/login', [PageController::class, 'showLoginPage']);
 
     Route::post('/login', [UserController::class, 'login']);
 });
 
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
-});
 
-Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage'])->middleware('loggedin');
-Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage'])->middleware('loggedin');
-Route::get('/temp/myReviews', [PageController::class, 'showMyReviewsPage'])->middleware('loggedin');
-Route::get('/temp/bookmarks', [PageController::class, 'showMyBookmarksPage'])->middleware('loggedin');
-Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage'])->middleware('loggedin');
+    Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage']);
+    Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
+    Route::get('/temp/myReviews', [PageController::class, 'showMyReviewsPage']);
+    Route::get('/temp/bookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
+    Route::get('/temp/search/{ingredientName}', [PageController::class, 'showRecipesPage']);
+});

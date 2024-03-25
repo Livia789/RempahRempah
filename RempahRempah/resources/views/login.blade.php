@@ -7,13 +7,11 @@
 @section('title', 'RempahRempah | Login')
 
 @section('content')
-
     <style>
         body{
             background-color: rgb(33, 37, 41);
         }
     </style>
-
     <div class="authFlexContainer">
         <div class="banner"></div>
         <div style="margin:auto">

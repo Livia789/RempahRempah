@@ -11,7 +11,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <nav class="navbar bg-dark navbar-expand-lg fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home"><img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

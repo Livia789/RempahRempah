@@ -12,14 +12,6 @@ class Recipe extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function specialOccasion(){
-        return $this->belongsTo(SpecialOccasion::class);
-    }
-
-    public function daerah(){
-        return $this->belongsTo(Daerah::class);
-    }
-
     public function admin(){
         return $this->belongsTo(User::class, 'admin_id');
     }
@@ -29,11 +21,23 @@ class Recipe extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function sub_category_1(){
+        return $this->belongsTo(Category::class, 'sub_category_1_id');
+    }
+
+    public function sub_category_2(){
+        return $this->belongsTo(Category::class, 'sub_category_2_id');
     }
 
     public function isPublic(){
-        return $this->ahli_gizi_id !== null && $this->ahli_gizi_id !== null;
+        return $this->ahli_gizi_id !== null;
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 
     public function stepHeaders(){

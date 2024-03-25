@@ -8,6 +8,14 @@ use App\Models\Recipe;
 
 class PageController extends Controller
 {
+    public function showHomePage () {
+        return view('home');
+    }
+
+    public function showLoginPage () {
+        return view('login');
+    }
+
     public function showAvoidedIngredientsPage(){
         $user = Auth::user();
         $avoidedIngredients = $user->avoidedIngredients;
@@ -42,4 +50,16 @@ class PageController extends Controller
         }
     }
 
+    public function showRecipesPage($ingredientName){
+        $user = Auth::user()->id;
+        $recipes = Recipe::where(function ($query) use ($user) {
+            $query->where('user_id', $user)
+                  ->orWhere('type', 'public');
+        })
+        ->whereHas('ingredientHeaders.ingredients', function ($query) use ($ingredientName) {
+            $query->where('name', $ingredientName);
+        })->get();
+
+        return view('temp/search', compact('recipes'));
+    }
 }

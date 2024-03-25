@@ -70,7 +70,7 @@
             border-color:white;
         }
 
-        a:hover{
+        .footerSectionContainer a:hover{
             color:#E3E800;
             border:2px solid #E3E800;
         }

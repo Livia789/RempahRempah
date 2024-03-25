@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     use HasFactory;
+
+    public function ingredientHeaders() {
+        return $this->belongsToMany(IngredientHeader::class);
+    }
 }
