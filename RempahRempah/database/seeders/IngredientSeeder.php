@@ -16,18 +16,10 @@ class IngredientSeeder extends Seeder
     public function run()
     {
         DB::table('ingredients')->insert([
-            [
-                'name' => 'air'
-            ],
-            [
-                'name' => 'tepung terigu'
-            ],
-            [
-                'name' => 'saus tomat',
-            ],
-            [
-                'name' => 'saus sambal',
-            ],
+            ['name' => 'air'],
+            ['name' => 'tepung terigu'],
+            ['name' => 'saus tomat'],
+            ['name' => 'saus sambal'],
         ]);
     }
 }
