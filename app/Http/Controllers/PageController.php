@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 
 class PageController extends Controller
 {
-    public function showHomePage () {
+    public function showHomePage() {
         return view('home');
     }
 
-    public function showLoginPage () {
+    public function showLoginPage() {
         return view('login');
+    }
+
+    public function showRegisterPage() {
+        return view('register');
     }
 
     public function showAvoidedIngredientsPage(){
@@ -50,16 +55,49 @@ class PageController extends Controller
         }
     }
 
-    public function showRecipesPage($ingredientName){
-        $user = Auth::user()->id;
-        $recipes = Recipe::where(function ($query) use ($user) {
-            $query->where('user_id', $user)
-                  ->orWhere('type', 'public');
-        })
-        ->whereHas('ingredientHeaders.ingredients', function ($query) use ($ingredientName) {
-            $query->where('name', $ingredientName);
-        })->get();
+    public function showRecipesPage(Request $req){
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $query = Recipe::where(function ($query) use ($user_id) {
+                $query->where('user_id', $user_id)
+                    ->orWhere('type', 'public');
+            });
+        } else {
+            $query = Recipe::where('type', 'public');
+        }
 
-        return view('temp/search', compact('recipes'));
+        $name = $req->input('name');
+        $category = $req->input('category');
+        $duration = $req->input('duration');
+        // $tag = $req->input('tag');
+
+        if ($name) {
+            $query->where('name', 'like', '%'.$name.'%')
+                  ->orWhereHas('ingredientHeaders.ingredients', function ($query) use ($name) {
+                    $query->where('name', 'like', '%'.$name.'%');
+            });
+        }
+
+        if ($category) {
+            $query->where('category_id', $category);
+        }
+
+        if ($duration) {
+            if ($duration < 0) {
+                $query->where('duration', '>', 90);
+            } else {
+                $query->where('duration', '<=', $duration);
+            }
+        }
+
+        // if ($tag) {
+        //     $query->whereHas('tags', function ($q) use ($tag) {
+        //         $q->where('name', $tag);
+        //     });
+        // }
+
+        $recipes = $query->paginate(10);
+
+        return view('recipes', compact('recipes'));
     }
 }

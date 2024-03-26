@@ -1,0 +1,24 @@
+.content {
+    padding: 20px;
+}
+
+.col a {
+    text-decoration: none !important;
+    color: black;
+}
+
+.card {
+    border: 2.5px solid rgb(33, 37, 41);
+    padding: 15px;
+}
+
+.recipeAttributes {
+    margin-bottom: 5px;
+}
+
+.rating i {
+    color: rgb(255, 225, 0);
+}
+.reviews i {
+    color: pink;
+}

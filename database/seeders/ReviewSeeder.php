@@ -26,6 +26,14 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
+                "user_id" => "4",
+                "recipe_id" => "1",
+                "comment" => "ayamnya sangat crispy dan gurih. wajib dicoba",
+                "rating" => "4",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
                 "user_id" => "3",
                 "recipe_id" => "2",
                 "comment" => "gorengan terbaik",

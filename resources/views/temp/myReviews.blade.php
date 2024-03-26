@@ -6,8 +6,6 @@
 
 @section('title', 'RempahRempah | Login')
 
-
-
 @section('content')
 <div>
     <button style="margin:20px; padding:5px 10px">

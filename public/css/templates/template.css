@@ -1,11 +1,12 @@
 body {
     padding: 0;
+    padding-top: 92px;
     margin: 0;
 }
 
 nav {
     position: fixed;
-    padding: 0 50px !important;
+    padding: 15px 50px !important;
     border-bottom: 1px solid grey;
 }
 
@@ -30,7 +31,8 @@ nav {
     background-color: transparent;
     border: 1px solid white;
     border-radius: 15px;
-    margin: 5px;
+    margin: 0 10px;
+    padding: 10px 15px !important;
 }
 .nav-item .nav-link:hover {
     background-color: rgb(227, 232, 0);
@@ -41,7 +43,7 @@ nav {
 }
 
 .nav-item .dropdown-menu {
-    margin: 0 5px;
+    margin: 0 10px;
 }
 
 .nav-item .dropdown-item {
@@ -51,9 +53,6 @@ nav {
     background-color: rgb(227, 232, 0);
 }
 
-.navbar form {
-    margin: 0 5px;
-}
 .navbar form button {
     color: white;
     border-color: white;
@@ -69,7 +68,7 @@ nav {
 }
 
 #profileImg {
-    width: 50px;
+    width: 65px;
 }
 
 #profileName {
@@ -83,16 +82,24 @@ nav {
 }
 
 @media (max-width: 992px) {
+    .nav-item .nav-link {
+        margin: 5px 0;
+    }
+
     .nav-item .nav-link, .nav-item .dropdown-item {
         text-align: center;
     }
 
     .profileButton {
-        margin-bottom: 15px !important;
+        margin-bottom: -15px !important;
     }
 
     .profileButton .profileDropdown {
         display: flex;
         justify-content: space-evenly;
+    }
+
+    .profileButton .dropdown-menu {
+        margin-bottom: 10px !important;
     }
 }
