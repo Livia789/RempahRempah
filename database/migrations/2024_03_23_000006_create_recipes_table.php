@@ -30,9 +30,9 @@ return new class extends Migration
             $table->foreign('sub_category_2_id')->references('id')->on('categories')->nullable()->default(null);
             $table->string('name');
             $table->string('description');
-            $table->integer('time');
-            $table->string('image');
-            $table->string('video')->nullable()->default(null);
+            $table->integer('duration');
+            $table->string('img');
+            $table->string('vid')->nullable()->default(null);
             $table->boolean('is_verified_by_admin')->default(false);
             $table->boolean('is_verified_by_ahli_gizi')->default(false);
             $table->enum('type', ['public', 'private'])->default('private');

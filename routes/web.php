@@ -17,11 +17,14 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'showHomePage']);
 Route::get('/home', [PageController::class, 'showHomePage']);
+Route::get('/recipes/', [PageController::class, 'showRecipesPage']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [PageController::class, 'showLoginPage']);
+    Route::get('/register', [PageController::class, 'showRegisterPage']);
 
     Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
 });
 
 Route::group(['middleware' => ['loggedin']], function () {
@@ -30,7 +33,6 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage']);
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/temp/myReviews', [PageController::class, 'showMyReviewsPage']);
-    Route::get('/temp/bookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
     Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
-    Route::get('/temp/search/{ingredientName}', [PageController::class, 'showRecipesPage']);
 });
