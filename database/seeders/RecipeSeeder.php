@@ -71,7 +71,7 @@ class RecipeSeeder extends Seeder
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => null,
-                "name" => "ketoprak rahasia",
+                "name" => "ketoprak terbuka",
                 "description" => "tidak diberi tahu",
                 "duration" => "100",
                 "img" => "recipes/default_recipe_img.png",
