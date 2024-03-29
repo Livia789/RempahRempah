@@ -81,6 +81,24 @@ nav {
     padding: 0 60px !important;
 }
 
+.roundedBox{
+    border:2px solid white;
+    color:white;
+    display:inline-box;
+    padding:10px;
+    border-radius:10px;
+    width:fit-content;
+}
+
+.roundedBox:hover{
+    color:#E3E800;
+    border:2px solid #E3E800;
+}
+
+.rating i {
+    color: rgb(255, 225, 0);
+}
+
 @media (max-width: 992px) {
     .nav-item .nav-link {
         margin: 5px 0;
