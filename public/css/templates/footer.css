@@ -1,6 +1,5 @@
 .footerContainer *{
     margin:0px;
-    padding:0px;
 }
 
 .footerContainer a{
@@ -42,20 +41,6 @@
 .footerLogo{
     width:100px;
     height:auto;
-}
-
-.footerContainer .roundedBox{
-    border:2px solid white;
-    color:white;
-    display:inline-box;
-    padding:10px;
-    border-radius:10px;
-    width:fit-content;
-}
-
-.footerContainer .roundedBox:hover{
-    color:#E3E800;
-    border:2px solid #E3E800;
 }
 
 .footerContainer a.roundedBox:hover::after{

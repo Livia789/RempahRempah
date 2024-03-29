@@ -59,4 +59,17 @@ class Recipe extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
+
+    function getDurationStr(){
+        $durationMinute = $this->duration;
+        $totaldays = floor($durationMinute / (24 * 60));
+        $totalhour = floor(($durationMinute % (24 * 60)) / 60);
+        $totalMinute = $durationMinute % 60;
+
+        $durationStr = "";
+        if ($totaldays > 0) $durationStr .= $totaldays." hari ";
+        if ($totalhour > 0) $durationStr .= $totalhour." jam ";
+        if ($totalMinute > 0) $durationStr .= $totalMinute." menit";
+        return $durationStr;
+    }
 }

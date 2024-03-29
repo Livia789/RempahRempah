@@ -76,9 +76,28 @@ nav {
     background-color: white;
 }
 
-.content {
-    margin: 20px 0;
-    padding: 0 60px !important;
+.roundedBox {
+    border:2px solid white;
+    color:white;
+    display:inline-box;
+    padding:5px 10px;
+    border-radius:10px;
+    width:fit-content;
+}
+
+.roundedBox.black{
+    color:black;
+    border-color:black;
+}
+
+.roundedBox:hover{
+    color:#E3E800;
+    border:2px solid #E3E800;
+    cursor: pointer;
+}
+
+.rating i {
+    color: rgb(255, 225, 0);
 }
 
 @media (max-width: 992px) {

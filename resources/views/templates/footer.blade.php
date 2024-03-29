@@ -21,16 +21,16 @@
                 <p>Email</p>
                 <p class="roundedBox">rempah-rempah@gmail.com</p>
                 <p>Kontak</p>
-                <p class="roundedBox">+62 321654987</p>
+                <a class="roundedBox">+62 321654987</a>
             </div>
             <div class="footerSectionContainer">
-                    <p>Media sosial kami</p>
-                    <div class="socialMediaIconContainer">
-                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
-                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
-                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
-                    </div>
-                    <p class="roundedBox">@rempah-rempah</p>
+                <p>Media sosial kami</p>
+                <div class="socialMediaIconContainer">
+                    <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
+                    <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
+                    <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
+                </div>
+                <p class="roundedBox">@rempah-rempah</p>
             </div>
         </div>
         <hr>
