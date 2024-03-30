@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('member');
             $table->boolean('isVerified')->default(false);
-            $table->string('profile_img')->default('users/default_profile_img.png');
+            $table->string('profile_img')->default('assets/default_profile_img.png');
             $table->rememberToken();
             $table->timestamps();
         });

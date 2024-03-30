@@ -31,9 +31,13 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
 
     Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage']);
-    Route::get('/temp/myProfile', [PageController::class, 'showMyProfilePage']);
+    Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
     Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
+
+    Route::post('/updateProfile', [UserController::class, 'updateProfile']);
+    Route::post('/updatePassword', [UserController::class, 'updatePassword']);
+
 });
