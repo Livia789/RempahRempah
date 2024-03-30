@@ -18,22 +18,8 @@
                             time, duration --}}
                             <h5 class="card-title">{{$recipe->name}}</h5>
                             <p class="card-text">
-                                <p class="recipeAttributes rating">
-                                    @php
-                                        $rating_avg = $recipe->reviews->avg('rating');
-                                    @endphp
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $rating_avg)
-                                            {{--  <i class="fa fa-star"></i>  --}}
-                                            <img src="/assets/icons/full_star.png" class="starIcon" alt="star_icon">
-                                        @elseif ($i - $rating_avg >= 0.5 && $i - $rating_avg < 1)
-                                            <i class="fa fa-star-half-empty"></i>
-                                        @else
-                                            <i class="fa fa-star-o"></i>
-                                        @endif
-                                    @endfor
-                                    {{ number_format($rating_avg, 2) }}
-                                </p>
+
+                                @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
                                 <p class="recipeAttributes reviews">
                                     <i class="fa fa-heart"></i>
                                     {{$recipe->reviews->count('rating')}} ulasan

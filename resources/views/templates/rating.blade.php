@@ -8,5 +8,5 @@
             <img src="/assets/icons/empty_star.png" class="starIcon" alt="star_icon">
         @endif
     @endfor
-    <b class="ms-2">{{ number_format($rating_avg, 2) }}</b>
+    <b>{{ number_format($rating_avg, 2) }}</b>
 </div>
