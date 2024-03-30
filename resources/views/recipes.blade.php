@@ -24,7 +24,8 @@
                                     @endphp
                                     @for ($i = 1; $i <= 5; $i++)
                                         @if ($i <= $rating_avg)
-                                            <i class="fa fa-star"></i>
+                                            {{--  <i class="fa fa-star"></i>  --}}
+                                            <img src="/assets/icons/full_star.png" class="starIcon" alt="star_icon">
                                         @elseif ($i - $rating_avg >= 0.5 && $i - $rating_avg < 1)
                                             <i class="fa fa-star-half-empty"></i>
                                         @else

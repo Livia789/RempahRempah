@@ -57,3 +57,22 @@
 .halfWidth{
     width:50%;
 }
+
+@media(max-width: 992px){
+    .profileBodyContainer{
+        flex-direction: column;
+        padding:25px 25px;
+    }
+
+    .profileContainer{
+        width:100%;
+    }
+
+    .profilePicture{
+        width:50px;
+    }
+
+    .sharpBox{
+        padding:5px;
+    }
+}

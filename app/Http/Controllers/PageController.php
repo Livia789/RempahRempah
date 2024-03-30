@@ -33,6 +33,11 @@ class PageController extends Controller
         return view('temp/myRecipes', compact('user', 'myRecipes'));
     }
 
+    public function showMyProfilePage(){
+        $user = Auth::user();
+        return view('myProfile', compact('user'));
+    }
+
     public function showMyReviewsPage(){
         $user = Auth::user();
         $reviews = $user->reviews;

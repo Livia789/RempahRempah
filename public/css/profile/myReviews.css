@@ -3,6 +3,7 @@
     display:flex;
     flex-wrap:wrap;
     justify-content:left;
+    margin:auto;
 }
 
 .reviewCardContainer{
@@ -16,6 +17,10 @@
     flex-direction: row;
     justify-content: space-between;
     margin:20px;
+}
+
+.cardContent{
+    width:40%;
 }
 
 .recipeImg{
@@ -41,4 +46,38 @@
     font-size:18px;
     margin:10px 0px;
     font-weight: bold;
+}
+
+@media(max-width: 1200px){
+    .reviewCardContainer{
+        width:90%;
+    }
+}
+
+@media(max-width: 920px){
+    .reviewCardContainer{
+        width:100%;
+        margin:7px;
+    }
+
+    .profileContentContainer{
+        width:90%;
+    }
+}
+
+
+@media(max-width: 550px){
+    .profileContentContainer{
+        width:100%;
+    }
+}
+
+@media(max-width: 400px){
+    .reviewCardContainer{
+        flex-direction: column;
+    }
+
+    .cardContent{
+        width:100%;
+    }
 }
