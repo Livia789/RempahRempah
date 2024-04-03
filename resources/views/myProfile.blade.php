@@ -20,11 +20,11 @@
         @csrf
         <div class="col">
             <label for="name" class="form-label">Username</label>
-            <input type="text" class="form-control textField white" placeholder="Masukkan Username" id="name" name="name" value="{{ $user->name }}">
+            <input type="text" class="form-control textField whiteBackground" placeholder="Masukkan Username" id="name" name="name" value="{{ $user->name }}">
         </div>
         <div class="col">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control textField white" placeholder="Masukkan email" id="email" name="email" value="{{ $user->email }}">
+            <input type="text" class="form-control textField whiteBackground" placeholder="Masukkan email" id="email" name="email" value="{{ $user->email }}">
         </div>
         <button class="sharpBox mt-5" type="submit" name="btn-submit" value="submit">
             <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
@@ -49,8 +49,7 @@
         <div class="col">
             <label for="password" class="form-label">Kata sandi</label>
             <div class="inputWithIconWrapper textField white">
-
-                <input type="password" class="form-control textField white" placeholder="Masukkan kata sandi" id="password" name="password">
+                <input type="password" class="form-control textField whiteBackground" placeholder="Masukkan kata sandi" id="password" name="password">
                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password" onclick="toggleHidePassword('password')" alt="eye_icon">
             </div>
         </div>
@@ -58,7 +57,7 @@
             <label for="password_conf" class="form-label">Konfirmasi Kata sandi</label>
             <div class="inputWithIconWrapper textField white">
 
-                <input type="password" class="form-control textField white" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
+                <input type="password" class="form-control textField whiteBackground" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password_conf" onclick="toggleHidePassword('password_conf')" alt="eye_icon">
             </div>
         </div>

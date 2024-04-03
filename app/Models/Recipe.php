@@ -24,16 +24,12 @@ class Recipe extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function sub_category_1(){
-        return $this->belongsTo(Category::class, 'sub_category_1_id');
-    }
-
-    public function sub_category_2(){
-        return $this->belongsTo(Category::class, 'sub_category_2_id');
+    public function sub_category($index){
+        return $this->belongsTo(Category::class, 'sub_category_'.$index.'_id');
     }
 
     public function isPublic(){
-        return $this->ahli_gizi_id !== null;
+        return $this->admin_id !== null && $this->ahli_gizi_id !== null;
     }
 
     public function reviews(){

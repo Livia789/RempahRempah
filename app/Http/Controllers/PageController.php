@@ -6,9 +6,76 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
+use App\Models\Tag;
+use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
 {
+    public function __construct(){
+        View::share('category_all', Category::all());
+        View::share('tag_all', Tag::all());
+        View::share('unique_ctg_groups', Category::all()->unique('class'));
+        View::share('duration_minutes', [15, 30, 45, 60]);
+
+        View::share('functions', [
+            'buildFilterQuery' => function ($name, $categoryGroups, $index, $curr_ctg_id, $durations, $duration_new, $tags, $tag_new) {
+                $query_str = "";
+                // dd(request()->input('name'));
+                if (isset($name) && $name != null) {
+                    $query_str .= "name=".$name."&";
+                }
+                for ($i = 0; $i <= 2; $i++) {
+                    if (isset($categoryGroups[$i])) {
+                        if (isset($index) && $i == $index) {
+                            if (!in_array($curr_ctg_id, $categoryGroups[$i])) {
+                                $categoryGroups[$i][] = (string) $curr_ctg_id;
+                            } else {
+                                $pos = array_search($curr_ctg_id, $categoryGroups[$i]);
+                                unset($categoryGroups[$i][$pos]);
+                            }
+                        }
+                        if (count($categoryGroups[$i]) > 0) {
+                            $query_str .= "category".$i."=".implode('%', $categoryGroups[$i]).'&';
+                        }
+                    } elseif (isset($index) && $i == $index) {
+                        $query_str .= "category".$i."=".$curr_ctg_id.'&';
+                    }
+                }
+                if (isset($durations)) {
+                    if (isset($duration_new)) {
+                        if (!in_array($duration_new, $durations)) {
+                            $durations[] = (string) $duration_new;
+                        } else {
+                            $pos = array_search($duration_new, $durations);
+                            unset($durations[$pos]);
+                        }
+                    }
+                    if (count($durations) > 0) {
+                        $query_str .= "duration=".implode('%', $durations).'&';
+                    }
+                } elseif (isset($duration_new)) {
+                    $query_str .= "duration=".$duration_new.'&';
+                }
+                if (isset($tags)) {
+                    if (isset($tag_new)) {
+                        if (!in_array($tag_new, $tags)) {
+                            $tags[] = (string) $tag_new;
+                        } else {
+                            $pos = array_search($tag_new, $tags);
+                            unset($tags[$pos]);
+                        }
+                    }
+                    if (count($tags) > 0) {
+                        $query_str .= "tag=".implode('%', $tags).'&';
+                    }
+                } elseif (isset($tag_new)) {
+                    $query_str .= "tag=".$tag_new.'&';
+                }
+                return str_replace('%', '%25', $query_str);
+            }
+        ]);
+    }
+
     public function showHomePage() {
         return view('home');
     }
@@ -60,49 +127,72 @@ class PageController extends Controller
         }
     }
 
-    public function showRecipesPage(Request $req){
+    public function showSearchPage(Request $req){
+        $query = Recipe::query();
         if (Auth::check()) {
             $user_id = Auth::user()->id;
-            $query = Recipe::where(function ($query) use ($user_id) {
+            $query->where(function ($query) use ($user_id) {
                 $query->where('user_id', $user_id)
-                    ->orWhere('type', 'public');
+                      ->orWhere(function ($query) {
+                            $query->where('type', 'public')
+                                  ->whereNotNull('ahli_gizi_id')
+                                  ->whereNotNull('admin_id');
+                        });
             });
         } else {
-            $query = Recipe::where('type', 'public');
+            $query->where('type', 'public')
+                   ->whereNotNull('ahli_gizi_id')
+                   ->whereNotNull('admin_id');
         }
 
         $name = $req->input('name');
-        $category = $req->input('category');
-        $duration = $req->input('duration');
-        // $tag = $req->input('tag');
-
         if ($name) {
-            $query->where('name', 'like', '%'.$name.'%')
-                  ->orWhereHas('ingredientHeaders.ingredients', function ($query) use ($name) {
-                    $query->where('name', 'like', '%'.$name.'%');
+            $query->where(function ($query) use ($name) {
+                $query->where('name', 'like', '%'.$name.'%')
+                      ->orWhereHas('ingredientHeaders.ingredients', function ($query) use ($name) {
+                        $query->where('name', 'like', '%'.$name.'%');
+                    });
             });
         }
 
-        if ($category) {
-            $query->where('category_id', $category);
-        }
-
-        if ($duration) {
-            if ($duration < 0) {
-                $query->where('duration', '>', 90);
-            } else {
-                $query->where('duration', '<=', $duration);
+        $categoryGroups = [];
+        foreach ($req->all() as $key => $value) {
+            if (str_contains($key, 'category')) {
+                $index = (int) substr($key, 8);
+                $categoryGroups[$index] = explode('%', $value);
+                if ($index == 0) {
+                    $query->whereIn('category_id', $categoryGroups[$index]);
+                } else {
+                    $query->whereIn('sub_category_'.$index.'_id', $categoryGroups[$index]);
+                }
             }
         }
 
-        // if ($tag) {
-        //     $query->whereHas('tags', function ($q) use ($tag) {
-        //         $q->where('name', $tag);
-        //     });
-        // }
+        $duration = $req->input('duration');
+        $durations = [];
+        if ($duration) {
+            $durations = explode('%', $duration);
+            $query->where(function ($query) use ($durations) {
+                foreach ($durations as $dur) {
+                    if ($dur < 0) {
+                        $query->orWhere('duration', '>', 90);
+                    } else {
+                        $query->orWhere('duration', '<=', $dur);
+                    }
+                }
+            });
+        }
 
-        $recipes = $query->paginate(10);
+        $tag = $req->input('tag');
+        $tags = [];
+        if ($tag) {
+            $tags = explode('%', $tag);
+            $query->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('id', $tags);
+            });
+        }
 
-        return view('recipes', compact('recipes'));
+        $recipes = $query->paginate(9);
+        return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags'));
     }
 }

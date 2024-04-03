@@ -22,6 +22,11 @@
                 </h6>
                 <form action="/register" method="POST">
                     @csrf
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            Mohon memasukkan input yang sesuai.
+                        </div>
+                    @endif
                     <div class="col">
                         <label for="name" class="form-label">Nama</label>
                         <input type="text" class="form-control textField" placeholder="Masukkan nama" id="name" name="name">

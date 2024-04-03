@@ -17,7 +17,7 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'showHomePage']);
 Route::get('/home', [PageController::class, 'showHomePage']);
-Route::get('/recipes/', [PageController::class, 'showRecipesPage']);
+Route::get('/search', [PageController::class, 'showSearchPage']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [PageController::class, 'showLoginPage']);

@@ -1,0 +1,30 @@
+.content {
+    margin: 20px 0;
+    padding: 0 60px !important;
+}
+
+.accordion {
+	--bs-accordion-btn-color: black;
+	--bs-accordion-btn-bg: rgb(227, 232, 0);
+	--bs-accordion-active-color: black;
+	--bs-accordion-active-bg: rgb(227, 232, 0);
+}
+.accordion-body {
+    word-wrap: break-word !important;
+}
+.recipesCount {
+    display: inline;
+    color: grey;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.col a {
+    color: black;
+}
+
+.emptySearch {
+    width: auto;
+}

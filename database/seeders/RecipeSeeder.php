@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class RecipeSeeder extends Seeder
@@ -26,11 +27,13 @@ class RecipeSeeder extends Seeder
                 "name" => "Nasi Goreng",
                 "description" => "Nasi goreng adalah makanan yang terbuat dari nasi yang digoreng dan diaduk dalam minyak goreng, biasanya ditambah kecap manis, bawang merah, bawang putih, merica, garam, cabai, irisan daging ayam, telur, dan sayuran.",
                 "duration" => "30",
-                "img" => "recipes/default_recipe_img.png",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 "user_id" => "3",
@@ -42,11 +45,13 @@ class RecipeSeeder extends Seeder
                 "name" => "gorengan",
                 "description" => "gorengan adalah makanan yang terbuat dari tepung",
                 "duration" => "30",
-                "img" => "recipes/default_recipe_img.png",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 "user_id" => "4",
@@ -58,11 +63,13 @@ class RecipeSeeder extends Seeder
                 "name" => "bebek ala po",
                 "description" => "bebek ala po adalah makanan yang terbuat dari bebek",
                 "duration" => "100",
-                "img" => "recipes/default_recipe_img.png",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 "user_id" => "4",
@@ -74,11 +81,13 @@ class RecipeSeeder extends Seeder
                 "name" => "ketoprak rahasia",
                 "description" => "tidak diberi tahu",
                 "duration" => "100",
-                "img" => "recipes/default_recipe_img.png",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
         ]);
     }

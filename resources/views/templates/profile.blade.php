@@ -8,7 +8,7 @@
     <div class="profileBodyContainer">
         <div class="profileContainer">
             <p style="font-size:30px"><b>Profil Saya</b></p>
-            <img src="{{ $user->profile_img }}" class="profilePicture" alt="profile_picture">
+            <img src="{{ asset($user->profile_img) }}" class="profilePicture" alt="profile_picture">
 
             <a href="#" class="sharpBox mx-auto mb-5">
                 <img src="assets/icons/edit_icon.png" class="picon" alt="edit_icon">
