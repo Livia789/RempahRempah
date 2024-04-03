@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 nav {
     position: fixed;
     padding: 15px 50px !important;
@@ -23,14 +27,14 @@ nav {
     color: white !important;
 }
 .navbar-toggler:hover, .navbar-toggler:focus {
-    color: rgb(33, 37, 41) !important;
+    color: black !important;
     background-color: white;
 }
 
 .nav-item .nav-link {
     background-color: transparent;
-    border: 1px solid white;
-    border-radius: 15px;
+    border: 1.5px solid white;
+    border-radius: 10px;
     margin: 0 10px;
     padding: 10px 15px !important;
 }
@@ -53,12 +57,20 @@ nav {
     background-color: rgb(227, 232, 0);
 }
 
-.navbar form button {
+form .searchBtn {
+    border: 2px solid white;
+    min-width: 50px;
+}
+form .searchBtn.blackBackground {
     color: white;
     border-color: white;
 }
-.navbar form button:hover, .navbar form button:focus {
-    background-color: white !important;
+form .searchBtn.whiteBackground {
+    color: black;
+    border-color: black;
+}
+form .searchBtn:hover, form .searchBtn:focus {
+    background-color: rgb(227, 232, 0) !important;
     color: rgb(33, 37, 41) !important;
 }
 
@@ -77,36 +89,65 @@ nav {
 }
 
 .roundedBox {
-    border:2px solid white;
-    color:white;
-    display:inline-box;
-    padding:5px 10px;
-    border-radius:10px;
-    width:fit-content;
+    display: inline-box;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+.roundedBox.blackBackground {
+    border: 2px solid white;
+    color: white;
+}
+.roundedBox.whiteBackground {
+    border: 2px solid black;
+    color: black;
+}
+.roundedBox.blackBackground:hover {
+    color: rgb(227, 232, 0);
+    border: 2px solid rgb(227, 232, 0);;
+}
+.roundedBox.whiteBackground:hover {
+    color: black;
+    background-color: rgb(227, 232, 0);
 }
 
-.roundedBox.black{
-    color:black;
-    border-color:black;
+.card.recipeCard {
+    border: 2.5px solid black;
+    padding: 15px;
+}
+.card.recipeCard:hover {
+    box-shadow: 0 0 5px black;
 }
 
-.roundedBox:hover{
-    color:#E3E800;
-    border:2px solid #E3E800;
-    cursor: pointer;
+.recipeAttributes {
+    margin-bottom: 5px;
 }
 
-.rating i {
-    color: rgb(255, 225, 0);
+.reviews i {
+    color: pink;
 }
 
 .starIcon{
-    height:25px;
-    width:auto;
-    margin-right:5px;
+    height: 25px;
+    width: auto;
+    margin-right: 5px;
 }
 
+.sectionDivider {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
 
+.pagination {
+    margin-top: 20px;
+}
+
+.page-item a {
+    color: black !important;
+}
+.page-item a:hover {
+    background-color: rgb(227, 232, 0) !important;
+}
 
 @media (max-width: 992px) {
     .nav-item .nav-link {

@@ -40,59 +40,45 @@
 }
 
 form .col {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
-.urlText {
-    font-weight: bold;
-    color: rgb(227, 232, 0);
-}
-.urlText:hover {
-    background-color: rgb(227, 232, 0);
-    color: rgb(33, 37, 41);
-    transition: color 0.5s ease;
-    padding: 2.5px;
-}
-
-.errorMsg {
-    color: red;
-    margin-top: 10px;
-}
-
-.form-control:focus{
+.form-control:focus {
     box-shadow: none !important;
 }
 
-.textField, .form-control.textField{
-    background-color: rgb(33, 37, 41);
-    color: white;
+.textField, .form-control.textField {
     border: 3px solid white;
-    padding:10px;
+    padding: 10px;
     border-radius: 3.5px;
 }
-
-.textField, .form-control.textField.white{
+.textField, .form-control.textField.blackBackround {
+    background-color: rgb(33, 37, 41);
+    border-color: white;
+    color: white;
+}
+.textField, .form-control.textField.whiteBackground {
     background-color: white;
-    border-color:black;
+    border-color: black;
     color: black;
 }
 
-.inputWithIconWrapper{
+.inputWithIconWrapper {
     display: flex;
     flex-direction: row;
-    width:100%;
-    padding:0px;
+    width: 100%;
+    padding: 0px;
 }
 
-.inputWithIconWrapper .form-control.textField{
-    border:none;
+.inputWithIconWrapper .form-control.textField {
+    border: none;
 }
 
-.inputWithIconWrapper .picon{
-    height:30px;
-    width:auto;
-    margin:auto;
-    margin-right:10px;
+.inputWithIconWrapper .picon {
+    height: 30px;
+    width: auto;
+    margin: auto;
+    margin-right: 10px;
     cursor: pointer;
 }
 
@@ -102,14 +88,25 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 input[type="checkbox"]:checked {
-    accent-color: rgb(227, 232, 0);
+    accent-color: black;
     outline: 1px solid white;
     box-shadow: 0 0 5px white;
+}
+input[type="checkbox"].blackBackground:checked {
+    accent-color: rgb(227, 232, 0);
+}
+input[type="checkbox"].whiteBackground:checked {
+    accent-color: black;
 }
 
 .checkBox {
     display: flex;
     align-items: center;
+}
+
+.errorMsg {
+    margin-top: 10px;
+    color: red;
 }
 
 .col button {

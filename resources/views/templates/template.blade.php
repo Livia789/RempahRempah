@@ -19,49 +19,42 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 225px;">
-                    @php
-                        $categories = App\Models\Category::all();
-                        $unique_categories = $categories->unique('class');
-                    @endphp
-                    @foreach ($unique_categories as $unique_ctg)
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{$unique_ctg->class}}
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach ($categories as $ctg)
-                                @if ($ctg->class == $unique_ctg->class)
-                                    <li><a class="dropdown-item" href="/search?category={{$ctg->id}}">{{$ctg->name}}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </li>
+                    @foreach ($unique_ctg_groups as $index => $unique_ctg)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{$unique_ctg->class}}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($category_all as $ctg)
+                                    @if ($ctg->class == $unique_ctg->class)
+                                        <li><a class="dropdown-item" href="/search?category{{$index}}={{$ctg->id}}">{{$ctg->name}}</a></li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
                     @endforeach
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Durasi
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/search?duration=15">&le;15 menit</a></li>
-                            <li><a class="dropdown-item" href="/search?duration=30">&le;30 menit</a></li>
-                            <li><a class="dropdown-item" href="/search?duration=60">&le;60 menit</a></li>
-                            <li><a class="dropdown-item" href="/search?duration=90">&le;90 menit</a></li>
+                            @foreach ($duration_minutes as $minutes)
+                                <li><a class="dropdown-item" href="/search?duration={{$minutes}}">&le;{{$minutes}} menit</a></li>
+                            @endforeach
                             <li><a class="dropdown-item" href="/search?duration=-1">Lainnya</a></li>
                         </ul>
                     </li>
                 </ul>
-                <form action="/search?name=" class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" name="name" placeholder="Cari resep berdasarkan nama atau #tag" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"><i class='fa fa-search'></i></button>
-                </form>
+                @if (!request()->is('search'))
+                    <form action="/search??name" class="d-flex" role="search" method="GET" class="textField">
+                        <input class="form-control me-2 textField blackBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
+                        <button class="btn btn-outline-success searchBtn blackBackground" type="submit"><i class='fa fa-search'></i></button>
+                    </form>
+                @endif
                 <ul class="navbar-nav profileButton">
                     <li class="nav-item dropdown">
                         <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @if (Auth::check())
-                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Storage::url(Auth::user()->profile_img) }}" alt="profile image">
-                            @else
-                                <img class="nav-link dropdown-toggle" id="profileImg" src="{{ asset('assets/default_profile_img.png') }}" alt="profile image">
-                            @endif
+                            <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Auth::check() ? asset(Auth::user()->profile_img) : asset('storage/users/default_profile_img.png') }}" alt="profile image">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             @if (Auth::check())
@@ -70,7 +63,7 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 @if (Auth::user()->role == 'member')
-                                    <li><a class="dropdown-item" href="#">Edit Profil</a></li>
+                                    <li><a class="dropdown-item" href="/myProfile">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
                                     <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else

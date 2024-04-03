@@ -21,7 +21,7 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($credentials, true)) {
-            return redirect('/');
+            return redirect('/')->with('loginSuccess', 'Selamat datang kembali, '.Auth::user()->name.'!');
         } else {
             return back()->withErrors(['Email atau kata sandi salah.']);
         }
@@ -65,6 +65,7 @@ class UserController extends Controller
                 'password' => $req->password
             ], true);
 
+            // redirect ke preference sm session tp nanti yak
             return redirect('/');
         }
     }

@@ -11,13 +11,13 @@
             {{--  //TODO: link ke page recipeDetail yg baru nanti kl udah ada --}}
             <a href="/temp/recipeDetail/{{ $recipe->id }}" class="reviewCardContainer">
                 <div class="cardContent">
-                    <img src="{{ Storage::url($review->recipe->img) }}" class="recipeImg" alt="recipe img">
+                    <img src="{{ asset($review->recipe->img) }}" class="recipeImg" alt="recipe img">
                     <p class="reviewCardTitle"><b>{{ $review->recipe->name }}</b></p>
                     <div class="d-flex align-items-center">
                         <p><b>Resep oleh</b></p>
                         {{--  //TODO: link ke page profile orang (?) tp blm ada design + blm bahas mau tampilin apa aja & gmn (bs private akun/gmn dll) --}}
                         {{--  //pak bos tolong bantu saya bikin design buat link ke profile orang  --}}
-                        <p class="roundedBox black ms-3">{{ "@".$review->recipe->creator->name }}</p>
+                        <p class="roundedBox whiteBackground ms-3">{{ "@".$review->recipe->creator->name }}</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <img src="/assets/icons/time_icon.png" class="picon" alt="time_icon">
@@ -28,9 +28,9 @@
                 <div class="cardContent">
                     <p class="reviewCardTitle">Ulasan Saya</p>
 
-                    <img src="{{ Storage::url($review->recipe->img) }}" class="reviewImg" alt="recipe img">
+                    <img src="{{ asset($review->recipe->img) }}" class="reviewImg" alt="recipe img">
 
-
+                    {{-- ada bagusnya taro tgl dia post reviewnya jg ga sih di cardnya --}}
                     @include('templates/rating', ['rating_avg' => $review->recipe->reviews->avg('rating')])
 
                     {{--  <p class="rating mt-3">
