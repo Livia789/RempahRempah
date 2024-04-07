@@ -58,7 +58,7 @@
                     <div class="col d-grid gap-2">
                         <button class="btn btn-primary" type="submit" name="btn-submit" value="submit">Daftar</button>
                     </div>
-                    <h6>Sudah memiliki akun? <a href="/register" class="urlText">Yuk, masuk di sini!</a></h6>
+                    <h6>Sudah memiliki akun? <a href="/register" class="roundedBox blackBackground">Yuk, masuk di sini!</a></h6>
                 </form>
             </div>
         </div>

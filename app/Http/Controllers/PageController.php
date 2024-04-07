@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Models\Tag;
+use App\Models\AvoidedIngredient;
 use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
@@ -20,7 +21,6 @@ class PageController extends Controller
         View::share('functions', [
             'buildFilterQuery' => function ($name, $categoryGroups, $index, $curr_ctg_id, $durations, $duration_new, $tags, $tag_new) {
                 $query_str = "";
-                // dd(request()->input('name'));
                 if (isset($name) && $name != null) {
                     $query_str .= "name=".$name."&";
                 }
@@ -88,6 +88,10 @@ class PageController extends Controller
         return view('register');
     }
 
+    public function showResetPasswordPage() {
+        return view('resetPassword');
+    }
+
     public function showAvoidedIngredientsPage(){
         $user = Auth::user();
         $avoidedIngredients = $user->avoidedIngredients;
@@ -120,7 +124,7 @@ class PageController extends Controller
     public function showRecipeDetailPage($recipe_id){
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
-        if ($recipe->user_id === $user->id || $recipe->isPublic()) {
+        if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
             return view('temp/recipeDetail', compact('recipe'));
         } else {
             echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
@@ -139,6 +143,12 @@ class PageController extends Controller
                                   ->whereNotNull('admin_id');
                         });
             });
+            $avoidedIngredientNames = AvoidedIngredient::where('user_id', $user_id)->pluck('ingredient_name')->toArray();
+
+            $query->whereDoesntHave('ingredientHeaders.ingredients', function ($query) use ($avoidedIngredientNames) {
+                $query->whereIn('name', $avoidedIngredientNames);
+            });
+            // dd($query->toSql(), $query->getBindings());
         } else {
             $query->where('type', 'public')
                    ->whereNotNull('ahli_gizi_id')

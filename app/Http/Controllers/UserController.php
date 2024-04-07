@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -23,7 +25,7 @@ class UserController extends Controller
         if(Auth::attempt($credentials, true)) {
             return redirect('/')->with('loginSuccess', 'Selamat datang kembali, '.Auth::user()->name.'!');
         } else {
-            return back()->withErrors(['Email atau kata sandi salah.']);
+            return back()->with('loginFailed', 'Email atau kata sandi salah.');
         }
     }
 
@@ -70,6 +72,50 @@ class UserController extends Controller
         }
     }
 
+    public function resetPassword(Request $req) {
+        $rules = [
+            'email' => 'required',
+            'token' => 'required|min:20',
+            'password' => 'required|alpha_num|min:6',
+            'password_conf' => 'required|same:password'
+        ];
+
+        $messages = [
+            'email.required' => 'Email belum diisi.',
+            'token.required' => 'Kode belum diisi.',
+            'token.min' => 'Kode minimal :min karakter.',
+            'password.required' => 'Kata sandi baru belum diisi.',
+            'password.alpha_num' => 'Kata sandi baru hanya dapat terdiri dari huruf dan angka.',
+            'password.min' => 'Kata sandi baru minimal :min karakter.',
+            'password_conf.required' => 'Konfirmasi kata sandi baru belum diisi.',
+            'password_conf.same' => 'Konfirmasi kata sandi baru harus sama dengan kata sandi.',
+        ];
+
+        $validator = Validator::make($req->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                         ->with('email', $req->email);
+        } else {
+            $verify = DB::table('password_resets')
+                        ->where('email', $req->email)
+                        ->where('token', $req->token)
+                        ->where('expires_at', '>', Carbon::now())->first();
+
+            if ($verify) {
+                DB::table('password_resets')->where('email', $verify->email)->delete();
+
+                $user = User::where('email', $verify->email)->first();
+                $user->password = bcrypt($req->password);
+                $user->save();
+
+                return redirect('/login')->with('resetPasswordSuccess', 'Kata sandi berhasil diganti.');
+            } else {
+                return back()->with('resetPasswordFailed', 'Kode salah atau sudah kedaluwarsa.')
+                             ->with('email', $req->email);
+            }
+        }
+    }
+
     public function updateProfile(Request $req) {
         $user = Auth::user();
         $rules = [
@@ -88,12 +134,12 @@ class UserController extends Controller
         $validator = Validator::make($req->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('updateProfileFailed', $validator->errors()->first());
+            return back()->with('updateProfileFailed', $validator->errors()->first());
         } else {
             $user->name = $req->name;
             $user->email = $req->email;
             $user->save();
-            return redirect()->back()->with('updateProfileSuccess', 'Profil berhasil diperbaharui!');
+            return back()->with('updateProfileSuccess', 'Profil berhasil diperbaharui!');
         }
     }
 
@@ -116,11 +162,11 @@ class UserController extends Controller
 
 
         if ($validator->fails()) {
-            return redirect()->back()->with('updatePasswordFailed', $validator->errors()->first());
+            return back()->with('updatePasswordFailed', $validator->errors()->first());
         } else {
             $user->password = bcrypt($req->password);
             $user->save();
-            return redirect()->back()->with('updatePasswordSuccess', 'Kata sandi berhasil diperbaharui!');
+            return back()->with('updatePasswordSuccess', 'Kata sandi berhasil diperbaharui!');
         }
     }
 
