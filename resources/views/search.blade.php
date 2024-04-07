@@ -10,7 +10,7 @@
 @section('content')
     @php
         $index = -1;
-
+        // ini count $recipes yg di pagenya, sih. bkn utk overall :(
         if (!function_exists('countRecipe')) {
             function countRecipe ($recipes, $ctg_id, $duration, $tag_id) {
                 $count = 0;

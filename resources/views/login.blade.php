@@ -22,13 +22,18 @@
                 </h6>
                 <form action="/login" method="POST">
                     @csrf
-                    @if ($errors->any())
+                    @if (session('loginFailed'))
                         <div class="alert alert-danger">
-                            {{$errors->first()}}
+                            {{ session('loginFailed') }}
+                        </div>
+                    @elseif (session('resetPasswordSuccess'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('resetPasswordSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                     <div class="col">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email*</label>
                         <input type="text" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email" value="{{Cookie::get('mycookie') !== null ? Cookie::get('mycookie') : ''}}">
                     </div>
                     <div class="col">
@@ -40,7 +45,7 @@
                         <label class="form-check-label" for="remember">Ingat saya</label>
                     </div>
                     <div class="col">
-                        <a href="#" class="roundedBox blackBackground">Lupa kata sandi?</a>
+                        <a href="/resetPassword" class="roundedBox blackBackground">Lupa kata sandi?</a>
                     </div>
                     <div class="col d-grid gap-2">
                         <button class="btn btn-primary" type="submit" name="btn-submit" value="submit">Masuk</button>
