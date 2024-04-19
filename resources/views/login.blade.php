@@ -13,7 +13,7 @@
         }
     </style>
     <div class="authFlexContainer">
-        <div class="banner"></div>
+        <div class="banner twoCols"></div>
         <div class="temp" style="margin:auto">
             <div class="form">
                 <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah">
@@ -33,7 +33,7 @@
                         </div>
                     @endif
                     <div class="col">
-                        <label for="email" class="form-label">Email*</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="text" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email" value="{{Cookie::get('mycookie') !== null ? Cookie::get('mycookie') : ''}}">
                     </div>
                     <div class="col">

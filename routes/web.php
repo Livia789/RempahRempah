@@ -34,13 +34,16 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/welcome', [PageController::class, 'showWelcomePage']);
 
-    Route::get('/temp/avoidedIngredients', [PageController::class, 'showAvoidedIngredientsPage']);
+    Route::post('/updatePrefPage', [PageController::class, 'updatePrefPage']);
+    Route::post('/updatePreferences', [UserController::class, 'updatePreferences']);
+
+    Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
     Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
-
 });

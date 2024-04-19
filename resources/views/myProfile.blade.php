@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | My Profile')
+@section('title', 'RempahRempah | Profil Saya')
 
 <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 
@@ -32,7 +32,6 @@
         </button>
     </form>
 
-
     <br><br><br>
     <h1>Update Password</h1>
     @if(session('updatePasswordFailed'))
@@ -48,15 +47,14 @@
         @csrf
         <div class="col">
             <label for="password" class="form-label">Kata sandi</label>
-            <div class="inputWithIconWrapper textField white">
+            <div class="inputWithIconWrapper textField whiteBackground">
                 <input type="password" class="form-control textField whiteBackground" placeholder="Masukkan kata sandi" id="password" name="password">
                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password" onclick="toggleHidePassword('password')" alt="eye_icon">
             </div>
         </div>
         <div class="col">
             <label for="password_conf" class="form-label">Konfirmasi Kata sandi</label>
-            <div class="inputWithIconWrapper textField white">
-
+            <div class="inputWithIconWrapper textField whiteBackground">
                 <input type="password" class="form-control textField whiteBackground" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password_conf" onclick="toggleHidePassword('password_conf')" alt="eye_icon">
             </div>

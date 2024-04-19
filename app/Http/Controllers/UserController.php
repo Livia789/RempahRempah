@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\AvoidedIngredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -67,8 +68,7 @@ class UserController extends Controller
                 'password' => $req->password
             ], true);
 
-            // redirect ke preference sm session tp nanti yak
-            return redirect('/');
+            return redirect('/welcome');
         }
     }
 
@@ -143,7 +143,7 @@ class UserController extends Controller
         }
     }
 
-    public function updatePassword(Request $req){
+    public function updatePassword(Request $req) {
         $user = Auth::user();
         $rules = [
             'password' => 'required|alpha_num|min:6',
@@ -167,6 +167,27 @@ class UserController extends Controller
             $user->password = bcrypt($req->password);
             $user->save();
             return back()->with('updatePasswordSuccess', 'Kata sandi berhasil diperbaharui!');
+        }
+    }
+
+    public function updatePreferences(Request $req) {
+        $user = Auth::user();
+        $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
+        $selected_ingredients = collect($req->input('selected_ingredients'));
+        $src = $req->input('source_view');
+
+        $diff = $selected_ingredients->diff($avoided_ingredients);
+        foreach($diff as $ingredient) {
+            $avoided_ingredient = new AvoidedIngredient();
+            $avoided_ingredient->user_id = $user->id;
+            $avoided_ingredient->ingredient_name = $ingredient;
+            $avoided_ingredient->save();
+        }
+
+        if ($src == 'welcome') {
+            return redirect('/')->with('loginSuccess', 'Data berhasil disimpan.');
+        } else {
+            return back()->with('updateSuccess', 'Data berhasil disimpan.');
         }
     }
 
