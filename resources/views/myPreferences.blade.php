@@ -1,28 +1,26 @@
-@extends('templates\template')
+@extends('templates/profile')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/preference.css') }}">
-@endsection
+@section('title', 'RempahRempah | Bahan yang Dihindari')
 
-@section('title', 'RempahRempah | Selamat datang')
+<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+<link rel="stylesheet" href="{{ asset('css/preference.css') }}">
 
-@section('content')
+@section('profileContent')
     @php
         $default_avoided_ingredients = ['Udang', 'Seafood', 'Kacang', 'Kedelai', 'Kangkung', 'Sapi', 'Tepung Terigu', 'Kepiting'];
         $default_avoided_ingredients = collect($default_avoided_ingredients)->sortBy(function ($ingredient) {
             return strlen($ingredient);
         });
     @endphp
-    <div class="banner oneCol"></div>
-    <div class="section">
+    <div class="container px-5">
+        <h1>Bahan yang Dihindari</h1>
+        @if (session('updateSuccess'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('updateSuccess') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="preferenceSection">
-            <h1>
-                Selamat datang, {{$user->name}}
-            </h1>
-            <h6>
-                Yuk, bantu kami mengenalmu lebih jauh!
-            </h6>
             <span class="sharpBox yellow">
                 Pencarian resep di RempahRempah nanti akan menghindari resep yang mengandung kata kunci yang kamu masukkan pada halaman ini.
             </span>
@@ -31,7 +29,7 @@
                 <input type="text" name="cmd" id="cmd" hidden>
                 <input type="text" name="curr_ingredient" id="curr_ingredient" hidden>
                 <div class="row row-cols-2 row-cols-sm-4 row-cols-md-6 g-3">
-                    @foreach(session('selected_ingredients') == null ? [] : session('selected_ingredients') as $item)
+                    @foreach(session('selected_ingredients') == null ? $selected_ingredients : session('selected_ingredients') as $item)
                         <div class="col">
                             <button class="sharpBox yellow removeBtn" id="selected" value="{{$item}}">
                                 <i class="fa fa-close"></i> &ensp;{{$item}}
@@ -62,18 +60,17 @@
             </form>
             <form action="/updatePreferences" class="preferenceForm" method="POST">
                 @csrf
-                <input type="text" name="source_view" id="source_view" value="welcome" hidden>
-                @foreach(session('selected_ingredients') == null ? [] : session('selected_ingredients') as $item)
+                <input type="text" name="source_view" id="source_view" value="myPreferences" hidden>
+                @foreach(session('selected_ingredients') == null ? $selected_ingredients : session('selected_ingredients') as $item)
                     <input type="text" name="selected_ingredients[]" value="{{$item}}" hidden>
                 @endforeach
-                <button class="sharpBox mt-5" type="submit" name="btn-submit" value="submit">
+                <button class="sharpBox {{ session('changes') == true ? '' : 'disabled' }}" type="submit" name="btn-submit" value="submit" {{ session('changes') == true ? '' : 'disabled' }}>
                     <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
                     Simpan
                 </button>
             </form>
         </div>
     </div>
-
     <script>
         var addBtns = document.getElementsByClassName('addBtn');
         var removeBtns = document.getElementsByClassName('removeBtn');

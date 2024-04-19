@@ -47,7 +47,7 @@
                     </li>
                 </ul>
                 @if (!request()->is('search'))
-                    <form action="/search??name" class="d-flex" role="search" method="GET" class="textField">
+                    <form action="/search?name" class="d-flex" role="search" method="GET">
                         <input class="form-control me-2 textField blackBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
                         <button class="btn btn-outline-success searchBtn blackBackground" type="submit"><i class='fa fa-search'></i></button>
                     </form>

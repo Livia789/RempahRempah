@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Models\Tag;
 use App\Models\AvoidedIngredient;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
@@ -88,14 +89,52 @@ class PageController extends Controller
         return view('register');
     }
 
+    public function showWelcomePage() {
+        $user = Auth::user();
+        $currentTime = Carbon::now();
+        $timeGap = $currentTime->diffInHours(Carbon::parse($user->created_at));
+        $userNotNew = AvoidedIngredient::where('user_id', $user->id)->first();
+        if ($timeGap <= 3 && $userNotNew == null) {
+            $selected_ingredients = [];
+            return view('welcome')->with('user', $user)
+                                  ->with('selected_ingredients', $selected_ingredients);
+        }
+        return redirect('/')->with('accessDenied', 'Akses ditolak.');
+    }
+
+    public function updatePrefPage(Request $req) {
+        $user = Auth::user();
+        $cmd = $req->input('cmd');
+        if ($cmd != null) {
+            $selected_ingredients = collect($req->input('selected_ingredients'));
+            $curr_ingredient = $req->input('curr_ingredient');
+            if ($cmd == 'remove') {
+                $selected_ingredients = $selected_ingredients->reject(function ($item) use ($curr_ingredient) {
+                    return $item == $curr_ingredient;
+                });
+            } else if ($selected_ingredients->doesntContain($curr_ingredient)) {
+                $selected_ingredients->push($curr_ingredient);
+            }
+
+            $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
+            $changes = $selected_ingredients->diff($avoided_ingredients)->isEmpty() ? false : true;
+        } else {
+            $selected_ingredients = [];
+        }
+        return back()->with('user', $user)
+                        ->with('selected_ingredients', $selected_ingredients)
+                        ->with('changes', $changes);
+    }
+
     public function showResetPasswordPage() {
         return view('resetPassword');
     }
 
-    public function showAvoidedIngredientsPage(){
+    public function showMyPreferencesPage() {
         $user = Auth::user();
-        $avoidedIngredients = $user->avoidedIngredients;
-        return view('temp/avoidedIngredients', compact('user', 'avoidedIngredients'));
+        $selected_ingredients = Auth::user()->avoidedIngredients->pluck('ingredient_name');
+        return view('myPreferences')->with('user', $user)
+                                    ->with('selected_ingredients', $selected_ingredients);
     }
 
     public function showMyRecipesPage(){

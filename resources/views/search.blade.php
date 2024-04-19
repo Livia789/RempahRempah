@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Recipes')
+@section('title', 'RempahRempah | Resep')
 
 @section('content')
     @php
@@ -119,7 +119,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" role="search" method="GET" class="textField">
+            <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" role="search" method="GET">
                 <input class="form-control me-2 textField whiteBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
                 <button class="btn btn-outline-success searchBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
             </form>
@@ -143,7 +143,7 @@
                 @endforelse
             </div>
             @auth
-                <h3 class="sectionDivider">Resepku</h3>
+                <h3 class="sectionDivider">Resep Saya</h3>
                 <h4 class="sectionDivider">Publik</h4>
                 <div class="row row-cols-1 row-cols-md-3 g-3">
                     @forelse ($recipes_user_public as $recipe)

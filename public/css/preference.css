@@ -1,0 +1,48 @@
+.section {
+    margin: 40px 0;
+    padding: 0 60px !important;
+}
+.preferenceSection {
+    color: black;
+}
+.preferenceSection .sharpBox.yellow {
+    margin: 10px 0;
+}
+.preferenceSection .sharpBox i {
+    margin-top: 5px;
+}
+
+.sharpBox.addBtn, .sharpBox.removeBtn {
+    justify-content: left;
+    width: 100%;
+}
+.sharpBox.yellow {
+    background-color: rgb(227, 232, 0);
+}
+.sharpBox:disabled, .sharpBox:hover:disabled {
+    background-color: gainsboro;
+}
+
+.row .col {
+    margin: 0;
+}
+
+.preferenceSection form {
+    margin-top: 25px;
+}
+
+.container .preferenceSection .searchField {
+    margin-top: 10px;
+}
+.searchField {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.searchField .sharpBox {
+    margin: 0;
+}
+
+#selected {
+    background-color: rgb(227, 232, 0);
+}
+

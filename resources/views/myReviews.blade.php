@@ -1,10 +1,11 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | My Reviews')
+@section('title', 'RempahRempah | Ulasan Saya')
 
 <link rel="stylesheet" href="{{ asset('css/profile/myReviews.css') }}">
 
 @section('profileContent')
+    {{-- judulnya jgn lupa --}}
     <div class="profileContentContainer">
         @foreach($reviews as $review)
             <?php $recipe = $review->recipe ?>

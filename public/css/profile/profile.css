@@ -1,78 +1,46 @@
-.profileBodyContainer{
-    padding:75px 25px;
-    display:flex;
+.profileBodyContainer {
+    padding: 75px 25px;
+    display: flex;
     flex-direction: row;
 }
 
-.profileBodyContainer a, a:hover{
+.profileBodyContainer a, a:hover {
     text-decoration: none;
-    color:black;
+    color: black;
 }
 
-.profilePicture{
-    width:40%;
-    height:auto;
-    margin:10px;
+.profilePicture {
+    width: 40%;
+    height: auto;
+    margin: 10px;
 }
 
-.profileContainer{
-    width:25%;
+.profileContainer {
+    width: 25%;
     text-align: center;
 }
 
-.sharpBox{
-    border:3px solid black;
-    color:black;
-    display:inline-box;
-    padding:10px 15px;
-    border-radius:5px;
-    width:fit-content;
-    background-color:white;
-    display:flex;
-    justify-content: center;
-    margin:20px 0px;
+.content {
+    padding: 0px;
+    margin: 0px;
+    background-color: #EFEFEF;
 }
 
-.sharpBox:hover{
-    background-color:rgb(175, 175, 175);
+.halfWidth {
+    width: 50%;
 }
 
-#sharpBoxSelected{
-    background-color:black;
-    color:white;
-}
-
-.picon{
-    height:25px;
-    width:auto;
-    margin-right:10px;
-}
-
-.content{
-    padding:0px;
-    margin:0px;
-    background-color:#EFEFEF;
-}
-
-.halfWidth{
-    width:50%;
-}
-
-@media(max-width: 992px){
-    .profileBodyContainer{
+@media(max-width: 992px) {
+    .profileBodyContainer {
         flex-direction: column;
-        padding:25px 25px;
+        padding: 25px 25px;
     }
 
-    .profileContainer{
-        width:100%;
+    .profileContainer {
+        width: 100%;
     }
 
-    .profilePicture{
-        width:50px;
-    }
-
-    .sharpBox{
-        padding:5px;
+    .profilePicture {
+        width: 50px;
     }
 }

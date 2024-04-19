@@ -57,8 +57,16 @@ nav {
     background-color: rgb(227, 232, 0);
 }
 
+.content {
+    background-color: #EFEFEF !important;
+}
+
+form {
+    margin: 0;
+}
+
 form .searchBtn {
-    border: 2px solid white;
+    border: 2.5px solid white;
     min-width: 50px;
 }
 form .searchBtn.blackBackground {
@@ -147,6 +155,49 @@ form .searchBtn:hover, form .searchBtn:focus {
 }
 .page-item a:hover {
     background-color: rgb(227, 232, 0) !important;
+}
+
+.sharpBox {
+    border: 2.5px solid black;
+    color: black;
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    width: fit-content;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.sharpBox:hover {
+    background-color: rgb(227, 232, 0);
+}
+
+#sharpBoxSelected {
+    background-color: black;
+    color: white;
+}
+
+.picon {
+    height: 25px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.textField, .form-control.textField {
+    border: 3px solid white;
+    padding: 10px;
+    border-radius: 3.5px;
+}
+.textField, .form-control.textField.blackBackround {
+    background-color: rgb(33, 37, 41);
+    border-color: white;
+    color: white;
+}
+.textField, .form-control.textField.whiteBackground {
+    background-color: white;
+    border-color: black;
+    color: black;
 }
 
 @media (max-width: 992px) {

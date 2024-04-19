@@ -13,7 +13,7 @@
         }
     </style>
     <div class="authFlexContainer">
-        <div class="banner"></div>
+        <div class="banner twoCols"></div>
         <div class="temp" style="margin:auto">
             <div class="form">
                 <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah">
