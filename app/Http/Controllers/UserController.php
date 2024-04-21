@@ -183,6 +183,10 @@ class UserController extends Controller
             $avoided_ingredient->ingredient_name = $ingredient;
             $avoided_ingredient->save();
         }
+        $diff = $avoided_ingredients->diff($selected_ingredients);
+        foreach($diff as $ingredient) {
+            $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
+        }
 
         if ($src == 'welcome') {
             return redirect('/')->with('loginSuccess', 'Data berhasil disimpan.');

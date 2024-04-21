@@ -117,7 +117,7 @@ class PageController extends Controller
             }
 
             $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
-            $changes = $selected_ingredients->diff($avoided_ingredients)->isEmpty() ? false : true;
+            $changes = $selected_ingredients == $avoided_ingredients ? false : true;
         } else {
             $selected_ingredients = [];
         }
