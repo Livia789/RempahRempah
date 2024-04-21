@@ -148,6 +148,11 @@ class PageController extends Controller
         return view('myProfile', compact('user'));
     }
 
+    public function showMyPasswordPage(){
+        $user = Auth::user();
+        return view('myPassword', compact('user'));
+    }
+
     public function showMyReviewsPage(){
         $user = Auth::user();
         $reviews = $user->reviews;

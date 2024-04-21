@@ -44,6 +44,7 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/myPassword', [PageController::class, 'showMyPasswordPage']);
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
 });
