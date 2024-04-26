@@ -7,10 +7,17 @@
 
 @section('profileContent')
     @php
-        $default_avoided_ingredients = ['Udang', 'Seafood', 'Kacang', 'Kedelai', 'Kangkung', 'Sapi', 'Tepung Terigu', 'Kepiting'];
-        $default_avoided_ingredients = collect($default_avoided_ingredients)->sortBy(function ($ingredient) {
+        $default_ingredients = collect($default_ingredients)->sortBy(function ($ingredient) {
             return strlen($ingredient);
         });
+        $temp = session('selected_ingredients') == null ? $selected_ingredients : session('selected_ingredients');
+        if ($temp !== null) {
+            $diff = $default_ingredients->diff($temp);
+            $default_ingredients = [];
+            foreach($diff as $ingredient) {
+                $default_ingredients[] = $ingredient;
+            }
+        }
     @endphp
     <div class="container px-5">
         <h1>Bahan yang Dihindari</h1>
@@ -49,7 +56,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-sm-4 row-cols-md-6 g-3">
-                    @foreach($default_avoided_ingredients as $item)
+                    @foreach($default_ingredients as $item)
                         <div class="col">
                             <button class="sharpBox addBtn curr_ingredient" value="{{$item}}">
                                 <i class="fa fa-plus"></i> &ensp;{{$item}}

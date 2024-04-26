@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\Tag;
+use App\Models\Ingredient;
 use App\Models\AvoidedIngredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -18,6 +21,27 @@ class PageController extends Controller
         View::share('tag_all', Tag::all());
         View::share('unique_ctg_groups', Category::all()->unique('class'));
         View::share('duration_minutes', [15, 30, 45, 60]);
+
+        $default_ingredients = Cache::remember('default_ingredients', 60*3, function () {
+            $recipes = Recipe::with('ingredientHeaders.ingredients')->get();
+            $default_ingredients = [];
+
+            foreach ($recipes as $recipe) {
+                foreach ($recipe->ingredientHeaders as $header) {
+                    foreach ($header->ingredients as $ingredient) {
+                        $name = $ingredient->name;
+                        if (!isset($default_ingredients[$name])) {
+                            $default_ingredients[$name] = 0;
+                        }
+                        $default_ingredients[$name]++;
+                    }
+                }
+            }
+            arsort($default_ingredients);
+            $default_ingredients = array_keys(array_slice($default_ingredients, 0, 10, true));
+            return $default_ingredients;
+        });
+        View::share('default_ingredients', $default_ingredients);
 
         View::share('functions', [
             'buildFilterQuery' => function ($name, $categoryGroups, $index, $curr_ctg_id, $durations, $duration_new, $tags, $tag_new) {
@@ -94,7 +118,7 @@ class PageController extends Controller
         $currentTime = Carbon::now();
         $timeGap = $currentTime->diffInHours(Carbon::parse($user->created_at));
         $userNotNew = AvoidedIngredient::where('user_id', $user->id)->first();
-        if ($timeGap <= 3 && $userNotNew == null) {
+        if ($timeGap <= 24 && $userNotNew == null) {
             $selected_ingredients = [];
             return view('welcome')->with('user', $user)
                                   ->with('selected_ingredients', $selected_ingredients);
@@ -106,8 +130,10 @@ class PageController extends Controller
         $user = Auth::user();
         $cmd = $req->input('cmd');
         if ($cmd != null) {
-            $selected_ingredients = collect($req->input('selected_ingredients'));
-            $curr_ingredient = $req->input('curr_ingredient');
+            $selected_ingredients = collect($req->input('selected_ingredients'))->map(function ($ingredient) {
+                return strtolower($ingredient);
+            });
+            $curr_ingredient = strtolower($req->input('curr_ingredient'));
             if ($cmd == 'remove') {
                 $selected_ingredients = $selected_ingredients->reject(function ($item) use ($curr_ingredient) {
                     return $item == $curr_ingredient;

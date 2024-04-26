@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>@yield('title')</title>
 </head>
+@php
+    $index = -1;
+@endphp
 <body>
     <nav class="navbar bg-dark navbar-expand-lg fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
@@ -20,14 +23,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 225px;">
-                    @foreach ($unique_ctg_groups as $index => $unique_ctg)
+                    @foreach ($unique_ctg_groups as $unique_ctg_group)
+                        @php
+                            $index++;
+                        @endphp
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{$unique_ctg->class}}
+                                {{$unique_ctg_group->class}}
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach ($category_all as $ctg)
-                                    @if ($ctg->class == $unique_ctg->class)
+                                    @if ($ctg->class == $unique_ctg_group->class)
                                         <li><a class="dropdown-item" href="/search?category{{$index}}={{$ctg->id}}">{{$ctg->name}}</a></li>
                                     @endif
                                 @endforeach
