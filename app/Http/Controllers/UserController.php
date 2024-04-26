@@ -173,7 +173,9 @@ class UserController extends Controller
     public function updatePreferences(Request $req) {
         $user = Auth::user();
         $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
-        $selected_ingredients = collect($req->input('selected_ingredients'));
+        $selected_ingredients = collect($req->input('selected_ingredients'))->map(function ($ingredient) {
+            return strtolower($ingredient);
+        });
         $src = $req->input('source_view');
 
         $diff = $selected_ingredients->diff($avoided_ingredients);

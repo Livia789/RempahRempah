@@ -57,7 +57,7 @@
                                 @foreach ($category_all as $ctg)
                                     @if ($ctg->class == $unique_ctg_group->class)
                                         <a class="dropdown-item text-wrap" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}">
-                                            <input type="checkbox" name="category_{{$ctg->id}}" id="category_{{$ctg->id}}" {{isset($categoryGroups[$index]) && in_array($ctg->id, $categoryGroups[$index]) ? "checked" : "" }} class="whiteBackground">
+                                            <input type="checkbox" name="category_{{$ctg->id}}" id="category_{{$ctg->id}}" {{isset($categoryGroups[$index]) && in_array($ctg->id, $categoryGroups[$index]) ? "checked" : "" }} class="whiteBackground"onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}';">
                                             {{$ctg->name}}
                                             <div class="recipesCount">
                                                 ({{countRecipe($recipes, $ctg->id, null, null)}})
@@ -79,7 +79,7 @@
                         <div class="accordion-body">
                             @foreach ($duration_minutes as $minutes)
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}">
-                                    <input type="checkbox" name="duration_{{$minutes}}" id="duration_{{$minutes}}" {{in_array($minutes, $durations) ? " checked" : "" }} class="whiteBackground">
+                                    <input type="checkbox" name="duration_{{$minutes}}" id="duration_{{$minutes}}" {{in_array($minutes, $durations) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}';">
                                     &le;{{$minutes}} menit
                                     <div class="recipesCount">
                                         ({{countRecipe($recipes, null, $minutes, null)}})
@@ -106,7 +106,7 @@
                         <div class="accordion-body">
                             @foreach ($tag_all as $tag)
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}">
-                                    <input type="checkbox" name="tag_{{$tag->id}}" id="tag_{{$tag->id}}" {{in_array($tag->id, $tags) ? " checked" : "" }} class="whiteBackground">
+                                    <input type="checkbox" name="tag_{{$tag->id}}" id="tag_{{$tag->id}}" {{in_array($tag->id, $tags) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}';">
                                     {{$tag->name}}
                                     <div class="recipesCount">
                                         ({{countRecipe($recipes, null, null, $tag->id)}})
