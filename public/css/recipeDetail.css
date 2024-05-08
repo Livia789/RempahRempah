@@ -1,0 +1,105 @@
+.recipeDetailContainer {
+    padding: 60px;
+    background-color:EFEFEF;
+}
+
+.sharpBox{
+    margin:10px 10px 10px 0px;
+}
+
+a, a:hover{
+    text-decoration: none;
+    color:black;
+}
+
+.recipeDetailSummaryCtr{
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    font-size:14px;
+}
+
+.recipeDetailSummaryCtr:hover{
+    background-color:white;
+}
+
+.separatorLine{
+    border-right:2px solid black;
+    margin:10px 25px;
+}
+
+.starIcon{
+    height:20px;
+    width:auto;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.recipeImage{
+    height:250px;
+    width:auto;
+    object-fit: cover;
+    margin-right:20px;
+    border-radius: 5px;
+    /* border:3px solid black; */
+}
+
+.imgDescContainer{
+    margin:30px;
+    margin-left:0px;
+}
+
+.stepCheckIcon{
+    height:25px;
+    width:25px;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #E3E800;
+ }
+
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: white;
+}
+
+.table-striped>thead>tr>th{
+    background-color:white;
+}
+
+
+.table{
+    border:3px solid black;
+    margin:18px 0px;
+}
+
+.box{
+    border: 2.5px solid black;
+    color: black;
+    border-radius: 5px;
+    width: fit-content;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+    margin:0px;
+    margin-right:10px;
+}
+
+.longBox{
+    padding: 8px;
+    flex-grow:1;
+    justify-content:left;
+}
+
+.shortBox{
+    height:fit-content;
+    padding:8px;
+}
+
+.highlight .shortBox{
+    background-color:#E3E800;
+}
+.highlight .longBox{
+    background-color: rgb(246, 246, 121);
+}
