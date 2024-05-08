@@ -189,7 +189,19 @@ class PageController extends Controller
         return view('temp/bookmarks', compact('user', 'bookmarks'));
     }
 
+
     public function showRecipeDetailPage($recipe_id){
+        $user = Auth::user();
+        $recipe = Recipe::find($recipe_id);
+        $reviews = $recipe->reviews;
+        if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
+            return view('recipeDetail', compact('recipe', 'user', 'reviews'));
+        } else {
+            echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
+        }
+    }
+
+    public function TEMP_showRecipeDetailPage($recipe_id){
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
         if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {

@@ -1,4 +1,4 @@
-<a href="/temp/recipeDetail/{{$recipe->id}}">
+<a href="/recipeDetail/{{$recipe->id}}">
     <div class="card h-100 recipeCard">
         <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">
         <div class="card-body">

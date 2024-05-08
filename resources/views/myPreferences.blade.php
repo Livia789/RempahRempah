@@ -72,7 +72,7 @@
                     <input type="text" name="selected_ingredients[]" value="{{$item}}" hidden>
                 @endforeach
                 <button class="sharpBox {{ session('changes') == true ? '' : 'disabled' }}" type="submit" name="btn-submit" value="submit" {{ session('changes') == true ? '' : 'disabled' }}>
-                    <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
+                    <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
                     Simpan
                 </button>
             </form>
