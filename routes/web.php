@@ -4,6 +4,7 @@ use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,30 +22,36 @@ Route::get('/search', [PageController::class, 'showSearchPage']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [PageController::class, 'showLoginPage']);
-    Route::get('/register', [PageController::class, 'showRegisterPage']);
-    Route::get('/resetPassword', [PageController::class, 'showResetPasswordPage']);
-    Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
-
     Route::post('/login', [UserController::class, 'login']);
+
+    Route::get('/register', [PageController::class, 'showRegisterPage']);
     Route::post('/register', [UserController::class, 'register']);
+
+    Route::get('/resetPassword', [PageController::class, 'showResetPasswordPage']);
     Route::post('/sendResetPasswordMail', [EmailController::class, 'sendResetPasswordMail']);
     Route::post('/resetPassword', [UserController::class, 'resetPassword']);
 
+    Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 });
 
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/welcome', [PageController::class, 'showWelcomePage']);
 
+    Route::get('/welcome', [PageController::class, 'showWelcomePage']);
+    Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
     Route::post('/updatePrefPage', [PageController::class, 'updatePrefPage']);
     Route::post('/updatePreferences', [UserController::class, 'updatePreferences']);
 
-    Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
     Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
-    Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
-    Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
-    Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
-    Route::get('/myPassword', [PageController::class, 'showMyPasswordPage']);
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
+    Route::get('/myPassword', [PageController::class, 'showMyPasswordPage']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
+
+    Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
+    Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
+    Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
+
+    Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
+    Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
+    Route::post('/updateTagPage', [PageController::class, 'updateTagPage']);
 });

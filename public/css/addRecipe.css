@@ -1,0 +1,60 @@
+.content {
+    padding: 20px 60px !important;
+}
+
+label {
+    font-weight: bold;
+}
+
+.addRecipe {
+    margin: 0 15%;
+}
+.addRecipe select {
+    font-size: medium;
+}
+.addRecipe select option {
+    background-color: white;
+}
+.addRecipe select option:hover {
+    background-color: rgb(227, 232, 0);
+}
+
+.groupTextForm {
+    background-color: #EFEFEF;
+    border: 0;
+}
+
+#durationTotal {
+    margin-left: 25px !important;
+    padding: 0 25px;
+    background-color: rgb(227, 232, 0);
+    border: 2.5px solid black;
+    border-radius: 25px !important;
+    color: black;
+    font-weight: 500;
+}
+
+.tagLabelForm {
+    margin-bottom: 0px;
+}
+
+.searchField {
+    margin-bottom: 45px;
+}
+
+.removeBtn {
+    margin-top: -10px !important;
+    margin-bottom: 30px !important;
+}
+
+.scrollSection {
+    max-height: 125px;
+    overflow-y: auto;
+    background-color: #C1C1C1;
+}
+
+@media (max-width: 992px) {
+    .addRecipe {
+        margin: 0;
+    }
+}

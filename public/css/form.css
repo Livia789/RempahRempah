@@ -3,13 +3,13 @@
     background-repeat: repeat-x;
 }
 
-.twoCols {
+.banner.twoCols {
     height: 100vh;
     width: 50%;
     background-image: url('/assets/banner1.png');
 }
 
-.oneCol {
+.banner.oneCol {
     height: 30vh;
     background-image: url('/assets/banner2.png');
 }
@@ -18,15 +18,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0px;
     padding: 0px;
     background-color: rgb(33, 37, 41);
 }
 
 .form {
-    margin: auto;
-    padding: 25px;
+    padding: 25px 50px;
     width: 100%;
     color: white;
     background-color: rgb(33, 37, 41);
@@ -38,10 +36,6 @@
 
 .form #logo {
     width: 100px;
-}
-
-.form h6 {
-    max-width: 500px;
 }
 
 form .col {
@@ -74,12 +68,10 @@ form .col {
     width: 100%;
     padding: 0px;
 }
-
 .inputWithIconWrapper .form-control.textField {
     padding: 0;
     border: none;
 }
-
 .inputWithIconWrapper .picon {
     height: 30px;
     width: auto;
@@ -131,7 +123,7 @@ input[type="checkbox"].whiteBackground:checked {
 }
 
 @media (max-width: 992px) {
-    .banner .twoCols {
+    .banner.twoCols {
         visibility: hidden;
         width: 0;
     }

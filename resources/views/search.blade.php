@@ -121,7 +121,7 @@
         <div class="col-md-9">
             <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" role="search" method="GET">
                 <input class="form-control me-2 textField whiteBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
-                <button class="btn btn-outline-success searchBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
+                <button class="btn btn-outline-success outlinedBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
             </form>
             @php
                 if (Auth::user()) {

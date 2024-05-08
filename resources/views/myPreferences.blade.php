@@ -83,14 +83,14 @@
         var removeBtns = document.getElementsByClassName('removeBtn');
 
         for (var i = 0; i < addBtns.length; i++) {
-            addBtns[i].addEventListener('click', function(){
+            addBtns[i].addEventListener('click', function() {
                 document.getElementById('cmd').value = 'add';
                 document.getElementById('curr_ingredient').value = this.value;
             });
         }
 
         for (var i = 0; i < removeBtns.length; i++) {
-            removeBtns[i].addEventListener('click', function(){
+            removeBtns[i].addEventListener('click', function() {
                 document.getElementById('cmd').value = 'remove';
                 document.getElementById('curr_ingredient').value = this.value;
             });

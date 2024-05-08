@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\Tag;
-use App\Models\Ingredient;
 use App\Models\AvoidedIngredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -148,8 +146,8 @@ class PageController extends Controller
             $selected_ingredients = [];
         }
         return back()->with('user', $user)
-                        ->with('selected_ingredients', $selected_ingredients)
-                        ->with('changes', $changes);
+                     ->with('selected_ingredients', $selected_ingredients)
+                     ->with('changes', $changes);
     }
 
     public function showResetPasswordPage() {
@@ -272,7 +270,35 @@ class PageController extends Controller
             });
         }
 
-        $recipes = $query->paginate(9);
+        $recipes = $query->paginate(15);
         return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags'));
+    }
+
+    public function showAddRecipePage() {
+        return view('addRecipe');
+    }
+
+    public function updateTagPage(Request $req) {
+        $user = Auth::user();
+        $cmd = $req->input('cmd');
+
+        if ($cmd != null) {
+            $selected_tags = collect($req->input('selected_tags'))->map(function ($tag) {
+                return strtolower($tag);
+            });
+            $curr_tag = strtolower($req->input('curr_tag'));
+            if ($cmd == 'remove') {
+                $selected_tags = $selected_tags->reject(function ($item) use ($curr_tag) {
+                    return $item == $curr_tag;
+                });
+            } else if ($selected_tags->doesntContain($curr_tag)) {
+                $selected_tags->push($curr_tag);
+            }
+        } else {
+            $selected_tags = [];
+        }
+        // dd([$cmd, $selected_tags]);
+        return back()->with('selected_tags', $selected_tags)
+                     ->with($req->all());
     }
 }
