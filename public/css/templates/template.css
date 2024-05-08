@@ -65,19 +65,19 @@ form {
     margin: 0;
 }
 
-form .searchBtn {
+form .outlinedBtn {
     border: 2.5px solid white;
     min-width: 50px;
 }
-form .searchBtn.blackBackground {
+form .outlinedBtn.blackBackground {
     color: white;
     border-color: white;
 }
-form .searchBtn.whiteBackground {
+form .outlinedBtn.whiteBackground {
     color: black;
     border-color: black;
 }
-form .searchBtn:hover, form .searchBtn:focus {
+form .outlinedBtn:hover, form .outlinedBtn:focus {
     background-color: rgb(227, 232, 0) !important;
     color: rgb(33, 37, 41) !important;
 }
@@ -168,9 +168,11 @@ form .searchBtn:hover, form .searchBtn:focus {
     justify-content: center;
     margin: 20px 0px;
 }
-
 .sharpBox:hover {
     background-color: rgb(227, 232, 0);
+}
+.sharpBox i {
+    margin-top: 5px;
 }
 
 #sharpBoxSelected {

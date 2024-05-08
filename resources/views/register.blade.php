@@ -14,7 +14,7 @@
     </style>
     <div class="authFlexContainer">
         <div class="banner twoCols"></div>
-        <div class="temp" style="margin:auto">
+        <div class="temp" style="margin:auto; width:55%">
             <div class="form">
                 <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah">
                 <h6>
@@ -58,7 +58,7 @@
                     <div class="col d-grid gap-2">
                         <button class="btn btn-primary" type="submit" name="btn-submit" value="submit">Daftar</button>
                     </div>
-                    <h6>Sudah memiliki akun? <a href="/register" class="roundedBox blackBackground">Yuk, masuk di sini!</a></h6>
+                    <h6>Sudah memiliki akun? <a href="/login" class="roundedBox blackBackground">Yuk, masuk di sini!</a></h6>
                 </form>
             </div>
         </div>

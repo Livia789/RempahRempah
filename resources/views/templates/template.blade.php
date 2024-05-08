@@ -55,13 +55,13 @@
                 @if (!request()->is('search'))
                     <form action="/search?name" class="d-flex" role="search" method="GET">
                         <input class="form-control me-2 textField blackBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
-                        <button class="btn btn-outline-success searchBtn blackBackground" type="submit"><i class='fa fa-search'></i></button>
+                        <button class="btn btn-outline-success outlinedBtn blackBackground" type="submit"><i class='fa fa-search'></i></button>
                     </form>
                 @endif
                 <ul class="navbar-nav profileButton">
                     <li class="nav-item dropdown">
                         <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Auth::check() ? asset(Auth::user()->profile_img) : asset('storage/users/default_profile_img.png') }}" alt="profile image">
+                            <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Auth::check() ? asset(Auth::user()->img) : asset('storage/users/default_profile_img.png') }}" alt="profile image">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             @if (Auth::check())
@@ -71,7 +71,7 @@
                                 <li><hr class="dropdown-divider"></li>
                                 @if (Auth::user()->role == 'member')
                                     <li><a class="dropdown-item" href="/myProfile">Edit Profil</a></li>
-                                    <li><a class="dropdown-item" href="#">Tambah Resep</a></li>
+                                    <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
                                     <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else
                                     <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>

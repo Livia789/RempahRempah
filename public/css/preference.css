@@ -7,9 +7,6 @@
 .preferenceSection .sharpBox.yellow {
     margin: 10px 0;
 }
-.preferenceSection .sharpBox i {
-    margin-top: 5px;
-}
 
 .sharpBox.addBtn, .sharpBox.removeBtn {
     justify-content: left;
