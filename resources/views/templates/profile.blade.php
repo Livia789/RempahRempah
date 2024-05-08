@@ -1,4 +1,4 @@
-@extends('templates\template')
+@extends('templates/template')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/profile/profile.css') }}">
