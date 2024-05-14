@@ -18,6 +18,9 @@ class LoggedIn
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
+            if (Auth::user()->role == 'member' && Auth::user()->accountStatus == 'new' && !(request()->is('welcome') || request()->is('updateSelected') || request()->is('updatePreferences') || request()->is('logout'))) {
+                return redirect('welcome');
+            }
             return $next($request);
         }
         return abort(401);

@@ -119,8 +119,8 @@
             </div>
         </div>
         <div class="col-md-9">
-            <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" role="search" method="GET">
-                <input class="form-control me-2 textField whiteBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
+            <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" method="GET" id="searchForm">
+                <input type="text" class="form-control me-2 textField whiteBackground" placeholder="Cari resep di sini" id="input_recipe" name="name" value="{{isset($name) ? $name : ""}}" data-type="recipe">
                 <button class="btn btn-outline-success outlinedBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
             </form>
             @php
@@ -188,4 +188,25 @@
             </a>
         </li>
     </ul>
+    <script>
+        $(document).ready(function() {
+            $(document).on('keypress', '#input_recipe', function(e) {
+                if (e.which === 13) {
+                    $('#searchForm').submit();
+                }
+            });
+        });
+
+        $('#input_recipe').typeahead({
+            source: function (query, process) {
+                var type = $('#input_recipe').data('type');
+                return $.get("/showResult", {
+                    query: query,
+                    type: type
+                }, function (data) {
+                    return process(data);
+                });
+            }
+        });
+    </script>
 @endsection

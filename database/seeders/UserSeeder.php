@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin1@gmail.com',
             'password' => bcrypt('wadimor'),
             'role' => 'admin',
-            'isVerified' => true,
+            'accountStatus' => 'verified',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'email' => 'ahligizi1@gmail.com',
             'password' => bcrypt('wadimor'),
             'role' => 'ahligizi',
-            'isVerified' => true,
+            'accountStatus' => 'verified',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -40,6 +40,7 @@ class UserSeeder extends Seeder
             'name' => 'Lala',
             'email' => 'lalaaa@gmail.com',
             'password' => bcrypt('kuning'),
+            'accountStatus' => 'verified',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -48,6 +49,7 @@ class UserSeeder extends Seeder
             'name' => 'Po',
             'email' => 'po@gmail.com',
             'password' => bcrypt('merah'),
+            'accountStatus' => 'verified',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

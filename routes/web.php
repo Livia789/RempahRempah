@@ -16,8 +16,12 @@ use App\Http\Controllers\RecipeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [PageController::class, 'showHomePage']);
 Route::get('/home', [PageController::class, 'showHomePage']);
+Route::get('/showResult', [PageController::class, 'showResult']);
+// utk semua route yg utk show page di bawah ini (tdk termasuk middleware lain)
+// dicek dl accountstatusnya, kalo 'new' redirect welcome (liat yg di showSearchPage aja 3 line)
 Route::get('/search', [PageController::class, 'showSearchPage']);
 Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
@@ -41,8 +45,8 @@ Route::group(['middleware' => ['loggedin']], function () {
 
     Route::get('/welcome', [PageController::class, 'showWelcomePage']);
     Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
-    Route::post('/updatePrefPage', [PageController::class, 'updatePrefPage']);
-    Route::post('/updatePreferences', [UserController::class, 'updatePreferences']);
+    Route::post('/updateSelected', [PageController::class, 'updateSelected']);
+    Route::post('/w', [UserController::class, 'updatePreferences']);
 
     Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
