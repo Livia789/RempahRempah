@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -172,11 +174,16 @@ class UserController extends Controller
 
     public function updatePreferences(Request $req) {
         $user = Auth::user();
+        $src = parse_url(url()->previous(), PHP_URL_PATH);
+        if ($src == '/welcome') {
+            $user->accountStatus = 'regular';
+            $user->save();
+        }
+
         $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
         $selected_ingredients = collect($req->input('selected_ingredients'))->map(function ($ingredient) {
             return strtolower($ingredient);
         });
-        $src = $req->input('source_view');
 
         $diff = $selected_ingredients->diff($avoided_ingredients);
         foreach($diff as $ingredient) {
@@ -190,7 +197,7 @@ class UserController extends Controller
             $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
         }
 
-        if ($src == 'welcome') {
+        if ($src == '/welcome') {
             return redirect('/')->with('loginSuccess', 'Data berhasil disimpan.');
         } else {
             return back()->with('updateSuccess', 'Data berhasil disimpan.');
@@ -198,6 +205,7 @@ class UserController extends Controller
     }
 
     public function logout() {
+        Session::flush();
         Auth::logout();
         return redirect('/');
     }

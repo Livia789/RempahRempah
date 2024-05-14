@@ -1,44 +1,36 @@
 .section {
     padding: 40px 60px !important;
 }
+
 .preferenceSection {
     color: black;
 }
-.preferenceSection .sharpBox.yellow {
-    margin: 10px 0;
-}
 
-.sharpBox.addBtn, .sharpBox.removeBtn {
-    justify-content: left;
-    width: 100%;
-}
-.sharpBox.yellow {
-    background-color: rgb(227, 232, 0);
-}
-.sharpBox:disabled, .sharpBox:hover:disabled {
-    background-color: gainsboro;
+.preferenceForm {
+    margin-top: 35px;
 }
 
 .row .col {
     margin: 0;
 }
 
-.preferenceSection form {
-    margin-top: 25px;
+.sharpBox.addBtn, .sharpBox.removeBtn {
+    justify-content: left;
+    width: 100%;
 }
-
-.container .preferenceSection .searchField {
-    margin-top: 10px;
-}
-.searchField {
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-.searchField .sharpBox {
-    margin: 0;
-}
-
-#selected {
+.sharpBox.yellow, .sharpBox.removeBtn {
     background-color: rgb(227, 232, 0);
+}
+.sharpBox:disabled, .sharpBox:hover:disabled {
+    background-color: gainsboro;
+}
+
+.searchField {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.addInputBtn {
+    margin-top: 0 !important;
 }
 

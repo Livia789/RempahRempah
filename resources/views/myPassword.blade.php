@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col">
-            <label for="password_conf" class="form-label">Konfirmasi Kata sandi</label>
+            <label for="password_conf" class="form-label">Konfirmasi kata sandi</label>
             <div class="inputWithIconWrapper textField whiteBackground">
                 <input type="password" class="form-control textField whiteBackground" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password_conf" onclick="toggleHidePassword('password_conf')" alt="eye_icon">
@@ -42,7 +42,7 @@
 @endsection
 
 <script>
-    function toggleHidePassword(element){
+    function toggleHidePassword(element) {
         const inputField = document.getElementById(element);
         const type = inputField.getAttribute("type") == "password" ? "text" : "password";
         inputField.setAttribute("type", type);

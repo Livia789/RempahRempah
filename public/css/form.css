@@ -46,30 +46,14 @@ form .col {
     box-shadow: none !important;
 }
 
-.textField, .form-control.textField {
-    border: 3px solid white;
-    padding: 10px;
-    border-radius: 3.5px;
-}
-.textField, .form-control.textField.blackBackround {
-    background-color: rgb(33, 37, 41);
-    border-color: white;
-    color: white;
-}
-.textField, .form-control.textField.whiteBackground {
-    background-color: white;
-    border-color: black;
-    color: black;
-}
-
 .inputWithIconWrapper {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 0px;
+    padding: 0px !important;
+    border: none;
 }
 .inputWithIconWrapper .form-control.textField {
-    padding: 0;
     border: none;
 }
 .inputWithIconWrapper .picon {

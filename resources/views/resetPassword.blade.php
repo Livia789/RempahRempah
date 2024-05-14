@@ -72,15 +72,21 @@
                             @endif
                         </div>
                         <div class="col">
-                            <label for="password" class="form-label">Kata sandi baru</label>
-                            <input type="password" class="form-control textField" placeholder="Masukkan kata sandi" id="password" name="password">
+                            <label for="password" class="form-label">Kata sandi</label>
+                            <div class="inputWithIconWrapper textField blackBackground">
+                                <input type="password" class="form-control textField blackBackground" placeholder="Masukkan kata sandi" id="password" name="password">
+                                <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password" onclick="toggleHidePassword('password')" alt="eye_icon">
+                            </div>
                             @if ($errors->has('password'))
                                 <h6 class="errorMsg">{{$errors->first('password')}}</h6>
                             @endif
                         </div>
                         <div class="col">
-                            <label for="password_conf" class="form-label">Konfirmasi kata sandi baru</label>
-                            <input type="password" class="form-control textField" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
+                            <label for="password_conf" class="form-label">Konfirmasi kata sandi</label>
+                            <div class="inputWithIconWrapper textField blackBackground">
+                                <input type="password" class="form-control textField blackBackground" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
+                                <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password_conf" onclick="toggleHidePassword('password_conf')" alt="eye_icon">
+                            </div>
                             @if ($errors->has('password_conf'))
                                 <h6 class="errorMsg">{{$errors->first('password_conf')}}</h6>
                             @endif
@@ -96,4 +102,15 @@
             </div>
         </div>
     </div>
+    <script>
+        function toggleHidePassword(element) {
+            const inputField = document.getElementById(element);
+            const type = inputField.getAttribute("type") == "password" ? "text" : "password";
+            inputField.setAttribute("type", type);
+
+            const icon = document.getElementById(`toggle_icon_${element}`);
+            const iconSource = type === "password" ? "/assets/icons/eye_open.png" : "/assets/icons/eye_closed.png";
+            icon.setAttribute("src", iconSource);
+        }
+    </script>
 @endsection

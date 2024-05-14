@@ -9,13 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     @yield('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
     <title>@yield('title')</title>
 </head>
-@php
-    $index = -1;
-@endphp
 <body>
-    <nav class="navbar bg-dark navbar-expand-lg fixed-top" data-bs-theme="dark">
+    @php
+        $index = -1;
+    @endphp
+    <nav class="navbar bg-dark navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home"><img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +56,8 @@
                     </li>
                 </ul>
                 @if (!request()->is('search'))
-                    <form action="/search?name" class="d-flex" role="search" method="GET">
-                        <input class="form-control me-2 textField blackBackground" type="search" name="name" placeholder="Cari resep di sini" value="{{isset($name) ? $name : ""}}" aria-label="Search">
+                    <form action="/search?name" class="d-flex" method="GET" id="searchForm">
+                        <input type="text" class="form-control me-2 textField blackBackground" placeholder="Cari resep di sini" id="input_recipe" name="name" value="{{isset($name) ? $name : ""}}" data-type="recipe">
                         <button class="btn btn-outline-success outlinedBtn blackBackground" type="submit"><i class='fa fa-search'></i></button>
                     </form>
                 @endif
@@ -91,6 +94,27 @@
         @yield('content')
     </div>
     <footer>
+        <script>
+            $(document).ready(function() {
+                $(document).on('keypress', '#input_recipe', function(e) {
+                    if (e.which === 13) {
+                        $('#searchForm').submit();
+                    }
+                });
+            });
+
+            $('#input_recipe').typeahead({
+                source: function (query, process) {
+                    var type = $('#input_recipe').data('type');
+                    return $.get("/showResult", {
+                        query: query,
+                        type: type
+                    }, function (data) {
+                        return process(data);
+                    });
+                }
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         @include('templates/footer')
     </footer>

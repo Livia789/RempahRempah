@@ -17,6 +17,9 @@ nav {
 .navbar a {
     color: white;
 }
+.typeahead a {
+    color: black;
+}
 
 .navbar-brand #logo {
     width: 100px;
