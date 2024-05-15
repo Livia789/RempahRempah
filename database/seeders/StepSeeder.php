@@ -19,7 +19,7 @@ class StepSeeder extends Seeder
             [
                 'step_header_id' => '1',
                 'step_desc' => 'campur tepung dengan air',
-                'step_img' => null
+                'step_img' => 'storage/recipes/default_recipe_img.png'
             ],
             [
                 'step_header_id' => '1',
@@ -29,7 +29,7 @@ class StepSeeder extends Seeder
             [
                 'step_header_id' => '1',
                 'step_desc' => 'tiriskan',
-                'step_img' => null
+                'step_img' => 'storage/recipes/default_recipe_img.png'
             ],
             [
                 'step_header_id' => '1',

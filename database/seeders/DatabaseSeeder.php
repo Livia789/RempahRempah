@@ -38,6 +38,10 @@ class DatabaseSeeder extends Seeder
             NutritionRecipeSeeder::class,
             TagSeeder::class,
             RecipeTagSeeder::class,
+            ReviewReactionSeeder::class,
+            StepProgressSeeder::class,
+            UserIngredientProgressSeeder::class,
+            UserToolProgressSeeder::class,
         ]);
     }
 }

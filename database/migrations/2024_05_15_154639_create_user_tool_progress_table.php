@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
+        Schema::create('user_tool_progress', function (Blueprint $table) {
             $table->timestamps();
-            $table->unsignedBigInteger('recipe_id');
-            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->unsignedBigInteger('tool_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('recipe_id');
+            $table->foreign('tool_id')->references('id')->on('tools')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('rating');
-            $table->text('comment');
-            $table->string('img')->default('storage/recipes/default_recipe_img.png');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->primary(['tool_id', 'user_id', 'recipe_id']);
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('user_tool_progress');
     }
 };

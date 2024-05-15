@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('recipe_id');
-            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+        Schema::create('review_reactions', function (Blueprint $table) {
+            $table->unsignedBigInteger('review_id');
             $table->unsignedBigInteger('user_id');
+            $table->enum('type', ['like', 'dislike']);
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('rating');
-            $table->text('comment');
-            $table->string('img')->default('storage/recipes/default_recipe_img.png');
+            $table->primary(['review_id', 'user_id']);
+
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('review_reactions');
     }
 };

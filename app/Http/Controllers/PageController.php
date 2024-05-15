@@ -7,6 +7,8 @@ use App\Models\Recipe;
 use App\Models\Ingredient;
 use App\Models\Tag;
 use App\Models\AvoidedIngredient;
+use App\Models\UserIngredientProgress;
+use App\Models\UserToolProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -257,8 +259,10 @@ class PageController extends Controller
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
         $reviews = $recipe->reviews;
+        $user_ingredients = UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get();
+        $user_tools = UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get();
         if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
-            return view('recipeDetail', compact('recipe', 'user', 'reviews'));
+            return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
         } else {
             echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
         }

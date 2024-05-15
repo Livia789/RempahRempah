@@ -5,6 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewReactionController;
+use App\Http\Controllers\StepProgressController;
+use App\Http\Controllers\UserIngredientProgressController;
+use App\Http\Controllers\UserToolProgressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +67,13 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
     Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
     Route::post('/updateTagPage', [PageController::class, 'updateTagPage']);
+
+    Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
+    Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
+    Route::post('/likeReview', [ReviewReactionController::class, 'likeReview']);
+    Route::post('/dislikeReview', [ReviewReactionController::class, 'dislikeReview']);
+    Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
+    Route::post('/toggleUserIngredientProgress', [UserIngredientProgressController::class, 'toggleUserIngredientProgress']);
+    Route::post('/toggleUserToolProgress', [UserToolProgressController::class, 'toggleUserToolProgress']);
 });
+

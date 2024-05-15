@@ -6,10 +6,16 @@
     <link rel="stylesheet" href="{{ asset('css/recipeDetail.css') }}">
 @endsection
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{{asset('js/recipeDetail.js')}}"></script>
+<script>
+    var token = '{{csrf_token()}}';
+    var recipe_id = '{{$recipe->id}}';
+    var user_id = '{{$user ? $user->id : -1}}';
+</script>
 
 @section('content')
     <div class="recipeDetailContainer">
-
         {{--  TODO  --}}
         <p>Path 1 > Path 2 > Path 3</p>
 
@@ -26,7 +32,7 @@
             <?php
                 $bookmarkImage = $user && $user->bookmarks()->where('recipe_id', $recipe->id)->exists() ? 'bookmark_black.png' : 'bookmark_white.png';
             ?>
-            <div class="sharpBox" onclick="toggleBookmark()">
+            <div class="sharpBox" id="bookmarkButton">
                 <img src="/assets/icons/{{ $bookmarkImage }}" id="bookmarkImage" class="picon" alt="bookmark_icon">
                 Bookmark
             </div>
@@ -75,9 +81,12 @@
                     <i>Tidak ada data alat untuk resep ini</i>
                 @else
                     @foreach($recipe->tools as $tool)
-                        <div class="d-flex m-2" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
+                        <?php
+                            $progress = $user_tools->where('tool_id', $tool->id)->first()
+                        ?>
+                        <div class="d-flex m-2 progressDiv toolDiv" tool_id="{{$tool->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                             <div class="box shortBox">
-                                <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" onclick="toggleCheck({{ $loop->iteration }})" class="stepCheckIcon" alt="grey_check">
+                                <img src="/assets/icons/check_grey.png" class="stepCheckIcon" alt="grey_check">
                             </div>
                             <div class="box longBox">
                                 {{ $tool->name }}
@@ -117,7 +126,6 @@
 
         <div>
             <h3><b>Bahan</b></h3>
-
             <div class="d-flex">
                 <div style="width:45%; margin-right:50px">
                     @foreach($recipe->ingredientHeaders as $ingredientHeader)
@@ -131,14 +139,17 @@
                             </div>
                             <div>
                                 @foreach($ingredientHeader->ingredients as $ingredient)
-                                    <div class="d-flex m-2"  onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
-                                        <div class="box shortBox">
-                                            <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
-                                        </div>
-                                        <div class="box longbox">
-                                            {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
-                                        </div>
+                                <?php
+                                    $progress = $user_ingredients->where('ingredient_id', $ingredient->id)->first()
+                                ?>
+                                <div class="d-flex m-2 progressDiv ingredientDiv" ingredient_id="{{$ingredient->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
+                                    <div class="box shortBox">
+                                        <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
                                     </div>
+                                    <div class="box longbox">
+                                        {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                    </div>
+                                </div>
                                 @endforeach
                             </div>
                             <br>
@@ -157,14 +168,17 @@
                             </div>
                             <div>
                                 @foreach($ingredientHeader->ingredients as $ingredient)
-                                    <div class="d-flex m-2"  onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
-                                        <div class="box shortBox">
-                                            <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
-                                        </div>
-                                        <div class="box longBox">
-                                            {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
-                                        </div>
+                                <?php
+                                    $progress = $user_ingredients->where('ingredient_id', $ingredient->id)->first()
+                                ?>
+                                <div class="d-flex m-2 progressDiv ingredientDiv" ingredient_id="{{$ingredient->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
+                                    <div class="box shortBox">
+                                        <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
                                     </div>
+                                    <div class="box longbox">
+                                        {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                    </div>
+                                </div>
                                 @endforeach
                             </div>
                             <br>
@@ -201,106 +215,41 @@
                         </div>
                         <div>
                             @foreach($stepHeader->steps as $step)
-                                <div class="d-flex m-2" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
+                                <?php
+                                    $progress = $step->stepProgress->first();            
+                                ?>
+                                <div class="d-flex m-2 stepDiv progressDiv" progress="{{$progress}}" step_id="{{$step->id}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                                     <div class="box shortBox">
                                         <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
                                     </div>
                                     <div class="box longbox">
                                         {{ $step->step_desc }}
                                     </div>
-                                    {{--  TODO: step image  --}}
                                 </div>
+                                @if($step->step_img != null)
+                                    <img src="{{ asset($step->step_img) }}" class="stepImage" alt="step_image">
+                                @endif
                             @endforeach
                         </div>
                         <br>
                 @endforeach
                 </div>
             </div>
-
             <div style="width:45%; background-color:black; padding:30px; border-radius:15px;">
                 <div>
                     <div class="d-flex" style="justify-content:space-between; margin-bottom:30px; flex:1; overflow-y:auto;">
                         <h3><b style="color:white; ">Penilaian</b></h3>
                         <div class="sharpBox" style="border-color:white; background-color:black; height:fit-content">
                             <p style="color:white; margin:0px 10px 0px 0px">Urutkan</p>
-                            <img src="/assets/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
+                            <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
                         </div>
                     </div>
-
                     @foreach($recipe->reviews as $review)
                         @include('templates/reviewCard')
                     @endforeach
-
                 </div>
             </div>
         </div>
     </div>
-
-<script>
-function toggleHighlight(row) {
-    row.classList.toggle('highlight');
-}
-
-function hoverHighlight(row){
-    row.classList.toggle('orange');
-}
-
-</script>
-
-<style>
-
-
-
-</style>
-
-
 @endsection
-
-<script>
-    function toggleBookmark(){
-        const bookmarkImage = document.getElementById('bookmarkImage');
-        const imgSrc = bookmarkImage.getAttribute('src');
-
-        if(imgSrc === '/assets/icons/bookmark_white.png'){
-            bookmarkImage.setAttribute('src', '/assets/icons/bookmark_black.png');
-        }else{
-            bookmarkImage.setAttribute('src', '/assets/icons/bookmark_white.png');
-        }
-    }
-
-    function toggleLike(){
-        const bookmarkImage = document.getElementById('bookmarkImage');
-        const imgSrc = bookmarkImage.getAttribute('src');
-
-        if(imgSrc === '/assets/icons/bookmark_white.png'){
-            bookmarkImage.setAttribute('src', '/assets/icons/bookmark_black.png');
-        }else{
-            bookmarkImage.setAttribute('src', '/assets/icons/bookmark_white.png');
-        }
-    }
-
-    function toggleCheck2(element) {
-        element.style.backgroundColor = "yellow";
-        var img = element.querySelector('img');
-        alert(img.src)
-        img.src = "/assets/icons/check_black.png";
-    }
-
-    function toggleCheck(stepNum){
-        const step = document.getElementById('check_'+stepNum);
-        const imgSrc = step.getAttribute('src');
-
-        if(imgSrc === '/assets/icons/check_grey.png'){
-            step.setAttribute('src', '/assets/icons/check_black.png');
-            step.setAttribute.style.backgroundColor = 'yellow';
-            step.parentElement.style.backgroundColor = 'yellow';
-        }else{
-            step.setAttribute('src', '/assets/icons/check_grey.png');
-        }
-    }
-</script>
-
-
-
-
 
