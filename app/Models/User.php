@@ -61,8 +61,4 @@ class User extends Authenticatable
     public function reviewReactions(){
         return $this->belongsToMany(Review::class, 'review_reactions')->withPivot(['type']);
     }
-
-    public function stepProgress(){
-        return $this->belongsToMany(Step::class, 'step_progress');
-    }
 }

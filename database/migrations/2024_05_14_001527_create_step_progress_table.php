@@ -17,9 +17,11 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('step_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('recipe_id');
             $table->foreign('step_id')->references('id')->on('steps')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->primary(['step_id', 'user_id']);
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->primary(['step_id', 'user_id', 'recipe_id']);
         });
     }
 

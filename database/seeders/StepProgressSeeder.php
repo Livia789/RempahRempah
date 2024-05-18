@@ -19,14 +19,17 @@ class StepProgressSeeder extends Seeder
             [
                 'user_id' => '3',
                 'step_id' => '1',
+                'recipe_id' => '2'
             ],
             [
                 'user_id' => '3',
                 'step_id' => '3',
+                'recipe_id' => '2'
             ],
             [
                 'user_id' => '3',
                 'step_id' => '4',
+                'recipe_id' => '2'
             ],
         ]);
     }

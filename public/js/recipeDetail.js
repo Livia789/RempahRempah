@@ -189,3 +189,21 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $("#btnResetCookingProgress").click(function(){
+        $.ajax({
+            url: '/resetCookingProgress',
+            type: 'POST',
+            data: {
+                recipe_id: recipe_id,
+                _token: token
+            },
+            success: function(response){
+                
+            },
+            error: function(e) {
+            }
+        });
+    });
+});

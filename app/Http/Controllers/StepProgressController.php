@@ -32,8 +32,7 @@ class StepProgressController extends Controller
         ]);
     }
 
-    public function toggleStepProgress(Request $req)
-    {
+    public function toggleStepProgress(Request $req){
         $progress = StepProgress::where('user_id', auth()->id())->where('step_id', $req->step_id)->exists();
         if($progress){
             return $this->removeStepProgress($req->step_id);

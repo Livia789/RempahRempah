@@ -12,6 +12,7 @@ use App\Http\Controllers\ReviewReactionController;
 use App\Http\Controllers\StepProgressController;
 use App\Http\Controllers\UserIngredientProgressController;
 use App\Http\Controllers\UserToolProgressController;
+use App\Http\Controllers\ProgressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,5 +76,6 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
     Route::post('/toggleUserIngredientProgress', [UserIngredientProgressController::class, 'toggleUserIngredientProgress']);
     Route::post('/toggleUserToolProgress', [UserToolProgressController::class, 'toggleUserToolProgress']);
+    Route::post('/resetCookingProgress', [ProgressController::class, 'resetCookingProgress']);
 });
 

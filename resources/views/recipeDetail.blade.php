@@ -66,6 +66,10 @@
             <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
         </div>
 
+        <div class="sharpBox" id="btnResetCookingProgress">
+            Reset Cooking Progress
+        </div>
+
         <div class="d-flex imgDescContainer">
             <img src="{{ asset($recipe->img) }}" class="recipeImage" alt="recipe_image">
             <div>
