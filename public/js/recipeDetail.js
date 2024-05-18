@@ -172,7 +172,6 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(".toolDiv").click(function(){
         var tool_id = $(this).attr('tool_id');
-        {{"ids : " + $recipe_id + " " + $tool_id + " " + $user_id}}
         $.ajax({
             url: '/toggleUserToolProgress',
             type: 'POST',
