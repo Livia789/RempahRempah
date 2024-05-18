@@ -6,6 +6,20 @@ function hoverHighlight(row){
     row.classList.toggle('hoverHighlight');
 }
 
+function setHighlight() {
+    var progressDiv = document.getElementsByClassName('progressDiv');
+    var progressDivsArray = Array.from(progressDiv);
+
+    progressDivsArray.forEach(function(progressDiv) {
+        progress = progressDiv.getAttribute('progress');
+        if(progress){
+            progressDiv.classList.add('clickHighlight');
+        }else{
+            progressDiv.classList.remove('clickHighlight');
+        }
+    });
+}
+
 function toggleBookmark(){
     const bookmarkImage = document.getElementById('bookmarkImage');
     const imgSrc = bookmarkImage.getAttribute('src');
@@ -97,17 +111,8 @@ $(document).ready(function(){
     });
 });
 
-
 $(document).ready(function() {
-    var progressDiv = document.getElementsByClassName('progressDiv');
-    var progressDivsArray = Array.from(progressDiv);
-
-    progressDivsArray.forEach(function(progressDiv) {
-        progress = progressDiv.getAttribute('progress');
-        if(progress){
-            progressDiv.classList.toggle('clickHighlight');
-        }
-    });
+    setHighlight();
 });
 
 $(document).ready(function(){
@@ -119,6 +124,7 @@ $(document).ready(function(){
             data: {
                 user_id: user_id,
                 step_id: step_id,
+                recipe_id: recipe_id,
                 _token: token
             },
             success: function(response){
@@ -166,6 +172,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(".toolDiv").click(function(){
         var tool_id = $(this).attr('tool_id');
+        {{"ids : " + $recipe_id + " " + $tool_id + " " + $user_id}}
         $.ajax({
             url: '/toggleUserToolProgress',
             type: 'POST',
@@ -200,7 +207,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response){
-                
+                setHighlight();
             },
             error: function(e) {
             }
