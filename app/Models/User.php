@@ -57,4 +57,8 @@ class User extends Authenticatable
     public function bookmarks(){
         return $this->hasMany(Bookmark::class);
     }
+
+    public function reviewReactions(){
+        return $this->belongsToMany(Review::class, 'review_reactions')->withPivot(['type']);
+    }
 }

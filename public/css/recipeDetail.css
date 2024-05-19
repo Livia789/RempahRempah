@@ -97,9 +97,21 @@ a, a:hover{
     padding:8px;
 }
 
-.highlight .shortBox{
+.clickHighlight .shortBox{
     background-color:#E3E800;
 }
-.highlight .longBox{
+.clickHighlight .longBox{
     background-color: rgb(246, 246, 121);
+}
+
+.hoverHighlight .shortBox{
+    background-color:rgb(255, 177, 32);
+}
+.hoverHighlight .longBox{
+    background-color: rgb(255, 199, 94);
+}
+
+.stepImage{
+    height:150px;
+    width:auto;
 }

@@ -37,8 +37,8 @@ class RecipeSeeder extends Seeder
             ],
             [
                 "user_id" => "3",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => null,
