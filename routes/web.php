@@ -44,8 +44,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/resetPassword', [PageController::class, 'showResetPasswordPage']);
     Route::post('/sendResetPasswordMail', [EmailController::class, 'sendResetPasswordMail']);
     Route::post('/resetPassword', [UserController::class, 'resetPassword']);
-
-    Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 });
 
 Route::group(['middleware' => ['loggedin']], function () {

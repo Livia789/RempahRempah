@@ -47,7 +47,8 @@ $(document).ready(function(){
                 alert("Bookmark has been successfully " + status);
             },
             error: function(e) {
-                alert("Error processing bookmark request");
+                msg = e.status == 401 ? "[Error] Please login to bookmark recipe" : "Error processing bookmark request"
+                alert(msg);
                 toggleBookmark();
             }
         });
@@ -76,7 +77,8 @@ $(document).ready(function(){
                 $('#dislike_icon').attr('src', dislikeSrc);
             },
             error: function(e) {
-                alert("Error processing like request");
+                msg = e.status == 401 ? "[Error] Please login to like this review" : "Error processing like request";
+                alert(msg);
             }
         });
     });
@@ -105,7 +107,8 @@ $(document).ready(function(){
                 $('#dislike_icon').attr('src', dislikeSrc);
             },
             error: function(e) {
-                alert("Error processing like request");
+                msg = e.status == 401 ? "[Error] Please login to dislike review" : "Error processing dislike request";
+                alert(msg);
             }
         });
     });

@@ -259,8 +259,8 @@ class PageController extends Controller
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
         $reviews = $recipe->reviews;
-        $user_ingredients = UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get();
-        $user_tools = UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get();
+        $user_ingredients = $user? UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
+        $user_tools = $user? UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
         if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
             return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
         } else {
