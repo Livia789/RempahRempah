@@ -6,18 +6,51 @@ function hoverHighlight(row){
     row.classList.toggle('hoverHighlight');
 }
 
-function setHighlight() {
-    var progressDiv = document.getElementsByClassName('progressDiv');
-    var progressDivsArray = Array.from(progressDiv);
-
-    progressDivsArray.forEach(function(progressDiv) {
-        progress = progressDiv.getAttribute('progress');
-        if(progress){
-            progressDiv.classList.add('clickHighlight');
-        }else{
-            progressDiv.classList.remove('clickHighlight');
-        }
+function removeHighlight(){
+    var rows = document.getElementsByClassName('clickHighlight');
+    var rowsArray = Array.from(rows);
+    rowsArray.forEach(function(row) {
+        row.classList.remove('clickHighlight');
     });
+}
+
+function setHighlight() {
+    if(user_id == -1){
+        $.ajax({
+            url: '/getCookingProgress',
+            type: 'GET',
+            data: {
+                recipe_id: recipe_id,
+                _token: token
+            },
+            success: function(response){
+                for(var i = 0; i < response.tools.length; i++){
+                    var toolDiv = $('[tool_id=' + response.tools[i] + ']');
+                    toolDiv.addClass('clickHighlight');
+                }
+                for(var i = 0; i < response.ingredients.length; i++){
+                    var ingredientDiv = $('[ingredient_id=' + response.ingredients[i] + ']');
+                    ingredientDiv.addClass('clickHighlight');
+                }
+                for(var i = 0; i < response.steps.length; i++){
+                    var stepDiv = $('[step_id=' + response.steps[i] + ']');
+                    stepDiv.addClass('clickHighlight');
+                }
+            },
+            error: function(e) {
+            }
+        });
+    }else{
+        var progressDiv = document.getElementsByClassName('progressDiv');
+        var progressDivsArray = Array.from(progressDiv);
+    
+        progressDivsArray.forEach(function(progressDiv) {
+            progress = progressDiv.getAttribute('progress');
+            if(progress){
+                progressDiv.classList.add('clickHighlight');
+            }
+        });
+    }
 }
 
 function toggleBookmark(){
@@ -131,13 +164,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response){
-                var stepDiv = $('[step_id=' + step_id + ']');
-                if(response.isProgress){
-                    stepDiv.addClass('clickHighlight');
-
-                }else{
-                    stepDiv.removeClass('clickHighlight');
-                }
+                setHighlight();
             },
             error: function(e) {
             }
@@ -158,13 +185,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response){
-                var ingredientDiv = $('[ingredient_id=' + ingredient_id + ']');
-                if(response.isProgress){
-                    ingredientDiv.addClass('clickHighlight');
-
-                }else{
-                    ingredientDiv.removeClass('clickHighlight');
-                }
+                setHighlight();
             },
             error: function(e) {
             }
@@ -185,13 +206,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response){
-                var toolDiv = $('[tool_id=' + tool_id + ']');
-                if(response.isProgress){
-                    toolDiv.addClass('clickHighlight');
-
-                }else{
-                    toolDiv.removeClass('clickHighlight');
-                }
+                setHighlight();
             },
             error: function(e) {
             }
@@ -209,7 +224,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response){
-                setHighlight();
+                removeHighlight();
             },
             error: function(e) {
             }

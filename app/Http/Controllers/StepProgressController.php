@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StepProgress;
+use Session;
 
 
 class StepProgressController extends Controller
@@ -33,12 +34,40 @@ class StepProgressController extends Controller
         ]);
     }
 
-    public function toggleStepProgress(Request $req){
-        $progress = StepProgress::where('user_id', auth()->id())->where('step_id', $req->step_id)->where('recipe_id', $req->recipe_id)->exists();
-        if($progress){
-            return $this->removeStepProgress($req->step_id, $req->recipe_id);
+    public function guest_toggleUserStepProgress($step_id, $recipe_id){
+        $cookingProgress = Session::get('recipe_'.$recipe_id) ?? [
+            'tools' => [],
+            'ingredients' => [],
+            'steps' => []
+        ];
+
+        if(in_array($step_id, $cookingProgress['steps'])){
+            $message = 'ok exists';
+            $removeIndex = array_search($step_id, $cookingProgress['steps']);
+            unset($cookingProgress['steps'][$removeIndex]);
+            $cookingProgress['steps'] = array_values($cookingProgress['steps']);
         }else{
-            return $this->addStepProgress($req->step_id, $req->recipe_id);
+            $message = 'not exists';
+            array_push($cookingProgress['steps'], $step_id);
+        }
+
+        Session::put('recipe_'.$recipe_id, $cookingProgress);
+        
+        return response()->json([
+            'cookingProgress' => Session::get('recipe_'.$recipe_id)
+        ]);
+    }
+
+    public function toggleStepProgress(Request $req){
+        if(auth()->check()){
+            $progress = StepProgress::where('user_id', auth()->id())->where('step_id', $req->step_id)->where('recipe_id', $req->recipe_id)->exists();
+            if($progress){
+                return $this->removeStepProgress($req->step_id, $req->recipe_id);
+            }else{
+                return $this->addStepProgress($req->step_id, $req->recipe_id);
+            }
+        }else{
+            return $this->guest_toggleUserStepProgress($req->step_id, $req->recipe_id);
         }
     }
 }

@@ -34,6 +34,13 @@ Route::get('/search', [PageController::class, 'showSearchPage']);
 Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 
+//progress routes
+Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
+Route::post('/toggleUserIngredientProgress', [UserIngredientProgressController::class, 'toggleUserIngredientProgress']);
+Route::post('/toggleUserToolProgress', [UserToolProgressController::class, 'toggleUserToolProgress']);
+Route::post('/resetCookingProgress', [ProgressController::class, 'resetCookingProgress']);
+Route::get('/getCookingProgress', [ProgressController::class, 'guest_getCookingProgress']);
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [PageController::class, 'showLoginPage']);
     Route::post('/login', [UserController::class, 'login']);
@@ -71,9 +78,5 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
     Route::post('/likeReview', [ReviewReactionController::class, 'likeReview']);
     Route::post('/dislikeReview', [ReviewReactionController::class, 'dislikeReview']);
-    Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
-    Route::post('/toggleUserIngredientProgress', [UserIngredientProgressController::class, 'toggleUserIngredientProgress']);
-    Route::post('/toggleUserToolProgress', [UserToolProgressController::class, 'toggleUserToolProgress']);
-    Route::post('/resetCookingProgress', [ProgressController::class, 'resetCookingProgress']);
 });
 
