@@ -86,7 +86,7 @@
                 @else
                     @foreach($recipe->tools as $tool)
                         <?php
-                            $progress = $user_tools->where('tool_id', $tool->id)->first()
+                            $progress = Auth::user()? $user_tools->where('tool_id', $tool->id)->first() : null;
                         ?>
                         <div class="d-flex m-2 progressDiv toolDiv" tool_id="{{$tool->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                             <div class="box shortBox">
@@ -144,7 +144,7 @@
                             <div>
                                 @foreach($ingredientHeader->ingredients as $ingredient)
                                 <?php
-                                    $progress = $user_ingredients->where('ingredient_id', $ingredient->id)->first()
+                                    $progress = Auth::user()? $user_ingredients->where('ingredient_id', $ingredient->id)->first() : null
                                 ?>
                                 <div class="d-flex m-2 progressDiv ingredientDiv" ingredient_id="{{$ingredient->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                                     <div class="box shortBox">
@@ -173,7 +173,7 @@
                             <div>
                                 @foreach($ingredientHeader->ingredients as $ingredient)
                                 <?php
-                                    $progress = $user_ingredients->where('ingredient_id', $ingredient->id)->first()
+                                    $progress = Auth::user()? $user_ingredients->where('ingredient_id', $ingredient->id)->first() : null;
                                 ?>
                                 <div class="d-flex m-2 progressDiv ingredientDiv" ingredient_id="{{$ingredient->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                                     <div class="box shortBox">

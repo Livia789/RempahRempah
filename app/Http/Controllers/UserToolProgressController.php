@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserToolProgress;
+use Session;
 
 class UserToolProgressController extends Controller
 {
@@ -30,14 +31,42 @@ class UserToolProgressController extends Controller
             'isProgress' => $progress
         ]);
     }
+
+    public function guest_toggleUserToolProgress($tool_id, $recipe_id){
+        $cookingProgress = Session::get('recipe_'.$recipe_id) ?? [
+            'tools' => [],
+            'ingredients' => [],
+            'steps' => []
+        ];
+
+        if(in_array($tool_id, $cookingProgress['tools'])){
+            $message = 'ok exists';
+            $removeIndex = array_search($tool_id, $cookingProgress['tools']);
+            unset($cookingProgress['tools'][$removeIndex]);
+            $cookingProgress['tools'] = array_values($cookingProgress['tools']);
+        }else{
+            $message = 'not exists';
+            array_push($cookingProgress['tools'], $tool_id);
+        }
+
+        Session::put('recipe_'.$recipe_id, $cookingProgress);
+        
+        return response()->json([
+            'cookingProgress' => Session::get('recipe_'.$recipe_id),
+        ]);
+    }
     
     public function toggleUserToolProgress(Request $req)
     {
-        $progress = UserToolProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->where('tool_id', $req->tool_id)->exists();
-        if($progress){
-            return $this->removeUserToolProgress($req->tool_id, $req->recipe_id);
+        if(auth()->check()){
+            $progress = UserToolProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->where('tool_id', $req->tool_id)->exists();
+            if($progress){
+                return $this->removeUserToolProgress($req->tool_id, $req->recipe_id);
+            }else{
+                return $this->addUserToolProgress($req->tool_id, $req->recipe_id);
+            }
         }else{
-            return $this->addUserToolProgress($req->tool_id, $req->recipe_id);
+            return $this->guest_toggleUserToolProgress($req->tool_id, $req->recipe_id);
         }
     }
 

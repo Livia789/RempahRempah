@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserIngredientProgress;
+use Session;
 
 class UserIngredientProgressController extends Controller
 {
@@ -30,14 +31,42 @@ class UserIngredientProgressController extends Controller
             'isProgress' => $progress
         ]);
     }
+
+    public function guest_toggleUserIngredientProgress($ingredient_id, $recipe_id){
+        $cookingProgress = Session::get('recipe_'.$recipe_id) ?? [
+            'tools' => [],
+            'ingredients' => [],
+            'steps' => []
+        ];
+
+        if(in_array($ingredient_id, $cookingProgress['ingredients'])){
+            $message = 'ok exists';
+            $removeIndex = array_search($ingredient_id, $cookingProgress['ingredients']);
+            unset($cookingProgress['ingredients'][$removeIndex]);
+            $cookingProgress['ingredients'] = array_values($cookingProgress['ingredients']);
+        }else{
+            $message = 'not exists';
+            array_push($cookingProgress['ingredients'], $ingredient_id);
+        }
+
+        Session::put('recipe_'.$recipe_id, $cookingProgress);
+        
+        return response()->json([
+            'cookingProgress' => Session::get('recipe_'.$recipe_id)
+        ]);
+    }
     
     public function toggleUserIngredientProgress(Request $req)
     {
-        $progress = UserIngredientProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->where('ingredient_id', $req->ingredient_id)->exists();
-        if($progress){
-            return $this->removeUserIngredientProgress($req->ingredient_id, $req->recipe_id);
+        if(auth()->check()){
+            $progress = UserIngredientProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->where('ingredient_id', $req->ingredient_id)->exists();
+            if($progress){
+                return $this->removeUserIngredientProgress($req->ingredient_id, $req->recipe_id);
+            }else{
+                return $this->addUserIngredientProgress($req->ingredient_id, $req->recipe_id);
+            }
         }else{
-            return $this->addUserIngredientProgress($req->ingredient_id, $req->recipe_id);
+            return $this->guest_toggleUserIngredientProgress($req->ingredient_id, $req->recipe_id);
         }
     }
 
