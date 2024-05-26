@@ -46,6 +46,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [UserController::class, 'login']);
 
     Route::get('/register', [PageController::class, 'showRegisterPage']);
+    Route::post('/sendWelcomeMail', [EmailController::class, 'sendResetPasswordMail']);
     Route::post('/register', [UserController::class, 'register']);
 
     Route::get('/resetPassword', [PageController::class, 'showResetPasswordPage']);
@@ -59,7 +60,7 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/welcome', [PageController::class, 'showWelcomePage']);
     Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
     Route::post('/updateSelected', [PageController::class, 'updateSelected']);
-    Route::post('/w', [UserController::class, 'updatePreferences']);
+    Route::post('/updatePreferences', [UserController::class, 'updatePreferences']);
 
     Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
@@ -71,12 +72,11 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
 
     Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
+    Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
     Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
-    Route::post('/updateTagPage', [PageController::class, 'updateTagPage']);
 
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
     Route::post('/likeReview', [ReviewReactionController::class, 'likeReview']);
     Route::post('/dislikeReview', [ReviewReactionController::class, 'dislikeReview']);
 });
-

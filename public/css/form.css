@@ -106,7 +106,25 @@ input[type="checkbox"].whiteBackground:checked {
     transition: color 0.5s ease;
 }
 
+.submitCol {
+    margin-bottom: 10px !important;
+}
+
+.modal {
+    top: 30% !important;
+}
+
+.linkedText {
+    margin-top: 15px !important;
+    white-space: nowrap;
+    display: inline-block;
+}
+
 @media (max-width: 992px) {
+    .temp {
+        width: 75% !important;
+    }
+
     .banner.twoCols {
         visibility: hidden;
         width: 0;

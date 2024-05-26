@@ -35,11 +35,15 @@ label {
 }
 
 .tagLabelForm {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .searchField {
-    margin-bottom: 45px;
+    margin-bottom: 25px;
+}
+
+.addBtn {
+    margin-bottom: 10px;
 }
 
 .removeBtn {
@@ -48,9 +52,26 @@ label {
 }
 
 .scrollSection {
-    max-height: 125px;
+    padding: 5px 0 !important;
+    max-height: 135px;
     overflow-y: auto;
     background-color: #C1C1C1;
+}
+
+#noResult {
+    margin: 5px;
+}
+
+.btn-toggle.active {
+    background-color: rgb(227, 232, 0);
+}
+
+#typeSection button {
+    margin-right: 15px;
+}
+
+.fileName {
+    margin-top: 15px;
 }
 
 @media (max-width: 992px) {

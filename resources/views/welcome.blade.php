@@ -91,7 +91,7 @@
                     $('#input_ingredient').val('');
                     if (!result.updateStatus) return;
                     if (cmd == "add") {
-                        $("#selectedSection").append(`
+                        $('#selectedSection').append(`
                             <div class="col">
                                 <button type="button" class="sharpBox removeBtn" data-cmd="remove" data-type="ingredient" data-value="${value}">
                                     <i class="fa fa-close"></i> &ensp;${value}
@@ -101,15 +101,15 @@
                         `);
                         if (result.updateBtn) {
                             console.log(result.updateBtn);
-                            $("#defaultSection .addBtn").filter(function() {
-                                return $(this).data("value") === value;
+                            $('#defaultSection .addBtn').filter(function() {
+                                return $(this).data('value') === value;
                             }).parent().remove();
                         }
                     } else {
                         curr_btn.parent().remove();
                         if (result.updateBtn) {
                             console.log(result.updateBtn);
-                            $("#defaultSection").append(`
+                            $('#defaultSection').append(`
                                 <div class="col">
                                     <button type="button" class="sharpBox addBtn" data-cmd="add" data-type="ingredient" data-value="${value}">
                                         <i class="fa fa-close"></i> &ensp;${value}
@@ -133,7 +133,7 @@
         $('#input_ingredient').typeahead({
             source: function (query, process) {
                 var type = $('#input_ingredient').data('type');
-                return $.get("/showResult", {
+                return $.get('/showResult', {
                     query: query,
                     type: type
                 }, function (data) {

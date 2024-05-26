@@ -16,6 +16,7 @@
 </head>
 <body>
     @php
+        $unique_ctg_groups = $category_all->unique('class');
         $index = -1;
     @endphp
     <nav class="navbar bg-dark navbar-expand-lg fixed-top">
@@ -106,7 +107,7 @@
             $('#input_recipe').typeahead({
                 source: function (query, process) {
                     var type = $('#input_recipe').data('type');
-                    return $.get("/showResult", {
+                    return $.get('/showResult', {
                         query: query,
                         type: type
                     }, function (data) {

@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 class RecipeController extends Controller
 {
     public function addRecipe(Request $req) {
-        $selected_tags = collect($req->input('selected_tags'))->map(function ($tag) {
-            return strtolower($tag);
-        });
         $rules = [
             'name' => 'required|min:5',
             'description' => 'required|min:10',
@@ -34,7 +31,7 @@ class RecipeController extends Controller
 
         if ($validator->fails()) {
             return back()->withErrors($validator)
-                            ->with($req->all());
+                         ->with($req->all());
         } else {
             $recipe = new Recipe();
             $recipe->name = $req->name;

@@ -70,6 +70,7 @@ class UserController extends Controller
                 'password' => $req->password
             ], true);
 
+            app('App\\Http\\Controllers\\EmailController')->sendWelcomeMail($req->email);
             return redirect('/welcome');
         }
     }

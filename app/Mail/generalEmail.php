@@ -17,14 +17,14 @@ class generalEmail extends Mailable
     public string $title;
     public string $greeting;
     public string $body;
-    public string $token;
+    public ?string $token;
     public string $warning;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $subject, string $title, string $greeting, string $body, string $token, string $warning)
+    public function __construct(string $subject, string $title, string $greeting, string $body, ?string $token, string $warning)
     {
         $this->subject = $subject;
         $this->title = $title;

@@ -10,6 +10,7 @@
 @section('content')
     @php
         $index = -1;
+        $unique_ctg_groups = $category_all->unique('class');
         // ini count $recipes yg di pagenya, sih. bkn utk overall :(
         if (!function_exists('countRecipe')) {
             function countRecipe ($recipes, $ctg_id, $duration, $tag_id) {
