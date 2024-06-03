@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('duration');
-            $table->string('img');
+            $table->string('img')->default('storage/recipes/default_recipe_img.png');
             $table->string('vid')->nullable()->default(null);
             $table->boolean('is_verified_by_admin')->default(false);
             $table->boolean('is_verified_by_ahli_gizi')->default(false);

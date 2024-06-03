@@ -26,7 +26,7 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($credentials, true)) {
-            return redirect('/')->with('loginSuccess', 'Selamat datang kembali, '.Auth::user()->name.'!');
+            return redirect('/')->with('successMessage', 'Selamat datang kembali, '.Auth::user()->name.'!');
         } else {
             return back()->with('loginFailed', 'Email atau kata sandi salah.');
         }
@@ -199,7 +199,7 @@ class UserController extends Controller
         }
 
         if ($src == '/welcome') {
-            return redirect('/')->with('loginSuccess', 'Data berhasil disimpan.');
+            return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
         } else {
             return back()->with('updateSuccess', 'Data berhasil disimpan.');
         }

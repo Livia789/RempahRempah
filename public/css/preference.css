@@ -21,9 +21,6 @@
 .sharpBox.yellow, .sharpBox.removeBtn {
     background-color: rgb(227, 232, 0);
 }
-.sharpBox:disabled, .sharpBox:hover:disabled {
-    background-color: gainsboro;
-}
 
 .searchField {
     margin-top: 5px;

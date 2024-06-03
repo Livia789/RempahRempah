@@ -19,6 +19,17 @@ label {
     background-color: rgb(227, 232, 0);
 }
 
+.categorySection {
+    margin-bottom: 20px;
+}
+.categorySection select, .durationSection .input-group {
+    margin-bottom: 0 !important;
+}
+.tagSection .errorMsg {
+    margin-top: -30px;
+    margin-bottom: 45px;
+}
+
 .groupTextForm {
     background-color: #EFEFEF;
     border: 0;
@@ -68,10 +79,81 @@ label {
 
 #typeSection button {
     margin-right: 15px;
+    margin-bottom: 0px;
 }
 
 .fileName {
     margin-top: 15px;
+}
+
+.ingredientHeader, .ingredientHeader input, .stepHeader, .stepHeader input {
+    margin-bottom: 15px;
+}
+.ingredientHeader label, .stepHeader label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ingredientDescription, .stepDescription {
+    margin-bottom: 10px;
+}
+
+.ingredientHeader .errorMsg {
+    margin-top: -5px;
+}
+.ingredientDescription .errorMsg {
+    margin-top: 10px;
+}
+.stepHeader .errorMsg {
+    margin-top: -5px !important;
+    margin-bottom: 15px !important;
+}
+
+.stepCounter {
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    display: block;
+    margin-bottom: 10px;
+    width: 120px;
+    text-align: center;
+}
+
+.descriptionContainer input, .descriptionContainer button {
+    margin-bottom: 0 !important;
+}
+.descriptionContainer input {
+    height: 50px;
+}
+.descriptionContainer button {
+    height: 50px;
+    margin-top: 0;
+    margin-left: 30px !important;
+}
+
+.ingredientDescriptionContainer {
+    margin-right: 20px;
+    flex-grow: 1;
+}
+.ingredientDescriptionContainer.sub {
+    width: 15% !important;
+}
+
+.add-header {
+    margin-top: 30px !important;
+}
+.add-description {
+    float: right;
+}
+.delete-header {
+    margin-top: 30px !important;
+}
+.ingredientDescription .delete-description {
+    margin-top: 35px !important;
+    margin-left: 0px !important;
+}
+.ingredientHeader .add-description {
+    margin-top: 15px !important;
 }
 
 @media (max-width: 992px) {

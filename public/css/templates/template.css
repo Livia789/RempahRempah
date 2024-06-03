@@ -177,6 +177,9 @@ form .outlinedBtn:hover, form .outlinedBtn:focus {
 .sharpBox i {
     margin-top: 5px;
 }
+.sharpBox:disabled, .sharpBox:hover:disabled {
+    background-color: gainsboro !important;
+}
 
 #sharpBoxSelected {
     background-color: black;
