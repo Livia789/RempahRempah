@@ -24,7 +24,7 @@
                     <form action="/sendResetPasswordMail" method="POST">
                         @csrf
                         <div class="col">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email*</label>
                             <input type="text" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email">
                         </div>
                         @if ($errors->has('email'))
@@ -55,24 +55,24 @@
                         </div>
                     @endif
                     <h6>
-                        Mohon mengisi kode dengan kode rahasia yang telah kami kirim (hanya berlaku dalam 5 menit sejak email dikirim) untuk mengatur kata sandi barumu.
+                        Mohon mengisi kode dengan kode rahasia yang telah kami kirim (hanya berlaku dalam 30 detik sejak email dikirim) untuk mengatur kata sandi barumu.
                     </h6>
                     <form action="/resetPassword" method="POST">
                         @csrf
                         <div class="col">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email*</label>
                             <input type="text" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email" value="{{ session('email') }}" disabled>
                             <input type="hidden" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email" value="{{ session('email') }}">
                         </div>
                         <div class="col">
-                            <label for="token" class="form-label">Kode</label>
+                            <label for="token" class="form-label">Kode*</label>
                             <input type="text" class="form-control textField blackBackground" placeholder="Masukkan kode (20 karakter)" id="token" name="token">
                             @if ($errors->has('token'))
                                 <h6 class="errorMsg">{{$errors->first('token')}}</h6>
                             @endif
                         </div>
                         <div class="col">
-                            <label for="password" class="form-label">Kata sandi</label>
+                            <label for="password" class="form-label">Kata sandi*</label>
                             <div class="inputWithIconWrapper textField blackBackground">
                                 <input type="password" class="form-control textField blackBackground" placeholder="Masukkan kata sandi" id="password" name="password">
                                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password" onclick="toggleHidePassword('password')" alt="eye_icon">
@@ -82,7 +82,7 @@
                             @endif
                         </div>
                         <div class="col">
-                            <label for="password_conf" class="form-label">Konfirmasi kata sandi</label>
+                            <label for="password_conf" class="form-label">Konfirmasi kata sandi*</label>
                             <div class="inputWithIconWrapper textField blackBackground">
                                 <input type="password" class="form-control textField blackBackground" placeholder="Masukkan konfirmasi kata sandi" id="password_conf" name="password_conf">
                                 <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password_conf" onclick="toggleHidePassword('password_conf')" alt="eye_icon">

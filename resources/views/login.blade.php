@@ -33,11 +33,11 @@
                         </div>
                     @endif
                     <div class="col">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email*</label>
                         <input type="text" class="form-control textField blackBackground" placeholder="Masukkan email" id="email" name="email" value="{{Cookie::get('mycookie') !== null ? Cookie::get('mycookie') : ''}}">
                     </div>
                     <div class="col">
-                        <label for="password" class="form-label">Kata sandi</label>
+                        <label for="password" class="form-label">Kata sandi*</label>
                         <div class="inputWithIconWrapper textField blackBackground">
                             <input type="password" class="form-control textField blackBackground" placeholder="Masukkan kata sandi" id="password" name="password">
                             <img src="/assets/icons/eye_open.png" class="picon" id="toggle_icon_password" onclick="toggleHidePassword('password')" alt="eye_icon">
@@ -50,11 +50,11 @@
                     <div class="col">
                         <a href="/resetPassword" class="roundedBox blackBackground">Lupa kata sandi?</a>
                     </div>
-                    <div class="col d-grid gap-2">
+                    <div class="col d-grid gap-2 submitCol">
                         <button class="btn btn-primary" type="submit" name="btn-submit" value="submit">Masuk</button>
                     </div>
                     <div class="col">
-                        Belum memiliki akun? <a href="/register" class="roundedBox blackBackground">Yuk, daftar di sini!</a>
+                        Belum memiliki akun? <a href="/register" class="roundedBox blackBackground linkedText">Yuk, daftar di sini!</a>
                     </div>
                 </form>
             </div>

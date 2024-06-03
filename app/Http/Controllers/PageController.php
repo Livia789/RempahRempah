@@ -18,13 +18,24 @@ use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
+    protected $category_all;
+    protected $tag_all;
     protected $top_ingredients;
 
     public function __construct(){
-        View::share('category_all', Category::all());
-        View::share('tag_all', Tag::all());
-        View::share('unique_ctg_groups', Category::all()->unique('class'));
         View::share('duration_minutes', [15, 30, 45, 60]);
+
+        $this->category_all = Cache::remember('category_all', 60*3, function (){
+            $category_all = Category::all();
+            return $category_all;
+        });
+        View::share('category_all', $this->category_all);
+
+        $this->tag_all = Cache::remember('tag_all', 60*3, function (){
+            $tag_all = Tag::all();
+            return $tag_all;
+        });
+        View::share('tag_all', Tag::all());
 
         $this->top_ingredients = Cache::remember('top_ingredients', 60*3, function () {
             $recipes = Recipe::with('ingredientHeaders.ingredients')->get();
@@ -141,15 +152,23 @@ class PageController extends Controller
         $updateStatus = false;
         $updateBtn = false;
 
-        $top = $this->top_ingredients;
         $default = $req->session()->get('default_'.$type, []);
         $selected = $req->session()->get('selected_'.$type, []);
         $saved = $req->session()->get('saved_'.$type, []);
 
         $idx = array_search($value, $selected);
-        $idx_2 = array_search($value, $top);
+        if ($type == 'ingredients') {
+            $curr_default = $this->top_ingredients;
+        } else if ($type == 'tags') {
+            $curr_default = $this->tag_all->pluck('name')->toArray();
+            $idx_3 = array_search($value, $default);
+            if ($idx_3 === false && $cmd == 'add') {
+                $value = '';
+            }
+        }
+        $idx_2 = array_search($value, $curr_default);
 
-        if ($cmd == 'add' && $idx === false) {
+        if ($cmd == 'add' && $idx === false && !empty($value)) {
             $updateStatus = true;
             $selected[] = $value;
             if ($idx_2 !== false) {
@@ -171,19 +190,21 @@ class PageController extends Controller
         $req->session()->put('selected_'.$type, $selected);
         sort($selected);
         sort($saved);
-        $changes = $selected == $saved ? false : true;
+        $changes = $selected != $saved;
         $req->session()->put('changes', $changes);
         return response()->json(['updateStatus' => $updateStatus, 'updateBtn' => $updateBtn, 'changes' => $changes]);
     }
 
     public function showResult(Request $req) {
         $query = $req->input('query');
-        $type = $req->input('type');
+        $type = $req->input('type').'s';
 
-        if ($type == 'ingredient') {
-            $results = Ingredient::where('name', 'LIKE', '%'.$query.'%')->get();
-        } else if ($type == 'tag') {
-            $results = Tag::where('name', 'LIKE', '%'.$query.'%')->get();
+        if ($type == 'ingredients') {
+            $selected = $req->session()->get('selected_'.$type, []);
+            $results = Ingredient::where('name', 'LIKE', '%'.$query.'%')->whereNotIn('name', $selected)->get();
+        } else if ($type == 'tags') {
+            $selected = $req->session()->get('selected_'.$type, []);
+            $results = Tag::where('name', 'LIKE', '%'.$query.'%')->whereNotIn('name', $selected)->get();
         } else {
             $results = Recipe::query();
             if (Auth::check()) {
@@ -213,7 +234,7 @@ class PageController extends Controller
     public function showMyPreferencesPage(Request $req) {
         $user = Auth::user();
         $saved_ingredients = Auth::user()->avoidedIngredients->pluck('ingredient_name')->toArray();
-        $selected_ingredients = $req->session()->get('selected_ingredients', $saved_ingredients);
+        $selected_ingredients = $saved_ingredients;
         $default_ingredients = array_diff($this->top_ingredients, $selected_ingredients);
 
         $req->session()->put('saved_ingredients', $saved_ingredients);
@@ -221,7 +242,7 @@ class PageController extends Controller
         $req->session()->put('default_ingredients', $default_ingredients);
         sort($selected_ingredients);
         sort($saved_ingredients);
-        $changes = $selected_ingredients == $saved_ingredients ? false : true;
+        $changes = $selected_ingredients != $saved_ingredients;
         $req->session()->put('changes', $changes);
         return view('myPreferences')->with('user', $user);
     }
@@ -253,7 +274,6 @@ class PageController extends Controller
         $bookmarks = $user->bookmarks;
         return view('temp/bookmarks', compact('user', 'bookmarks'));
     }
-
 
     public function showRecipeDetailPage($recipe_id){
         $user = Auth::user();
@@ -356,31 +376,24 @@ class PageController extends Controller
         return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags'));
     }
 
-    public function showAddRecipePage() {
+    public function showAddRecipePage(Request $req) {
+        $selected_tags = $req->session()->get('selected_tags', []);
+        $default_tags = array_diff($this->tag_all->pluck('name')->toArray(), $selected_tags);
+
+        $req->session()->put('selected_tags', $selected_tags);
+        $req->session()->put('default_tags', $default_tags);
         return view('addRecipe');
     }
 
-    // public function updateTagPage(Request $req) {
-    //     $user = Auth::user();
-    //     $cmd = $req->input('cmd');
+    public function showResultInputTag(Request $req) {
+        $query = $req->input('query');
 
-    //     if ($cmd != null) {
-    //         $selected_tags = collect($req->input('selected_tags'))->map(function ($tag) {
-    //             return strtolower($tag);
-    //         });
-    //         $curr_tag = strtolower($req->input('curr_tag'));
-    //         if ($cmd == 'remove') {
-    //             $selected_tags = $selected_tags->reject(function ($item) use ($curr_tag) {
-    //                 return $item == $curr_tag;
-    //             });
-    //         } else if ($selected_tags->doesntContain($curr_tag)) {
-    //             $selected_tags->push($curr_tag);
-    //         }
-    //     } else {
-    //         $selected_tags = [];
-    //     }
-    //     // dd([$cmd, $selected_tags]);
-    //     return back()->with('selected_tags', $selected_tags)
-    //                  ->with($req->all());
-    // }
+        $selected_tags = $req->session()->get('selected_tags', []);
+        $default_tags = array_diff($this->tag_all->pluck('name')->toArray(), $selected_tags);
+
+        $matching_tags = Tag::where('name', 'LIKE', '%' . $query . '%')->pluck('name')->toArray();
+        $tags = array_intersect($default_tags, $matching_tags);
+        sort($tags);
+        return response()->json(['tags' => $tags]);
+    }
 }

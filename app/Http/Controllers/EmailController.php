@@ -14,7 +14,21 @@ use Illuminate\Support\Facades\View;
 
 class EmailController extends Controller
 {
-    public function sendResetPasswordMail(Request $req){
+    public function sendWelcomeMail($email) {
+        $user = User::where('email', $email)->first();
+
+        $subject = 'Selamat datang';
+        $title = 'RempahRempah';
+        $greeting = 'Halo, '.$user->name;
+        $body = 'Terima kasih telah mendaftar di RempahRempah. Kami sangat senang memiliki kamu sebagai bagian dari komunitas kami. ';
+        $body .= 'Jangan ragu untuk menjelajahi fitur-fitur yang tersedia RempahRempah. Sekali lagi, selamat datang!';
+        $warning = 'Mohon abaikan email ini jika kamu tidak mengirimkan permintaan ini.';
+
+        $mail = new generalEmail($subject, $title, $greeting, $body, null, $warning);
+        Mail::to($email)->send($mail);
+    }
+
+    public function sendResetPasswordMail(Request $req) {
         $email = $req->email;
         $rules = [
             'email' => 'required|email:rfc,dns|exists:users,email',
@@ -46,7 +60,7 @@ class EmailController extends Controller
             $subject = 'Reset Kata Sandi';
             $title = 'RempahRempah';
             $greeting = 'Halo, '.$user->name;
-            $body = 'Kami baru saja menerima permintaan untuk mereset kata sandi untuk akunmu yang terhubung dengan email ini. ';
+            $body = 'Kami baru saja menerima permintaan untuk mereset kata sandi pada akun yang terhubung dengan email ini. ';
             $body .= 'Kode rahasia ini hanya akan berlaku dalam waktu 5 menit sejak email ini dikirim.\n';
             $body .= 'Masukkan kode berikut agar kamu dapat mengubah kata sandimu.';
             $token = rtrim(chunk_split(Str::random(16), 4, '-'), '-').'!';
@@ -56,7 +70,7 @@ class EmailController extends Controller
                 [
                     'email' => $email,
                     'token' => $token,
-                    'expires_at' => Carbon::now()->addMinutes(5),
+                    'expires_at' => Carbon::now()->addSeconds(30),
                     'created_at' => Carbon::now()
                 ],
             );
