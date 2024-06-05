@@ -126,8 +126,8 @@
             </form>
             @php
                 if (Auth::user()) {
-                    $recipes_user_public = $recipes->where('user_id', Auth::user()->id);
-                    $recipes_private = $recipes->where('type', "privat");
+                    $recipes_user_public = $recipes->where('user_id', Auth::user()->id)->where('type', "public");
+                    $recipes_private = $recipes->where('type', "private");
                     $recipes_general = $recipes->diff($recipes_user_public)->diff($recipes_private);
                 } else {
                     $recipes_general = $recipes;

@@ -24,7 +24,7 @@ class RecipeController extends Controller
             'selected_tags' => 'required|array|min:1',
             'selected_tags.*' => 'required|string',
             'type' => 'required',
-            'img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'img' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'vid' => 'nullable|file|mimes:mp4,mov|max:20480',
             'ingredientHeader.*' => 'required|min:5',
             'ingredientDescription.*.*' => 'required|min:5',
@@ -32,7 +32,7 @@ class RecipeController extends Controller
             'ingredientUnit.*.*' => 'required|min:1',
             'stepHeader.*' => 'required|min:5',
             'stepDescription.*.*' => 'required|min:5',
-            'stepImg.*.*' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
+            'stepImg.*.*' => 'nullable|file|mimes:jpeg,jpg,png|max:2048'
         ];
 
         $messages = [
@@ -86,6 +86,7 @@ class RecipeController extends Controller
             $recipe->sub_category_2_id = $req->sub_category_2_id;
             $recipe->duration = $req->duration;
             $recipe->type = $req->type;
+            Log::info($req->type);
             $recipe->save();
 
             $folderPath = 'recipes/'.$recipe->id.'/';
