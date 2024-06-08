@@ -115,3 +115,21 @@ a, a:hover{
     height:150px;
     width:auto;
 }
+
+.modalContainer{
+    padding:30px;
+    border-radius: 15px;
+    border:3px solid black;
+}
+
+form .col{
+    margin:20px 0px;
+}
+
+form label{
+    margin:8px 0px;
+}
+
+.starIcon:hover{
+    cursor:pointer;
+}

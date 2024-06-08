@@ -36,6 +36,7 @@ return new class extends Migration
             $table->boolean('is_verified_by_admin')->default(false);
             $table->boolean('is_verified_by_ahli_gizi')->default(false);
             $table->enum('type', ['public', 'private'])->default('private');
+            $table->boolean('isExclusive')->default(false);
         });
     }
 

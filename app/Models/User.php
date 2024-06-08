@@ -61,4 +61,46 @@ class User extends Authenticatable
     public function reviewReactions(){
         return $this->belongsToMany(Review::class, 'review_reactions')->withPivot(['type']);
     }
+
+    public function allStepProgress(){
+        return $this->hasMany(StepProgress::class);
+    }
+
+    public function recipeStepProgress($recipe_id){
+        return $this->allStepProgress()->where('recipe_id', $recipe_id)->get();
+    }
+
+    public function allIngredientProgress(){
+        return $this->hasMany(UserIngredientProgress::class);
+    }
+
+    public function recipeIngredientProgress($recipe_id){
+        return $this->allIngredientProgress()->where('recipe_id', $recipe_id)->get();
+    }
+
+    public function allToolProgress(){
+        return $this->hasMany(UserToolProgress::class);
+    }
+
+    public function recipeToolProgress($recipe_id){
+        return $this->allToolProgress()->where('recipe_id', $recipe_id)->get();
+    }
+
+    public function cookingProgressRecipes(){
+        $recipesWithStepProgress = $this->allStepProgress()->pluck('recipe_id');
+        $recipesWithIngredientProgress = $this->allIngredientProgress()->pluck('recipe_id');
+        $recipesWithToolProgress = $this->allToolProgress()->pluck('recipe_id');
+
+        $recipeProgress = $recipesWithStepProgress->merge($recipesWithIngredientProgress)->merge($recipesWithToolProgress)->unique();
+
+        return Recipe::whereIn('id', $recipeProgress)->get();
+    }
+
+    public function followers(){
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
+
+    public function followings(){
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
+    }
 }

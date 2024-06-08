@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('rating');
             $table->text('comment');
-            $table->string('img')->default('storage/recipes/default_recipe_img.png');
+            $table->string('img')->nullable();
         });
     }
 

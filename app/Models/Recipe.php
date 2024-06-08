@@ -32,12 +32,33 @@ class Recipe extends Model
         return $this->admin_id !== null && $this->ahli_gizi_id !== null;
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class);
+    public function reviews($filter = ''){
+        $reviews = $this->hasMany(Review::class);
+        if($filter == 'dateAsc') return $reviews->orderBy('created_at', 'asc');
+        if($filter == 'dateDesc') return $reviews->orderBy('created_at', 'desc');
+        if($filter == 'ratingAsc') return $reviews->orderBy('rating', 'asc');
+        if($filter == 'ratingDesc') return $reviews->orderBy('rating', 'desc');
+        return $reviews;
     }
 
     public function stepHeaders(){
         return $this->hasMany(StepHeader::class);
+    }
+
+    public function totalSteps(){
+        return $this->stepHeaders->sum(function ($stepHeader) {
+            return $stepHeader->steps->count();
+        });
+    }
+
+    public function totalIngredients(){
+        return $this->ingredientHeaders->sum(function ($ingredientHeader) {
+            return $ingredientHeader->ingredients->count();
+        });
+    }
+
+    public function totalTools(){
+        return $this->tools->count();
     }
 
     public function ingredientHeaders(){

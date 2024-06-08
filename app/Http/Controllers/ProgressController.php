@@ -17,6 +17,9 @@ class ProgressController extends Controller
             UserToolProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->delete();
             UserIngredientProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->delete();
             StepProgress::where('user_id', auth()->id())->where('recipe_id', $req->recipe_id)->delete();
+
+            $progress = Auth::user()->cookingProgressRecipes();
+            return response()->json(['message' => 'ok ', 'recipe_id' => $req->recipe_id, 'progress' => $progress]);
         }else{
             Session::forget('recipe_'.$req->recipe_id);
         }

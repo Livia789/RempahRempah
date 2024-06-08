@@ -210,4 +210,20 @@ class UserController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function toggleFollowUser(Request $req){
+        $other_user_id = $req->other_user_id;
+        $user = User::find(auth()->id());
+        $other_user = User::find($other_user_id);
+        if($user->followings->contains($other_user)){
+            $user->followings()->detach($other_user);
+        }else{
+            $user->followings()->attach($other_user);
+        }
+        return response()->json([
+            'isFollowing' => Auth::user()->followings->contains($other_user),
+            'otherUserFollowersCount' => $other_user->followers->count(),
+            'otherUserFollowingsCount' => $other_user->followings->count()
+        ]);
+    }
 }

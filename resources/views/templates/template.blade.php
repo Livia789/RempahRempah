@@ -77,6 +77,7 @@
                                 @if (Auth::user()->role == 'member')
                                     <li><a class="dropdown-item" href="/myProfile">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
+                                    <li><a class="dropdown-item" href="/myCookingProgress">Progress Memasak</a></li>
                                     <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else
                                     <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>

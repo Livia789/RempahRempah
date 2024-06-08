@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             StepProgressSeeder::class,
             UserIngredientProgressSeeder::class,
             UserToolProgressSeeder::class,
+            FollowsSeeder::class,
         ]);
     }
 }
