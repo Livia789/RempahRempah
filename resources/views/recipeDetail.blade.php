@@ -69,8 +69,16 @@
             <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
         </div>
 
-        <div class="sharpBox" onclick="resetCookingProgress()">
-            Reset Cooking Progress
+        <div class="d-flex">
+            <div class="sharpBox" onclick="resetCookingProgress()">
+                <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
+                Hapus Progress Memasak
+            </div>
+    
+            <div class="sharpBox" onclick="$('#reviewFormContainer').modal('show');">
+                <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                Ulas Resep
+            </div>
         </div>
 
         <div class="d-flex imgDescContainer">
@@ -304,10 +312,11 @@
                     <textarea class="form-control textField whiteBackground" placeholder="Tulis tanggapanmu disini" id="reviewComment" name="comment" rows="3"></textarea>
                 </div>
                 <div class="col" style="display:flex; flex-direction: column">
-                    <label for="img">Choose an image:</label>
+                    <label for="img">Unggah foto masakanmu :</label>
                     <input type="file" id="reviewImg" name="img" accept="image/*"></input>  
                 </div>
                 <button type="button" onclick="submitReviewForm()" class="sharpBox mt-5">
+                    <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
                     Simpan
                 </button>
                 <p id="reviewErrorMsg" style="display:none; margin:0px; color:rgb(255, 57, 57)"></p>

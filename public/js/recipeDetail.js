@@ -288,10 +288,10 @@ function showDoneCookingModals(){
 
     $('#doneCooking_resetProgressContainer').on('shown.bs.modal', function () {
         confetti({
-            particleCount: 75,
+            particleCount: 50,
             spread: 200,
             gravity:0.5,
-            origin: { y: 0.2 },
+            origin: { y: 0.18 },
             zIndex: 1100
         });
     });
