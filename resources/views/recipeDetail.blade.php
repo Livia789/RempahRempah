@@ -7,7 +7,10 @@
 @endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script src="{{asset('js/recipeDetail.js')}}"></script>
+
 <script>
     var token = '{{csrf_token()}}';
     var recipe_id = '{{$recipe->id}}';
@@ -41,17 +44,17 @@
                 Resep oleh
             </div>
             <div style="margin: auto 0px">
-                <b class="roundedBox whiteBackground"><a href="#">{{ '@'.$recipe->creator->name }}</a></b>
+                <b class="roundedBox whiteBackground"><a href="/publicProfile/{{$recipe->creator->id}}">{{ '@'.$recipe->creator->name }}</a></b>
             </div>
         </div>
         <div class="sharpBox recipeDetailSummaryCtr">
-            @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
+            @include('templates/rating', ['rating_avg' => $reviews->avg('rating')])
 
             <div class="separatorLine"></div>
 
             <img src="/assets/icons/empty_heart.png" class="picon mb-auto mt-auto" alt="heart_icon">
             <div class="mt-auto mb-auto ">
-                <b>{{ $recipe->reviews->count() }} Ulasan</b>
+                <b>{{ $reviews->count() }} Ulasan</b>
             </div>
 
             <div class="separatorLine"></div>
@@ -66,7 +69,7 @@
             <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
         </div>
 
-        <div class="sharpBox" id="btnResetCookingProgress">
+        <div class="sharpBox" onclick="resetCookingProgress()">
             Reset Cooking Progress
         </div>
 
@@ -130,6 +133,9 @@
 
         <div>
             <h3><b>Bahan</b></h3>
+            @if($recipe->ingredientHeaders->count() == 0)
+                <i>Tidak ada data bahan untuk resep ini</i>
+            @endif
             <div class="d-flex">
                 <div style="width:45%; margin-right:50px">
                     @foreach($recipe->ingredientHeaders as $ingredientHeader)
@@ -151,7 +157,11 @@
                                         <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
                                     </div>
                                     <div class="box longbox">
-                                        {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                        @if($ingredient->pivot->unit)
+                                            {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                        @else
+                                            {{ $ingredient->name.' '.$ingredient->pivot->quantity }}
+                                        @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -180,7 +190,11 @@
                                         <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
                                     </div>
                                     <div class="box longbox">
-                                        {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                        @if($ingredient->pivot->unit)
+                                            {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                                        @else
+                                            {{ $ingredient->name.' '.$ingredient->pivot->quantity }}
+                                        @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -239,18 +253,84 @@
                 @endforeach
                 </div>
             </div>
-            <div style="width:45%; background-color:black; padding:30px; border-radius:15px;">
+            <div id="reviewSection" style="width:45%; background-color:black; padding:30px; border-radius:15px;">
                 <div>
                     <div class="d-flex" style="justify-content:space-between; margin-bottom:30px; flex:1; overflow-y:auto;">
                         <h3><b style="color:white; ">Penilaian</b></h3>
-                        <div class="sharpBox" style="border-color:white; background-color:black; height:fit-content">
-                            <p style="color:white; margin:0px 10px 0px 0px">Urutkan</p>
-                            <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
+                        <div class="sharpBox" style="margin-right:0px; border-color:white; background-color:black; height:fit-content">
+                            <div id="reviewFilterBtn" class="d-flex">
+                                <p style="color:white; margin:0px 10px 0px 0px" id="sortLabel">Urutkan</p>
+                                <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end" style="margin:40px 30px 0px 0px; border:2px solid black" id="reviewFilterDropdown">
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateDesc">Rating terbaru</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateAsc">Rating terlama</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingDesc">Rating tertinggi</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingAsc">Rating terendah</a>
+                            </div>
                         </div>
                     </div>
-                    @foreach($recipe->reviews as $review)
+                    @foreach($reviews as $review)
                         @include('templates/reviewCard')
                     @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="reviewFormContainer" aria-hidden="true">
+        <div class="modal-dialog modalContainer modal-content" style="max-width: 80vw; width:60vw; height:90vh; background-color:white" >
+            
+            <div class="text-center justify-content-center" >
+                <h1>Berikan Ulasan</h1>
+                <p>Bagaimana pengalaman memasakmu? Yuk ceritakan pengalamanmu memasak dengan resep ini!</p>
+                <img src="/assets/chef_review.png" style="height:150px; width:auto; border-radius:50%" alt="chef_review">
+            </div>
+
+            
+            <form action="/submitReview" id="reviewForm" enctype="multipart/form-data" style="padding:30px" method="POST">
+                @csrf
+                <div class="col">
+                    <label for="rating">Berikan bintang untuk resep ini</label><label style="color:rgb(255, 57, 57)">*</label>
+                    <div class="rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <img src="/assets/icons/empty_star.png" id="star_{{$i}}" onclick="adjustStar({{$i}})" class="starIcon" alt="star_icon">
+                        @endfor
+                    </div>                  
+                    <input type="hidden" id="reviewRating" name="rating" value=""></input>
+                </div>
+                <div class="col">
+                    <label for="comment">Apa tanggapanmu mengenai resep ini?</label><label style="color:rgb(255, 57, 57)">*</label>
+                    <textarea class="form-control textField whiteBackground" placeholder="Tulis tanggapanmu disini" id="reviewComment" name="comment" rows="3"></textarea>
+                </div>
+                <div class="col" style="display:flex; flex-direction: column">
+                    <label for="img">Choose an image:</label>
+                    <input type="file" id="reviewImg" name="img" accept="image/*"></input>  
+                </div>
+                <button type="button" onclick="submitReviewForm()" class="sharpBox mt-5">
+                    Simpan
+                </button>
+                <p id="reviewErrorMsg" style="display:none; margin:0px; color:rgb(255, 57, 57)"></p>
+                <input type="hidden" name="recipe_id" value="{{$recipe->id}}"></input>
+                <input type="hidden" name="user_id" value="{{$user ? $user->id : -1}}"></input>
+            </form>
+            
+        </div>
+    </div>
+
+    <div class="modal fade" id="doneCooking_resetProgressContainer" aria-hidden="true">
+        <div class="modal-dialog modalContainer modal-content" style="max-width:40vw; width:40vw; background-color:white" >
+            
+            <div class="text-center justify-content-center" >
+                <h1>Selamat!</h1>
+                <p>Anda sudah mengikuti setiap langkah pada resep <b>{{$recipe->name}}</b> ala <b>{{'@'.$recipe->creator->name}}</b></p>
+                <img src="/assets/chef_happy.png" style="border-radius:50%; height:150px; width:auto;" alt="chef_happy">
+
+                <br><br><br>
+                <p>Hapus progress memasak pada resep ini?</p>
+                <div style="width:80%; margin:auto">
+                    <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(true)">Ya</div>
+                    <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(false)">Tidak</div>
                 </div>
             </div>
         </div>

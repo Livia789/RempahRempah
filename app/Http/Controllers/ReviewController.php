@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ReviewReaction;
+use App\Models\Review;
 
-class ReviewReactionController extends Controller
+class ReviewController extends Controller
 {
     public $timestamps = false;
 
@@ -62,5 +63,23 @@ class ReviewReactionController extends Controller
             'isLiked' => ReviewReaction::where('review_id', $req->review_id)->where('user_id', $req->user_id)->where('type', 'like')->exists(),
             'isDisliked' => ReviewReaction::where('review_id', $req->review_id)->where('user_id', $req->user_id)->where('type', 'dislike')->exists()
         ]);
+    }
+
+    public function submitReview(Request $req){
+        $review = new Review;
+        $review->recipe_id = $req->recipe_id;
+        $review->user_id = $req->user_id;
+        $review->rating = $req->rating;
+        $review->comment = $req->comment;
+
+        if ($req->img) {
+            $reviewImg = $req->file('img');
+            $reviewImg->store('public/reviewImages');
+            $review->img = $reviewImg->hashName();
+        }else{
+            $review->img = null;
+        }
+        $review->save();
+        return redirect('recipeDetail/'.$req->recipe_id.'?filter=dateDesc');
     }
 }

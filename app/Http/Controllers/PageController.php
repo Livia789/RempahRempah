@@ -396,4 +396,16 @@ class PageController extends Controller
         sort($tags);
         return response()->json(['tags' => $tags]);
     }
+
+    public function showMyCookingProgressPage(){
+        $user = Auth::user();
+        $recipes = $user->cookingProgressRecipes();
+        return view('myCookingProgress', compact('user', 'recipes'));
+    }
+
+    public function showPublicProfilePage($public_profile_id){
+        $user = Auth::user();
+        $public_profile = User::find($public_profile_id);
+        return view('publicProfile', compact('user', 'public_profile'));
+    }
 }

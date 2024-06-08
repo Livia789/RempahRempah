@@ -8,7 +8,7 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\ReviewReactionController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StepProgressController;
 use App\Http\Controllers\UserIngredientProgressController;
 use App\Http\Controllers\UserToolProgressController;
@@ -33,6 +33,7 @@ Route::get('/showResult', [PageController::class, 'showResult']);
 Route::get('/search', [PageController::class, 'showSearchPage']);
 Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
+Route::get('/publicProfile/{public_profile_id}', [PageController::class, 'showPublicProfilePage']);
 
 //progress routes
 Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
@@ -67,9 +68,10 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/myPassword', [PageController::class, 'showMyPasswordPage']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
 
+    Route::get('/myCookingProgress', [PageController::class, 'showMyCookingProgressPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
-    Route::get('/temp/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
 
     Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
     Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
@@ -77,6 +79,8 @@ Route::group(['middleware' => ['loggedin']], function () {
 
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
-    Route::post('/likeReview', [ReviewReactionController::class, 'likeReview']);
-    Route::post('/dislikeReview', [ReviewReactionController::class, 'dislikeReview']);
+    Route::post('/likeReview', [ReviewController::class, 'likeReview']);
+    Route::post('/dislikeReview', [ReviewController::class, 'dislikeReview']);
+    Route::post('/submitReview', [ReviewController::class, 'submitReview']);
+    Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
 });

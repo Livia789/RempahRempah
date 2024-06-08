@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StepProgress;
+use App\Models\Recipe;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 
 class StepProgressController extends Controller
 {
+
+    public function recipeStepDone($recipe_id){
+        if(!Auth::user()) return "not authorized";
+        $recipe = Recipe::find($recipe_id);
+        $user = Auth::user();
+        $totalSteps = $recipe->totalSteps();
+        $doneSteps = $user->recipeStepProgress(2)->count($recipe_id);
+        return $totalSteps == $doneSteps;
+    }
 
     public function addStepProgress($step_id, $recipe_id){
         $progress = new StepProgress;
@@ -16,11 +27,13 @@ class StepProgressController extends Controller
         $progress->step_id = $step_id;
         $progress->recipe_id = $recipe_id;
         $progress->save();
+        $allStepsDone = $this->recipeStepDone($recipe_id);
 
         $progress = StepProgress::where('user_id', auth()->id())->where('step_id', $step_id)->exists();
         return response()->json([
             'message' => 'Progress added',
-            'isProgress' => $progress
+            'isProgress' => $progress,
+            'allStepsDone' => $allStepsDone
         ]);
     }
 
