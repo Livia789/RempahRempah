@@ -126,9 +126,13 @@
             </form>
             @php
                 if (Auth::user()) {
-                    $recipes_user_public = $recipes->where('user_id', Auth::user()->id)->where('type', "public");
-                    $recipes_private = $recipes->where('type', "private");
-                    $recipes_general = $recipes->diff($recipes_user_public)->diff($recipes_private);
+                    $recipes_user_public = $recipes->where('user_id', Auth::user()->id)->where('type', 'public');
+                    $recipes_private = $recipes->where('type', 'private');
+                    $recipes_general = $recipes->diff($recipes_user_public)
+                                                ->diff($recipes_private)
+                                                ->sortByDesc(function($recipe) {
+                                                    return $recipe->type == 'exclusive';
+                                                });
                 } else {
                     $recipes_general = $recipes;
                 }
@@ -144,17 +148,23 @@
                 @endforelse
             </div>
             @auth
+                @php
+                    $isNeedProcessTrack = true;
+                @endphp
                 <h3 class="sectionDivider">Resep Saya</h3>
                 <h4 class="sectionDivider">Publik</h4>
                 <div class="row row-cols-1 row-cols-md-3 g-3">
                     @forelse ($recipes_user_public as $recipe)
                         <div class="col">
-                            @include('templates/recipeCard', compact('recipe'))
+                            @include('templates/recipeCard', compact('recipe', 'isNeedProcessTrack'))
                         </div>
                     @empty
                         <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
                     @endforelse
                 </div>
+                @php
+                    unset($isNeedProcessTrack);
+                @endphp
                 <h4 class="sectionDivider">Privat</h4>
                 <div class="row row-cols-1 row-cols-md-3 g-3">
                     @forelse ($recipes_private as $recipe)

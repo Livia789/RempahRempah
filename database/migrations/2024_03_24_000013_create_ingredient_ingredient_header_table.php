@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('quantity');
             $table->string('unit')->nullable()->default(null);
             $table->primary(['ingredient_id', 'ingredient_header_id']);
-
         });
     }
 
