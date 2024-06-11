@@ -6,6 +6,11 @@ label {
     font-weight: bold;
 }
 
+textarea {
+    height: 100px;
+    resize: none;
+}
+
 .addRecipe {
     margin: 0 15%;
 }
@@ -19,13 +24,13 @@ label {
     background-color: rgb(227, 232, 0);
 }
 
-.categorySection {
+#categorySection {
     margin-bottom: 20px;
 }
-.categorySection select, .durationSection .input-group {
+#categorySection select, #durationSection .input-group {
     margin-bottom: 0 !important;
 }
-.tagSection .errorMsg {
+#tagSection .errorMsg {
     margin-top: -30px;
     margin-bottom: 45px;
 }
@@ -86,6 +91,16 @@ label {
     margin-top: 15px;
 }
 
+#toolSection label {
+    margin-bottom: 10px !important;
+}
+.delete-tool {
+    margin: 0 0 0 20px !important;
+}
+.col .add-tool {
+    margin-top: 30px !important;
+}
+
 .ingredientHeader, .ingredientHeader input, .stepHeader, .stepHeader input {
     margin-bottom: 15px;
 }
@@ -128,7 +143,7 @@ label {
 .descriptionContainer button {
     height: 50px;
     margin-top: 0;
-    margin-left: 30px !important;
+    margin-left: 10px !important;
 }
 
 .ingredientDescriptionContainer {
@@ -137,6 +152,13 @@ label {
 }
 .ingredientDescriptionContainer.sub {
     width: 15% !important;
+}
+
+.descriptionContainer textarea {
+    margin-right: 15px;
+}
+.stepDescription .descriptionContainer .delete-description {
+    margin-top: 20px !important;
 }
 
 .add-header {
@@ -171,5 +193,28 @@ label {
 @media (max-width: 992px) {
     .addRecipe {
         margin: 0;
+    }
+    #durationTotal {
+        display: none;
+    }
+    .ingredientDescriptionContainer {
+        width: 100%;
+        margin-right: 0px;
+    }
+    .ingredientDescriptionContainer.sub {
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+    .descriptionContainer .delete-description {
+        margin-top: 45px !important;
+    }
+    .add-description {
+        width: 50%;
+        max-width: 200px;
+        margin-left: 20px;
+    }
+    .stepDescription .delete-description {
+        display: flex;
+        margin-top: 20px !important;
     }
 }

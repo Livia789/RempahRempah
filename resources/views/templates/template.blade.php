@@ -80,7 +80,10 @@
                                     <li><a class="dropdown-item" href="/myCookingProgress">Progress Memasak</a></li>
                                     <li><a class="dropdown-item" href="#">Markah</a></li>
                                 @else
-                                    <li><a class="dropdown-item" href="#">Verifikasi Resep</a></li>
+                                    @if (Auth::user()->role == 'admin')
+                                        <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
+                                    @endif
+                                    <li><a class="dropdown-item" href="/recipeVerification">Verifikasi Resep</a></li>
                                 @endif
                                 <li><a class="dropdown-item" href="/logout">Keluar</a></li>
                             @else

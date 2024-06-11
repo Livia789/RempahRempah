@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'name' => 'Ahli Gizi 1',
             'email' => 'ahligizi1@gmail.com',
             'password' => bcrypt('wadimor'),
-            'role' => 'ahligizi',
+            'role' => 'ahli_gizi',
             'accountStatus' => 'verified',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
@@ -53,7 +53,5 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-
-
     }
 }

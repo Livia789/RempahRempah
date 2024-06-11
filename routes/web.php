@@ -34,6 +34,7 @@ Route::get('/search', [PageController::class, 'showSearchPage']);
 Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 Route::get('/publicProfile/{public_profile_id}', [PageController::class, 'showPublicProfilePage']);
+Route::get('/aboutUs', [PageController::class, 'showAboutUsPage']);
 
 //progress routes
 Route::post('/toggleStepProgress', [StepProgressController::class, 'toggleStepProgress']);
@@ -58,6 +59,14 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
 
+    Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
+    Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
+    Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
+
+    Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
+});
+
+Route::group(['middleware' => ['member']], function () {
     Route::get('/welcome', [PageController::class, 'showWelcomePage']);
     Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
     Route::post('/updateSelected', [PageController::class, 'updateSelected']);
@@ -73,14 +82,18 @@ Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
 
-    Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
-    Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
-    Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
-
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
     Route::post('/likeReview', [ReviewController::class, 'likeReview']);
     Route::post('/dislikeReview', [ReviewController::class, 'dislikeReview']);
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
+});
+
+Route::group(['middleware' => ['ahligizi']], function () {
+    // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
 });

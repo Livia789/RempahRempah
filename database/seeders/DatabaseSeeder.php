@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AvoidedIngredientSeeder::class,
             CategorySeeder::class,
+            CompanySeeder::class,
             RecipeSeeder::class,
             ReviewSeeder::class,
             BookmarkSeeder::class,

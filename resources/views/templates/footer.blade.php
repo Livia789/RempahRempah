@@ -14,7 +14,7 @@
             <div class="footerSectionContainer">
                 <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
-                <a class="roundedBox blackBackground" href="\tentangKami">Tentang Kami</a>
+                <a class="roundedBox blackBackground" href="\aboutUs">Tentang Kami</a>
             </div>
             <div class="footerSectionContainer">
                 <p>Hubungi Kami:</p>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <hr>
-        <p>© 2024 Rempah-Rempah, All right reserved.</p>
+        <p>© 2024 Rempah Rempah, All right reserved.</p>
     </div>
 </body>
 </html>
