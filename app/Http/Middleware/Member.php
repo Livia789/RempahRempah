@@ -18,6 +18,9 @@ class Member
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && Auth::user()->role == 'member') {
+            if (Auth::user()->accountStatus == 'new' && !request()->is('welcome')) {
+                return redirect('welcome');
+            }
             return $next($request);
         }
         return abort(401);

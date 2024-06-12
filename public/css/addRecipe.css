@@ -1,0 +1,220 @@
+.content {
+    padding: 20px 60px !important;
+}
+
+label {
+    font-weight: bold;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+.addRecipe {
+    margin: 0 15%;
+}
+.addRecipe select {
+    font-size: medium;
+}
+.addRecipe select option {
+    background-color: white;
+}
+.addRecipe select option:hover {
+    background-color: rgb(227, 232, 0);
+}
+
+#categorySection {
+    margin-bottom: 20px;
+}
+#categorySection select, #durationSection .input-group {
+    margin-bottom: 0 !important;
+}
+#tagSection .errorMsg {
+    margin-top: -30px;
+    margin-bottom: 45px;
+}
+
+.groupTextForm {
+    background-color: #EFEFEF;
+    border: 0;
+}
+
+#durationTotal {
+    margin-left: 25px !important;
+    padding: 0 25px;
+    background-color: rgb(227, 232, 0);
+    border: 2.5px solid black;
+    border-radius: 25px !important;
+    color: black;
+    font-weight: 500;
+}
+
+.tagLabelForm {
+    margin-bottom: 5px;
+}
+
+.searchField {
+    margin-bottom: 25px;
+}
+
+.addBtn {
+    margin-bottom: 10px;
+}
+
+.removeBtn {
+    margin-top: -10px !important;
+    margin-bottom: 30px !important;
+}
+
+.scrollSection {
+    padding: 5px 0 !important;
+    max-height: 135px;
+    overflow-y: auto;
+    background-color: #C1C1C1;
+}
+
+#noResult {
+    margin: 5px;
+}
+
+.btn-toggle.active {
+    background-color: rgb(227, 232, 0);
+}
+
+#typeSection button {
+    margin-right: 15px;
+    margin-bottom: 0px;
+}
+
+.fileName {
+    margin-top: 15px;
+}
+
+#toolSection label {
+    margin-bottom: 10px !important;
+}
+.delete-tool {
+    margin: 0 0 0 20px !important;
+}
+.col .add-tool {
+    margin-top: 30px !important;
+}
+
+.ingredientHeader, .ingredientHeader input, .stepHeader, .stepHeader input {
+    margin-bottom: 15px;
+}
+.ingredientHeader label, .stepHeader label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ingredientDescription, .stepDescription {
+    margin-bottom: 10px;
+}
+
+.ingredientHeader .errorMsg {
+    margin-top: -5px;
+}
+.ingredientDescription .errorMsg {
+    margin-top: 10px;
+}
+.stepHeader .errorMsg {
+    margin-top: -5px !important;
+    margin-bottom: 15px !important;
+}
+
+.stepCounter {
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    display: block;
+    margin-bottom: 10px;
+    width: 120px;
+    text-align: center;
+}
+
+.descriptionContainer input, .descriptionContainer button {
+    margin-bottom: 0 !important;
+}
+.descriptionContainer input {
+    height: 50px;
+}
+.descriptionContainer button {
+    height: 50px;
+    margin-top: 0;
+    margin-left: 10px !important;
+}
+
+.ingredientDescriptionContainer {
+    margin-right: 20px;
+    flex-grow: 1;
+}
+.ingredientDescriptionContainer.sub {
+    width: 15% !important;
+}
+
+.descriptionContainer textarea {
+    margin-right: 15px;
+}
+.stepDescription .descriptionContainer .delete-description {
+    margin-top: 20px !important;
+}
+
+.add-header {
+    margin-top: 30px !important;
+}
+.add-description {
+    float: right;
+}
+.delete-header {
+    margin-top: 30px !important;
+}
+.ingredientDescription .delete-description {
+    margin-top: 35px !important;
+    margin-left: 0px !important;
+}
+.ingredientHeader .add-description {
+    margin-top: 15px !important;
+}
+
+.cropper-container {
+    justify-content: center;
+    align-items: center;
+}
+.cropper {
+    display: flex;
+}
+.cropper button {
+    display: block;
+    margin-right: 5px;
+}
+
+@media (max-width: 992px) {
+    .addRecipe {
+        margin: 0;
+    }
+    #durationTotal {
+        display: none;
+    }
+    .ingredientDescriptionContainer {
+        width: 100%;
+        margin-right: 0px;
+    }
+    .ingredientDescriptionContainer.sub {
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+    .descriptionContainer .delete-description {
+        margin-top: 45px !important;
+    }
+    .add-description {
+        width: 50%;
+        max-width: 200px;
+        margin-left: 20px;
+    }
+    .stepDescription .delete-description {
+        display: flex;
+        margin-top: 20px !important;
+    }
+}

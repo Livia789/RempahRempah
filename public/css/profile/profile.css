@@ -1,0 +1,46 @@
+.profileBodyContainer {
+    padding: 75px 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.profileBodyContainer a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.profilePicture {
+    width: 40%;
+    height: auto;
+    margin: 10px;
+}
+
+.profileContainer {
+    width: 25%;
+    text-align: center;
+}
+
+.content {
+    padding: 0px;
+    margin: 0px;
+    background-color: #EFEFEF;
+}
+
+.halfWidth {
+    width: 50%;
+}
+
+@media(max-width: 992px) {
+    .profileBodyContainer {
+        flex-direction: column;
+        padding: 25px 25px;
+    }
+
+    .profileContainer {
+        width: 100%;
+    }
+
+    .profilePicture {
+        width: 50px;
+    }
+}

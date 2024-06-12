@@ -1,0 +1,83 @@
+.profileContentContainer{
+    width:75%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:left;
+    margin:auto;
+}
+
+.reviewCardContainer{
+    background-color:white;
+    border:3px solid black;
+    color:black;
+    border-radius:7px;
+    width:45%;
+    padding:20px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin:20px;
+}
+
+.cardContent{
+    width:40%;
+}
+
+.recipeImg{
+    width:100%;
+    height:auto;
+    border-radius:7px;
+    border:2px solid black;
+}
+
+.reviewImg{
+    width:80%;
+    height:auto;
+    margin: 0px auto;
+    border-radius:7px;
+    border:2px solid black;
+}
+
+.cardDivider {
+    border-left: 3px solid black;
+}
+
+.reviewCardTitle{
+    font-size:18px;
+    margin:10px 0px;
+    font-weight: bold;
+}
+
+@media(max-width: 1200px){
+    .reviewCardContainer{
+        width:90%;
+    }
+}
+
+@media(max-width: 920px){
+    .reviewCardContainer{
+        width:100%;
+        margin:7px;
+    }
+
+    .profileContentContainer{
+        width:90%;
+    }
+}
+
+
+@media(max-width: 550px){
+    .profileContentContainer{
+        width:100%;
+    }
+}
+
+@media(max-width: 400px){
+    .reviewCardContainer{
+        flex-direction: column;
+    }
+
+    .cardContent{
+        width:100%;
+    }
+}

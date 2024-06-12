@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 nav {
     position: fixed;
     padding: 15px 50px !important;
@@ -12,6 +16,9 @@ nav {
 
 .navbar a {
     color: white;
+}
+.typeahead a {
+    color: black;
 }
 
 .navbar-brand #logo {
@@ -23,14 +30,14 @@ nav {
     color: white !important;
 }
 .navbar-toggler:hover, .navbar-toggler:focus {
-    color: rgb(33, 37, 41) !important;
+    color: black !important;
     background-color: white;
 }
 
 .nav-item .nav-link {
     background-color: transparent;
-    border: 1px solid white;
-    border-radius: 15px;
+    border: 1.5px solid white;
+    border-radius: 10px;
     margin: 0 10px;
     padding: 10px 15px !important;
 }
@@ -53,12 +60,28 @@ nav {
     background-color: rgb(227, 232, 0);
 }
 
-.navbar form button {
+.content {
+    background-color: #EFEFEF !important;
+}
+
+form {
+    margin: 0;
+}
+
+form .outlinedBtn {
+    border: 2.5px solid white;
+    min-width: 50px;
+}
+form .outlinedBtn.blackBackground {
     color: white;
     border-color: white;
 }
-.navbar form button:hover, .navbar form button:focus {
-    background-color: white !important;
+form .outlinedBtn.whiteBackground {
+    color: black;
+    border-color: black;
+}
+form .outlinedBtn:hover, form .outlinedBtn:focus {
+    background-color: rgb(227, 232, 0) !important;
     color: rgb(33, 37, 41) !important;
 }
 
@@ -76,9 +99,113 @@ nav {
     background-color: white;
 }
 
-.content {
-    margin: 20px 0;
-    padding: 0 60px !important;
+.roundedBox {
+    display: inline-box;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+.roundedBox.blackBackground {
+    border: 2px solid white;
+    color: white;
+}
+.roundedBox.whiteBackground {
+    border: 2px solid black;
+    color: black;
+}
+.roundedBox.blackBackground:hover {
+    color: rgb(227, 232, 0);
+    border: 2px solid rgb(227, 232, 0);;
+}
+.roundedBox.whiteBackground:hover {
+    color: black;
+    background-color: rgb(227, 232, 0);
+}
+
+.card.recipeCard {
+    border: 2.5px solid black;
+    padding: 15px;
+}
+.card.recipeCard:hover {
+    box-shadow: 0 0 5px black;
+}
+
+.recipeAttributes {
+    margin-bottom: 5px;
+}
+
+.reviews i {
+    color: pink;
+}
+
+.starIcon {
+    height: 25px;
+    width: auto;
+    margin-right: 5px;
+}
+
+.sectionDivider {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.page-item a {
+    color: black !important;
+}
+.page-item a:hover {
+    background-color: rgb(227, 232, 0) !important;
+}
+
+.sharpBox {
+    border: 2.5px solid black;
+    color: black;
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    width: fit-content;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+.sharpBox:hover {
+    background-color: rgb(227, 232, 0);
+}
+.sharpBox i {
+    margin-top: 5px;
+}
+.sharpBox:disabled, .sharpBox:hover:disabled {
+    background-color: gainsboro !important;
+}
+
+#sharpBoxSelected {
+    background-color: black;
+    color: white;
+}
+
+.picon {
+    height: 25px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.textField, .form-control.textField {
+    border: 3px solid white;
+    padding: 10px;
+    border-radius: 3.5px;
+}
+.textField, .form-control.textField.blackBackround {
+    background-color: rgb(33, 37, 41);
+    border-color: white;
+    color: white;
+}
+.textField, .form-control.textField.whiteBackground {
+    background-color: white;
+    border-color: black;
+    color: black;
 }
 
 @media (max-width: 992px) {

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AvoidedIngredientSeeder::class,
             CategorySeeder::class,
+            CompanySeeder::class,
             RecipeSeeder::class,
             ReviewSeeder::class,
             BookmarkSeeder::class,
@@ -38,6 +39,11 @@ class DatabaseSeeder extends Seeder
             NutritionRecipeSeeder::class,
             TagSeeder::class,
             RecipeTagSeeder::class,
+            ReviewReactionSeeder::class,
+            StepProgressSeeder::class,
+            UserIngredientProgressSeeder::class,
+            UserToolProgressSeeder::class,
+            FollowsSeeder::class,
         ]);
     }
 }

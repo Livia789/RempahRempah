@@ -15,4 +15,12 @@ class Review extends Model
     public function recipe(){
         return $this->belongsTo(Recipe::class);
     }
+
+    public function likes(){
+        return $this->belongsToMany(User::class, 'review_reactions')->where('type', 'like');
+    }
+
+    public function dislikes(){
+        return $this->belongsToMany(User::class, 'review_reactions')->where('type', 'dislike');
+    }
 }

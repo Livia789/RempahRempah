@@ -24,24 +24,41 @@ class Recipe extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function sub_category_1(){
-        return $this->belongsTo(Category::class, 'sub_category_1_id');
-    }
-
-    public function sub_category_2(){
-        return $this->belongsTo(Category::class, 'sub_category_2_id');
+    public function sub_category($index){
+        return $this->belongsTo(Category::class, 'sub_category_'.$index.'_id');
     }
 
     public function isPublic(){
-        return $this->ahli_gizi_id !== null;
+        return $this->admin_id !== null && $this->ahli_gizi_id !== null;
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class);
+    public function reviews($filter = ''){
+        $reviews = $this->hasMany(Review::class);
+        if($filter == 'dateAsc') return $reviews->orderBy('created_at', 'asc');
+        if($filter == 'dateDesc') return $reviews->orderBy('created_at', 'desc');
+        if($filter == 'ratingAsc') return $reviews->orderBy('rating', 'asc');
+        if($filter == 'ratingDesc') return $reviews->orderBy('rating', 'desc');
+        return $reviews;
     }
 
     public function stepHeaders(){
         return $this->hasMany(StepHeader::class);
+    }
+
+    public function totalSteps(){
+        return $this->stepHeaders->sum(function ($stepHeader) {
+            return $stepHeader->steps->count();
+        });
+    }
+
+    public function totalIngredients(){
+        return $this->ingredientHeaders->sum(function ($ingredientHeader) {
+            return $ingredientHeader->ingredients->count();
+        });
+    }
+
+    public function totalTools(){
+        return $this->tools->count();
     }
 
     public function ingredientHeaders(){
@@ -58,5 +75,18 @@ class Recipe extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+
+    function getDurationStr(){
+        $durationMinute = $this->duration;
+        $totaldays = floor($durationMinute / (24 * 60));
+        $totalhour = floor(($durationMinute % (24 * 60)) / 60);
+        $totalMinute = $durationMinute % 60;
+
+        $durationStr = "";
+        if ($totaldays > 0) $durationStr .= $totaldays." hari ";
+        if ($totalhour > 0) $durationStr .= $totalhour." jam ";
+        if ($totalMinute > 0) $durationStr .= $totalMinute." menit";
+        return $durationStr;
     }
 }

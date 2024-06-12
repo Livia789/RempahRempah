@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class RecipeSeeder extends Seeder
@@ -61,11 +62,14 @@ class RecipeSeeder extends Seeder
                 "name" => "Cookies Ginger Pohon Natal",
                 "description" => "Cookies Ginger Pohon Natal adalah kreasi spesial yang memadukan cita rasa klasik cookies jahe dengan suasana musim liburan. Dibentuk seperti pohon-pohon Natal, cookies ini memberikan kelezatan renyah dan wangi jahe yang sempurna untuk dinikmati bersama keluarga dan teman-teman selama musim liburan. Dihiasi dengan gula dan warna-warni, cookies ini cocok sebagai camilan atau hiasan meja yang menarik selama perayaan Natal.",
                 "duration" => "30",
-                "img" => "recipes/default_recipe_img.png",
+                "serving" => "1",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
-                "is_verified_by_admin" => "1",
-                "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "is_verified_by_admin" => true,
+                "is_verified_by_ahli_gizi" => true,
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 4
             [
@@ -529,8 +533,8 @@ class RecipeSeeder extends Seeder
             //menu 31
             [
                 "user_id" => "3",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => "7",
                 "sub_category_2_id" => "14",
@@ -605,11 +609,14 @@ class RecipeSeeder extends Seeder
                 "name" => "Nasi Tutug Oncom",
                 "description" => "Nasi Tutug Oncom adalah hidangan nasi yang dicampur dengan oncom yang telah dihaluskan dan bumbu rempah khas Indonesia. Oncom merupakan hasil fermentasi biji-bijian, seringkali kedelai, dan merupakan makanan tradisional Indonesia yang kaya akan protein. Hidangan ini memiliki cita rasa gurih dan harum rempah yang khas.",
                 "duration" => "30",
-                "img" => "recipes/default_recipe_img.png",
+                "serving" => "5",
+                "img" => "storage/recipes/default_recipe_img.png",
                 "vid" => null,
-                "is_verified_by_admin" => "1",
-                "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "is_verified_by_admin" => true,
+                "is_verified_by_ahli_gizi" => true,
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 36
             [
@@ -624,9 +631,11 @@ class RecipeSeeder extends Seeder
                 "duration" => "30",
                 "img" => "recipes/default_recipe_img.png",
                 "vid" => null,
-                "is_verified_by_admin" => "1",
-                "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "is_verified_by_admin" => true,
+                "is_verified_by_ahli_gizi" => true,
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 37
             [
@@ -692,9 +701,11 @@ class RecipeSeeder extends Seeder
                 "duration" => "90",
                 "img" => "recipes/default_recipe_img.png",
                 "vid" => null,
-                "is_verified_by_admin" => "1",
-                "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "is_verified_by_admin" => false,
+                "is_verified_by_ahli_gizi" => false,
+                "type" => "public",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
         ]);
     }

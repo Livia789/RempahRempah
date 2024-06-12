@@ -14,27 +14,27 @@
             <div class="footerSectionContainer">
                 <img src="/assets/logo_rempah.png" class="footerLogo">
                 <p style="padding:30px 0px">“Dari Dapur ke Dunia, Resep Sederhana, Kelezatan Luar Biasa”</p>
-                <a class="roundedBox" href="\tentangKami">Tentang Kami</a>
+                <a class="roundedBox blackBackground" href="\aboutUs">Tentang Kami</a>
             </div>
             <div class="footerSectionContainer">
                 <p>Hubungi Kami:</p>
                 <p>Email</p>
-                <p class="roundedBox">rempah-rempah@gmail.com</p>
+                <p class="roundedBox blackBackground">rempah-rempah@gmail.com</p>
                 <p>Kontak</p>
-                <p class="roundedBox">+62 321654987</p>
+                <a class="roundedBox blackBackground">+62 321654987</a>
             </div>
             <div class="footerSectionContainer">
-                    <p>Media sosial kami</p>
-                    <div class="socialMediaIconContainer">
-                        <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
-                        <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
-                        <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
-                    </div>
-                    <p class="roundedBox">@rempah-rempah</p>
+                <p>Media sosial kami</p>
+                <div class="socialMediaIconContainer">
+                    <a href="https://www.instagram.com/rempahrempah"><img class="socialMediaIcon" src="/assets/instagramLogo.png" class="footerLogo"></a>
+                    <a href="https://www.twitter.com/rempahrempah"><img class="socialMediaIcon" src="/assets/twitterLogo.png" class="footerLogo"></a>
+                    <a href="https://www.facebook.com"><img class="socialMediaIcon" src="/assets/facebookLogo.png" class="footerLogo"></a>
+                </div>
+                <p class="roundedBox blackBackground">@rempah-rempah</p>
             </div>
         </div>
         <hr>
-        <p>© 2024 Rempah-Rempah, All right reserved.</p>
+        <p>© 2024 Rempah Rempah, All right reserved.</p>
     </div>
 </body>
 </html>

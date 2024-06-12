@@ -19,7 +19,7 @@ class AvoidedIngredientSeeder extends Seeder
         DB::table('avoided_ingredients')->insert([
             [
                 'user_id' => 3,
-                'ingredient_name' => 'terigu'
+                'ingredient_name' => 'tepung terigu'
             ],
             [
                 'user_id' => 3,
