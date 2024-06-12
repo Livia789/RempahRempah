@@ -16,18 +16,10 @@ class NutritionSeeder extends Seeder
     public function run()
     {
         DB::table('nutrition')->insert([
-            [
-                'name' => 'Kalori',
-            ],
-            [
-                'name' => 'Karbohidrat',
-            ],
-            [
-                'name' => 'Protein',
-            ],
-            [
-                'name' => 'Lemak',
-            ]
+            ['name' => 'Kalori'],
+            ['name' => 'Karbohidrat'],
+            ['name' => 'Protein'],
+            ['name' => 'Lemak']
         ]);
     }
 }

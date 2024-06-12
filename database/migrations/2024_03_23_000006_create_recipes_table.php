@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_category_2_id')->nullable()->default(null);
             $table->foreign('sub_category_2_id')->references('id')->on('categories')->nullable()->default(null);
             $table->string('name');
-            $table->string('description');
+            $table->string('description', 1000);
             $table->integer('duration');
             $table->string('img');
             $table->string('vid')->nullable()->default(null);

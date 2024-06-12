@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('step_header_id');
             $table->foreign('step_header_id')->references('id')->on('step_headers')->onDelete('cascade');
-            $table->string('step_desc');
+            $table->string('step_desc', 1000);
             $table->string('step_img')->nullable()->default(null);
         });
     }
