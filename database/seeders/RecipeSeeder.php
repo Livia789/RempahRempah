@@ -28,7 +28,7 @@ class RecipeSeeder extends Seeder
                 "name" => "Ayam Goreng Ayam Bawang Putih",
                 "description" => "Nikmati kelezatan Ayam Goreng Bawang Putih yang gurih dan aromatik. Potongan ayam direndam dalam campuran bumbu dan bawang putih cincang, kemudian digoreng hingga kecoklatan dan renyah di luar, sementara juicy di dalamnya. Sajikan sebagai hidangan utama atau camilan yang memuaskan untuk acara bersama keluarga dan teman-teman.",
                 "duration" => "35",
-                "img" => "recipes/default_recipe_img.png",
+                "img" => "storage/recipeImages/recipes1/recipes1.webp",
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",

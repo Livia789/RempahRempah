@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('rating');
             $table->text('comment', 1000);
-            $table->string('img')->nullable();
+            $table->string('img')->nullable()->default(null);
         });
     }
 

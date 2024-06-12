@@ -23,7 +23,8 @@ class ReviewSeeder extends Seeder
                 "comment" => "Ayam goreng bawang putih ini sungguh luar biasa! Tekstur ayamnya renyah di luar, tapi juicy di dalamnya. Aromanya yang harum bawang putih benar-benar menggugah selera.",
                 "rating" => "5",
                 "created_at" => Carbon::now(),
-                "updated_at" => Carbon::now()
+                "updated_at" => Carbon::now(),
+                "img" => "storage/reviewImages/review1.webp"
             ],
             [
                 "user_id" => "2",
