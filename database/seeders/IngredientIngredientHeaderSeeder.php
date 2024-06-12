@@ -514,12 +514,6 @@ class IngredientIngredientHeaderSeeder extends Seeder
                 'ingredient_id' => '68',
                 'ingredient_header_id' => '11',
                 'quantity' => '2',
-                'unit' => 'sendok makan'
-            ],
-            [
-                'ingredient_id' => '68',
-                'ingredient_header_id' => '11',
-                'quantity' => '2',
                 'unit' => 'ons'
             ],
             [
@@ -2155,12 +2149,6 @@ class IngredientIngredientHeaderSeeder extends Seeder
                 'unit' => 'gram'
             ],
             [
-                'ingredient_id' => '82',
-                'ingredient_header_id' => '55',
-                'quantity' => '500',
-                'unit' => 'mililiter'
-            ],
-            [
                 'ingredient_id' => '67',
                 'ingredient_header_id' => '55',
                 'quantity' => '100',
@@ -2297,12 +2285,6 @@ class IngredientIngredientHeaderSeeder extends Seeder
                 'ingredient_header_id' => '62',
                 'quantity' => '2',
                 'unit' => 'sendok makan'
-            ],
-            [
-                'ingredient_id' => '226',
-                'ingredient_header_id' => '62',
-                'quantity' => '80',
-                'unit' => 'mililiter'
             ],
             [
                 'ingredient_id' => '226',
@@ -2480,12 +2462,6 @@ class IngredientIngredientHeaderSeeder extends Seeder
             ],
             [
                 'ingredient_id' => '243',
-                'ingredient_header_id' => '68',
-                'quantity' => 'secukupnya',
-                'unit' => null
-            ],
-            [
-                'ingredient_id' => '',
                 'ingredient_header_id' => '68',
                 'quantity' => 'secukupnya',
                 'unit' => null
@@ -2947,13 +2923,7 @@ class IngredientIngredientHeaderSeeder extends Seeder
                 'unit' => null
             ],
             [
-                'ingredient_id' => '289',
-                'ingredient_header_id' => '79',
-                'quantity' => 'secukupnya',
-                'unit' => null
-            ],
-            [
-                'ingredient_id' => '288',
+                'ingredient_id' => '300',
                 'ingredient_header_id' => '79',
                 'quantity' => '1',
                 'unit' => 'siung'

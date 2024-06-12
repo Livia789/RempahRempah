@@ -20,8 +20,8 @@ class RecipeSeeder extends Seeder
             //menu 1
             [
                 "user_id" => "3",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => null,
@@ -32,13 +32,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 2
             [
                 "user_id" => "4",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "8",
@@ -49,13 +53,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 3
             [
                 "user_id" => "5",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "6",
                 "sub_category_2_id" => null,
@@ -69,13 +77,17 @@ class RecipeSeeder extends Seeder
                 "is_verified_by_ahli_gizi" => true,
                 "type" => "public",
                 'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             //menu 4
             [
                 "user_id" => "6",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => null,
@@ -86,13 +98,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 5
             [
                 "user_id" => "7",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -103,13 +119,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 6
             [
                 "user_id" => "8",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -120,13 +140,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 7
             [
                 "user_id" => "9",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "9",
@@ -137,13 +161,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 8
             [
                 "user_id" => "10",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -154,13 +182,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 9
             [
                 "user_id" => "11",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -171,13 +203,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 10
             [
                 "user_id" => "12",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -188,13 +224,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 11
             [
                 "user_id" => "3",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "13",
@@ -205,13 +245,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 12
             [
                 "user_id" => "4",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -222,13 +266,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 13
             [
                 "user_id" => "5",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -239,13 +287,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 14
             [
                 "user_id" => "6",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -256,13 +308,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 15
             [
                 "user_id" => "7",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -273,13 +329,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 16
             [
                 "user_id" => "8",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "13",
@@ -290,13 +350,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 17
             [
                 "user_id" => "9",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -307,13 +371,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 18
             [
                 "user_id" => "10",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -324,13 +392,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 19
             [
                 "user_id" => "11",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -341,13 +413,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             // menu 20
             [
                 "user_id" => "12",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -358,13 +434,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 21
             [
                 "user_id" => "3",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "13",
@@ -375,13 +455,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 22
             [
                 "user_id" => "4",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -392,13 +476,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 23
             [
                 "user_id" => "5",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "7",
                 "sub_category_2_id" => "14",
@@ -409,13 +497,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 24
             [
                 "user_id" => "6",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "7",
                 "sub_category_2_id" => "14",
@@ -426,13 +518,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 25
             [
                 "user_id" => "7",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => "6",
                 "sub_category_2_id" => "15",
@@ -443,13 +539,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 26
             [
                 "user_id" => "8",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -460,13 +560,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 27
             [
                 "user_id" => "9",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -477,13 +581,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 28
             [
                 "user_id" => "10",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -494,13 +602,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 29
             [
                 "user_id" => "11",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -511,13 +623,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 30
             [
                 "user_id" => "12",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "13",
@@ -528,7 +644,11 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 31
             [
@@ -545,13 +665,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 32
             [
                 "user_id" => "4",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "16",
@@ -562,13 +686,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 33
             [
                 "user_id" => "5",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -579,13 +707,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 34
             [
                 "user_id" => "6",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -596,13 +728,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 35
             [
                 "user_id" => "7",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -616,13 +752,17 @@ class RecipeSeeder extends Seeder
                 "is_verified_by_ahli_gizi" => true,
                 "type" => "public",
                 'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             //menu 36
             [
                 "user_id" => "8",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -635,13 +775,17 @@ class RecipeSeeder extends Seeder
                 "is_verified_by_ahli_gizi" => true,
                 "type" => "public",
                 'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             //menu 37
             [
                 "user_id" => "9",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -652,13 +796,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 38
             [
                 "user_id" => "10",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -669,13 +817,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 39
             [
                 "user_id" => "11",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -686,13 +838,17 @@ class RecipeSeeder extends Seeder
                 "vid" => null,
                 "is_verified_by_admin" => "1",
                 "is_verified_by_ahli_gizi" => "1",
-                "type" => "public"
+                "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             //menu 40
             [
                 "user_id" => "12",
-                "admin_id" => null,
-                "ahli_gizi_id" => null,
+                "admin_id" => "1",
+                "ahli_gizi_id" => "2",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -704,6 +860,8 @@ class RecipeSeeder extends Seeder
                 "is_verified_by_admin" => false,
                 "is_verified_by_ahli_gizi" => false,
                 "type" => "public",
+                "company_id" => null,
+                "serving" => "5",
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],

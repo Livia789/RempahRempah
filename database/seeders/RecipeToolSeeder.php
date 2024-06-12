@@ -1119,22 +1119,6 @@ class RecipeToolSeeder extends Seeder
             ],
             [
                 'recipe_id' => 32,
-                'tool_id' => 2
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 31
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 30
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 5
-            ],
-            [
-                'recipe_id' => 32,
                 'tool_id' => 14
             ],
             [
@@ -1148,42 +1132,6 @@ class RecipeToolSeeder extends Seeder
             [
                 'recipe_id' => 33,
                 'tool_id' => 11
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 31
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 2
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 30
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 5
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 14
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 13
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 109
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 110
-            ],
-            [
-                'recipe_id' => 32,
-                'tool_id' => 15
             ],
             [
                 'recipe_id' => 34,
