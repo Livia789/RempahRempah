@@ -1,22 +1,42 @@
-.content {
-    padding: 20px 60px !important;
+.accordion-item {
+    border: 2px solid black;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-.accordion {
-	--bs-accordion-btn-color: black;
-	--bs-accordion-btn-bg: rgb(227, 232, 0);
-	--bs-accordion-active-color: black;
-	--bs-accordion-active-bg: rgb(227, 232, 0);
-    margin-bottom: 20px;
+.accordion-button {
+    --bs-accordion-btn-color: black;
+    --bs-accordion-btn-bg: rgb(227, 232, 0);
+    --bs-accordion-active-color: black;
+    --bs-accordion-active-bg: rgb(227, 232, 0);
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+    margin-bottom: 10px;
 }
 
 .accordion-body {
     word-wrap: break-word !important;
 }
 
+.accordion-body input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.2);
+}
+
+.accordion-body .dropdown-item {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
 .recipesCount {
     display: inline;
-    color: grey;
+    color: white;
+    margin-left: 10px;
 }
 
 .col a {
@@ -25,4 +45,10 @@
 
 .emptySearch {
     width: auto;
+}
+
+.content {
+    padding: 20px 60px !important;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
