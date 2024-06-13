@@ -6,7 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class NutritionSeeder extends Seeder
+
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +16,13 @@ class NutritionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('nutrition')->insert([
-            ['name' => 'Kalori'],
-            ['name' => 'Karbohidrat'],
-            ['name' => 'Protein'],
-            ['name' => 'Lemak']
+        DB::table('companies')->insert([
+            [
+                "name" => "Royco"
+            ],
+            [
+                "name" => "Bango"
+            ]
         ]);
     }
 }

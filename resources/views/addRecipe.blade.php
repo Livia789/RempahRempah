@@ -27,12 +27,12 @@
         </div>
         <div class="col">
             <label for="description" class="form-label">Deskripsi resep*</label>
-            <input type="text" class="form-control textField whiteBackground" placeholder="Masukkan deskripsi" id="description" name="description" value="{{session('description') == null ? "" : session('description')}}">
+            <textarea class="form-control textField whiteBackground" placeholder="Masukkan deskripsi" id="description" name="description">{{session('description') == null ? "" : session('description')}}</textarea>
             @if ($errors->has('description'))
                 <h6 class="errorMsg">{{$errors->first('description')}}</h6>
             @endif
         </div>
-        <div class="row categorySection">
+        <div class="row" id="categorySection">
             @foreach ($unique_ctg_groups as $unique_ctg_group)
                 @php
                     $index++;
@@ -45,7 +45,7 @@
                         <option value="">-</option>
                         @foreach ($category_all as $ctg)
                             @if ($ctg->class == $unique_ctg_group->class)
-                                <option value="{{$ctg->id}}" {{old($form_ctg_names[$index]) == $ctg->id ? 'selected' : ''}}>{{$ctg->name}}</option>
+                                <option value="{{$ctg->id}}" {{session($form_ctg_names[$index]) == $ctg->id ? 'selected' : ''}}>{{$ctg->name}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -55,7 +55,7 @@
                 </div>
             @endforeach
         </div>
-        <div class="col durationSection">
+        <div class="col" id="durationSection">
             <label for="duration" class="form-label">Durasi*</label>
             <div class="input-group mb-3">
                 <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan durasi" id="duration" name="duration" value="{{session('duration') == null ? "" : session('duration')}}" oninput="calculateTime()">
@@ -66,7 +66,14 @@
                 <h6 class="errorMsg">{{$errors->first('duration')}}</h6>
             @endif
         </div>
-        <div class="col tagSection">
+        <div class="col">
+            <label for="serving" class="form-label">Sajian*</label>
+            <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan jumlah sajian per resep" id="serving" name="serving" value="{{session('serving') == null ? "" : session('serving')}}">
+            @if ($errors->has('serving'))
+                <h6 class="errorMsg">{{$errors->first('serving')}}</h6>
+            @endif
+        </div>
+        <div class="col" id="tagSection">
             <label for="tags" class="form-label tagLabelForm">Tags*</label>
             <div class="row searchField">
                 <div class="col">
@@ -138,6 +145,26 @@
             </div>
         </div>
         <div class="col">
+            <div id="toolSection">
+                @php
+                    $toolLength = count(session('tool', ['blank']));
+                @endphp
+                @for ($i = 0; $i < $toolLength; $i++)
+                    <div class="toolContainer" data-index="{{$i}}">
+                        <label for="tool{{$i}}">Alat*</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama alat" name="tool[{{$i}}]" id="tool{{$i}}" value="{{session('tool.'.$i) ? session('tool.'.$i) : ''}}">
+                            <button type="button" class="sharpBox delete-tool {{$toolLength == 1 ? 'disabled' : ''}}" onclick="deleteTool({{$i}})" {{$toolLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus alat</button>
+                        </div>
+                        @if ($errors->has('tool.'.$i))
+                            <h6 class="errorMsg">{{$errors->first('tool.'.$i)}}</h6>
+                        @endif
+                    </div>
+                @endfor
+            </div>
+            <button type="button" class="add-tool sharpBox" onclick="addTool()"><i class="fa fa-plus"></i> &ensp;Tambah alat</button>
+        </div>
+        <div class="col">
             <label class="form-label">Bahan</label>
                 <div id="ingredientSection">
                 @php
@@ -146,7 +173,7 @@
                 @for ($i = 0; $i < $ingredientHeaderLength; $i++)
                     <div class="ingredientHeader" data-header-index="{{$i}}">
                         <label for="ingredientHeader{{$i}}">Header bahan*</label>
-                        <input type="text" class="form-control textField whiteBackground" name="ingredientHeader[{{$i}}]" id="ingredientHeader{{$i}}" value="{{session('ingredientHeader.'.$i) ? session('ingredientHeader.'.$i) : ''}}">
+                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header bahan" name="ingredientHeader[{{$i}}]" id="ingredientHeader{{$i}}" value="{{session('ingredientHeader.'.$i) ? session('ingredientHeader.'.$i) : ''}}">
                         @if ($errors->has('ingredientHeader.'.$i))
                             <h6 class="errorMsg">{{$errors->first('ingredientHeader.'.$i)}}</h6>
                         @endif
@@ -158,24 +185,21 @@
                                 <div class="input-group mb-3 descriptionContainer">
                                     <div class="ingredientDescriptionContainer">
                                         <label for="ingredientDescription{{$i}}_{{$j}}">Bahan*</label>
-                                        <input type="text" class="form-control textField whiteBackground" name="ingredientDescription[{{$i}}][{{$j}}]" id="ingredientDescription{{$i}}_{{$j}}" value="{{session('ingredientDescription.'.$i.'.'.$j) ? session('ingredientDescription.'.$i.'.'.$j) : ''}}">
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama bahan" name="ingredientDescription[{{$i}}][{{$j}}]" id="ingredientDescription{{$i}}_{{$j}}" value="{{session('ingredientDescription.'.$i.'.'.$j) ? session('ingredientDescription.'.$i.'.'.$j) : ''}}">
                                         @if ($errors->has('ingredientDescription.'.$i.'.'.$j))
                                             <h6 class="errorMsg">{{$errors->first('ingredientDescription.'.$i.'.'.$j)}}</h6>
                                         @endif
                                     </div>
                                     <div class="ingredientDescriptionContainer sub">
                                         <label for="ingredientQty{{$i}}_{{$j}}">Jumlah*</label>
-                                        <input type="text" class="form-control textField whiteBackground" name="ingredientQty[{{$i}}][{{$j}}]" id="ingredientQty{{$i}}_{{$j}}" value="{{session('ingredientQty.'.$i.'.'.$j) ? session('ingredientQty.'.$i.'.'.$j) : ''}}">
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan jumlah bahan" name="ingredientQty[{{$i}}][{{$j}}]" id="ingredientQty{{$i}}_{{$j}}" value="{{session('ingredientQty.'.$i.'.'.$j) ? session('ingredientQty.'.$i.'.'.$j) : ''}}">
                                         @if ($errors->has('ingredientQty.'.$i.'.'.$j))
                                             <h6 class="errorMsg">{{$errors->first('ingredientQty.'.$i.'.'.$j)}}</h6>
                                         @endif
                                     </div>
                                     <div class="ingredientDescriptionContainer sub">
-                                        <label for="ingredientUnit{{$i}}_{{$j}}">Satuan*</label>
-                                        <input type="text" class="form-control textField whiteBackground" name="ingredientUnit[{{$i}}][{{$j}}]" id="ingredientUnit{{$i}}_{{$j}}" value="{{session('ingredientUnit.'.$i.'.'.$j) ? session('ingredientUnit.'.$i.'.'.$j) : ''}}">
-                                        @if ($errors->has('ingredientUnit.'.$i.'.'.$j))
-                                            <h6 class="errorMsg">{{$errors->first('ingredientUnit.'.$i.'.'.$j)}}</h6>
-                                        @endif
+                                        <label for="ingredientUnit{{$i}}_{{$j}}">Satuan</label>
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan satuan bahan" name="ingredientUnit[{{$i}}][{{$j}}]" id="ingredientUnit{{$i}}_{{$j}}" value="{{session('ingredientUnit.'.$i.'.'.$j) ? session('ingredientUnit.'.$i.'.'.$j) : ''}}">
                                     </div>
                                     <button type="button" class="sharpBox delete-description {{$ingredientDescriptionLength == 1 ? 'disabled' : ''}}" onclick="deleteDescription('ingredient', {{$i}}, {{$j}})" {{$ingredientDescriptionLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
                                 </div>
@@ -197,7 +221,7 @@
                 @for ($i = 0; $i < $stepHeaderLength; $i++)
                     <div class="stepHeader" data-header-index="{{$i}}">
                         <label for="stepHeader{{$i}}">Header langkah*</label>
-                        <input type="text" class="form-control textField whiteBackground" name="stepHeader[{{$i}}]" id="stepHeader{{$i}}" value="{{session('stepHeader.'.$i) ? session('stepHeader.'.$i) : ''}}">
+                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header langkah" name="stepHeader[{{$i}}]" id="stepHeader{{$i}}" value="{{session('stepHeader.'.$i) ? session('stepHeader.'.$i) : ''}}">
                         @if ($errors->has('stepHeader.'.$i))
                             <h6 class="errorMsg">{{$errors->first('stepHeader.'.$i)}}</h6>
                         @endif
@@ -210,7 +234,7 @@
                                 <label for="stepDescription{{$i}}_{{$j}}">Deskripsi langkah*</label>
                                 <div class="descriptionContainer">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control textField whiteBackground" name="stepDescription[{{$i}}][{{$j}}]" id="stepDescription{{$i}}_{{$j}}" value="{{session('stepDescription.'.$i.'.'.$j) ? session('stepDescription.'.$i.'.'.$j) : ''}}">
+                                        <textarea class="form-control textField whiteBackground" placeholder="Masukan deskripsi langkah" name="stepDescription[{{$i}}][{{$j}}]" id="stepDescription{{$i}}_{{$j}}">{{session('stepDescription.'.$i.'.'.$j) ? session('stepDescription.'.$i.'.'.$j) : ''}}</textarea>
                                         <button type="button" class="sharpBox delete-description {{$stepDescriptionLength == 1 ? 'disabled' : ''}}" onclick="deleteDescription('step', {{$i}}, {{$j}})" {{$stepDescriptionLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus langkah</button>
                                     </div>
                                     @if ($errors->has('stepDescription.'.$i.'.'.$j))
@@ -324,6 +348,58 @@
             });
         });
 
+        function addTool() {
+            const section = document.getElementById('toolSection');
+            const containerIdx = section.getElementsByClassName('toolContainer').length;
+
+            const newContainer = document.createElement('div');
+            newContainer.className = 'toolContainer';
+            newContainer.setAttribute('data-index', containerIdx);
+            let newInnerHTML = `
+                <label for="tool${containerIdx}">Alat*</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama alat" name="tool[${containerIdx}]" id="tool${containerIdx}">
+                    <button type="button" class="sharpBox delete-tool" onclick="deleteTool(${containerIdx})"><i class="fa fa-trash"></i> &ensp;Hapus alat</button>
+                </div>
+            `;
+            newContainer.innerHTML = newInnerHTML;
+            section.appendChild(newContainer);
+
+            const containers = section.querySelectorAll('.toolContainer');
+            var deleteButton = containers[0].getElementsByClassName('delete-tool')[0];
+            deleteButton.disabled = false;
+            deleteButton.classList.remove('disabled');
+        }
+
+        function deleteTool(containerIdx) {
+            const container = document.querySelector(`.toolContainer[data-index="${containerIdx}"]`);
+            container.remove();
+
+            const containers = document.querySelectorAll('.toolContainer');
+            containers.forEach((container, idx) => {
+                container.setAttribute('data-index', idx);
+
+                let label = container.querySelector('label');
+                label.htmlFor = `tool${idx}`;
+
+                let input = container.querySelector('input');
+                input.name = `tool[${idx}]`;
+                input.id = `tool${idx}`;
+
+                let deleteButton = container.querySelector('.delete-tool');
+                deleteButton.setAttribute('onclick', `deleteTool(${idx})`);
+            });
+
+            let deleteButton = containers[0].getElementsByClassName('delete-tool')[0];
+            if (containers.length === 1) {
+                deleteButton.disabled = true;
+                deleteButton.classList.add('disabled');
+            } else {
+                deleteButton.disabled = false;
+                deleteButton.classList.remove('disabled');
+            }
+        }
+
         function addHeader(type) {
             if (type == 'ingredient') {
                 var typeLabel = 'bahan';
@@ -339,10 +415,7 @@
             newHeader.setAttribute('data-header-index', headerIdx);
             let newInnerHTML = `
                 <label for="${type}Header${headerIdx}">Header ${typeLabel}*</label>
-                <input type="text" class="form-control textField whiteBackground" name="${type}Header[${headerIdx}]" id="${type}Header${headerIdx}">
-                @if ($errors->has('${type}Header.0'))
-                    <h6 class="errorMsg">{{$errors->first('${type}Header.0')}}</h6>
-                @endif
+                <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama ${typeLabel} bahan" name="${type}Header[${headerIdx}]" id="${type}Header${headerIdx}">
                 <div class="${type}Description" data-description-index="0">
             `;
             if (type == 'step') {
@@ -351,8 +424,8 @@
                     <label for="stepDescription${headerIdx}_0">Deskripsi langkah*</label>
                     <div class="descriptionContainer">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control textField whiteBackground" name="stepDescription[${headerIdx}][0]" id="stepDescription${headerIdx}_0">
-                            <button type="button" class="sharpBox delete-description disabled" onclick="deleteDescription('step', ${headerIdx}, 0)" disabled><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
+                            <textarea class="form-control textField whiteBackground" placeholder="Masukan deskripsi langkah" name="stepDescription[${headerIdx}][0]" id="stepDescription${headerIdx}_0"></textarea>
+                            <button type="button" class="sharpBox delete-description disabled" onclick="deleteDescription('step', ${headerIdx}, 0)" disabled><i class="fa fa-trash"></i> &ensp;Hapus langkah</button>
                         </div>
                     </div>
                     <div class="col">
@@ -372,15 +445,15 @@
                     <div class="input-group mb-3 descriptionContainer">
                         <div class="ingredientDescriptionContainer">
                             <label for="ingredientDescription${headerIdx}_0">Bahan*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientDescription[${headerIdx}][0]" id="ingredientDescription${headerIdx}_0">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama bahan" name="ingredientDescription[${headerIdx}][0]" id="ingredientDescription${headerIdx}_0">
                         </div>
                         <div class="ingredientDescriptionContainer sub">
                             <label for="ingredientQty${headerIdx}_0">Jumlah*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientQty[${headerIdx}][0]" id="ingredientQty${headerIdx}_0">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan jumlah bahan" name="ingredientQty[${headerIdx}][0]" id="ingredientQty${headerIdx}_0">
                         </div>
                         <div class="ingredientDescriptionContainer sub">
-                            <label for="ingredientUnit${headerIdx}_0">Satuan*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientUnit[${headerIdx}][0]" id="ingredientUnit${headerIdx}_0">
+                            <label for="ingredientUnit${headerIdx}_0">Satuan</label>
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan satuan bahan" name="ingredientUnit[${headerIdx}][0]" id="ingredientUnit${headerIdx}_0">
                         </div>
                         <button type="button" class="sharpBox delete-description disabled" onclick="deleteDescription('ingredient', 0, 0)" disabled><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
                     </div>
@@ -429,9 +502,9 @@
                         label = description.querySelector('label');
                         label.htmlFor = `stepDescription${idx}_${idx2}`;
 
-                        input = description.querySelector('input');
-                        input.name = `stepDescription[${idx}][${idx2}]`;
-                        input.id = `stepDescription${idx}_${idx2}`;
+                        textarea = description.querySelector('textarea');
+                        textarea.name = `stepDescription[${idx}][${idx2}]`;
+                        textarea.id = `stepDescription${idx}_${idx2}`;
 
                         deleteButton = description.querySelector('.delete-description');
                         deleteButton.setAttribute('onclick', `deleteDescription('step', ${idx}, ${idx2})`);
@@ -501,8 +574,8 @@
                     <label for="stepDescription${headerIdx}_${descriptionIdx}">Deskripsi langkah*</label>
                     <div class="descriptionContainer">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control textField whiteBackground" name="stepDescription[${headerIdx}][${descriptionIdx}]" id="stepDescription${headerIdx}_${descriptionIdx}">
-                            <button type="button" class="sharpBox delete-description" onclick="deleteDescription('step', ${headerIdx}, ${descriptionIdx})"><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
+                            <textarea class="form-control textField whiteBackground" placeholder="Masukan deskripsi langkah" name="stepDescription[${headerIdx}][${descriptionIdx}]" id="stepDescription${headerIdx}_${descriptionIdx}"></textarea>
+                            <button type="button" class="sharpBox delete-description" onclick="deleteDescription('step', ${headerIdx}, ${descriptionIdx})"><i class="fa fa-trash"></i> &ensp;Hapus langkah</button>
                         </div>
                     </div>
                     <div class="col">
@@ -522,15 +595,15 @@
                     <div class="input-group mb-3 descriptionContainer">
                         <div class="ingredientDescriptionContainer">
                             <label for="ingredientDescription${headerIdx}_${descriptionIdx}">Bahan*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientDescription[${headerIdx}][${descriptionIdx}]" id="ingredientDescription${headerIdx}_${descriptionIdx}">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama bahan" name="ingredientDescription[${headerIdx}][${descriptionIdx}]" id="ingredientDescription${headerIdx}_${descriptionIdx}">
                         </div>
                         <div class="ingredientDescriptionContainer sub">
                             <label for="ingredientQty${headerIdx}_${descriptionIdx}">Jumlah*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientQty[${headerIdx}][${descriptionIdx}]" id="ingredientQty${headerIdx}_${descriptionIdx}">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan jumlah bahan" name="ingredientQty[${headerIdx}][${descriptionIdx}]" id="ingredientQty${headerIdx}_${descriptionIdx}">
                         </div>
                         <div class="ingredientDescriptionContainer sub">
-                            <label for="ingredientUnit${headerIdx}_${descriptionIdx}">Satuan*</label>
-                            <input type="text" class="form-control textField whiteBackground" name="ingredientUnit[${headerIdx}][${descriptionIdx}]" id="ingredientUnit${headerIdx}_${descriptionIdx}">
+                            <label for="ingredientUnit${headerIdx}_${descriptionIdx}">Satuan</label>
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan satuan bahan" name="ingredientUnit[${headerIdx}][${descriptionIdx}]" id="ingredientUnit${headerIdx}_${descriptionIdx}">
                         </div>
                         <button type="button" class="sharpBox delete-description" onclick="deleteDescription('ingredient', ${headerIdx}, ${descriptionIdx})"><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
                     </div>
@@ -557,9 +630,9 @@
                     let label = description.querySelector('label');
                     label.htmlFor = `stepDescription${headerIdx}_${idx}`;
 
-                    let input = description.querySelector('input');
-                    input.name = `stepDescription[${headerIdx}][${idx}]`;
-                    input.id = `stepDescription${headerIdx}_${idx}`;
+                    let textarea = description.querySelector('textarea');
+                    textarea.name = `stepDescription[${headerIdx}][${idx}]`;
+                    textarea.id = `stepDescription${headerIdx}_${idx}`;
 
                     let deleteButton = description.querySelector('.delete-description');
                     deleteButton.setAttribute('onclick', `deleteDescription('step', ${headerIdx}, ${idx})`);

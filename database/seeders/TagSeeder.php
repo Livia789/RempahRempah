@@ -16,15 +16,17 @@ class TagSeeder extends Seeder
     public function run()
     {
         DB::table('tags')->insert([
-            [
-                'name' => 'asin'
-            ],
-            [
-                'name' => 'manis'
-            ],
-            [
-                'name' => 'gurih'
-            ]
+            ['name' => 'pedas'],
+            ['name' => 'asam'],
+            ['name' => 'manis'],
+            ['name' => 'asin'],
+            ['name' => 'diet'],
+            ['name' => 'sehat'],
+            ['name' => 'renyah'],
+            ['name' => 'kuah'],
+            ['name' => 'seafood'],
+            ['name' => 'ayam'],
+            ['name' => 'sapi']
         ]);
     }
 }

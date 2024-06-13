@@ -69,6 +69,18 @@ class CategorySeeder extends Seeder
                 "name" => "Makassar",
                 "class" => "Daerah"
             ],
+            [
+                "name" => "Tiongkok",
+                "class" => "Daerah"
+            ],
+            [
+                "name" => "Manado",
+                "class" => "Daerah"
+            ],
+            [
+                "name" => "Aceh",
+                "class" => "Daerah"
+            ],
         ]);
     }
 }

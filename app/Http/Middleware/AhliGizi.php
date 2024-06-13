@@ -17,7 +17,7 @@ class AhliGizi
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'ahligizi') {
+        if (Auth::check() && Auth::user()->role == 'ahli_gizi') {
             return $next($request);
         }
         return abort(401);

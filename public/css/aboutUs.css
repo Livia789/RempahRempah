@@ -1,0 +1,22 @@
+.content {
+    padding: 20px 60px !important;
+}
+
+.title {
+    width: max-content;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border: 2.5px solid black;
+    background-color: white;
+    font-weight: bold;
+}
+
+.description p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.section #logo {
+    height: 100px;
+}

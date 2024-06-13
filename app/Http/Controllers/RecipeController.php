@@ -9,6 +9,8 @@ use App\Models\Ingredient;
 use App\Models\StepHeader;
 use App\Models\Step;
 use App\Models\User;
+use App\Models\Tag;
+use App\Models\Tool;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -22,17 +24,18 @@ class RecipeController extends Controller
             'description' => 'required|min:10',
             'category_id' => 'required',
             'duration' => 'required|numeric|min:1',
+            'serving' => 'required|numeric|min:1',
             'selected_tags' => 'required|array|min:1',
             'selected_tags.*' => 'required|string',
             'type' => 'required',
             'img' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'vid' => 'nullable|file|mimes:mp4,mov|max:20480',
-            'ingredientHeader.*' => 'required|min:5',
-            'ingredientDescription.*.*' => 'required|min:5',
-            'ingredientQty.*.*' => 'required|min:1',
-            'ingredientUnit.*.*' => 'required|min:1',
-            'stepHeader.*' => 'required|min:5',
-            'stepDescription.*.*' => 'required|min:5',
+            'tool.*' => 'required|min:3',
+            'ingredientHeader.*' => 'required|min:3',
+            'ingredientDescription.*.*' => 'required|min:3',
+            'ingredientQty.*.*' => 'required',
+            'stepHeader.*' => 'required|min:3',
+            'stepDescription.*.*' => 'required|min:3',
             'stepImg.*.*' => 'nullable|file|mimes:jpeg,jpg,png|max:2048'
         ];
 
@@ -45,6 +48,9 @@ class RecipeController extends Controller
             'duration.required' => 'Durasi belum diisi.',
             'duration.numeric' => 'Durasi harus berupa angka.',
             'duration.min' => 'Durasi minimal :min menit.',
+            'serving.required' => 'Sajian belum diisi.',
+            'serving.numeric' => 'Sajian harus berupa angka.',
+            'serving.min' => 'Sajian minimal :min menit.',
             'selected_tags.required' => 'Tag minimal dipilih satu.',
             'type.required' => 'Tipe resep belum dipilih.',
             'img.required' => 'Foto tampilan utama belum dipilih.',
@@ -53,14 +59,13 @@ class RecipeController extends Controller
             'img.max' => 'Ukuran gambar maksimal :max kilobita.',
             'vid.mimes' => 'Format video yang diterima: mp4, mov.',
             'vid.max' => 'Ukuran video maksimal :max kilobita.',
+            'tool.*.required' => 'Alat belum diisi.',
+            'tool.*.min' => 'Alat minimal :min karakter.',
             'ingredientHeader.*.required' => 'Judul header bahan belum diisi.',
             'ingredientHeader.*.min' => 'Judul header bahan minimal :min karakter.',
             'ingredientDescription.*.*.required' => 'Bahan belum diisi.',
             'ingredientDescription.*.*.min' => 'Bahan minimal :min karakter.',
             'ingredientQty.*.*.required' => 'Jumlah belum diisi.',
-            'ingredientQty.*.*.min' => 'Jumlah minimal :min karakter.',
-            'ingredientUnit.*.*.required' => 'Satuan belum diisi.',
-            'ingredientUnit.*.*.min' => 'Satuan minimal :min karakter.',
             'stepHeader.*.required' => 'Judul header langkah belum diisi.',
             'stepHeader.*.min' => 'Judul header langkah minimal :min karakter.',
             'stepDescription.*.*.required' => 'Deskripsi langkah belum diisi.',
@@ -70,10 +75,8 @@ class RecipeController extends Controller
         ];
 
         $validator = Validator::make($req->all(), $rules, $messages);
-
         if ($validator->fails()) {
-            $req->session()->regenerateToken();
-            $inputExceptFiles = $req->except('vid', 'img', 'stepImg');
+            $inputExceptFiles = $req->except('vid', 'img', 'stepImg', '_token');
             return back()->withErrors($validator)
                          ->with($inputExceptFiles);
         } else {
@@ -86,8 +89,25 @@ class RecipeController extends Controller
             $recipe->sub_category_1_id = $req->sub_category_1_id;
             $recipe->sub_category_2_id = $req->sub_category_2_id;
             $recipe->duration = $req->duration;
+            $recipe->serving = $req->serving;
             $recipe->type = $req->type;
-            Log::info($req->type);
+
+            $admin = User::where('role', 'admin')->get()
+                            ->map(function ($user) {
+                                $user->recipe_count = Recipe::where('admin_id', $user->id)
+                                                            ->where('is_verified_by_admin', false)
+                                                            ->count();
+                                return $user;
+                            })->sortBy('recipe_count')->first();
+            $ahli_gizi = User::where('role', 'ahli_gizi')->get()
+                            ->map(function ($user) {
+                                $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
+                                                            ->where('is_verified_by_ahli_gizi', false)
+                                                            ->count();
+                                return $user;
+                            })->sortBy('recipe_count')->first();
+            $recipe->admin_id = $admin->id;
+            $recipe->ahli_gizi_id = $ahli_gizi->id;
             $recipe->save();
 
             $folderPath = 'recipes/'.$recipe->id.'/';
@@ -95,7 +115,6 @@ class RecipeController extends Controller
             $imgName = 'recipe'.$recipe->id.'.img.'.$img->getClientOriginalExtension();
             Storage::putFileAs('public/'.$folderPath, $img, $imgName);
             $recipe->img = 'storage/'.$folderPath.$imgName;
-
             if ($req->hasFile('vid')) {
                 $vid = $req->file('vid');
                 $vidName = 'recipe'.$recipe->id.'.vid.'.$vid->getClientOriginalExtension();
@@ -104,19 +123,33 @@ class RecipeController extends Controller
             }
             $recipe->save();
 
+            foreach ($req->selected_tags as $idx => $tag) {
+                $tag = Tag::where('name', $tag)->first();
+                $recipe->tags()->attach($tag->id);
+            }
+            foreach ($req->tool as $idx => $tool) {
+                $tool = Tool::firstOrCreate(['name' => $tool]);
+                $exists = $recipe->tools()->where('tool_id', $tool->id)->exists();
+                if (!$exists) {
+                    $recipe->tools()->attach($tool->id);
+                }
+            }
+
             foreach ($req->ingredientHeader as $idx => $header) {
                 $ingredientHeader = new IngredientHeader();
                 $ingredientHeader->recipe_id = $recipe->id;
                 $ingredientHeader->name = $header;
                 $ingredientHeader->save();
 
-                foreach ($req->input('ingredientDescription')[$idx] as $idx2 => $description) {
+                foreach ($req->ingredientDescription[$idx] as $idx2 => $description) {
                     $ingredient = Ingredient::firstOrCreate(['name' => $description]);
-
-                    $ingredientHeader->ingredients()->attach($ingredient->id, [
-                        'quantity' => $req->input('ingredientQty')[$idx][$idx2],
-                        'unit' => $req->input('ingredientUnit')[$idx][$idx2]
-                    ]);
+                    $exists = $ingredientHeader->ingredients()->where('ingredient_id', $ingredient->id)->exists();
+                    if (!$exists) {
+                        $ingredientHeader->ingredients()->attach($ingredient->id, [
+                            'quantity' => $req->ingredientQty[$idx][$idx2],
+                            'unit' => $req->ingredientUnit[$idx][$idx2]
+                        ]);
+                    }
                 }
             }
 

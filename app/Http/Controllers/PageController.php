@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Recipe;
 use App\Models\Ingredient;
@@ -215,8 +216,8 @@ class PageController extends Controller
                     $query->where('user_id', $user_id)
                           ->orWhere(function ($query) {
                                 $query->where('type', 'public')
-                                      ->whereNotNull('ahli_gizi_id')
-                                      ->whereNotNull('admin_id');
+                                      ->where('is_verified_by_admin', true)
+                                      ->where('is_verified_by_ahli_gizi', true);
                             });
                 });
                 $avoidedIngredientNames = AvoidedIngredient::where('user_id', $user_id)->pluck('ingredient_name')->toArray();
@@ -225,8 +226,8 @@ class PageController extends Controller
                 });
             } else {
                 $results->where('type', 'public')
-                        ->whereNotNull('ahli_gizi_id')
-                        ->whereNotNull('admin_id');
+                        ->where('is_verified_by_admin', true)
+                        ->where('is_verified_by_ahli_gizi', true);
             }
             $results = $results->where('name', 'LIKE', '%'.$query.'%')->get();
         }
@@ -249,29 +250,29 @@ class PageController extends Controller
         return view('myPreferences')->with('user', $user);
     }
 
-    public function showMyRecipesPage(){
+    public function showMyRecipesPage() {
         $user = Auth::user();
         $myRecipes = $user->recipes;
         return view('temp/myRecipes', compact('user', 'myRecipes'));
     }
 
-    public function showMyProfilePage(){
+    public function showMyProfilePage() {
         $user = Auth::user();
         return view('myProfile', compact('user'));
     }
 
-    public function showMyPasswordPage(){
+    public function showMyPasswordPage() {
         $user = Auth::user();
         return view('myPassword', compact('user'));
     }
 
-    public function showMyReviewsPage(){
+    public function showMyReviewsPage() {
         $user = Auth::user();
         $reviews = $user->reviews;
         return view('myReviews', compact('user', 'reviews'));
     }
 
-    public function showMyBookmarksPage(){
+    public function showMyBookmarksPage() {
         $user = Auth::user();
         $bookmarks = $user->bookmarks;
         return view('temp/bookmarks', compact('user', 'bookmarks'));
@@ -290,7 +291,7 @@ class PageController extends Controller
         }
     }
 
-    public function TEMP_showRecipeDetailPage($recipe_id){
+    public function TEMP_showRecipeDetailPage($recipe_id) {
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
         if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
@@ -300,7 +301,7 @@ class PageController extends Controller
         }
     }
 
-    public function showSearchPage(Request $req){
+    public function showSearchPage(Request $req) {
         if (Auth::check() && Auth::user()->accountStatus == 'new') {
             return redirect('welcome');
         }
@@ -312,8 +313,8 @@ class PageController extends Controller
                 $query->where('user_id', $user_id)
                       ->orWhere(function ($query) {
                             $query->where('type', 'public')
-                                  ->whereNotNull('ahli_gizi_id')
-                                  ->whereNotNull('admin_id');
+                            ->where('is_verified_by_admin', true)
+                            ->where('is_verified_by_ahli_gizi', true);
                         });
             });
             $avoidedIngredientNames = AvoidedIngredient::where('user_id', $user_id)->pluck('ingredient_name')->toArray();
@@ -323,8 +324,8 @@ class PageController extends Controller
             // dd($query->toSql(), $query->getBindings());
         } else {
             $results->where('type', 'public')
-                    ->whereNotNull('ahli_gizi_id')
-                    ->whereNotNull('admin_id');
+                    ->where('is_verified_by_admin', true)
+                    ->where('is_verified_by_ahli_gizi', true);
         }
 
         $name = $req->input('name');
@@ -379,6 +380,9 @@ class PageController extends Controller
     }
 
     public function showAddRecipePage(Request $req) {
+        if (Auth::user()->role == 'ahli_gizi') {
+            return abort(401);
+        }
         $selected_tags = $req->session()->get('selected_tags', []);
         $default_tags = array_diff($this->tag_all->pluck('name')->toArray(), $selected_tags);
 
@@ -399,13 +403,38 @@ class PageController extends Controller
         return response()->json(['tags' => $tags]);
     }
 
-    public function showMyCookingProgressPage(){
+    public function showAboutUsPage(Request $req) {
+        if (Auth::check() && Auth::user()->accountStatus == 'new') {
+            return redirect('welcome');
+        }
+        return view('aboutUs');
+    }
+
+    public function showRecipeVerificationPage(Request $req) {
+        $role = Auth::user()->role;
+        if ($role == 'member') {
+            return abort(401);
+        }
+        $user_id = Auth::user()->id;
+        $doneRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, true)
+                                                           ->orderBy('updated_at', 'desc')
+                                                           ->paginate(12);
+        $availableRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, false)
+                                                                ->orderBy('updated_at', 'asc')
+                                                                ->paginate(12);
+        return view('recipeVerification', compact('doneRecipes', 'availableRecipes'));
+    }
+
+    public function showMyCookingProgressPage() {
         $user = Auth::user();
         $recipes = $user->cookingProgressRecipes();
         return view('myCookingProgress', compact('user', 'recipes'));
     }
 
-    public function showPublicProfilePage($public_profile_id){
+    public function showPublicProfilePage($public_profile_id) {
+        if (Auth::check() && Auth::user()->accountStatus == 'new') {
+            return redirect('welcome');
+        }
         $user = Auth::user();
         $public_profile = User::find($public_profile_id);
         return view('publicProfile', compact('user', 'public_profile'));
