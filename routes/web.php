@@ -13,6 +13,7 @@ use App\Http\Controllers\StepProgressController;
 use App\Http\Controllers\UserIngredientProgressController;
 use App\Http\Controllers\UserToolProgressController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\NutritionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,8 +93,11 @@ Route::group(['middleware' => ['member']], function () {
 
 Route::group(['middleware' => ['admin']], function () {
     // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
+    Route::post('/rejectRecipe', [RecipeController::class, 'rejectRecipe']);
+    Route::post('/approveRecipe', [RecipeController::class, 'approveRecipe']);
 });
 
 Route::group(['middleware' => ['ahligizi']], function () {
     // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
+    Route::post('/addNutrition', [NutritionController::class, 'addNutrition']);
 });

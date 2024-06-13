@@ -15,22 +15,5 @@ class StepProgressSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('step_progress')->insert([
-            [
-                'user_id' => '3',
-                'step_id' => '1',
-                'recipe_id' => '2'
-            ],
-            [
-                'user_id' => '3',
-                'step_id' => '3',
-                'recipe_id' => '2'
-            ],
-            [
-                'user_id' => '3',
-                'step_id' => '4',
-                'recipe_id' => '2'
-            ],
-        ]);
     }
 }

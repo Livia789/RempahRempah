@@ -14,13 +14,6 @@ class UserToolProgressSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        DB::table('user_tool_progress')->insert([
-            [
-                'user_id' => '3',
-                'tool_id' => '2',
-                'recipe_id' => '2'
-            ]
-        ]);
+    {   
     }
 }

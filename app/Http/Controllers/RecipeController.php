@@ -193,10 +193,7 @@ class RecipeController extends Controller
             $recipe = Recipe::find($req->recipe_id);
             $recipe->is_verified_by_admin = true;
 
-            //get all users
-            $all_users = User::where('role', 'ahligizi')->get();
-
-            $ahli_gizi = User::where('role', 'ahligizi')->get()
+            $ahli_gizi = User::where('role', 'ahli_gizi')->get()
                             ->map(function ($user) {
                                 $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
                                                             ->where('is_verified_by_ahli_gizi', false)

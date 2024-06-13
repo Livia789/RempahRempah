@@ -67,7 +67,7 @@
     <script>
         function addNutritionField(nutrition){
             var nutritionField = `
-                <div class="nutritionField">
+                <div class="nutritionField" id="nutritionField">
                     <div class="d-flex justify-content-between align-items-center">
                         <input type="text" value="${nutrition.name}" style="border:none; width:30%">
                         <div class="d-flex">
@@ -95,8 +95,13 @@
         function submitNutritionForm(){
             var form = document.getElementById("addNutritionForm");
             if (form.reportValidity()) {
-                $('#addNutritionModalContainer').modal('hide');
-                $('#confirmation_verification').modal('show');
+                var totalNutritionField = document.getElementById('nutritionField')
+                if(!totalNutritionField){
+                    alert("Mohon tambahkan nutrisi untuk resep ini");
+                }else{
+                    $('#addNutritionModalContainer').modal('hide');
+                    $('#confirmation_verification').modal('show');
+                }
             }
         }
         function verificationForm_yes(){

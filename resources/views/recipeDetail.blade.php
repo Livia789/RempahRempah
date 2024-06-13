@@ -21,7 +21,6 @@
     <div class="recipeDetailContainer">
         {{--  TODO  --}}
         <p>Path 1 > Path 2 > Path 3</p>
-
         <h1><b>{{ $recipe->name }}</b></h1>
         <div class="d-flex mt-1 mb-1">
             {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
@@ -81,8 +80,8 @@
                     Ulas Resep
                 </div>
             </div>
-        @elseif(Auth::user()->role == 'ahligizi')
-            @if(!$recipe->nutrition->count() && !$recipe->is_verified_by_ahli_gizi)
+        @elseif(Auth::user()->role == 'ahli_gizi')
+            @if(!$recipe->nutrition->count() && !$recipe->energiDariLemak && !$recipe->energiDariLemak)
                 @if($recipe->ahli_gizi_id == Auth::user()->id)
                     <div class="sharpBox" onclick="$('#addNutritionModalContainer').modal('show')">
                         <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
@@ -160,7 +159,7 @@
             <div style="width:45%">
                 <h3><b>Informasi Nilai Gizi</b></h3>
                 
-                @if($recipe->nutrition->count() == 0 && !$recipe->energiDariLemak && !$recipe->energiTotal)
+                @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
                 @else
                     <table class="table table-striped" style="width=50%">

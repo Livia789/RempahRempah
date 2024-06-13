@@ -15,22 +15,5 @@ class UserIngredientProgressSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_ingredient_progress')->insert([
-            [
-                'user_id' => '3',
-                'ingredient_id' => '1',
-                'recipe_id' => '2'
-            ],
-            [
-                'user_id' => '3',
-                'ingredient_id' => '3',
-                'recipe_id' => '2'
-            ],
-            [
-                'user_id' => '3',
-                'ingredient_id' => '4',
-                'recipe_id' => '2'
-            ],
-        ]);
     }
 }
