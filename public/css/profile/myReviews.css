@@ -1,5 +1,4 @@
 .profileContentContainer{
-    width:75%;
     display:flex;
     flex-wrap:wrap;
     justify-content:left;
@@ -7,16 +6,12 @@
 }
 
 .reviewCardContainer{
-    background-color:white;
-    border:3px solid black;
     color:black;
-    border-radius:7px;
-    width:45%;
-    padding:20px;
+    padding:20px 0px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    margin:20px;
+    margin:0px 20px;
 }
 
 .cardContent{

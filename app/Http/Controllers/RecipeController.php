@@ -8,6 +8,7 @@ use App\Models\IngredientHeader;
 use App\Models\Ingredient;
 use App\Models\StepHeader;
 use App\Models\Step;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -142,5 +143,36 @@ class RecipeController extends Controller
             // harusnya ke myRecipes tp blm ada jd temp ke /
             return redirect('/')->with('successMessage', 'Resep berhasil didaftarkan.');
         }
+    }
+
+    public function rejectRecipe(Request $req) {
+        if(!$req->rejectionReason){
+            return redirect()->back()->with('error', 'Mohon isi alasan penolakan resep.');
+        }
+        $recipe = Recipe::find($req->recipe_id);
+        $recipe->rejectionReason = $req->rejectionReason;
+        $recipe->save();
+        return redirect()->back();
+    }
+
+    public function approveRecipe(Request $req) {
+        if($req->adminApproveRecipeConfirmationText == 'terima'){
+            $recipe = Recipe::find($req->recipe_id);
+            $recipe->is_verified_by_admin = true;
+
+            //get all users
+            $all_users = User::where('role', 'ahligizi')->get();
+
+            $ahli_gizi = User::where('role', 'ahligizi')->get()
+                            ->map(function ($user) {
+                                $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
+                                                            ->where('is_verified_by_ahli_gizi', false)
+                                                            ->count();
+                                return $user;
+                            })->sortBy('recipe_count')->first();
+            $recipe->ahli_gizi_id = $ahli_gizi->id;
+            $recipe->save();
+        }
+        return redirect()->back();
     }
 }

@@ -90,10 +90,9 @@ $(document).ready(function () {
             success: function (response) {
                 console.log('bookmark status : ' + response.isBookmarked);
                 let status = response.isBookmarked ? 'added' : 'removed';
-                alert("Bookmark has been successfully " + status);
             },
             error: function (e) {
-                msg = e.status == 401 ? "[Error] Please login to bookmark recipe" : "Error processing bookmark request"
+                msg = e.status == 401 ? "[Error] Mohon login untuk dapat menyimpan resep" : "Gagal memproses permintaan simpan resep"
                 alert(msg);
                 toggleBookmark();
             }
@@ -123,7 +122,7 @@ function likeReview(btnLike, btnDislike) {
             $(btnDislike).find("img").attr('src', dislikeSrc);
         },
         error: function (e) {
-            msg = e.status == 401 ? "[Error] Please login to like this review" : "Error processing like request";
+            msg = e.status == 401 ? "[Error] Mohon login untuk memberikan reaksi" : "Gagal memproses permintaan reaksi suka"
             alert(msg);
         }
     });
@@ -150,7 +149,7 @@ function dislikeReview(btnLike, btnDislike) {
             $(btnDislike).find("img").attr('src', dislikeSrc);
         },
         error: function (e) {
-            msg = e.status == 401 ? "[Error] Please login to dislike review" : "Error processing dislike request";
+            msg = e.status == 401 ? "[Error] Mohon login untuk untuk memberikan reaksi" : "Error memproses reaksi tidak suka";
             alert(msg);
         }
     });
@@ -306,8 +305,13 @@ function doneCookingResetProgress(resetProgress){
         resetCookingProgress();
     }
     $('#doneCooking_resetProgressContainer').modal('hide');
+    $('#confirmation_resetProgressContainer').modal('hide');
 }
 
+function showReviewRecipeModal(){
+    if(user_id != -1) $('#reviewFormContainer').modal('show');
+    else alert("Anda harus login untuk bisa memberikan review");
+}
 
 $(document).ready(function () {
     setHighlight();

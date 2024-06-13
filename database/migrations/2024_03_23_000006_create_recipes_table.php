@@ -35,8 +35,10 @@ return new class extends Migration
             $table->string('vid')->nullable()->default(null);
             $table->boolean('is_verified_by_admin')->default(false);
             $table->boolean('is_verified_by_ahli_gizi')->default(false);
-            $table->enum('type', ['public', 'private'])->default('private');
-            $table->boolean('isExclusive')->default(false);
+            $table->enum('type', ['public', 'private', 'exclusive'])->default('private');
+            $table->integer('energiTotal')->nullable()->default(null);
+            $table->integer('energiDariLemak')->nullable()->default(null);
+            $table->string('rejectionReason')->nullable()->default(null);
         });
     }
 
