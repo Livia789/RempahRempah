@@ -177,4 +177,32 @@ class RecipeController extends Controller
             return redirect('/')->with('successMessage', 'Resep berhasil didaftarkan.');
         }
     }
+
+    public function rejectRecipe(Request $req) {
+        if(!$req->rejectionReason){
+            return redirect()->back()->with('error', 'Mohon isi alasan penolakan resep.');
+        }
+        $recipe = Recipe::find($req->recipe_id);
+        $recipe->rejectionReason = $req->rejectionReason;
+        $recipe->save();
+        return redirect()->back();
+    }
+
+    public function approveRecipe(Request $req) {
+        if($req->adminApproveRecipeConfirmationText == 'terima'){
+            $recipe = Recipe::find($req->recipe_id);
+            $recipe->is_verified_by_admin = true;
+
+            $ahli_gizi = User::where('role', 'ahli_gizi')->get()
+                            ->map(function ($user) {
+                                $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
+                                                            ->where('is_verified_by_ahli_gizi', false)
+                                                            ->count();
+                                return $user;
+                            })->sortBy('recipe_count')->first();
+            $recipe->ahli_gizi_id = $ahli_gizi->id;
+            $recipe->save();
+        }
+        return redirect()->back();
+    }
 }

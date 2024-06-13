@@ -21,7 +21,6 @@
     <div class="recipeDetailContainer">
         {{--  TODO  --}}
         <p>Path 1 > Path 2 > Path 3</p>
-
         <h1><b>{{ $recipe->name }}</b></h1>
         <div class="d-flex mt-1 mb-1">
             {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
@@ -69,17 +68,64 @@
             <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
         </div>
 
-        <div class="d-flex">
-            <div class="sharpBox" onclick="resetCookingProgress()">
-                <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
-                Hapus Progress Memasak
+        @if(!Auth::user() || Auth::user()->role == 'member')
+            <div class="d-flex">
+                <div class="sharpBox" onclick="$('#confirmation_resetProgressContainer').modal('show')">
+                    <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
+                    Hapus Progress Memasak
+                </div>
+        
+                <div class="sharpBox" onclick="showReviewRecipeModal()">
+                    <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                    Ulas Resep
+                </div>
             </div>
-    
-            <div class="sharpBox" onclick="$('#reviewFormContainer').modal('show');">
-                <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
-                Ulas Resep
+        @elseif(Auth::user()->role == 'ahli_gizi')
+            @if(!$recipe->nutrition->count() && !$recipe->energiDariLemak && !$recipe->energiDariLemak)
+                @if($recipe->ahli_gizi_id == Auth::user()->id)
+                    <div class="sharpBox" onclick="$('#addNutritionModalContainer').modal('show')">
+                        <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
+                        Berikan Nilai Gizi
+                    </div>
+                @else
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)">
+                        <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
+                        Nilai gizi akan diberikan oleh ahli gizi &nbsp;<b>"{{$recipe->ahli_gizi->name}}"</b>
+                    </div>
+                @endif
+            @else
+                <div class="sharpBox" style="background-color:rgb(189, 189, 189)" onclick="alert('Error : Informasi nilai gizi untuk resep ini telah dimasukkan.')">
+                    <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
+                    Nilai gizi telah ditambahkan
+                </div>
+            @endif
+        @elseif(Auth::user()->role == 'admin')
+            <div class="d-flex">
+                @if(!$recipe->is_verified_by_admin && $recipe->rejectionReason == NULL)
+                    @if(Auth::user()->id == $recipe->admin_id)
+                        <div class="sharpBox" onclick="$('#adminApproveRecipe').modal('show')">
+                            <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                            Approve Resep
+                        </div>
+                        <div class="sharpBox"  onclick="$('#adminRejectRecipe').modal('show')">
+                            <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                            Tolak Resep
+                        </div>
+                    @else
+                        <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                            <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                            Verifikasi akan dilakukan oleh admin &nbsp;<b>"{{$recipe->admin->name}}"</b>
+                        </div>
+                    @endif
+                @else
+                    <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                        <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                        <?php $statusVerifikasiAdmin = $recipe->is_verified_by_admin ? 'DITERIMA' : 'DITOLAK' ?>
+                        Resep sudah diverifikasi oleh admin dengan status &nbsp;<b>{{$statusVerifikasiAdmin}}</b>
+                    </div>
+                @endif
             </div>
-        </div>
+        @endif
 
         <div class="d-flex imgDescContainer">
             <img src="{{ asset($recipe->img) }}" class="recipeImage" alt="recipe_image">
@@ -111,16 +157,34 @@
                 @endif
             </div>
             <div style="width:45%">
-                <h3><b>Nilai Gizi</b></h3>
+                <h3><b>Informasi Nilai Gizi</b></h3>
+                
                 @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
                 @else
                     <table class="table table-striped" style="width=50%">
+                        <thead>
+                            <tr>
+                            <th scope="col">
+                                <span>Energi Total</span>
+                                <br>
+                                <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Energi dari lemak</span>
+                            </th>
+                            <th></th>
+                            <th scope="col" class="text-end">
+                                <span>{{$recipe->energiTotal." kkal"}}</span>
+                                <br>
+                                <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$recipe->energiDariLemak." kkal"}}</span>
+                            </th>
+                            </tr>
+                        </thead>  
+                    </table>
+                    <table class="table table-striped" style="width=50%">
                     <thead>
                       <tr>
-                        <th scope="col">Nilai Gizi</th>
+                        <th scope="col">Nilai Gizi  </th>
                         <th scope="col">Berat</th>
-                        <th scope="col">Takaran Harian</th>
+                        <th scope="col">%AKG</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -128,7 +192,7 @@
                             <tr>
                                 <td>{{ $nutrition->name }}</td>
                                 <td>{{ $nutrition->pivot->quantity.' '.$nutrition->pivot->unit }}</td>
-                                <td>{{ $nutrition->pivot->daily_intake }}</td>
+                                <td>{{ number_format($nutrition->pivot->akgPercentage, 2).' %' }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -286,63 +350,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="reviewFormContainer" aria-hidden="true">
-        <div class="modal-dialog modalContainer modal-content" style="max-width: 80vw; width:60vw; height:90vh; background-color:white" >
-            
-            <div class="text-center justify-content-center" >
-                <h1>Berikan Ulasan</h1>
-                <p>Bagaimana pengalaman memasakmu? Yuk ceritakan pengalamanmu memasak dengan resep ini!</p>
-                <img src="/assets/chef_review.png" style="height:150px; width:auto; border-radius:50%" alt="chef_review">
-            </div>
+    @include('modals.reviewRecipeModal')
+    @include('modals.doneCookingResetProgressModal')
+    @include('modals.resetProgressConfirmationModal')
+    @include('modals.addNutritionModal')
+    @include('modals.adminVerificationModal')
 
-            
-            <form action="/submitReview" id="reviewForm" enctype="multipart/form-data" style="padding:30px" method="POST">
-                @csrf
-                <div class="col">
-                    <label for="rating">Berikan bintang untuk resep ini</label><label style="color:rgb(255, 57, 57)">*</label>
-                    <div class="rating">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <img src="/assets/icons/empty_star.png" id="star_{{$i}}" onclick="adjustStar({{$i}})" class="starIcon" alt="star_icon">
-                        @endfor
-                    </div>                  
-                    <input type="hidden" id="reviewRating" name="rating" value=""></input>
-                </div>
-                <div class="col">
-                    <label for="comment">Apa tanggapanmu mengenai resep ini?</label><label style="color:rgb(255, 57, 57)">*</label>
-                    <textarea class="form-control textField whiteBackground" placeholder="Tulis tanggapanmu disini" id="reviewComment" name="comment" rows="3"></textarea>
-                </div>
-                <div class="col" style="display:flex; flex-direction: column">
-                    <label for="img">Unggah foto masakanmu :</label>
-                    <input type="file" id="reviewImg" name="img" accept="image/*"></input>  
-                </div>
-                <button type="button" onclick="submitReviewForm()" class="sharpBox mt-5">
-                    <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
-                    Simpan
-                </button>
-                <p id="reviewErrorMsg" style="display:none; margin:0px; color:rgb(255, 57, 57)"></p>
-                <input type="hidden" name="recipe_id" value="{{$recipe->id}}"></input>
-                <input type="hidden" name="user_id" value="{{$user ? $user->id : -1}}"></input>
-            </form>
-            
-        </div>
-    </div>
-
-    <div class="modal fade" id="doneCooking_resetProgressContainer" aria-hidden="true">
-        <div class="modal-dialog modalContainer modal-content" style="max-width:40vw; width:40vw; background-color:white" >
-            
-            <div class="text-center justify-content-center" >
-                <h1>Selamat!</h1>
-                <p>Anda sudah mengikuti setiap langkah pada resep <b>{{$recipe->name}}</b> ala <b>{{'@'.$recipe->creator->name}}</b></p>
-                <img src="/assets/chef_happy.png" style="border-radius:50%; height:150px; width:auto;" alt="chef_happy">
-
-                <br><br><br>
-                <p>Hapus progress memasak pada resep ini?</p>
-                <div style="width:80%; margin:auto">
-                    <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(true)">Ya</div>
-                    <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(false)">Tidak</div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 

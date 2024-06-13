@@ -19,20 +19,23 @@ class NutritionRecipeSeeder extends Seeder
             [
                 'recipe_id' => '2',
                 'nutrition_id' => '1',
-                'quantity' => '100',
-                'unit' => 'g'
+                'quantity' => '10',
+                'unit' => 'kg',
+                'akgPercentage' => '2.1234567'
             ],
             [
                 'recipe_id' => '2',
                 'nutrition_id' => '2',
                 'quantity' => '200',
-                'unit' => 'g'
+                'unit' => 'g',
+                'akgPercentage' => '100'
             ],
             [
                 'recipe_id' => '2',
                 'nutrition_id' => '3',
                 'quantity' => '300',
-                'unit' => 'g'
+                'unit' => 'g',
+                'akgPercentage' => '75'
             ]
         ]);
     }

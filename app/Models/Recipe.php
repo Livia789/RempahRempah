@@ -29,7 +29,7 @@ class Recipe extends Model
     }
 
     public function isPublic(){
-        return $this->admin_id !== null && $this->ahli_gizi_id !== null;
+        return $this->is_verified_by_admin !== null && $this->is_verified_by_ahli_gizi !== null && $this->rejectionReason == null && $this->type != 'private';
     }
 
     public function reviews($filter = ''){
@@ -70,7 +70,7 @@ class Recipe extends Model
     }
 
     public function nutrition(){
-        return $this->belongsToMany(Nutrition::class)->withPivot('quantity', 'unit');
+        return $this->belongsToMany(Nutrition::class)->withPivot('quantity', 'unit', 'akgPercentage');
     }
 
     public function tags(){

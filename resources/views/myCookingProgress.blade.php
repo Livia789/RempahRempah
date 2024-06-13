@@ -30,7 +30,7 @@
         </div>
 
         @foreach($recipes as $recipe)
-            <div class="progressCard">
+            <a href="/recipeDetail/{{$recipe->id}}" class="progressCard" style="text-decoration:none; color:black">
                 <div class="d-flex" style="text-align:center; justify-content:center; margin-bottom:30px">
                     <h5 style="flex:1; padding-left:25px">{{$recipe->name}}</h5>
                     <img id="btnRemoveProgress" onclick="removeProgress(this)" recipe_id="{{$recipe->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)" class="trash_closed" src="/assets/icons/trash_closed.png" style="width:25px; height:25px; text-align:right" alt="trash_icon">
@@ -96,7 +96,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </a>
         @endforeach
     </div>
 @endsection

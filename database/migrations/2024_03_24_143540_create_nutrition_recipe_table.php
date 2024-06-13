@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('nutrition_recipe', function (Blueprint $table) {
             $table->unsignedBigInteger('nutrition_id');
             $table->unsignedBigInteger('recipe_id');
+            $table->integer('quantity');
+            $table->string('unit');
+            $table->double('akgPercentage');
+
             $table->foreign('nutrition_id')->references('id')->on('nutrition')->onDelete('cascade');
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
             $table->primary(['nutrition_id', 'recipe_id']);
-            $table->integer('quantity');
-            $table->string('unit');
         });
     }
 

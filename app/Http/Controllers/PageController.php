@@ -118,7 +118,8 @@ class PageController extends Controller
     }
 
     public function showHomePage() {
-        return view('home');
+        $allRecipes = Recipe::where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->get();
+        return view('home', compact('allRecipes'));
     }
 
     public function showRegisterPage() {
@@ -276,13 +277,13 @@ class PageController extends Controller
         return view('temp/bookmarks', compact('user', 'bookmarks'));
     }
 
-    public function showRecipeDetailPage($recipe_id) {
+    public function showRecipeDetailPage(Request $req, $recipe_id){
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
-        $reviews = $recipe->reviews;
+        $reviews = $recipe->reviews($req->input('filter'))->get();
         $user_ingredients = $user? UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
         $user_tools = $user? UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
-        if ((isset($user) && $recipe->user_id === $user->id) || $recipe->isPublic()) {
+        if ($recipe->isPublic() || (isset($user) && ($recipe->user_id === $user->id || $user->role == 'ahli_gizi' || $user->role == 'admin' ))) {
             return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
         } else {
             echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";

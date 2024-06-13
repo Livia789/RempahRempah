@@ -82,4 +82,11 @@ class ReviewController extends Controller
         $review->save();
         return redirect('recipeDetail/'.$req->recipe_id.'?filter=dateDesc');
     }
+
+    public function deleteReview(Request $req){
+        $review = Review::find($req->review_id);
+        if(!$review) return response()->json(['msg' => 'error (review not found)']);
+        $review->delete();
+        return response()->json(['msg' => 'success']);
+    }
 }
