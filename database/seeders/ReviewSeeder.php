@@ -18,7 +18,7 @@ class ReviewSeeder extends Seeder
     {
         DB::table('reviews')->insert([
             [
-                "user_id" => "1",
+                "user_id" => "3",
                 "recipe_id" => "1",
                 "comment" => "Ayam goreng bawang putih ini sungguh luar biasa! Tekstur ayamnya renyah di luar, tapi juicy di dalamnya. Aromanya yang harum bawang putih benar-benar menggugah selera.",
                 "rating" => "5",
@@ -27,28 +27,10 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now(),
             ],
             [
-                "user_id" => "2",
+                "user_id" => "4",
                 "recipe_id" => "1",
                 "comment" => "Rasa ayam goreng bawang putih ini benar-benar mengingatkan saya akan masakan rumah. Bumbu-bumbunya meresap sempurna ke dalam daging ayam, membuatnya begitu lezat.",
                 "rating" => "4",
-                "img" => null,
-                "created_at" => Carbon::now(),
-                "updated_at" => Carbon::now()
-            ],
-            [
-                "user_id" => "3",
-                "recipe_id" => "1",
-                "comment" => "Saya suka bagaimana bumbu bawang putih memberikan aroma yang khas pada ayam goreng ini. Rasanya sangat memuaskan dan cocok sebagai hidangan utama.",
-                "rating" => "5",
-                "img" => null,
-                "created_at" => Carbon::now(),
-                "updated_at" => Carbon::now()
-            ],
-            [
-                "user_id" => "4",
-                "recipe_id" => "1",
-                "comment" => "Ayam goreng bawang putih ini menjadi favorit keluarga kami! Anak-anak saya bahkan meminta tambahan lagi karena mereka sangat menyukainya.",
-                "rating" => "5",
                 "img" => null,
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
@@ -108,7 +90,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "10",
                 "recipe_id" => "2",
                 "comment" => "Rendang Daging Sapi ala Jawa ini benar-benar memukau! Dagingnya lembut dan bumbunya meresap sempurna, memberikan citra rasa yang autentik. Saya suka betapa kaya akan rempah-rempahnya dan aroma yang menggugah selera.",
                 "rating" => "5",
@@ -117,7 +99,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "9",
                 "recipe_id" => "2",
                 "comment" => "Saya sangat terkesan dengan Rendang Daging Sapi ala Jawa ini. Rasa gurih santan yang melimpah bersatu sempurna dengan daging sapi yang empuk. Tidak ada yang bisa menandingi kenikmatan dari rempah-rempah khas Jawa yang terasa dalam setiap gigitannya.",
                 "rating" => "4",
@@ -198,7 +180,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "10",
                 "recipe_id" => "5",
                 "comment" => "Resep Gudeg Ala Jogja ini benar-benar membawa cita rasa autentik kota pelajar ke dalam hidangan saya. Dengan bumbu rempah yang kaya dan nangka muda yang empuk, setiap suapan memberikan pengalaman kuliner yang mengesankan.",
                 "rating" => "5",
@@ -207,7 +189,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "9",
                 "recipe_id" => "5",
                 "comment" => "Gudeg Ala Jogja ini merupakan hidangan yang begitu menggoda dengan kombinasi manis dari nangka muda dan gurihnya santan serta rempah-rempah. Resepnya mudah diikuti dan hasilnya benar-benar memuaskan, cocok untuk dinikmati dalam acara keluarga atau acara khusus lainnya.",
                 "rating" => "4",
@@ -288,7 +270,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "8",
                 "comment" => "Rempah-rempah seperti serai, daun salam, dan daun pandan memberikan aroma khas yang menggoda sejak awal memasak. Setiap gigitan nasi liwet kukus ini memberikan pengalaman kuliner yang autentik dan memuaskan.",
                 "rating" => "5",
@@ -297,7 +279,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "8",
                 "comment" => "Penggunaan daun pisang sebagai alas dalam proses memasak memberikan nuansa tradisional yang kuat. Selain memberikan aroma khas, daun pisang juga memberikan sentuhan alami yang memperkaya pengalaman makan.",
                 "rating" => "5",
@@ -387,7 +369,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "9",
                 "recipe_id" => "12",
                 "comment" => "Menggabungkan cita rasa tradisional dengan kepraktisan dalam penyajiannya. Dengan isian yang menggugah selera dan saus gula yang khas, lumpia ini cocok disajikan di berbagai acara atau sebagai camilan di rumah, memberikan pengalaman kuliner yang memuaskan bagi siapa pun yang menikmatinya.",
                 "rating" => "4",
@@ -396,7 +378,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "8",
                 "recipe_id" => "13",
                 "comment" => "Ayam Pop adalah hidangan ayam yang populer di Indonesia, khususnya di daerah Padang, Sumatra Barat. Hidangan ini terdiri dari potongan ayam yang dipanggang atau digoreng hingga kulitnya renyah sementara dagingnya tetap lembut dan bumbu rempahnya meresap. Rasanya gurih, pedas, dan kaya rempah, menjadikannya pilihan yang sempurna untuk dinikmati bersama nasi putih dan sambal.",
                 "rating" => "5",
@@ -477,7 +459,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "3",
                 "recipe_id" => "19",
                 "comment" => "Resep ini menghadirkan krecek yang renyah dan pedas yang memikat selera. Bumbu sambal yang meresap sempurna membuat hidangan ini cocok sebagai pendamping nasi hangat",
                 "rating" => "5",
@@ -486,7 +468,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "4",
                 "recipe_id" => "20",
                 "comment" => "Roti Gambang ini begitu lembut dan beraroma, dengan kombinasi sempurna antara aroma kayu manis dan kelembutan tekstur rotinya. Sangat cocok dinikmati sebagai camilan atau sarapan pagi yang menggugah selera.",
                 "rating" => "5",
@@ -567,7 +549,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "6",
                 "recipe_id" => "23",
                 "comment" => "Rasakan kelezatan Kue Keranjang yang meleleh di mulut dengan rasa gula merah yang khas. Teksturnya yang kenyal membuatnya menjadi favorit di setiap kesempatan.",
                 "rating" => "5",
@@ -576,7 +558,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "5",
                 "recipe_id" => "23",
                 "comment" => "Kue Keranjang tidak hanya lezat, tetapi juga sarat dengan nilai tradisional yang kaya. Setiap gigitan menghadirkan cita rasa masa lalu yang memikat.",
                 "rating" => "4",
@@ -657,7 +639,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "25",
                 "comment" => "Resep Klapertart Keju ini adalah pilihan tepat untuk pencinta keju dan kelapa. Teksturnya yang creamy dan lembut, dipadukan dengan keju yang melimpah, menjadikan makanan penutup ini begitu istimewa. Cocok disajikan di berbagai acara, baik santai maupun formal. Benar-benar menggugah selera!",
                 "rating" => "5",
@@ -666,7 +648,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "25",
                 "comment" => "Klapertart Keju ini sukses membuat semua orang di rumah ketagihan. Kombinasi antara rasa manis kelapa dan gurihnya keju sangat seimbang, menciptakan harmoni rasa yang sempurna. Proses pembuatannya juga tidak rumit, dengan hasil yang selalu memukau. Sempurna untuk menemani waktu bersantai bersama keluarga!",
                 "rating" => "5",
@@ -747,7 +729,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "28",
                 "comment" => "Resep klepon ketan ini memberikan pengalaman rasa autentik jajanan pasar yang mudah dibuat di rumah. Dengan bahan-bahan yang mudah ditemukan, Anda bisa menciptakan camilan lezat yang disukai semua orang.",
                 "rating" => "3",
@@ -756,7 +738,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "28",
                 "comment" => "Siapa yang bisa menolak kelezatan klepon ketan? Dengan paduan antara tekstur kenyal klepon dan manisnya gula merah di dalamnya, jajanan klasik ini selalu berhasil memikat selera siapa pun yang mencicipinya.",
                 "rating" => "5",
@@ -837,7 +819,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "32",
                 "comment" => "Tampilan yang menggiurkan dan rasanya tak kalah menggoda! Kuah santan yang lezat meresap dalam setiap gigitan telur. Ditambah dengan bumbu-bumbu khas yang terasa sangat autentik, membuat hidangan ini sempurna untuk dinikmati bersama keluarga.",
                 "rating" => "4",
@@ -846,7 +828,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "32",
                 "comment" => "Inilah sajian yang selalu dinantikan setiap kali makan siang! Telur yang lembut bertemu dengan kuah santan yang kaya rempah, menciptakan paduan cita rasa yang memukau. Cocok disajikan dengan nasi hangat untuk pengalaman makan yang memuaskan.",
                 "rating" => "5",
@@ -927,7 +909,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "36",
                 "comment" => "Wow! Resep lodeh yang sangat menggugah selera. Kombinasi berbagai bumbu membuatnya begitu sedap. Ini benar-benar sayuran yang lezat dan sehat. Sangat direkomendasikan untuk yang ingin mencoba hidangan tradisional yang lezat!",
                 "rating" => "4",
@@ -936,7 +918,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "37",
                 "comment" => "Resep cumi saus Padang ini sangat lezat! Cumi yang digoreng tepung disiram dengan saus Padang yang pedas dan gurih, menciptakan paduan cita rasa yang menggoda.",
                 "rating" => "5",
@@ -1017,7 +999,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "1",
+                "user_id" => "5",
                 "recipe_id" => "40",
                 "comment" => "Semur daging ini enak banget! Dagingnya empuk dan bumbunya meresap sempurna. Cocok banget disantap dengan nasi hangat di hari-hari yang sejuk.",
                 "rating" => "5",
@@ -1026,7 +1008,7 @@ class ReviewSeeder extends Seeder
                 "updated_at" => Carbon::now()
             ],
             [
-                "user_id" => "2",
+                "user_id" => "6",
                 "recipe_id" => "40",
                 "comment" => "Resep semur daging yang praktis dan mudah diikuti. Rasanya begitu lezat dan gurih. Saya pasti akan membuatnya lagi untuk keluarga!",
                 "rating" => "5",

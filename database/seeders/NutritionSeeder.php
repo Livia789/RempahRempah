@@ -16,10 +16,20 @@ class NutritionSeeder extends Seeder
     public function run()
     {
         DB::table('nutrition')->insert([
-            ['name' => 'Kalori'],
             ['name' => 'Karbohidrat'],
+            ['name' => 'Lemak'],
             ['name' => 'Protein'],
-            ['name' => 'Lemak']
+            ['name' => 'Kolestrol'],
+            ['name' => 'Sodium'],
+            ['name' => 'Kalium'],
+            ['name' => 'Vitamin B3'],
+            ['name' => 'Natrium'],
+            ['name' => 'Vitamin B1'],
+            ['name' => 'Kalsium'],
+            ['name' => 'Fosfor'],
+            ['name' => 'Zat Besi'],
+            ['name' => 'Vitamin B5'],
+            ['name' => 'Vitamin E'],
         ]);
     }
 }
