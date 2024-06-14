@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | Ulasan Saya')
+@section('title', 'Rempah Rempah | Ulasan Saya')
 
 <link rel="stylesheet" href="{{ asset('css/profile/myReviews.css') }}">
 

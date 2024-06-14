@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | Perbarui Kata Sandi')
+@section('title', 'Rempah Rempah | Perbarui Kata Sandi')
 
 <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 

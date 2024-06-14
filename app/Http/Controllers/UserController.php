@@ -198,6 +198,7 @@ class UserController extends Controller
             $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
         }
 
+        Session::forget('selected_ingredients');
         if ($src == '/welcome') {
             return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
         } else {

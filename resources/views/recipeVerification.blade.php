@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Verifikasi resep')
+@section('title', 'Rempah Rempah | Verifikasi resep')
 
 @section('content')
     <style>

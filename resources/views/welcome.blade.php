@@ -5,9 +5,13 @@
     <link rel="stylesheet" href="{{ asset('css/preference.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Selamat datang')
+@section('title', 'Rempah Rempah | Selamat datang')
 
 @section('content')
+{{-- @php
+
+dd(session()->all());
+@endphp --}}
     <div class="banner oneCol"></div>
     <div class="section">
         <div class="preferenceSection">
@@ -18,7 +22,7 @@
                 Sebelum lanjut, yuk, bantu kami mengenalmu lebih jauh!
             </h6>
             <span class="sharpBox yellow">
-                Pencarian resep di RempahRempah nanti akan menghindari resep yang mengandung kata kunci yang kamu masukkan pada halaman ini.
+                Pencarian resep di Rempah Rempah nanti akan menghindari resep yang mengandung kata kunci yang kamu masukkan pada halaman ini.
             </span>
             <form action="/updatePreferences" method="POST" class="preferenceForm">
                 @csrf

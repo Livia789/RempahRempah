@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | Profil Saya')
+@section('title', 'Rempah Rempah | Profil Saya')
 
 <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 

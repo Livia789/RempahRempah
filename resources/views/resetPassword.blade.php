@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Reset Kata Sandi')
+@section('title', 'Rempah Rempah | Reset Kata Sandi')
 
 @section('content')
     <style>
@@ -16,7 +16,7 @@
         <div class="banner twoCols"></div>
         <div class="temp" style="margin:auto; width:55%">
             <div class="form">
-                <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah">
+                <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="Rempah Rempah">
                 @if (!session('email'))
                     <h6>
                         Masukkan alamat emailmu dan kami akan mengirimkan kode rahasia untuk mereset kata sandimu.

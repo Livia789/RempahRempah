@@ -33,7 +33,7 @@
       font-weight: bold;
       font-size: 25px;
     }
-    .token {
+    .textBox {
       background-color: #E3E800;
       border: 0.5px solid black;
       border-radius: 15px;
@@ -55,16 +55,19 @@
             <img src="{{ $message->embed(public_path('/assets/logo_rempah.png')) }}" alt="RempahRempah" id="logo">
         </div>
         <div class="content">
-        <p class="text">{{$greeting}}</p>
-        @foreach(explode("\\n", $body) as $line)
-            {{ $line }}<br>
-        @endforeach
-        @if (isset($token))
-            <div class="token">
-                {{$token}}
-            </div>
-        @endif
-        <p class="warning">{{$warning}}</p>
+            <p class="text">{{$greeting}}</p>
+            @foreach(explode("\\n", $body) as $line)
+                {{ $line }}<br>
+            @endforeach
+            @if (isset($textBox))
+                <div class="textBox">
+                    {{$textBox}}
+                </div>
+            @endif
+            @if (isset($body_2))
+                <p>{{$body_2}}</p>
+            @endif
+            <p class="warning">{{$warning}}</p>
         </div>
         <div class="footer">
         </div>
