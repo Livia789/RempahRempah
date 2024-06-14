@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Recipe;
 use App\Models\Ingredient;
 use App\Models\Tag;
@@ -374,20 +375,18 @@ class PageController extends Controller
             });
         }
 
-        $recipes = $results->paginate(15);
+        $recipes = $results->orderBy('type', 'asc')->paginate(15);
         return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags'));
     }
 
     public function showAddRecipePage(Request $req) {
-        if (Auth::user()->role == 'ahli_gizi') {
-            return abort(401);
-        }
         $selected_tags = $req->session()->get('selected_tags', []);
         $default_tags = array_diff($this->tag_all->pluck('name')->toArray(), $selected_tags);
+        $company_all = Company::all();
 
         $req->session()->put('selected_tags', $selected_tags);
         $req->session()->put('default_tags', $default_tags);
-        return view('addRecipe');
+        return view('addRecipe', compact('company_all'));
     }
 
     public function showResultInputTag(Request $req) {
@@ -411,16 +410,20 @@ class PageController extends Controller
 
     public function showRecipeVerificationPage(Request $req) {
         $role = Auth::user()->role;
-        if ($role == 'member') {
-            return abort(401);
-        }
         $user_id = Auth::user()->id;
         $doneRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, true)
                                                            ->orderBy('updated_at', 'desc')
                                                            ->paginate(12);
-        $availableRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, false)
-                                                                ->orderBy('updated_at', 'asc')
-                                                                ->paginate(12);
+        if ($role == 'admin') {
+            $availableRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, false)
+                                                                    ->whereNull('rejectionReason')
+                                                                    ->orderBy('updated_at', 'asc')
+                                                                    ->paginate(12);
+        } else {
+            $availableRecipes = Recipe::where($role.'_id', $user_id)->where('is_verified_by_'.$role, false)
+                                                                    ->orderBy('updated_at', 'asc')
+                                                                    ->paginate(12);
+        }
         return view('recipeVerification', compact('doneRecipes', 'availableRecipes'));
     }
 

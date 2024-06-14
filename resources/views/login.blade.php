@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Login')
+@section('title', 'Rempah Rempah | Login')
 
 @section('content')
     <style>
@@ -16,7 +16,7 @@
         <div class="banner twoCols"></div>
         <div class="temp" style="margin:auto; width:55%">
             <div class="form">
-                <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="RempahRempah">
+                <img id="logo" src="{{ asset('assets/logo_rempah.png') }}" alt="Rempah Rempah">
                 <h6>
                     Akses dan simpan semua resep favoritmu dalam <b>SATU AKUN</b>.
                 </h6>

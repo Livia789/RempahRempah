@@ -14,6 +14,7 @@ use App\Models\Tool;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
@@ -50,7 +51,7 @@ class RecipeController extends Controller
             'duration.min' => 'Durasi minimal :min menit.',
             'serving.required' => 'Sajian belum diisi.',
             'serving.numeric' => 'Sajian harus berupa angka.',
-            'serving.min' => 'Sajian minimal :min menit.',
+            'serving.min' => 'Sajian minimal :min.',
             'selected_tags.required' => 'Tag minimal dipilih satu.',
             'type.required' => 'Tipe resep belum dipilih.',
             'img.required' => 'Foto tampilan utama belum dipilih.',
@@ -85,6 +86,9 @@ class RecipeController extends Controller
             $recipe->user_id = $user_id;
             $recipe->name = $req->name;
             $recipe->description = $req->description;
+            if (Auth::user()->role == 'admin') {
+                $recipe->company_id = $req->company;
+            }
             $recipe->category_id = $req->category_id;
             $recipe->sub_category_1_id = $req->sub_category_1_id;
             $recipe->sub_category_2_id = $req->sub_category_2_id;
@@ -92,32 +96,37 @@ class RecipeController extends Controller
             $recipe->serving = $req->serving;
             $recipe->type = $req->type;
 
-            $admin = User::where('role', 'admin')->get()
-                            ->map(function ($user) {
-                                $user->recipe_count = Recipe::where('admin_id', $user->id)
-                                                            ->where('is_verified_by_admin', false)
-                                                            ->count();
-                                return $user;
-                            })->sortBy('recipe_count')->first();
-            $ahli_gizi = User::where('role', 'ahli_gizi')->get()
-                            ->map(function ($user) {
-                                $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
-                                                            ->where('is_verified_by_ahli_gizi', false)
-                                                            ->count();
-                                return $user;
-                            })->sortBy('recipe_count')->first();
-            $recipe->admin_id = $admin->id;
-            $recipe->ahli_gizi_id = $ahli_gizi->id;
+            if ($req->type == 'public') {
+                $admin = User::where('role', 'admin')->get()
+                                ->map(function ($user) {
+                                    $user->recipe_count = Recipe::where('admin_id', $user->id)
+                                                                ->where('is_verified_by_admin', false)
+                                                                ->count();
+                                    return $user;
+                                })->sortBy('recipe_count')->first();
+                $recipe->admin_id = $admin->id;
+            } else if ($req->type == 'exclusive') {
+                $recipe->admin_id = Auth::user()->id;
+                $recipe->is_verified_by_admin = true;
+                $ahli_gizi = User::where('role', 'ahli_gizi')->get()
+                                ->map(function ($user) {
+                                    $user->recipe_count = Recipe::where('ahli_gizi_id', $user->id)
+                                                                ->where('is_verified_by_ahli_gizi', false)
+                                                                ->count();
+                                    return $user;
+                                })->sortBy('recipe_count')->first();
+                $recipe->ahli_gizi_id = $ahli_gizi->id;
+            }
             $recipe->save();
 
-            $folderPath = 'recipes/'.$recipe->id.'/';
+            $folderPath = 'recipeImages/recipes'.$recipe->id.'/';
             $img = $req->file('img');
-            $imgName = 'recipe'.$recipe->id.'.img.'.$img->getClientOriginalExtension();
+            $imgName = 'recipes'.$recipe->id.'.'.$img->getClientOriginalExtension();
             Storage::putFileAs('public/'.$folderPath, $img, $imgName);
             $recipe->img = 'storage/'.$folderPath.$imgName;
             if ($req->hasFile('vid')) {
                 $vid = $req->file('vid');
-                $vidName = 'recipe'.$recipe->id.'.vid.'.$vid->getClientOriginalExtension();
+                $vidName = 'recipes'.$recipe->id.'.'.$vid->getClientOriginalExtension();
                 Storage::putFileAs('public/'.$folderPath, $vid, $vidName);
                 $recipe->vid = 'storage/'.$folderPath.$vidName;
             }
@@ -166,12 +175,21 @@ class RecipeController extends Controller
 
                     if ($req->hasFile('stepImg.'.$idx.'.'.$idx2)) {
                         $stepImg = $req->file('stepImg.'.$idx.'.'.$idx2);
-                        $imgName = 'recipe'.$recipe->id.'.img_'.$idx.'.'.$idx2.'.'.$stepImg->getClientOriginalExtension();
+                        $imgName = 'recipes'.$recipe->id.'.'.$idx.'.'.$idx2.'.'.$stepImg->getClientOriginalExtension();
                         Storage::putFileAs('public/'.$folderPath, $stepImg, $imgName);
                         $step->step_img = 'storage/'.$folderPath.$imgName;
                     }
                     $step->save();
                 }
+            }
+            Session::forget('selected_tags');
+
+            if ($recipe->type == 'public') {
+                $email = User::where('id', $recipe->user_id)->first()->email;
+                app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, null, null, null);
+            } else if ($recipe->type == 'exclusive') {
+                $email = User::where('id', $recipe->user_id)->first()->email;
+                app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, null, 'admin', true);
             }
             // harusnya ke myRecipes tp blm ada jd temp ke /
             return redirect('/')->with('successMessage', 'Resep berhasil didaftarkan.');
@@ -185,6 +203,8 @@ class RecipeController extends Controller
         $recipe = Recipe::find($req->recipe_id);
         $recipe->rejectionReason = $req->rejectionReason;
         $recipe->save();
+        $email = User::where('id', $recipe->user_id)->first()->email;
+        app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, $req->rejectionReason, 'admin', false);
         return redirect()->back();
     }
 
@@ -202,6 +222,9 @@ class RecipeController extends Controller
                             })->sortBy('recipe_count')->first();
             $recipe->ahli_gizi_id = $ahli_gizi->id;
             $recipe->save();
+
+            $email = User::where('id', $recipe->user_id)->first()->email;
+            app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, null, 'admin', true);
         }
         return redirect()->back();
     }

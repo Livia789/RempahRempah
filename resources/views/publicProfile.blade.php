@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/publicProfile.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | ' . $public_profile->name)
+@section('title', 'Rempah Rempah | ' . $public_profile->name)
 
 @section('content')
 
@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div>
-                    Followers 
+                    Followers
                     <br>
                     <span id="followerCount">
                         {{$public_profile->followers->count()}}
@@ -54,7 +54,7 @@
 </div>
 
 <script>
-    
+
     function toggleFollow(){
         $.ajax({
             url: '/toggleFollowUser',

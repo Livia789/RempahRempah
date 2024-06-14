@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Member
+class AdminOrMember
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,7 @@ class Member
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'member') {
-            if (Auth::user()->accountStatus == 'new' && !(request()->is('welcome') || request()->is('updateSelected') || request()->is('updatePreferences') || request()->is('logout'))) {
-                return redirect('welcome');
-            }
+        if (Auth::check() && (Auth::user()->role == 'admin' || Auth::user()->role == 'member')) {
             return $next($request);
         }
         return abort(401);

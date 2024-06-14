@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/cookingProgress.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Progress Memasak')
+@section('title', 'Rempah Rempah | Progress Memasak')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{asset('js/cookingProgress.js')}}"></script>
@@ -78,7 +78,7 @@
                                 <div>
                                     <b>{{$userTools}}/{{$recipeTools}}</b> completed
                                 </div>
-                            </div> 
+                            </div>
                         @endif
 
                         @if($recipeSteps)

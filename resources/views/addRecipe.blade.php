@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/addRecipe.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Tambah Resep')
+@section('title', 'Rempah Rempah | Tambah Resep')
 
 @section('content')
     @php
@@ -110,15 +110,33 @@
         </div>
         <div class="col">
             <label for="type" class="form-label">Tipe resep*</label>
-            <input type="text" name="type" id="type" value="public" hidden>
             <div class="d-flex justify-content-start" id="typeSection">
-                <button type="button" class="sharpBox active btn-toggle" id="public" value="public" onclick="toggleActive(this)">Publik</button>
-                <button type="button" class="sharpBox btn-toggle" id="private" value="private" onclick="toggleActive(this)">Pribadi</button>
+                @if (Auth::user()->role == 'member')
+                    <input type="text" name="type" id="type" value="{{session('type') == 'public' || session('type') == null ? "public" : "private"}}" hidden>
+                    <button type="button" class="sharpBox {{session('type') == 'public' || session('type') == null ? "active" : ""}} btn-toggle" id="public" value="public" onclick="toggleActive(this)">Publik</button>
+                    <button type="button" class="sharpBox {{session('type') == 'private' ? "active" : ""}} btn-toggle" id="private" value="private" onclick="toggleActive(this)">Pribadi</button>
+                @else
+                    <input type="text" name="type" id="type" value="exclusive" hidden>
+                    <button type="button" class="sharpBox active btn-toggle" id="exclusive" value="exclusive" onclick="toggleActive(this)">Eksklusif</button>
+                @endif
             </div>
             @if ($errors->has('type'))
                 <h6 class="errorMsg">{{$errors->first('type')}}</h6>
             @endif
         </div>
+        @if (Auth::user()->role == 'admin')
+            <div class="col" id="companySection">
+                <label for="company" class="form-label">Merek</label>
+                <select name="company" class="form-select form-select-lg mb-3 outlinedBtn whiteBackground">
+                    @foreach ($company_all as $company)
+                        <option value="{{$company->id}}" {{session('company') == $company->id ? 'selected' : ''}}>{{$company->name}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('company'))
+                    <h6 class="errorMsg">{{$errors->first('company')}}</h6>
+                @endif
+            </div>
+        @endif
         <div class="col">
             <label for="img" class="form-label">Foto tampilan utama*</label>
             <input type="file" name="img" id="img" onchange="showFileName(this)" hidden>

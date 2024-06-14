@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'RempahRempah | Bahan yang Dihindari')
+@section('title', 'Rempah Rempah | Bahan yang Dihindari')
 
 <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 <link rel="stylesheet" href="{{ asset('css/preference.css') }}">
@@ -16,7 +16,7 @@
         @endif
         <div class="preferenceSection">
             <span class="sharpBox yellow">
-                Pencarian resep di RempahRempah nanti akan menghindari resep yang mengandung kata kunci yang kamu masukkan pada halaman ini.
+                Pencarian resep di Rempah Rempah nanti akan menghindari resep yang mengandung kata kunci yang kamu masukkan pada halaman ini.
             </span>
             <form action="/updatePreferences" method="POST" class="preferenceForm" id="preferenceForm">
                 @csrf

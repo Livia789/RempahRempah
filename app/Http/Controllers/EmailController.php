@@ -18,13 +18,13 @@ class EmailController extends Controller
         $user = User::where('email', $email)->first();
 
         $subject = 'Selamat datang';
-        $title = 'RempahRempah';
+        $title = 'Rempah Rempah';
         $greeting = 'Halo, '.$user->name;
-        $body = 'Terima kasih telah mendaftar di RempahRempah. Kami sangat senang memiliki kamu sebagai bagian dari komunitas kami. ';
-        $body .= 'Jangan ragu untuk menjelajahi fitur-fitur yang tersedia RempahRempah. Sekali lagi, selamat datang!';
+        $body = 'Terima kasih telah mendaftar di Rempah Rempah. Kami sangat senang memiliki kamu sebagai bagian dari komunitas kami. ';
+        $body .= 'Jangan ragu untuk menjelajahi fitur-fitur yang tersedia Rempah Rempah. Sekali lagi, selamat datang!';
         $warning = 'Mohon abaikan email ini jika kamu tidak mengirimkan permintaan ini.';
 
-        $mail = new generalEmail($subject, $title, $greeting, $body, null, $warning);
+        $mail = new generalEmail($subject, $title, $greeting, $body, null, null, $warning);
         Mail::to($email)->send($mail);
     }
 
@@ -58,7 +58,7 @@ class EmailController extends Controller
                          ->with('email', $email);
         } else {
             $subject = 'Reset Kata Sandi';
-            $title = 'RempahRempah';
+            $title = 'Rempah Rempah';
             $greeting = 'Halo, '.$user->name;
             $body = 'Kami baru saja menerima permintaan untuk mereset kata sandi pada akun yang terhubung dengan email ini. ';
             $body .= 'Kode rahasia ini hanya akan berlaku dalam waktu 5 menit sejak email ini dikirim.\n';
@@ -75,10 +75,38 @@ class EmailController extends Controller
                 ],
             );
 
-            $mail = new generalEmail($subject, $title, $greeting, $body, $token, $warning);
+            $mail = new generalEmail($subject, $title, $greeting, $body, null, $token, $warning);
             Mail::to($email)->send($mail);
             return back()->with('mailSuccess', "Email berhasil dikirim. Yuk, cek emailmu sekarang!")
                          ->with('email', $email);
         }
+    }
+
+    public function sendRecipeUpdateMail($email, $recipeTitle, $rejectionReason, $doneBy, $isVerified) {
+        $user = User::where('email', $email)->first();
+        $subject = 'Status Verifikasi Resep';
+        $title = 'Rempah Rempah';
+        $greeting = 'Halo, '.$user->name;
+        $body = 'Terima kasih telah mendaftarkan resepmu di Rempah Rempah. ';
+        $body_2 = null;
+        if ($isVerified === null) {
+            $body .= 'Resepmu yang berjudul '.$recipeTitle.' akan segera diverifikasi oleh tim kami.';
+            $body_2 = 'Segala perkembangan terkait resepmu akan kami kabarkan melalui email ini, jadi jangan lupa cek secara berkala, ya! ';
+        } elseif ($isVerified) {
+            $body .= 'Selamat! Resepmu yang berjudul '.$recipeTitle.' telah berhasil melewati verifikasi tahap selanjutnya. ';
+            if ($doneBy == 'admin') {
+                $body .= 'Meskipun begitu, resepmu masih perlu melewati tahap pengisian nilai gizi oleh tim kami agar segera dapat diakses oleh semua pengguna Rempah Rempah.\n';
+                $body_2 = 'Segala perkembangan terkait resepmu akan kami kabarkan melalui email ini, jadi jangan lupa cek secara berkala, ya! ';
+            } elseif ($doneBy == 'ahli_gizi') {
+                $body .= 'Sekarang, resepmu telah dapat diakses oleh semua pengguna Rempah Rempah. Sekali lagi, terima kasih telah menjadi bagian dari Rempah Rempah! ';
+            }
+        } else {
+            $body .= 'Sayangnya, resepmu yang berjudul '.$recipeTitle.' telah gagal melewati verifikasi tahap selanjutnya dengan alasan sebagai berikut:';
+            $body_2 = 'Jangan berkecil hati. Kamu masih dapat memperbaiki bagian-bagian resepmu berdasarkan ulasan dari tim kami dan mengirimkannya kembali. Semangat! ';
+        }
+        $warning = 'Mohon abaikan email ini jika kamu tidak mengirimkan permintaan ini.';
+
+        $mail = new generalEmail($subject, $title, $greeting, $body, $body_2, $rejectionReason, $warning);
+        Mail::to($email)->send($mail);
     }
 }

@@ -5,40 +5,12 @@
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 @endsection
 
-@section('title', 'RempahRempah | Resep')
+@section('title', 'Rempah Rempah | Resep')
 
 @section('content')
     @php
         $index = -1;
         $unique_ctg_groups = $category_all->unique('class');
-        // ini count $recipes yg di pagenya, sih. bkn utk overall :(
-        if (!function_exists('countRecipe')) {
-            function countRecipe ($recipes, $ctg_id, $duration, $tag_id) {
-                $count = 0;
-                foreach ($recipes as $recipe) {
-                    if (isset($ctg_id)) {
-                        if ($recipe->category->id == $ctg_id) {
-                            $count++;
-                        } else {
-                            for ($i = 1; $i <= 2; $i++) {
-                                if ($recipe->sub_category($i)->exists() && $recipe->sub_category($i)->first()->id == $ctg_id) {
-                                    $count++; break;
-                                }
-                            }
-                        }
-                    } elseif (isset($duration)) {
-                        if ($recipe->duration <= $duration) {
-                            $count++;
-                        }
-                    } else {
-                        if ($recipe->tags->contains($tag_id)) {
-                            $count++;
-                        }
-                    }
-                }
-                return $count;
-            }
-        }
     @endphp
     <div class="row">
         <div class="col-md-3">
@@ -60,9 +32,6 @@
                                         <a class="dropdown-item text-wrap" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}">
                                             <input type="checkbox" name="category_{{$ctg->id}}" id="category_{{$ctg->id}}" {{isset($categoryGroups[$index]) && in_array($ctg->id, $categoryGroups[$index]) ? "checked" : "" }} class="whiteBackground"onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}';">
                                             {{$ctg->name}}
-                                            <div class="recipesCount">
-                                                ({{countRecipe($recipes, $ctg->id, null, null)}})
-                                            </div>
                                         </a>
                                     @endif
                                 @endforeach
@@ -82,17 +51,11 @@
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}">
                                     <input type="checkbox" name="duration_{{$minutes}}" id="duration_{{$minutes}}" {{in_array($minutes, $durations) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}';">
                                     &le;{{$minutes}} menit
-                                    <div class="recipesCount">
-                                        ({{countRecipe($recipes, null, $minutes, null)}})
-                                    </div>
                                 </a>
                             @endforeach
                             <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, -1, $tags, null)}}">
                                 <input type="checkbox" name="duration_lainnya" id="duration_lainnya" {{in_array(-1, $durations) ? " checked" : "" }} class="whiteBackground">
                                 Lainnya
-                                <div class="recipesCount">
-                                    ({{countRecipe($recipes, null, -1, null)}})
-                                </div>
                             </a>
                         </div>
                     </div>
@@ -109,9 +72,6 @@
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}">
                                     <input type="checkbox" name="tag_{{$tag->id}}" id="tag_{{$tag->id}}" {{in_array($tag->id, $tags) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}';">
                                     {{$tag->name}}
-                                    <div class="recipesCount">
-                                        ({{countRecipe($recipes, null, null, $tag->id)}})
-                                    </div>
                                 </a>
                             @endforeach
                         </div>
@@ -124,58 +84,22 @@
                 <input type="text" class="form-control me-2 textField whiteBackground" placeholder="Cari resep di sini" id="input_recipe" name="name" value="{{isset($name) ? $name : ""}}" data-type="recipe">
                 <button class="btn btn-outline-success outlinedBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
             </form>
-            @php
-                if (Auth::user()) {
-                    $recipes_user_public = $recipes->where('user_id', Auth::user()->id)->where('type', 'public');
-                    $recipes_private = $recipes->where('type', 'private');
-                    $recipes_general = $recipes->diff($recipes_user_public)
-                                                ->diff($recipes_private)
-                                                ->sortByDesc(function($recipe) {
-                                                    return $recipe->type == 'exclusive';
-                                                });
-                } else {
-                    $recipes_general = $recipes;
-                }
-            @endphp
             <h3 class="sectionDivider">Recommendation</h3>
             <div class="row row-cols-1 row-cols-md-3 g-3">
-                @forelse ($recipes_general as $recipe)
+                @forelse ($recipes as $recipe)
+                    @php
+                        $isNeedProcessTrack = Auth::check() && Auth::user()->id == $recipe->user_id;
+                    @endphp
                     <div class="col">
                         @include('templates/recipeCard', compact('recipe'))
                     </div>
+                    {{-- @php
+                        unset($isNeedProcessTrack);
+                    @endphp --}}
                 @empty
                     <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
                 @endforelse
             </div>
-            @auth
-                @php
-                    $isNeedProcessTrack = true;
-                @endphp
-                <h3 class="sectionDivider">Resep Saya</h3>
-                <h4 class="sectionDivider">Publik</h4>
-                <div class="row row-cols-1 row-cols-md-3 g-3">
-                    @forelse ($recipes_user_public as $recipe)
-                        <div class="col">
-                            @include('templates/recipeCard', compact('recipe', 'isNeedProcessTrack'))
-                        </div>
-                    @empty
-                        <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
-                    @endforelse
-                </div>
-                @php
-                    unset($isNeedProcessTrack);
-                @endphp
-                <h4 class="sectionDivider">Privat</h4>
-                <div class="row row-cols-1 row-cols-md-3 g-3">
-                    @forelse ($recipes_private as $recipe)
-                        <div class="col">
-                            @include('templates/recipeCard', compact('recipe'))
-                        </div>
-                    @empty
-                        <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
-                    @endforelse
-                </div>
-            @endauth
         </div>
     </div>
     <ul class="pagination d-flex justify-content-center">

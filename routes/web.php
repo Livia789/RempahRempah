@@ -59,18 +59,22 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => ['loggedin']], function () {
     Route::get('/logout', [UserController::class, 'logout']);
+});
 
+Route::group(['middleware' => ['adminormember']], function () {
     Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
     Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
+    Route::post('/updateSelected', [PageController::class, 'updateSelected']);
     Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
+});
 
+Route::group(['middleware' => ['adminorahligizi']], function () {
     Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
 });
 
 Route::group(['middleware' => ['member']], function () {
     Route::get('/welcome', [PageController::class, 'showWelcomePage']);
     Route::get('/myPreferences', [PageController::class, 'showMyPreferencesPage']);
-    Route::post('/updateSelected', [PageController::class, 'updateSelected']);
     Route::post('/updatePreferences', [UserController::class, 'updatePreferences']);
 
     Route::get('/myProfile', [PageController::class, 'showMyProfilePage']);
@@ -92,12 +96,10 @@ Route::group(['middleware' => ['member']], function () {
 });
 
 Route::group(['middleware' => ['admin']], function () {
-    // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
     Route::post('/rejectRecipe', [RecipeController::class, 'rejectRecipe']);
     Route::post('/approveRecipe', [RecipeController::class, 'approveRecipe']);
 });
 
 Route::group(['middleware' => ['ahligizi']], function () {
-    // Route::get('/recipeVerification', [PageController::class, 'showRecipeVerificationPage']);
     Route::post('/addNutrition', [NutritionController::class, 'addNutrition']);
 });

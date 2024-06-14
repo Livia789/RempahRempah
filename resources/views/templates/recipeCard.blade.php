@@ -20,7 +20,7 @@
                 <p class="recipeAttributes rating">
                     @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
                 </p>
-                @if (isset($isNeedProcessTrack))
+                @if (isset($isNeedProcessTrack) && $isNeedProcessTrack === true)
                     <p class="recipeAttributes verificationStatus">
                         Tahap verifikasi {{(($recipe->is_verified_by_admin ? 1 : 0) + ($recipe->is_verified_by_ahli_gizi ? 1 : 0)) * 50}}%
                     </p>
@@ -35,5 +35,14 @@
                 </p>
             </p>
         </div>
+        @if ($recipe->type == 'private')
+            <h6 style="color: red; width: 80px; text-align: center; border: 1px red solid; border-radius: 16px; padding: 2px 5px; float: right; ">
+                Privat
+            </h6>
+        @elseif (Auth::check() && $recipe->user_id == Auth::user()->id)
+            <h6 style="color: green; width: 80px; text-align: center; border: 1px green solid; border-radius: 16px; padding: 2px 5px; float: right; ">
+                Publik
+            </h6>
+        @endif
     </div>
 </a>

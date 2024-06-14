@@ -17,20 +17,22 @@ class generalEmail extends Mailable
     public string $title;
     public string $greeting;
     public string $body;
-    public ?string $token;
+    public ?string $body_2;
+    public ?string $textBox;
     public string $warning;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $subject, string $title, string $greeting, string $body, ?string $token, string $warning)
+    public function __construct(string $subject, string $title, string $greeting, string $body, ?string $body_2, ?string $textBox, string $warning)
     {
         $this->subject = $subject;
         $this->title = $title;
         $this->greeting = $greeting;
         $this->body = $body;
-        $this->token = $token;
+        $this->body_2 = $body_2;
+        $this->textBox = $textBox;
         $this->warning = $warning;
     }
 
@@ -42,7 +44,8 @@ class generalEmail extends Mailable
                         'title' => $this->title,
                         'greeting' => $this->greeting,
                         'body' => $this->body,
-                        'token' => $this->token,
+                        'body_2' => $this->body_2,
+                        'textBox' => $this->textBox,
                         'warning' => $this->warning,
                     ]);
                     // ->attach(public_path('/assets/logo_rempah.png'), [
