@@ -286,7 +286,7 @@
 
                 @if($recipe->vid != NULL)
                     <video width="100%" height="auto" controls>
-                        <source src="{{ asset('storage/videos/'.$recipe->vid) }}" type="video/mp4">
+                        <source src="{{ asset($recipe->vid) }}" type="video/mp4">
                     </video>
                     <br><br><br>
                 @else
