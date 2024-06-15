@@ -104,11 +104,11 @@
                 @if(!$recipe->is_verified_by_admin && $recipe->rejectionReason == NULL)
                     @if(Auth::user()->id == $recipe->admin_id)
                         <div class="sharpBox" onclick="$('#adminApproveRecipe').modal('show')">
-                            <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                            <img src="/assets/icons/verification_accept.png" class="picon" alt="verification_icon">
                             Approve Resep
                         </div>
                         <div class="sharpBox"  onclick="$('#adminRejectRecipe').modal('show')">
-                            <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
+                            <img src="/assets/icons/verification_reject.png" class="picon" alt="verification_icon">
                             Tolak Resep
                         </div>
                     @else
