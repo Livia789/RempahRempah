@@ -81,11 +81,13 @@ class RecipeController extends Controller
             return back()->withErrors($validator)
                          ->with($inputExceptFiles);
         } else {
+            $user = Auth::user();
             if ($req->formType == 'add') {
-                $user_id = Auth::user()->id;
+                $returnMsg = 'Resep berhasil ditambahkan.';
                 $recipe = new Recipe();
-                $recipe->user_id = $user_id;
+                $recipe->user_id = $user->id;
             } else {
+                $returnMsg = 'Resep berhasil diperbarui.';
                 $recipe = Recipe::where('id', $req->formType)->first();
                 Storage::delete($recipe->img);
                 $recipe->vid && Storage::delete($recipe->vid);
@@ -235,8 +237,11 @@ class RecipeController extends Controller
                 $email = User::where('id', $recipe->user_id)->first()->email;
                 app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, null, 'admin', true);
             }
-            // harusnya ke myRecipes tp blm ada jd temp ke /
-            return redirect('/')->with('successMessage', 'Resep berhasil didaftarkan.');
+            if ($user->role == 'admin') {
+                return redirect('/')->with('successMessage', $returnMsg);
+            } else {
+                return redirect('/myRecipes')->with('successMessage', $returnMsg);
+            }
         }
     }
 
