@@ -6,29 +6,27 @@
     <link rel="stylesheet" href="{{ asset('css/addRecipe.css') }}">
 @endsection
 
-@section('title', 'Rempah Rempah | Tambah Resep')
+@section('title', 'Rempah Rempah | Sunting Resep')
 
 @section('content')
     @php
-        // session()->flush();
-        // dd($errors->toArray());
         $index = -1;
         $unique_ctg_groups = $category_all->unique('class');
         $form_ctg_names = ["category_id", "sub_category_1_id", "sub_category_2_id"];
     @endphp
-    <form action="/addRecipe" class="addRecipe" id="addRecipeForm" method="POST" enctype="multipart/form-data">
+    <form action="/addRecipe" class="addRecipe" id="editRecipeForm" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="formType" id="formType" value="add" hidden>
+        <input type="text" name="formType" id="formType" value="{{$recipe->id}}" hidden>
         <div class="col">
             <label for="name" class="form-label">Nama resep*</label>
-            <input type="text" class="form-control textField whiteBackground" placeholder="Masukkan nama" id="name" name="name" value="{{session('name') === null ? "" : session('name')}}">
+            <input type="text" class="form-control textField whiteBackground" placeholder="Masukkan nama" id="name" name="name" value="{{session('name') === null ? $recipe->name : session('name')}}">
             @if ($errors->has('name'))
                 <h6 class="errorMsg">{{$errors->first('name')}}</h6>
             @endif
         </div>
         <div class="col">
             <label for="description" class="form-label">Deskripsi resep*</label>
-            <textarea class="form-control textField whiteBackground" placeholder="Masukkan deskripsi" id="description" name="description">{{session('description') === null ? "" : session('description')}}</textarea>
+            <textarea class="form-control textField whiteBackground" placeholder="Masukkan deskripsi" id="description" name="description">{{session('description') === null ? $recipe->description : session('description')}}</textarea>
             @if ($errors->has('description'))
                 <h6 class="errorMsg">{{$errors->first('description')}}</h6>
             @endif
@@ -37,21 +35,22 @@
             @foreach ($unique_ctg_groups as $unique_ctg_group)
                 @php
                     $index++;
+                    $property = $form_ctg_names[$index];
                 @endphp
                 <div class="col">
                     <label for="description" class="form-label">
                         {{$unique_ctg_group->class}}{{$index == 0 ? '*' : ''}}
                     </label>
-                    <select name="{{$form_ctg_names[$index]}}" class="form-select form-select-lg mb-3 outlinedBtn whiteBackground">
+                    <select name="{{$property}}" class="form-select form-select-lg mb-3 outlinedBtn whiteBackground">
                         <option value="">-</option>
                         @foreach ($category_all as $ctg)
                             @if ($ctg->class == $unique_ctg_group->class)
-                                <option value="{{$ctg->id}}" {{session($form_ctg_names[$index]) == $ctg->id ? 'selected' : ''}}>{{$ctg->name}}</option>
+                                <option value="{{$ctg->id}}" {{((session($property) === null && ($ctg->id == ($index == 0 ? $recipe->category_id : ($index == 1 ? $recipe->sub_category_1_id : $recipe->sub_category_2_id)))) || session($property) == $ctg->id) ? 'selected' : ''}}>{{$ctg->name}}</option>
                             @endif
                         @endforeach
                     </select>
-                    @if ($index == 0 && $errors->has($form_ctg_names[$index]))
-                        <h6 class="errorMsg">{{$errors->first($form_ctg_names[$index])}}</h6>
+                    @if ($index == 0 && $errors->has($property))
+                        <h6 class="errorMsg">{{$errors->first($property)}}</h6>
                     @endif
                 </div>
             @endforeach
@@ -59,7 +58,7 @@
         <div class="col" id="durationSection">
             <label for="duration" class="form-label">Durasi*</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan durasi" id="duration" name="duration" value="{{session('duration') === null ? "" : session('duration')}}" oninput="calculateTime()">
+                <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan durasi" id="duration" name="duration" value="{{session('duration') === null ? $recipe->duration : session('duration')}}" oninput="calculateTime()">
                 <span class="input-group-text groupTextForm" id="basic-addon1">menit</span>
                 <span class="input-group-text groupTextForm" id="durationTotal"></span>
             </div>
@@ -69,7 +68,7 @@
         </div>
         <div class="col">
             <label for="serving" class="form-label">Sajian*</label>
-            <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan jumlah sajian per resep" id="serving" name="serving" value="{{session('serving') === null ? "" : session('serving')}}">
+            <input type="number" class="form-control textField whiteBackground" placeholder="Masukkan jumlah sajian per resep" id="serving" name="serving" value="{{session('serving') === null ? $recipe->serving : session('serving')}}">
             @if ($errors->has('serving'))
                 <h6 class="errorMsg">{{$errors->first('serving')}}</h6>
             @endif
@@ -113,9 +112,9 @@
             <label for="type" class="form-label">Tipe resep*</label>
             <div class="d-flex justify-content-start" id="typeSection">
                 @if (Auth::user()->role == 'member')
-                    <input type="text" name="type" id="type" value="{{session('type') == 'public' || session('type') === null ? 'public' : 'private'}}" hidden>
-                    <button type="button" class="sharpBox {{session('type') == 'public' || session('type') === null ? 'active' : ''}} btn-toggle" id="public" value="public" onclick="toggleActive(this)">Publik</button>
-                    <button type="button" class="sharpBox {{session('type') == 'private' ? 'active' : ''}} btn-toggle" id="private" value="private" onclick="toggleActive(this)">Pribadi</button>
+                    <input type="text" name="type" id="type" value="{{((session('type') === null && $recipe->type == 'public') || session('type') == 'public') ? 'public' : 'private'}}" hidden>
+                    <button type="button" class="sharpBox {{((session('type') === null && $recipe->type == 'public') || session('type') == 'public') ? 'active' : ''}} btn-toggle" id="public" value="public" onclick="toggleActive(this)">Publik</button>
+                    <button type="button" class="sharpBox {{((session('type') === null && $recipe->type == 'private') || session('type') == 'private') ? 'active' : ''}} btn-toggle" id="private" value="private" onclick="toggleActive(this)">Pribadi</button>
                 @else
                     <input type="text" name="type" id="type" value="exclusive" hidden>
                     <button type="button" class="sharpBox active btn-toggle" id="exclusive" value="exclusive" onclick="toggleActive(this)">Eksklusif</button>
@@ -130,7 +129,7 @@
                 <label for="company" class="form-label">Merek</label>
                 <select name="company" class="form-select form-select-lg mb-3 outlinedBtn whiteBackground">
                     @foreach ($company_all as $company)
-                        <option value="{{$company->id}}" {{session('company') == $company->id ? 'selected' : ''}}>{{$company->name}}</option>
+                        <option value="{{$company->id}}" {{((session('company') === null && $company->id == $recipe->company_id) || session('company') == $company->id) ? 'selected' : ''}}>{{$company->name}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('company'))
@@ -169,13 +168,14 @@
         <div class="col">
             <div id="toolSection">
                 @php
-                    $toolLength = count(session('tool', ['blank']));
+                    $tools = $recipe->tools->pluck('name')->toArray();
+                    $toolLength = count(session('tool', $tools));
                 @endphp
                 @for ($i = 0; $i < $toolLength; $i++)
                     <div class="toolContainer" data-index="{{$i}}">
                         <label for="tool{{$i}}">Alat*</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama alat" name="tool[{{$i}}]" id="tool{{$i}}" value="{{session('tool.'.$i) ? session('tool.'.$i) : ''}}">
+                            <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama alat" name="tool[{{$i}}]" id="tool{{$i}}" value="{{session('tool.'.$i) ? session('tool.'.$i) : $tools[$i]}}">
                             <button type="button" class="sharpBox delete-tool {{$toolLength == 1 ? 'disabled' : ''}}" onclick="deleteTool({{$i}})" {{$toolLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus alat</button>
                         </div>
                         @if ($errors->has('tool.'.$i))
@@ -190,38 +190,42 @@
             <label class="form-label">Bahan</label>
                 <div id="ingredientSection">
                 @php
-                    $ingredientHeaderLength = count(session('ingredientHeader', ['blank']));
+                    $ingredientHeaders = $recipe->ingredientHeaders->pluck('name')->toArray();
+                    $ingredientHeaderLength = count(session('ingredientHeader', $ingredientHeaders));
                 @endphp
                 @for ($i = 0; $i < $ingredientHeaderLength; $i++)
                     <div class="ingredientHeader" data-header-index="{{$i}}">
                         <label for="ingredientHeader{{$i}}">Header bahan*</label>
-                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header bahan" name="ingredientHeader[{{$i}}]" id="ingredientHeader{{$i}}" value="{{session('ingredientHeader.'.$i) ? session('ingredientHeader.'.$i) : ''}}">
+                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header bahan" name="ingredientHeader[{{$i}}]" id="ingredientHeader{{$i}}" value="{{session('ingredientHeader.'.$i) ? session('ingredientHeader.'.$i) : $ingredientHeaders[$i]}}">
                         @if ($errors->has('ingredientHeader.'.$i))
                             <h6 class="errorMsg">{{$errors->first('ingredientHeader.'.$i)}}</h6>
                         @endif
                         @php
-                            $ingredientDescriptionLength = count(session('ingredientDescription.'.$i, ['blank']));
+                            $ingredientDescriptions = $recipe->ingredientHeaders[$i]->ingredients->pluck('name')->toArray();
+                            $ingredientQtys = $recipe->ingredientHeaders[$i]->ingredients->pluck('pivot.quantity')->toArray();
+                            $ingredientUnits = $recipe->ingredientHeaders[$i]->ingredients->pluck('pivot.unit')->toArray();
+                            $ingredientDescriptionLength = count(session('ingredientDescription.'.$i, $ingredientDescriptions));
                         @endphp
                         @for ($j = 0; $j < $ingredientDescriptionLength; $j++)
                             <div class="ingredientDescription" data-description-index="{{$j}}">
                                 <div class="input-group mb-3 descriptionContainer">
                                     <div class="ingredientDescriptionContainer">
                                         <label for="ingredientDescription{{$i}}_{{$j}}">Bahan*</label>
-                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama bahan" name="ingredientDescription[{{$i}}][{{$j}}]" id="ingredientDescription{{$i}}_{{$j}}" value="{{session('ingredientDescription.'.$i.'.'.$j) ? session('ingredientDescription.'.$i.'.'.$j) : ''}}">
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama bahan" name="ingredientDescription[{{$i}}][{{$j}}]" id="ingredientDescription{{$i}}_{{$j}}" value="{{session('ingredientDescription.'.$i.'.'.$j) ? session('ingredientDescription.'.$i.'.'.$j) : $ingredientDescriptions[$j]}}">
                                         @if ($errors->has('ingredientDescription.'.$i.'.'.$j))
                                             <h6 class="errorMsg">{{$errors->first('ingredientDescription.'.$i.'.'.$j)}}</h6>
                                         @endif
                                     </div>
                                     <div class="ingredientDescriptionContainer sub">
                                         <label for="ingredientQty{{$i}}_{{$j}}">Jumlah*</label>
-                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan jumlah bahan" name="ingredientQty[{{$i}}][{{$j}}]" id="ingredientQty{{$i}}_{{$j}}" value="{{session('ingredientQty.'.$i.'.'.$j) ? session('ingredientQty.'.$i.'.'.$j) : ''}}">
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan jumlah bahan" name="ingredientQty[{{$i}}][{{$j}}]" id="ingredientQty{{$i}}_{{$j}}" value="{{session('ingredientQty.'.$i.'.'.$j) ? session('ingredientQty.'.$i.'.'.$j) : $ingredientQtys[$j]}}">
                                         @if ($errors->has('ingredientQty.'.$i.'.'.$j))
                                             <h6 class="errorMsg">{{$errors->first('ingredientQty.'.$i.'.'.$j)}}</h6>
                                         @endif
                                     </div>
                                     <div class="ingredientDescriptionContainer sub">
                                         <label for="ingredientUnit{{$i}}_{{$j}}">Satuan</label>
-                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan satuan bahan" name="ingredientUnit[{{$i}}][{{$j}}]" id="ingredientUnit{{$i}}_{{$j}}" value="{{session('ingredientUnit.'.$i.'.'.$j) ? session('ingredientUnit.'.$i.'.'.$j) : ''}}">
+                                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan satuan bahan" name="ingredientUnit[{{$i}}][{{$j}}]" id="ingredientUnit{{$i}}_{{$j}}" value="{{session('ingredientUnit.'.$i.'.'.$j) ? session('ingredientUnit.'.$i.'.'.$j) : $ingredientUnits[$j]}}">
                                     </div>
                                     <button type="button" class="sharpBox delete-description {{$ingredientDescriptionLength == 1 ? 'disabled' : ''}}" onclick="deleteDescription('ingredient', {{$i}}, {{$j}})" {{$ingredientDescriptionLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus bahan</button>
                                 </div>
@@ -238,17 +242,19 @@
             <label class="form-label">Langkah</label>
             <div id="stepSection">
                 @php
-                    $stepHeaderLength = count(session('stepHeader', ['blank']));
+                    $stepHeaders = $recipe->stepHeaders->pluck('name')->toArray();
+                    $stepHeaderLength = count(session('stepHeader', $stepHeaders));
                 @endphp
                 @for ($i = 0; $i < $stepHeaderLength; $i++)
                     <div class="stepHeader" data-header-index="{{$i}}">
                         <label for="stepHeader{{$i}}">Header langkah*</label>
-                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header langkah" name="stepHeader[{{$i}}]" id="stepHeader{{$i}}" value="{{session('stepHeader.'.$i) ? session('stepHeader.'.$i) : ''}}">
+                        <input type="text" class="form-control textField whiteBackground" placeholder="Masukan nama header langkah" name="stepHeader[{{$i}}]" id="stepHeader{{$i}}" value="{{session('stepHeader.'.$i) ? session('stepHeader.'.$i) : $stepHeaders[$i]}}">
                         @if ($errors->has('stepHeader.'.$i))
                             <h6 class="errorMsg">{{$errors->first('stepHeader.'.$i)}}</h6>
                         @endif
                         @php
-                            $stepDescriptionLength = count(session('stepDescription.'.$i, ['blank']));
+                            $stepDescriptions = $recipe->stepHeaders[$i]->steps->pluck('step_desc')->toArray();
+                            $stepDescriptionLength = count(session('stepDescription.'.$i, $stepDescriptions));
                         @endphp
                         @for ($j = 0; $j < $stepDescriptionLength; $j++)
                             <div class="stepDescription" data-description-index="{{$j}}">
@@ -256,7 +262,7 @@
                                 <label for="stepDescription{{$i}}_{{$j}}">Deskripsi langkah*</label>
                                 <div class="descriptionContainer">
                                     <div class="input-group mb-3">
-                                        <textarea class="form-control textField whiteBackground" placeholder="Masukan deskripsi langkah" name="stepDescription[{{$i}}][{{$j}}]" id="stepDescription{{$i}}_{{$j}}">{{session('stepDescription.'.$i.'.'.$j) ? session('stepDescription.'.$i.'.'.$j) : ''}}</textarea>
+                                        <textarea class="form-control textField whiteBackground" placeholder="Masukan deskripsi langkah" name="stepDescription[{{$i}}][{{$j}}]" id="stepDescription{{$i}}_{{$j}}">{{session('stepDescription.'.$i.'.'.$j) ? session('stepDescription.'.$i.'.'.$j) : $stepDescriptions[$j]}}</textarea>
                                         <button type="button" class="sharpBox delete-description {{$stepDescriptionLength == 1 ? 'disabled' : ''}}" onclick="deleteDescription('step', {{$i}}, {{$j}})" {{$stepDescriptionLength == 1 ? 'disabled' : ''}}><i class="fa fa-trash"></i> &ensp;Hapus langkah</button>
                                     </div>
                                     @if ($errors->has('stepDescription.'.$i.'.'.$j))
@@ -363,7 +369,7 @@
             });
             $('#proceedButton').on('click', function() {
                 save = true;
-                $('#addRecipeForm').submit();
+                $('#editRecipeForm').submit();
             });
             $('#backButton').on('click', function() {
                 $('#saveModal').modal('hide');

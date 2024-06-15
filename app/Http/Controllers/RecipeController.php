@@ -30,7 +30,7 @@ class RecipeController extends Controller
             'selected_tags.*' => 'required|string',
             'type' => 'required',
             'img' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'vid' => 'nullable|file|mimes:mp4,mov|max:20480',
+            'vid' => 'nullable|file|mimes:mp4,mov,mkv|max:20480',
             'tool.*' => 'required|min:3',
             'ingredientHeader.*' => 'required|min:3',
             'ingredientDescription.*.*' => 'required|min:3',
@@ -81,9 +81,15 @@ class RecipeController extends Controller
             return back()->withErrors($validator)
                          ->with($inputExceptFiles);
         } else {
-            $user_id = Auth::user()->id;
-            $recipe = new Recipe();
-            $recipe->user_id = $user_id;
+            if ($req->formType == 'add') {
+                $user_id = Auth::user()->id;
+                $recipe = new Recipe();
+                $recipe->user_id = $user_id;
+            } else {
+                $recipe = Recipe::where('id', $req->formType)->first();
+                Storage::delete($recipe->img);
+                $recipe->vid && Storage::delete($recipe->vid);
+            }
             $recipe->name = $req->name;
             $recipe->description = $req->description;
             if (Auth::user()->role == 'admin') {
@@ -95,6 +101,7 @@ class RecipeController extends Controller
             $recipe->duration = $req->duration;
             $recipe->serving = $req->serving;
             $recipe->type = $req->type;
+            $recipe->rejectionReason == null;
 
             if ($req->type == 'public') {
                 $admin = User::where('role', 'admin')->get()
@@ -132,10 +139,12 @@ class RecipeController extends Controller
             }
             $recipe->save();
 
+            $recipe->tags()->detach();
             foreach ($req->selected_tags as $idx => $tag) {
                 $tag = Tag::where('name', $tag)->first();
                 $recipe->tags()->attach($tag->id);
             }
+            $recipe->tools()->detach();
             foreach ($req->tool as $idx => $tool) {
                 $tool = Tool::firstOrCreate(['name' => $tool]);
                 $exists = $recipe->tools()->where('tool_id', $tool->id)->exists();
@@ -144,12 +153,31 @@ class RecipeController extends Controller
                 }
             }
 
+            if ($req->formType !== 'add') {
+                $ingredientHeaders = IngredientHeader::where('recipe_id', $req->formType)->get();
+                // $numLeft = count($ingredientHeaders) - count($req->ingredientHeader);
+                // if ($numLeft > 0) {
+                //     for ($i = 0; $i < $numLeft; $i++) {
+                //         $ingredientHeaders[$numLeft]->delete();
+                //     }
+                // }
+                foreach ($ingredientHeaders as $ingredientHeader) {
+                    $ingredientHeader->delete();
+                }
+            }
             foreach ($req->ingredientHeader as $idx => $header) {
+                // if (isset($ingredientHeaders) && $idx < count($ingredientHeaders)) {
+                //     $ingredientHeader = $ingredientHeaders[$idx];
+                // } else {
+                //     $ingredientHeader = new IngredientHeader();
+                //     $ingredientHeader->recipe_id = $recipe->id;
+                // }
                 $ingredientHeader = new IngredientHeader();
                 $ingredientHeader->recipe_id = $recipe->id;
                 $ingredientHeader->name = $header;
                 $ingredientHeader->save();
 
+                // $ingredientHeader->ingredients()->detach();
                 foreach ($req->ingredientDescription[$idx] as $idx2 => $description) {
                     $ingredient = Ingredient::firstOrCreate(['name' => $description]);
                     $exists = $ingredientHeader->ingredients()->where('ingredient_id', $ingredient->id)->exists();
@@ -162,7 +190,23 @@ class RecipeController extends Controller
                 }
             }
 
+            if ($req->formType !== 'add') {
+                $stepHeaders = StepHeader::where('recipe_id', $req->formType)->get();
+                foreach ($stepHeaders as $stepHeader) {
+                    $steps = Step::where('step_header_id', $stepHeader->id)->get();
+                    foreach ($steps as $step) {
+                        $step->step_img && Storage::delete($step->step_img);
+                    }
+                    $stepHeader->delete();
+                }
+            }
             foreach ($req->stepHeader as $idx => $header) {
+                // if (isset($stepHeaders) && $idx < count($stepHeaders)) {
+                //     $stepHeader = $stepHeaders[$idx];
+                // } else {
+                //     $stepHeader = new StepHeader();
+                //     $stepHeader->recipe_id = $recipe->id;
+                // }
                 $stepHeader = new StepHeader();
                 $stepHeader->recipe_id = $recipe->id;
                 $stepHeader->name = $header;

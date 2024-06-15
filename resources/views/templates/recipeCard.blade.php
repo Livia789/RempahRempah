@@ -20,7 +20,7 @@
                 <p class="recipeAttributes rating">
                     @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
                 </p>
-                @if (isset($isNeedProcessTrack) && $isNeedProcessTrack === true)
+                @if (isset($isNeedProcessTrack) && $isNeedProcessTrack === true && $recipe->type == 'public')
                     <p class="recipeAttributes verificationStatus">
                         Tahap verifikasi {{(($recipe->is_verified_by_admin ? 1 : 0) + ($recipe->is_verified_by_ahli_gizi ? 1 : 0)) * 50}}%
                     </p>

@@ -63,9 +63,10 @@ Route::group(['middleware' => ['loggedin']], function () {
 
 Route::group(['middleware' => ['adminormember']], function () {
     Route::get('/addRecipe', [PageController::class, 'showAddRecipePage']);
+    Route::get('/editRecipe/{recipe_id}', [PageController::class, 'showEditRecipePage']);
+    Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
     Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
     Route::post('/updateSelected', [PageController::class, 'updateSelected']);
-    Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
 });
 
 Route::group(['middleware' => ['adminorahligizi']], function () {
@@ -84,7 +85,7 @@ Route::group(['middleware' => ['member']], function () {
 
     Route::get('/myCookingProgress', [PageController::class, 'showMyCookingProgressPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
-    Route::get('/temp/myRecipes', [PageController::class, 'showMyRecipesPage']);
+    Route::get('/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
 
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
