@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('img_logo');
+            $table->string('img_banner');
             $table->timestamps();
         });
     }
