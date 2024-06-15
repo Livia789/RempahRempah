@@ -13,7 +13,12 @@
                 {{$text}}
             </h5>
         @endif
-        <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">
+        <div class="img container" style="position: relative;">
+            <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">
+            @if ($recipe->company_id !== null)
+                <img src="{{ asset($recipe->company()->first()->img_logo) }}" class="card-img-top company-logo" alt="...">
+            @endif
+        </div>
         <div class="card-body">
             <h5 class="card-title">{{$recipe->name}}</h5>
             <p class="card-text">

@@ -28,6 +28,10 @@ class Recipe extends Model
         return $this->belongsTo(Category::class, 'sub_category_'.$index.'_id');
     }
 
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
     public function isPublic(){
         return $this->is_verified_by_admin !== null && $this->is_verified_by_ahli_gizi !== null && $this->rejectionReason == null && $this->type != 'private';
     }

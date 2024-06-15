@@ -18,6 +18,9 @@ class AdminOrMember
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check() && (Auth::user()->role == 'admin' || Auth::user()->role == 'member')) {
+            if (Auth::user()->accountStatus == 'new' && (request()->is('addRecipe') || request()->is('editRecipe'))) {
+                return redirect('welcome');
+            }
             return $next($request);
         }
         return abort(401);
