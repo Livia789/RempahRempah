@@ -119,7 +119,7 @@ class RecipeController extends Controller
             }
             $recipe->save();
 
-            $folderPath = 'recipeImages/recipes'.$recipe->id.'/';
+            $folderPath = 'recipeAssets/recipes'.$recipe->id.'/';
             $img = $req->file('img');
             $imgName = 'recipes'.$recipe->id.'.'.$img->getClientOriginalExtension();
             Storage::putFileAs('public/'.$folderPath, $img, $imgName);

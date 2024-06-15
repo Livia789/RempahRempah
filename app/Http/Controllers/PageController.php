@@ -281,6 +281,9 @@ class PageController extends Controller
     public function showRecipeDetailPage(Request $req, $recipe_id){
         $user = Auth::user();
         $recipe = Recipe::find($recipe_id);
+        if(!$recipe) {
+            return redirect('/');
+        }
         $reviews = $recipe->reviews($req->input('filter'))->get();
         $user_ingredients = $user? UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
         $user_tools = $user? UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
