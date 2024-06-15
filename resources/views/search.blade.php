@@ -93,9 +93,6 @@
                     <div class="col">
                         @include('templates/recipeCard', compact('recipe'))
                     </div>
-                    {{-- @php
-                        unset($isNeedProcessTrack);
-                    @endphp --}}
                 @empty
                     <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
                 @endforelse

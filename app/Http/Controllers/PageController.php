@@ -252,8 +252,8 @@ class PageController extends Controller
 
     public function showMyRecipesPage() {
         $user = Auth::user();
-        $myRecipes = $user->recipes;
-        return view('temp/myRecipes', compact('user', 'myRecipes'));
+        $recipes = $user->recipes;
+        return view('myRecipes', compact('user', 'recipes'));
     }
 
     public function showMyProfilePage() {
@@ -390,6 +390,23 @@ class PageController extends Controller
         $req->session()->put('selected_tags', $selected_tags);
         $req->session()->put('default_tags', $default_tags);
         return view('addRecipe', compact('company_all'));
+    }
+
+    public function showEditRecipePage(Request $req, $recipe_id) {
+        $recipe = Recipe::where('id', $recipe_id)->first();
+
+        if (!Auth::user()->id == $recipe->user_id || ($recipe->rejectionReason == null && $recipe->type == 'public')) {
+            abort(401);
+            // echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
+        }
+
+        $selected_tags = $recipe->tags->pluck('name')->toArray();
+        $default_tags = array_diff($this->tag_all->pluck('name')->toArray(), $selected_tags);
+        $company_all = Company::all();
+
+        $req->session()->put('selected_tags', $selected_tags);
+        $req->session()->put('default_tags', $default_tags);
+        return view('editRecipe', compact('company_all', 'recipe'));
     }
 
     public function showResultInputTag(Request $req) {
