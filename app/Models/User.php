@@ -103,4 +103,8 @@ class User extends Authenticatable
     public function followings(){
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
+
+    public function cookingHistoryRecipes(){
+        return $this->belongsToMany(Recipe::class, 'cooking_histories')->withPivot(['created_at'])->orderByDesc('cooking_histories.created_at')->get();
+    }
 }

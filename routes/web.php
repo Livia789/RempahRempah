@@ -32,7 +32,6 @@ Route::get('/showResult', [PageController::class, 'showResult']);
 // utk semua route yg utk show page di bawah ini (tdk termasuk middleware lain)
 // dicek dl accountstatusnya, kalo 'new' redirect welcome (liat yg di showSearchPage aja 3 line)
 Route::get('/search', [PageController::class, 'showSearchPage']);
-Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 Route::get('/publicProfile/{public_profile_id}', [PageController::class, 'showPublicProfilePage']);
 Route::get('/aboutUs', [PageController::class, 'showAboutUsPage']);
@@ -87,6 +86,7 @@ Route::group(['middleware' => ['member']], function () {
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/myCookingHistory', [PageController::class, 'showMyCookingHistoryPage']);
 
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
@@ -94,6 +94,7 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/dislikeReview', [ReviewController::class, 'dislikeReview']);
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
+    Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
 });
 
 Route::group(['middleware' => ['admin']], function () {

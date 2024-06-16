@@ -11,6 +11,7 @@
 
 
 @section('profileContent')
+    @include('modals.confirmationModal')
     {{-- judulnya jgn lupa --}}
     <div style="width:75%" >
         <h1>Ulasan Saya</h1>
@@ -45,7 +46,7 @@
                         </div>
                     </a>
                     <div style="margin-top:10px">
-                        <img src="assets/icons/trash_closed.png" alt="trash_icon" class="picon" onclick="deleteReview(this)" review_id="{{$review->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)">
+                        <img src="assets/icons/trash_closed.png" alt="trash_icon" class="picon" confAction="deleteReview" onclick="showConfirmationModal(this)" review_id="{{$review->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)">
                     </div>
                 </div>
             @endforeach

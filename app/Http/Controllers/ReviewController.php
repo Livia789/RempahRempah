@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ReviewReaction;
 use App\Models\Review;
+use App\Models\CookingHistory;
 
 class ReviewController extends Controller
 {
@@ -65,6 +66,19 @@ class ReviewController extends Controller
         ]);
     }
 
+    public function addRecipeToCookingHistory(Request $req){
+        $cookingHistory = new CookingHistory;
+        $cookingHistoryTodayExists = CookingHistory::where('user_id', $req->user_id)->where('recipe_id', $req->recipe_id)->where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->first();
+        // dump("di review : " . (string)$cookingHistoryTodayExists);
+        if(!$cookingHistoryTodayExists){
+            $cookingHistory->user_id = $req->user_id;
+            $cookingHistory->recipe_id = $req->recipe_id;
+            $cookingHistory->save();
+            return "history added";
+        }
+        return "history exists";
+    }
+
     public function submitReview(Request $req){
         $review = new Review;
         $review->recipe_id = $req->recipe_id;
@@ -80,6 +94,9 @@ class ReviewController extends Controller
             $review->img = null;
         }
         $review->save();
+
+        $this->addRecipeToCookingHistory($req);
+
         return redirect('recipeDetail/'.$req->recipe_id.'?filter=dateDesc');
     }
 
