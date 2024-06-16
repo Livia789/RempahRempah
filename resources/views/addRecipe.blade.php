@@ -535,7 +535,7 @@
                         cropper.destroy();
                     }
                     cropper = new Cropper(image, {
-                        aspectRatio: 1,
+                        aspectRatio: 4/3,
                         viewMode: 1,
                         dragMode: 'move',
                         cropBoxResizable: false
