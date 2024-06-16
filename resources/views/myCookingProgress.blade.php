@@ -15,6 +15,7 @@
     var user_id = '{{$user ? $user->id : -1}}';
 </script>
 @section('content')
+    @include('modals.confirmationModal')
     <div class="cookingProgressContainer">
         <div>
             <h1>Progress Memasak</h1>
@@ -35,7 +36,7 @@
                     <a href="/recipeDetail/{{$recipe->id}}" style="flex:1; padding-left:25px; color:black">
                         <h5>{{$recipe->name}}</h5>
                     </a>
-                    <img id="btnRemoveProgress" onclick="removeProgress(this)" recipe_id="{{$recipe->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)" class="trash_closed" src="/assets/icons/trash_closed.png" style="width:25px; height:25px; text-align:right" alt="trash_icon">
+                    <img id="btnRemoveProgress" confAction="removeProgress" onclick="showConfirmationModal(this)" recipe_id="{{$recipe->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)" class="trash_closed" src="/assets/icons/trash_closed.png" style="width:25px; height:25px; text-align:right" alt="trash_icon">
                 </div>
                 <a href="/recipeDetail/{{$recipe->id}}" style="color:black">
                     <div class="d-flex" style="padding-top:30px">

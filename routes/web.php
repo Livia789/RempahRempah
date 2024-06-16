@@ -32,7 +32,6 @@ Route::get('/showResult', [PageController::class, 'showResult']);
 // utk semua route yg utk show page di bawah ini (tdk termasuk middleware lain)
 // dicek dl accountstatusnya, kalo 'new' redirect welcome (liat yg di showSearchPage aja 3 line)
 Route::get('/search', [PageController::class, 'showSearchPage']);
-Route::get('/temp/recipeDetail/{recipe_id}', [PageController::class, 'TEMP_showRecipeDetailPage']);
 Route::get('/recipeDetail/{recipe_id}', [PageController::class, 'showRecipeDetailPage']);
 Route::get('/publicProfile/{public_profile_id}', [PageController::class, 'showPublicProfilePage']);
 Route::get('/aboutUs', [PageController::class, 'showAboutUsPage']);

@@ -36,6 +36,10 @@ class Recipe extends Model
         return $this->is_verified_by_admin && $this->is_verified_by_ahli_gizi && $this->rejectionReason == null && $this->type != 'private';
     }
 
+    public function isPublicButNotPublished(){
+        return $this->type != 'private' && (!$this->is_verified_by_admin || !$this->is_verified_by_ahli_gizi);
+    }
+
     public function reviews($filter = ''){
         $reviews = $this->hasMany(Review::class);
         if($filter == 'dateAsc') return $reviews->orderBy('created_at', 'asc');

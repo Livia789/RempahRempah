@@ -29,6 +29,11 @@
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
+                @elseif($recipe->isPublicButNotPublished())
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang dalam proses verifikasi dapat menyebabkan hipertensi')">
+                        <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
+                        Edit Resep
+                    </a>
                 @else
                     <a class="sharpBox" style="margin-left:30px;" href="/editRecipe/{{$recipe->id}}">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
