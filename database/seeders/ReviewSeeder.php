@@ -22,7 +22,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "1",
                 "comment" => "Ayam goreng bawang putih ini sungguh luar biasa! Tekstur ayamnya renyah di luar, tapi juicy di dalamnya. Aromanya yang harum bawang putih benar-benar menggugah selera.",
                 "rating" => "5",
-                "img" => "review1.webp",
+                "img" => "review1.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now(),
             ],
@@ -94,7 +94,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "2",
                 "comment" => "Rendang Daging Sapi ala Jawa ini benar-benar memukau! Dagingnya lembut dan bumbunya meresap sempurna, memberikan citra rasa yang autentik. Saya suka betapa kaya akan rempah-rempahnya dan aroma yang menggugah selera.",
                 "rating" => "5",
-                "img" => "review2.jpg",
+                "img" => "review2.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -121,7 +121,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "3",
                 "comment" => "Cookies Ginger Pohon Natal adalah sentuhan magis dalam setiap gigitannya! Rasanya yang kaya jahe dan teksturnya yang renyah membuatnya sempurna sebagai camilan untuk merayakan musim liburan.",
                 "rating" => "5",
-                "img" => "review3.jpg",
+                "img" => "review3.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -157,7 +157,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "4",
                 "comment" => "Resep kue kering nastar ini sangat mudah diikuti dan hasilnya luar biasa! Aroma harum dari adonan yang terbuat dari campuran mentega, gula, dan kuning telur membuatnya begitu menggugah selera. Selai nanas di tengahnya memberikan sentuhan manis yang sempurna.",
                 "rating" => "5",
-                "img" => "review4.jpg",
+                "img" => "review4.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -184,7 +184,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "5",
                 "comment" => "Resep Gudeg Ala Jogja ini benar-benar membawa cita rasa autentik kota pelajar ke dalam hidangan saya. Dengan bumbu rempah yang kaya dan nangka muda yang empuk, setiap suapan memberikan pengalaman kuliner yang mengesankan.",
                 "rating" => "5",
-                "img" => "review5.webp",
+                "img" => "review5.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -202,7 +202,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "6",
                 "comment" => "Resep combro ini memberikan kombinasi tekstur yang sempurna dengan lapisan luar yang renyah dan lembut dalamnya. Hasilnya adalah camilan yang memuaskan bagi siapa pun yang menyukai rasa gurih dan kaya akan cita rasa.",
                 "rating" => "5",
-                "img" => "review6.jpg",
+                "img" => "review6.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -229,7 +229,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "7",
                 "comment" => "Resep dodol Garut menghadirkan cita rasa tradisional yang kaya dan manis yang menjadi ikon kelezatan dari daerah Garut. Rasanya yang lembut dan gurih memikat lidah siapa pun yang mencicipinya.",
                 "rating" => "5",
-                "img" => "review7.jpg",
+                "img" => "review7.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -265,7 +265,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "8",
                 "comment" => "Resep nasi liwet kukus ini adalah penghidangan klasik yang mempertahankan kelezatan tradisionalnya. Tekstur lembut dan rasa rempah yang kaya membuat setiap suapan menjadi kenikmatan yang tak terlupakan.",
                 "rating" => "5",
-                "img" => "review8.jpg",
+                "img" => "review8.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -310,7 +310,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "9",
                 "comment" => "Resep sate Padang menghadirkan cita rasa khas dengan bumbu rempah yang kaya dan kuah yang gurih. Daging sapi yang diolah dengan sempurna dan dilumuri bumbu Padang memberikan pengalaman kuliner yang autentik dan memikat.",
                 "rating" => "5",
-                "img" => "review9.webp",
+                "img" => "review9.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -328,7 +328,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "10",
                 "comment" => "Resep kerak telor ini merupakan hidangan tradisional khas Jakarta yang tak bisa dilewatkan. Tekstur renyah dari kerak telor yang disajikan dengan taburan kelapa sangrai dan bawang goreng membuatnya menjadi camilan yang menggugah selera.",
                 "rating" => "5",
-                "img" => "review10.jpg",
+                "img" => "review10.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -337,7 +337,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "11",
                 "comment" => "Resep es pisang ijo menghadirkan kesegaran rasa buah tropis dalam setiap suapannya. Paduan pisang yang lembut dan manis, dilapisi dengan adonan tepung hijau dan disajikan dengan santan dan sirup gula merah, membuatnya menjadi hidangan pencuci mulut yang sempurna untuk menikmati cuaca panas.",
                 "rating" => "4",
-                "img" => "review11.jpg",
+                "img" => "review11.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -364,7 +364,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "12",
                 "comment" => "Lumpia khas Semarang adalah hidangan yang lezat dan populer, terdiri dari rebung, daging ayam, dan bumbu-bumbu rempah yang disajikan dalam kulit lumpia yang renyah. Rasanya yang gurih dan tekstur yang crunchy membuatnya menjadi pilihan favorit untuk dinikmati sebagai camilan atau hidangan utama.",
                 "rating" => "5",
-                "img" => "review12.jpg",
+                "img" => "review12.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -382,7 +382,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "13",
                 "comment" => "Ayam Pop adalah hidangan ayam yang populer di Indonesia, khususnya di daerah Padang, Sumatra Barat. Hidangan ini terdiri dari potongan ayam yang dipanggang atau digoreng hingga kulitnya renyah sementara dagingnya tetap lembut dan bumbu rempahnya meresap. Rasanya gurih, pedas, dan kaya rempah, menjadikannya pilihan yang sempurna untuk dinikmati bersama nasi putih dan sambal.",
                 "rating" => "5",
-                "img" => "review13.jpg",
+                "img" => "review13.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -391,7 +391,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "14",
                 "comment" => "Kelezatan brongkos tidak hanya berasal dari bumbu-bumbu rempahnya, tetapi juga dari paduan berbagai bahan seperti tahu, tempe, dan kacang panjang yang menambah tekstur dan rasa yang beragam.",
                 "rating" => "4",
-                "img" => "review14.jpg",
+                "img" => "review14.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -409,7 +409,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "15",
                 "comment" => "Mochi khas Semarang ini menghadirkan rasa tradisional dengan tekstur yang lembut dan kenyal. Rasanya yang manis dengan isian kacang merah atau wijen membuatnya cocok sebagai camilan di sore hari.",
                 "rating" => "5",
-                "img" => "review15.jpg",
+                "img" => "review15.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -427,7 +427,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "16",
                 "comment" => "Rasakan kelezatan khas Sulawesi dengan coto Makassar yang kaya akan rempah-rempah. Kuahnya yang gurih dan daging sapi yang empuk membuat hidangan ini begitu memikat!",
                 "rating" => "4",
-                "img" => "review16.jpg",
+                "img" => "review16.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -436,7 +436,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "17",
                 "comment" => "Dengan campuran sayuran segar, disajikan dengan lapisan saus kacang khas, resep gado-gado klasik ini memukau dengan kelezatan dan keanekaragaman tekstur.",
                 "rating" => "5",
-                "img" => "review17.jpg",
+                "img" => "review17.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -454,7 +454,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "18",
                 "comment" => "Dengan aroma harum buluh yang meresap dalam nasi yang empuk, Lemang Tapai menawarkan cita rasa yang kaya dan lezat yang cocok untuk disantap sebagai hidangan utama atau makanan pendamping.",
                 "rating" => "5",
-                "img" => "review18.jpg",
+                "img" => "review18.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -463,7 +463,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "19",
                 "comment" => "Resep ini menghadirkan krecek yang renyah dan pedas yang memikat selera. Bumbu sambal yang meresap sempurna membuat hidangan ini cocok sebagai pendamping nasi hangat",
                 "rating" => "5",
-                "img" => "review19.jpg",
+                "img" => "review19.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -472,7 +472,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "20",
                 "comment" => "Roti Gambang ini begitu lembut dan beraroma, dengan kombinasi sempurna antara aroma kayu manis dan kelembutan tekstur rotinya. Sangat cocok dinikmati sebagai camilan atau sarapan pagi yang menggugah selera.",
                 "rating" => "5",
-                "img" => "review20.jpg",
+                "img" => "review20.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -490,7 +490,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "21",
                 "comment" => "Kapurung menawarkan cita rasa autentik khas Sulawesi Selatan yang kaya akan rempah-rempah. Kuahnya yang kental dan gurih berpadu sempurna dengan sayuran segar dan potongan ikan atau daging, menciptakan harmoni rasa yang memanjakan lidah.",
                 "rating" => "5",
-                "img" => "review21.jpg",
+                "img" => "review21.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -517,7 +517,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "22",
                 "comment" => "Tampilannya unik dan menggoda. Sangat kreatif cara mereka membentuk roti menjadi sesuatu yang menyerupai buaya. Rasanya juga lezat, renyah di luar dan lembut di dalam.",
                 "rating" => "5",
-                "img" => "review22.jpg",
+                "img" => "review22.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -544,7 +544,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "23",
                 "comment" => "Kue Keranjang adalah kudapan tradisional yang lezat dengan tekstur kenyal dan manis. Sangat cocok dinikmati sebagai camilan atau hidangan penutup.",
                 "rating" => "5",
-                "img" => "review23.webp",
+                "img" => "review23.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -589,7 +589,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "24",
                 "comment" => "Kue bulan mereka sangat lezat dan memikat! Isian biji teratai memberikan rasa manis yang begitu nikmat di lidah.",
                 "rating" => "5",
-                "img" => "review24.jpg",
+                "img" => "review24.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -625,7 +625,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "25",
                 "comment" => "Klapertart Keju ini luar biasa! Kombinasi lembutnya custard kelapa dengan cita rasa gurih keju membuatnya begitu memikat. Teksturnya yang lembut dan aroma harumnya sungguh menggugah selera. Sungguh pilihan sempurna untuk menemani santap sore atau sebagai pencuci mulut yang memuaskan.",
                 "rating" => "5",
-                "img" => "review25.jpg",
+                "img" => "review25.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -661,7 +661,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "26",
                 "comment" => "Es Loder merupakan menu yang menyegarkan dengan paduan unik antara es serut dan berbagai jenis topping seperti jelly, kacang, dan buah-buahan segar. Rasanya yang manis dan segar cocok untuk dinikmati di hari yang panas.",
                 "rating" => "4",
-                "img" => "review26.jpg",
+                "img" => "review26.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -688,7 +688,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "27",
                 "comment" => "Galamai ini luar biasa! Teksturnya yang kenyal dan aroma rempahnya begitu menggugah selera. Rasanya yang gurih dengan sentuhan manis pas membuatnya jadi menu favorit di keluarga kami.",
                 "rating" => "5",
-                "img" => "review27.webp",
+                "img" => "review27.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -715,7 +715,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "28",
                 "comment" => "Resep klepon ketan ini menghasilkan jajanan tradisional yang lezat dengan rasa manis gula merah yang legit. Tekstur kenyal dan aromanya yang harum membuatnya cocok dinikmati sebagai cemilan di waktu senggang.",
                 "rating" => "4",
-                "img" => "review28.jpg",
+                "img" => "review28.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -751,7 +751,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "29",
                 "comment" => "Resep Es Gempol Pleret ini menghadirkan cita rasa tradisional yang lezat dan menyegarkan. Tekstur gempol yang kenyal dipadu dengan aroma gula merah dan santan membuatnya menjadi pilihan dessert yang cocok untuk dinikmati di tengah hari yang panas.",
                 "rating" => "5",
-                "img" => "review29.jpg",
+                "img" => "review29.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -769,7 +769,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "30",
                 "comment" => "Es Pallu Butung ini benar-benar menyegarkan! Rasanya yang manis dan segar dari santan, gula merah, dan es serutnya membuatnya sempurna untuk dinikmati di hari yang panas.",
                 "rating" => "5",
-                "img" => "review30.jpg",
+                "img" => "review30.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -787,7 +787,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "31",
                 "comment" => "Menu ayam kodok ini sungguh menggugah selera! Dengan bumbu rempah yang meresap sempurna ke dalam daging ayam yang empuk, setiap suapan memberikan sensasi yang menggoda. Tidak hanya lezat, tetapi juga mudah disiapkan, menjadikan hidangan ini pilihan sempurna untuk keluarga yang ingin menikmati hidangan yang istimewa.",
                 "rating" => "5",
-                "img" => "review31.jpg",
+                "img" => "review31.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -805,7 +805,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "32",
                 "comment" => "Santapannya menggugah selera! Kuah santan yang kental menyatu sempurna dengan aroma rempah-rempah yang meresap pada telur. Rasanya benar-benar menggoda dan cocok untuk santapan sehari-hari.",
                 "rating" => "5",
-                "img" => "review32.webp",
+                "img" => "review32.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -841,7 +841,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "33",
                 "comment" => "Bubur Ayam Betawi adalah sajian khas yang lezat dan menyehatkan. Dengan bahan-bahan seperti ayam, beras, dan rempah-rempah, bubur ini memiliki cita rasa yang khas dan gurih.",
                 "rating" => "5",
-                "img" => "review33.jpg",
+                "img" => "review33.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -850,7 +850,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "34",
                 "comment" => "Resep ini menghadirkan bubur yang lembut dengan sentuhan kriuk dari keripik bayam yang renyah. Kaya akan nutrisi dari bayam dan beras, bubur ini tidak hanya menggugah selera, tetapi juga memberikan rasa yang memanjakan lidah. Cocok untuk sarapan atau makanan ringan di tengah hari.",
                 "rating" => "5",
-                "img" => "review34.jpg",
+                "img" => "review34.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -868,7 +868,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "35",
                 "comment" => "Nasi tutug oncom adalah sajian yang menggabungkan kelezatan nasi dengan cita rasa gurih oncom yang khas. Kedua bahan tersebut dipadukan dengan sempurna, memberikan rasa yang kaya dan tekstur yang menggoda. ",
                 "rating" => "4",
-                "img" => "review35.jpg",
+                "img" => "review35.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -895,7 +895,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "36",
                 "comment" => "Resep lodeh ini luar biasa! Rasanya autentik dan kaya rempah-rempah. Saya sangat suka dengan paduan santan yang lezat dan sayuran yang empuk. Sangat cocok disantap bersama nasi hangat.",
                 "rating" => "5",
-                "img" => "review36.jpg",
+                "img" => "review36.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -922,7 +922,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "37",
                 "comment" => "Resep cumi saus Padang ini sangat lezat! Cumi yang digoreng tepung disiram dengan saus Padang yang pedas dan gurih, menciptakan paduan cita rasa yang menggoda.",
                 "rating" => "5",
-                "img" => "review37.jpg",
+                "img" => "review37.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -967,7 +967,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "38",
                 "comment" => "Resep cuanki sehat ini benar-benar menyegarkan! Dengan paduan aneka sayuran segar dan bumbu rempah yang khas, cuanki ini memberikan cita rasa yang luar biasa. Cocok untuk disantap sebagai hidangan hangat di hari-hari yang sejuk.",
                 "rating" => "4",
-                "img" => "review38.webp",
+                "img" => "review38.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -985,7 +985,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "39",
                 "comment" => "Dalam resep ini, mie celor disajikan dengan bahan-bahan vegan yang menggugah selera. Sayuran segar seperti tauge, wortel, dan kubis, dicampur dengan saus lezat berbahan dasar santan, membuat hidangan ini kaya akan rasa dan gizi. Cocok bagi yang mencari opsi makanan yang ramah lingkungan dan menyehatkan.",
                 "rating" => "4",
-                "img" => "review39.webp",
+                "img" => "review39.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
@@ -1003,7 +1003,7 @@ class ReviewSeeder extends Seeder
                 "recipe_id" => "40",
                 "comment" => "Semur daging ini enak banget! Dagingnya empuk dan bumbunya meresap sempurna. Cocok banget disantap dengan nasi hangat di hari-hari yang sejuk.",
                 "rating" => "5",
-                "img" => "review40.jpg",
+                "img" => "review40.png",
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
