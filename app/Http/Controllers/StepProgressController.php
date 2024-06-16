@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StepProgress;
 use App\Models\Recipe;
+use App\Models\CookingHistory;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -17,8 +18,21 @@ class StepProgressController extends Controller
         $recipe = Recipe::find($recipe_id);
         $user = Auth::user();
         $totalSteps = $recipe->totalSteps();
-        $doneSteps = $user->recipeStepProgress(2)->count($recipe_id);
+        $doneSteps = $user->recipeStepProgress($recipe_id)->count();
         return $totalSteps == $doneSteps;
+    }
+
+    public function addRecipeToCookingHistory($user_id, $recipe_id){
+        $cookingHistory = new CookingHistory;
+        $cookingHistoryTodayExists = CookingHistory::where('user_id', $user_id)->where('recipe_id', $recipe_id)->where('created_at', 'LIKE', '%' . date('Y-m-d') . '%')->first();
+        // dump("di step : " . (string)$cookingHistoryTodayExists);
+        if(!$cookingHistoryTodayExists){
+            $cookingHistory->user_id = $user_id;
+            $cookingHistory->recipe_id = $recipe_id;
+            $cookingHistory->save();
+            return "history added";
+        }
+        return "history exists";
     }
 
     public function addStepProgress($step_id, $recipe_id){
@@ -29,11 +43,16 @@ class StepProgressController extends Controller
         $progress->save();
         $allStepsDone = $this->recipeStepDone($recipe_id);
 
+        if($allStepsDone){
+            $addHistoryResp = $this->addRecipeToCookingHistory(Auth::user()->id, $recipe_id);
+        }
+
         $progress = StepProgress::where('user_id', auth()->id())->where('step_id', $step_id)->exists();
         return response()->json([
             'message' => 'Progress added',
             'isProgress' => $progress,
-            'allStepsDone' => $allStepsDone
+            'allStepsDone' => $allStepsDone,
+            'addHistoryResp' => $addHistoryResp ?? ''
         ]);
     }
 

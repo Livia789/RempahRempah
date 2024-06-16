@@ -21,7 +21,22 @@
     <div class="recipeDetailContainer">
         {{--  TODO  --}}
         <p>Path 1 > Path 2 > Path 3</p>
-        <h1><b>{{ $recipe->name }}</b></h1>
+        <div class="d-flex">
+            <h1><b>{{ $recipe->name }}</b></h1>
+            @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
+                @if($recipe->isPublished())
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang telah dirilis ke publik dapat menyebabkan anemia')">
+                        <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
+                        Edit Resep
+                    </a>
+                @else
+                    <a class="sharpBox" style="margin-left:30px;" href="/editRecipe/{{$recipe->id}}">
+                        <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
+                        Edit Resep
+                    </a>
+                @endif
+            @endif
+        </div>
         <div class="d-flex mt-1 mb-1">
             {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
             @foreach($recipe->tags as $tag)
@@ -81,7 +96,19 @@
                 </div>
             </div>
         @elseif(Auth::user()->role == 'ahli_gizi')
-            @if(!$recipe->nutrition->count() && !$recipe->energiDariLemak && !$recipe->energiDariLemak)
+            @if(!$recipe->is_verified_by_admin)
+                @if(!$recipe->rejectionReason)
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)" onclick="alert('Nilai gizi belum dapat diberikan karena resep masih belum diverifikasi admin')">
+                        <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
+                        Menunggu verifikasi admin
+                    </div>
+                @else
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)" onclick="alert('Nilai gizi belum dapat diberikan karena resep masih belum diverifikasi admin')">
+                        <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">
+                        Nilai gizi tidak dapat ditambah karena resep ditolak admin
+                    </div>
+                @endif
+            @elseif(!$recipe->nutrition->count() && !$recipe->energiDariLemak && !$recipe->energiDariLemak)
                 @if($recipe->ahli_gizi_id == Auth::user()->id)
                     <div class="sharpBox" onclick="$('#addNutritionModalContainer').modal('show')">
                         <img src="/assets/icons/nutrition_icon.png" class="picon" alt="nutrition_icon">

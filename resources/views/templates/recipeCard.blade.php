@@ -13,6 +13,11 @@
                 {{$text}}
             </h5>
         @endif
+        @if($recipe->pivot && $recipe->pivot->created_at !== null)
+            <p>
+                Dimasak {{$recipe->pivot->created_at->format('d M Y')}}
+            </p>
+        @endif
         <div class="img container" style="position: relative;">
             <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">
             @if ($recipe->company_id !== null)

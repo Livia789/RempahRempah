@@ -87,6 +87,7 @@ Route::group(['middleware' => ['member']], function () {
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
     Route::get('/myRecipes', [PageController::class, 'showMyRecipesPage']);
     Route::get('/myBookmarks', [PageController::class, 'showMyBookmarksPage']);
+    Route::get('/myCookingHistory', [PageController::class, 'showMyCookingHistoryPage']);
 
     Route::post('/toggleBookmark', [BookmarkController::class, 'toggleBookmark']);
     Route::post('/addBookmark', [BookmarkController::class, 'addBookmark']);
@@ -94,6 +95,7 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/dislikeReview', [ReviewController::class, 'dislikeReview']);
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
+    Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
 });
 
 Route::group(['middleware' => ['admin']], function () {

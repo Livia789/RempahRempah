@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
             UserIngredientProgressSeeder::class,
             UserToolProgressSeeder::class,
             FollowsSeeder::class,
+            CookingHistorySeeder::class,
         ]);
     }
 }

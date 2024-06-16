@@ -6,6 +6,9 @@
 @if(Auth::user() && Auth::user()->role == 'ahli_gizi')
     <div class="modal fade" id="addNutritionModalContainer" aria-hidden="true">
         <div class="modal-dialog modalContainer modal-content" style="padding-right:5px; max-width: 80vw; width:60vw; height:90vh; background-color:white;">
+            <div>
+                <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon" style="float:right" onclick="$('#addNutritionModalContainer').modal('hide')">
+            </div>
             <form action="/addNutrition" id="addNutritionForm" style="padding:30px; overflow-y:auto;" method="POST">
                 @csrf
                 <b><h2>Nilai Gizi Per Sajian</h2></b>
