@@ -22,6 +22,7 @@
                 <a href="{{ request()->is('myRecipes')? '':'myRecipes' }}" id="{{ request()->is('myRecipes')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Resep Saya</a>
                 <a href="{{ request()->is('myPreferences')? '':'myPreferences' }}" id="{{ request()->is('myPreferences')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Bahan yang Dihindari</a>
                 <a href="{{ request()->is('myPassword')? '':'myPassword' }}" id="{{ request()->is('myPassword')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Perbarui Kata Sandi</a>
+                <a href="{{ request()->is('myBookmarks')? '':'myBookmarks' }}" id="{{ request()->is('myBookmarks')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Markah Saya</a>
             </div>
         </div>
 
