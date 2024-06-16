@@ -32,8 +32,12 @@ class Recipe extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function isPublic(){
-        return $this->is_verified_by_admin !== null && $this->is_verified_by_ahli_gizi !== null && $this->rejectionReason == null && $this->type != 'private';
+    public function isPublished(){
+        return $this->is_verified_by_admin && $this->is_verified_by_ahli_gizi && $this->rejectionReason == null && $this->type != 'private';
+    }
+
+    public function isPublicButNotPublished(){
+        return $this->type != 'private' && (!$this->is_verified_by_admin || !$this->is_verified_by_ahli_gizi);
     }
 
     public function reviews($filter = ''){
