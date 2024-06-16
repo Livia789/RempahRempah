@@ -1,5 +1,9 @@
 <a href="/recipeDetail/{{ $recipe->id }}" style="text-decoration: none; color:black;">
-
+    @if($recipe->pivot && $recipe->pivot->created_at !== null)
+        <p style="margin-bottom:0px">
+            Dimasak {{$recipe->pivot->created_at->format('d M Y')}}
+        </p>
+    @endif
     <div class="recipeCardContainer">
         <div class="recipeCardImg" style="position: relative;">
             <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">

@@ -279,7 +279,7 @@ class PageController extends Controller
     public function showMyBookmarksPage() {
         $user = Auth::user();
         $bookmarks = $user->bookmarks;
-        return view('temp/bookmarks', compact('user', 'bookmarks'));
+        return view('myBookmarks', compact('user', 'bookmarks'));
     }
 
     public function showRecipeDetailPage(Request $req, $recipe_id){

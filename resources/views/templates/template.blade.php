@@ -78,7 +78,7 @@
                                     <li><a class="dropdown-item" href="/myProfile">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
                                     <li><a class="dropdown-item" href="/myCookingProgress">Progress Memasak</a></li>
-                                    <li><a class="dropdown-item" href="#">Markah</a></li>
+                                    <li><a class="dropdown-item" href="/myBookmarks">Markah</a></li>
                                 @else
                                     @if (Auth::user()->role == 'admin')
                                         <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
