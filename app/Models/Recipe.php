@@ -32,10 +32,6 @@ class Recipe extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function company(){
-        return $this->belongsTo(Company::class, 'company_id');
-    }
-
     public function isPublished(){
         return $this->is_verified_by_admin && $this->is_verified_by_ahli_gizi && $this->rejectionReason == null && $this->type != 'private';
     }
