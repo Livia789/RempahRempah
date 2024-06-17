@@ -47,13 +47,6 @@ a:hover {
     border-radius: 5px;
 }
 
-.profileLinkHpcontainer {
-    display: flex;
-    flex-direction: column;
-    padding:5px 10px;
-    margin-bottom:40px;
-}
-
 .profileLinksHPContainer{
     display:none;
     margin:auto;
@@ -88,7 +81,7 @@ a:hover {
     }
 
     .profileLinksPCContainer{
-        display:none;
+        display:none;   
     }
 
     .updateProfileForm{
@@ -98,7 +91,7 @@ a:hover {
 }
 
 @media(max-width: 600px) {
-    .profileBodyContainer {
+    .profileContainer {
         font-size: 12px;
     }
 

@@ -25,32 +25,32 @@
             </div>
             
             <div class="profileLinksHPContainer" style="justify-content:space-between">
-                <a href="{{ request()->is('myProfile')? '':'myProfile' }}" class="profileLinkHpContainer" id="{{ request()->is('myProfile')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myProfile')? '':'myProfile' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px" id="{{ request()->is('myProfile')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/profile_icon.png"  class="profileButtonIcon" alt="profile_icon" >
                     Data<br>
                     Profil
                 </a>
-                <a href="{{ request()->is('myPassword')? '':'myPassword' }}" class="profileLinkHpContainer" id="{{ request()->is('myPassword')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myPassword')? '':'myPassword' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myPassword')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/password_icon.png" class="profileButtonIcon" alt="password_icon"  >
                     Ubah<br>
                     Sandi
                 </a>
-                <a href="{{ request()->is('myRecipes')? '':'myRecipes' }}" class="profileLinkHpContainer" id="{{ request()->is('myRecipes')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myRecipes')? '':'myRecipes' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myRecipes')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/dish_icon.png" class="profileButtonIcon" alt="recipe_icon"  >
                     Resep<br>
                     Saya
                 </a>
-                <a href="{{ request()->is('myBookmarks')? '':'myBookmarks' }}" class="profileLinkHpContainer" id="{{ request()->is('myBookmarks')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myBookmarks')? '':'myBookmarks' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myBookmarks')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/bookmark_white.png" class="profileButtonIcon" alt="bookmark_icon"  >
                     Markah<br>
                     Saya
                 </a>
-                <a href="{{ request()->is('myPreferences')? '':'myPreferences' }}" class="profileLinkHpContainer" id="{{ request()->is('myPreferences')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myPreferences')? '':'myPreferences' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myPreferences')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/avoided_ingredient_icon.png" class="profileButtonIcon" alt="avoid_icon"  >
                     Hindari<br>
                     Bahan
                 </a>
-                <a href="{{ request()->is('myReviews')? '':'myReviews' }}" class="profileLinkHpContainer" id="{{ request()->is('myReviews')?'profileLinkHpselected':'' }}">
+                <a href="{{ request()->is('myReviews')? '':'myReviews' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myReviews')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/review_icon.png" class="profileButtonIcon" alt="review_icon"  >
                     Ulasan<br>
                     Saya
