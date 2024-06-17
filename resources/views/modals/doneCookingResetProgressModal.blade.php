@@ -1,8 +1,9 @@
 <div class="modal fade" id="doneCooking_resetProgressContainer" aria-hidden="true">
     <div class="modal-dialog modalContainer modal-content" style="max-width:40vw; width:40vw; background-color:white" >
-        
+        <div>
+            <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon closeModalBtn" style="float:right" onclick="$('#doneCooking_resetProgressContainer').modal('hide')">
+        </div>
         <div class="text-center justify-content-center" >
-            <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon" style="float:right" onclick="$('#doneCooking_resetProgressContainer').modal('hide')">
             <br>
             <h1>Selamat!</h1>
             <p>Anda sudah mengikuti setiap langkah pada resep <b>{{$recipe->name}}</b> ala <b>{{'@'.$recipe->creator->name}}</b></p>

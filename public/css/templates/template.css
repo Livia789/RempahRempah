@@ -218,6 +218,15 @@ form .outlinedBtn:hover, form .outlinedBtn:focus {
     z-index: 1;
 }
 
+.modalContainerContent{
+    overflow-y:auto;
+    padding:20px;
+}
+
+.closeModalBtn:hover{
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
     .company-logo {
         width: 15vw !important;
