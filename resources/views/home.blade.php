@@ -22,14 +22,14 @@
 
     <div class="homePageContainer">
 
-        <div style="padding-right:60px">
+        <div class="exclusiveMenuContainerContainer">
             <div class="exclusiveMenuContainer">
                 <div class="d-flex">
-                    <h4 style="color:white">Menu Spesial oleh</h4>
+                    <h4 class="sectionTitle" style="color:white">Menu Spesial oleh</h4>
                     <img src="{{ asset($company->img_logo) }}"
                         style="height:30px; width:auto; margin:auto 10px;" alt="RempahRempah Logo">
                 </div>
-                <img src="{{ asset($company->img_banner) }}" style="min-height:300px; border-radius:5px; width:100%; max-height:150px; margin:15px 0px; object-fit:cover" alt="exclusive_recipe_banner">
+                <img src="{{ asset($company->img_banner) }}" class="companyBanner" alt="exclusive_recipe_banner">
                 <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
                     @foreach ($company->recipes as $recipe)
                         @include('templates/recipeCard2', compact('recipe'))
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <h1>Rekomendasi</h1>
+        <h1 class="sectionTitle">Rekomendasi</h1>
 
         <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
             @foreach ($topRatedRecipes as $recipe)
@@ -46,7 +46,7 @@
             @endforeach
         </div>
 
-        <h1>Masak Kilat</h1>
+        <h1 class="sectionTitle">Masak Kilat</h1>
 
         <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
             @foreach ($fastRecipes as $recipe)

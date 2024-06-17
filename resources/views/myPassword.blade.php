@@ -6,7 +6,6 @@
 
 @section('profileContent')
 <div class="container px-5">
-    <br><br><br>
     <h1>Update Password</h1>
     @if(session('updatePasswordFailed'))
         <div class="alert alert-danger">
@@ -17,7 +16,7 @@
             {{ session('updatePasswordSuccess') }}
         </div>
     @endif
-    <form action="/updatePassword" style="width:40%" method="POST">
+    <form action="/updatePassword" class="updateProfileForm" method="POST">
         @csrf
         <div class="col">
             <label for="password" class="form-label">Kata sandi</label>

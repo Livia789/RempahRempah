@@ -12,35 +12,36 @@
     @endif
     <div class="recipeCardContainer">
         <div class="recipeCardImg" style="position: relative; margin-bottom:10px">
-            <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="...">
+            <img src="{{ asset($recipe->img) }}" class="card-img-top" alt="recipe_image">
             @if ($recipe->company_id !== null)
                 <img src="{{ asset($recipe->company()->first()->img_logo) }}" class="card-img-top companyLogo" alt="company logo">
             @endif
         </div>
         <div class="d-flex">
-            <b style="flex:1; overflow-wrap:break-word;max-width:90%; width:90%">{{ Str::limit($recipe->name, 35) }}</b>
+            {{-- <b style="flex:1; overflow-wrap:break-word;max-width:90%; width:90%">{{ Str::limit($recipe->name, 25) }}</b> --}}
+            <b style="flex:1; overflow-wrap:break-word;max-width:90%; width:90%" class="limitTextRows">{{$recipe->name}}</b>
             <img src="/assets/icons/{{$bookmarkImage}}"  class="picon bookmarkIcon" style="margin:0px;" id="recipeCardBookmarkButton" isBookmarked="{{$isBookmarked}}" onclick="recipeCard_toggleBookmark(event, this)" onmouseover="mousein_blackBookmarkIcon(this)" onmouseout="mouseout_whiteBookmarkIcon(this)" recipe_id="{{$recipe->id}}" alt="bookmark_icon">
         </div>
         @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
 
-        <div style="display:flex; margin-bottom:10px">
+        <div style="display:flex;" class="recipeCardUlasanInfoCtr">
             <img src="/assets/icons/empty_heart.png" class="picon" style="margin-right:5px;" alt="heart_icon">
             <p>
                 {{ $recipe->reviews->count('rating') }} ulasan
             </p>
         </div>
-        <div style="display:flex;">
+        <div style="display:flex;" class="recipeCardUlasanInfoCtr">
             <img src="/assets/icons/time_icon.png" class="picon" style="margin-right:5px;" alt="time_icon">
             <p>
                 {{ $recipe->getDurationStr() }}
             </p>
         </div>
         @if ($recipe->type == 'private')
-            <h6 style="color: red; width: 80px; text-align: center; border: 1px red solid; border-radius: 16px; padding: 2px 5px; float: right; ">
+            <h6 style="color: red; border: 1px red solid;" class="publicPrivateBubble">
                 Privat
             </h6>
         @elseif (Auth::check() && $recipe->user_id == Auth::user()->id)
-            <h6 style="color: green; width: 80px; text-align: center; border: 1px green solid; border-radius: 16px; padding: 2px 5px; float: right; ">
+            <h6 style="color: green; border: 1px green solid;" class="publicPrivateBubble">
                 Publik
             </h6>
         @endif
@@ -50,17 +51,17 @@
 <style>
     .recipeCardContainer {
         width: 250px;
-        height: 370px;
+        height: 390px;
         background-color: white;
-        border-radius: 7px;
+        border-radius: 9px;
         border: 3px solid black;
         padding: 15px;
-        margin:0px 20px 10px 0px;
+        margin:0px 20px 20px 0px;
     }
 
     .recipeCardImg {
         max-width: 100%;
-        border-radius: 5px;
+        border-radius: 8px;
         border: 3px solid black;
     }
 
@@ -87,18 +88,41 @@
         margin: 0px;
     }
 
+    .recipeCardContainer .publicPrivateBubble{
+        width: 80px;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 16px;
+        padding: 2px 5px;
+        float: right;
+    }
+
+    .recipeCardUlasanInfoCtr{
+        margin-bottom:10px;
+    }
+
+    .limitTextRows {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 18px;
+        max-height: calc(18px * 2);
+    }
+
     @media (max-width: 600px) {
         .recipeCardContainer {
             width: 40vw;
-            height: 60vw;
+            height: 65vw;
             background-color: white;
             border-radius: 7px;
             border: 3px solid black;
-            padding: 15px;
-            margin:0px 20px 10px 0px;
+            padding: 8px;
+            margin:0px 10px 10px 0px;
         }
 
-        p, b{
+        .recipeCardContainer p, .recipeCardContainer b{
             font-size: 12px;
         }
 
@@ -116,6 +140,38 @@
         .recipeCardContainer .bookmarkIcon{
             width: 20px;
             height: 20px;
+        }
+
+        .recipeCardContainer .publicPrivateBubble{
+            width: 55px;
+            text-align: center;
+            border: 1px solid;
+            border-radius: 16px;
+            padding: 2px 2px;
+            float: right;
+            font-size: 8px;
+        }
+
+        .recipeCardContainer .ratingContainer{
+            margin:5px 0px 0px 0px;
+        }
+
+        .recipeCardContainer .recipeCardUlasanInfoCtr{
+            margin-bottom:2px;
+        }
+
+        .limitTextRows {
+            line-height: 14px;
+            max-height: calc(14px * 2);
+        }
+
+        .recipeCardContainer .companyLogo{
+            position: absolute;
+            bottom: 0px;
+            right: 3px;
+            width: 35px;
+            height: auto;
+            z-index: 1;
         }
     }
 
@@ -164,8 +220,11 @@
             },
             success: function (response) {
                 let isBookmarked = response.isBookmarked;
-                data.setAttribute('isBookmarked', isBookmarked);
-                data.src = isBookmarked ? '/assets/icons/bookmark_black.png' : '/assets/icons/bookmark_white.png';
+                let allBookmarkButtons = document.querySelectorAll(`img[id='recipeCardBookmarkButton'][recipe_id='${recipe_id}']`);
+                allBookmarkButtons.forEach(bookmarkButton => {
+                    bookmarkButton.setAttribute('isBookmarked', isBookmarked);
+                    bookmarkButton.src = isBookmarked ? '/assets/icons/bookmark_black.png' : '/assets/icons/bookmark_white.png';
+                });
             },
             error: function (e) {
                 msg = e.status == 401 ? "[Error] Mohon login untuk dapat menyimpan resep" : "Gagal memproses permintaan simpan resep"
