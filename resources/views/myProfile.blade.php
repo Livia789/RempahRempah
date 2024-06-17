@@ -16,7 +16,7 @@
             {{ session('updateProfileSuccess') }}
         </div>
     @endif
-    <form action="/updateProfile" style="width:40%;" method="POST">
+    <form action="/updateProfile" class="updateProfileForm" method="POST">
         @csrf
         <div class="col">
             <label for="name" class="form-label">Username</label>

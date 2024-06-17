@@ -1,10 +1,45 @@
-.homePageContainer{
-    padding:20px 0px 0px 60px;
+.homePageContainer {
+    padding: 20px 0px 0px 60px;
 }
 
-.exclusiveMenuContainer{
-    padding:20px 40px;
-    background-color:black;
-    border-radius:10px;
+.exclusiveMenuContainer {
+    padding: 20px 40px;
+    background-color: black;
+    border-radius: 10px;
     margin: 30px 0px;
+}
+
+.exclusiveMenuContainerContainer {
+    padding-right: 60px;
+}
+
+.companyBanner {
+    min-height: 300px;
+    border-radius: 5px;
+    width: 100%;
+    max-height: 150px;
+    margin: 15px 0px;
+    object-fit: cover;
+}
+
+@media(max-width: 600px) {
+    .homePageContainer {
+        padding: 1px 0px 0px 20px;
+    }
+
+    .companyBanner{
+        min-height:50px;
+    }
+
+    .exclusiveMenuContainerContainer {
+        padding-right: 20px;
+    }
+
+    .exclusiveMenuContainer {
+        padding: 20px 20px;
+    }
+
+    .sectionTitle{
+        font-size:20px;
+    }
 }

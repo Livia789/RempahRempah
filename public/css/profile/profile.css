@@ -4,7 +4,8 @@
     flex-direction: row;
 }
 
-.profileBodyContainer a, a:hover {
+.profileBodyContainer a,
+a:hover {
     text-decoration: none;
     color: black;
 }
@@ -16,8 +17,10 @@
 }
 
 .profileContainer {
-    width: 25%;
+    width: 25vw;
+    min-width: 25vw;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .content {
@@ -28,6 +31,37 @@
 
 .halfWidth {
     width: 50%;
+}
+
+.profileButtonIcon {
+    height: auto;
+    width: 28px;
+    margin: auto;
+    padding:2px;
+    border:1px solid grey;
+    border-radius: 50%
+}
+
+#profileLinkHpselected {
+    border:2px solid black;
+    border-radius: 5px;
+}
+
+.profileLinkHpcontainer {
+    display: flex;
+    flex-direction: column;
+    padding:5px 10px;
+    margin-bottom:40px;
+}
+
+.profileLinksHPContainer{
+    display:none;
+    margin:auto;
+    margin-bottom:30px;
+}
+
+.updateProfileForm{
+    width:40%;
 }
 
 @media(max-width: 992px) {
@@ -42,5 +76,38 @@
 
     .profilePicture {
         width: 50px;
+    }
+
+    .profileLinksHP{
+        display:block;
+    }
+
+    .profileLinksHPContainer{
+        display:flex;
+        width:70%;
+    }
+
+    .profileLinksPCContainer{
+        display:none;
+    }
+
+    .updateProfileForm{
+        max-width:100%;
+        width:100%;
+    }
+}
+
+@media(max-width: 600px) {
+    .profileBodyContainer {
+        font-size: 12px;
+    }
+
+    .profileContainer .picon{
+        height:16px;
+        width:auto;
+    }
+
+    .profileLinksHPContainer{
+        width:100%;
     }
 }
