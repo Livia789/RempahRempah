@@ -1,8 +1,11 @@
 <div class="modal fade" id="confirmationModal" aria-hidden="true">
     <div class="modal-dialog modalContainer modal-content" style="max-width:40vw; width:40vw; background-color:white; padding-top:10px">
         
+        <div>
+            <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon closeModalBtn" style="float:right" onclick="$('#confirmationModal').modal('hide')">
+        </div>
+
         <div class="text-center justify-content-center" >
-            <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon" style="float:right" onclick="$('#confirmationModal').modal('hide')">
             <br>
             <h1 id="confirmationModalTitle"></h1>
             <img src="/assets/chef_happy.png" id="confirmationModalImg" style="border-radius:50%; height:150px; width:auto;" alt="chef_happy">
@@ -11,7 +14,7 @@
             <p id="confirmationModalP"></p>
             <div style="width:80%; margin:auto">
                 <div class="sharpBox" style="width:100%" id="confirmationTrue">Ya</div>
-                <div class="sharpBox" style="width:100%" id="confirmationFalse">Tidak</div>
+                <div class="sharpBox" style="width:100%" id="confirmationFalse" onclick="$('#confirmationModal').modal('hide')">Tidak</div>
             </div>
         </div>
     </div>
