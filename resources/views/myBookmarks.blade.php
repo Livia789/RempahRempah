@@ -2,14 +2,11 @@
 
 @section('title', 'Rempah Rempah | Markah Saya')
 
-<link rel="stylesheet" href="{{ asset('css/search.css') }}">
-<link rel="stylesheet" href="{{ asset('css/form.css') }}">
-
 @section('profileContent')
-    <div class="container px-5">
+    <div class="">
         <h1>Markah Saya</h1>
 
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap" style="width:100%;">
             @foreach($user->bookmarks as $bookmark)
                 <?php $recipe = $bookmark->recipe; ?>
                 @include('templates/recipeCard2', compact('recipe'))
