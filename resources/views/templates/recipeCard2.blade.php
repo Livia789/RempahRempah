@@ -20,7 +20,9 @@
         <div class="d-flex">
             {{-- <b style="flex:1; overflow-wrap:break-word;max-width:90%; width:90%">{{ Str::limit($recipe->name, 25) }}</b> --}}
             <b style="flex:1; overflow-wrap:break-word;max-width:90%; width:90%" class="limitTextRows">{{$recipe->name}}</b>
-            <img src="/assets/icons/{{$bookmarkImage}}"  class="picon bookmarkIcon" style="margin:0px;" id="recipeCardBookmarkButton" isBookmarked="{{$isBookmarked}}" onclick="recipeCard_toggleBookmark(event, this)" onmouseover="mousein_blackBookmarkIcon(this)" onmouseout="mouseout_whiteBookmarkIcon(this)" recipe_id="{{$recipe->id}}" alt="bookmark_icon">
+            @if(!Auth::user() || Auth::user()->role == 'member')    
+                <img src="/assets/icons/{{$bookmarkImage}}"  class="picon bookmarkIcon" style="margin:0px;" id="recipeCardBookmarkButton" isBookmarked="{{$isBookmarked}}" onclick="recipeCard_toggleBookmark(event, this)" onmouseover="mousein_blackBookmarkIcon(this)" onmouseout="mouseout_whiteBookmarkIcon(this)" recipe_id="{{$recipe->id}}" alt="bookmark_icon">
+            @endif
         </div>
         @include('templates/rating', ['rating_avg' => $recipe->reviews->avg('rating')])
 
