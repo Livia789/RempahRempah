@@ -54,16 +54,19 @@
             <?php
                 $bookmarkImage = $user && $user->bookmarks()->where('recipe_id', $recipe->id)->exists() ? 'bookmark_black.png' : 'bookmark_white.png';
             ?>
-            <div class="sharpBox" id="bookmarkButton">
-                <img src="/assets/icons/{{ $bookmarkImage }}" id="bookmarkImage" class="picon" alt="bookmark_icon">
-                Bookmark
-            </div>
-
-            <div style="margin:auto 10px auto 0px">
-                Resep oleh
-            </div>
-            <div style="margin: auto 0px">
-                <b class="roundedBox whiteBackground"><a href="/publicProfile/{{$recipe->creator->id}}">{{ '@'.$recipe->creator->name }}</a></b>
+            <div class="d-flex" style="margin:10px 0px">
+                @if(!Auth::user() || Auth::user()->role == 'member')
+                    <div class="sharpBox" id="bookmarkButton" style="margin-top:0px; margin-bottom:0px">
+                        <img src="/assets/icons/{{ $bookmarkImage }}" id="bookmarkImage" class="picon" alt="bookmark_icon">
+                        Bookmark
+                    </div>
+                @endif
+                <div style="margin:auto 10px auto 0px">
+                    Resep oleh
+                </div>
+                <div style="margin: auto 0px">
+                    <b class="roundedBox whiteBackground"><a href="/publicProfile/{{$recipe->creator->id}}">{{ '@'.$recipe->creator->name }}</a></b>
+                </div>
             </div>
         </div>
         <div class="sharpBox recipeDetailSummaryCtr">
@@ -86,6 +89,12 @@
 
             <img src="/assets/icons/time_icon.png" class="picon mb-auto mt-auto" alt="time_icon">
             <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
+
+            <div class="separatorLine"></div>
+
+            <img src="/assets/icons/dish_icon.png" class="picon mb-auto mt-auto" alt="dish_icon">
+            <b class="mb-auto mt-auto">{{ $recipe->serving }}&nbsp;sajian</b>
+
         </div>
 
         @if(!Auth::user() || Auth::user()->role == 'member')
@@ -190,6 +199,7 @@
             </div>
             <div style="width:45%">
                 <h3><b>Informasi Nilai Gizi</b></h3>
+                <p><i>Jumlah per sajian</i></p>
                 
                 @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
