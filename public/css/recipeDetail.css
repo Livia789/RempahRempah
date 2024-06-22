@@ -198,4 +198,10 @@ form label{
     .stepReviewContentCtr{
         width:100%;
     }
+
+    .modalContainer{
+        max-width: 100% !important;
+        width:90% !important;
+        margin:30px auto !important;
+    }
 }
