@@ -1,5 +1,5 @@
 .homePageContainer {
-    padding: 20px 0px 0px 60px;
+    padding: 20px 0px 0px 0px;
 }
 
 .exclusiveMenuContainer {
@@ -10,7 +10,7 @@
 }
 
 .exclusiveMenuContainerContainer {
-    padding-right: 60px;
+    padding:0px 60px;
 }
 
 .companyBanner {
@@ -21,9 +21,32 @@
     object-fit: cover;
 }
 
+.sectionTitle{
+    margin-left:60px;
+}
+
+.ganjelan{
+    margin-right:60px;
+}
+
+.homePageContainer a{
+    color:black;
+}
+
+.homeSeeMoreBtn{
+    border:2px solid black;
+    padding:3px 6px;
+    border-radius:10px;
+}
+
+.homeSeeMoreBtn:hover::after{
+    content:' 👨‍🍳 →';
+    transition:all 0.3s;
+}
+
 @media(max-width: 600px) {
     .homePageContainer {
-        padding: 1px 0px 0px 20px;
+        padding: 1px 0px 0px 0px;
     }
 
     .companyBanner{
@@ -31,7 +54,7 @@
     }
 
     .exclusiveMenuContainerContainer {
-        padding-right: 20px;
+        padding:0px 20px;
     }
 
     .exclusiveMenuContainer {
@@ -40,5 +63,10 @@
 
     .sectionTitle{
         font-size:20px;
+        margin-left:20px;
+    }
+
+    .ganjelan{
+        margin-right:20px;
     }
 }
