@@ -200,8 +200,8 @@ form label{
     }
 
     .modalContainer{
-        max-width: 100% !important;
-        width:90% !important;
+        max-width: 100vw !important;
+        width:90vw !important;
         margin:30px auto !important;
     }
 }
