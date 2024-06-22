@@ -23,12 +23,12 @@
             <h1><b>{{ $recipe->name }}</b></h1>
             @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
                 @if($recipe->isPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang telah dirilis ke publik dapat menyebabkan anemia')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Resep tidak bisa disunting karena telah dirilis ke publik')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
                 @elseif($recipe->isPublicButNotPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang dalam proses verifikasi dapat menyebabkan hipertensi')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Resep tidak bisa disunting karena sedang dalam proses verifikasi')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
