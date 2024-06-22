@@ -30,7 +30,7 @@
                         alt="RempahRempah Logo">
                 </div>
                 <img src="{{ asset($company->img_banner) }}" class="companyBanner" alt="exclusive_recipe_banner">
-                <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
+                <div class="d-flex" style="margin:10px 0px; overflow-x:scroll">
                     @foreach ($company->recipes as $recipe)
                         @include('templates/recipeCard2', compact('recipe'))
                     @endforeach
