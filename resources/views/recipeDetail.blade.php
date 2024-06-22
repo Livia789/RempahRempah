@@ -43,9 +43,9 @@
         <div class="d-flex mt-1 mb-1">
             {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
             @foreach($recipe->tags as $tag)
-                <div class="sharpBox">
+                <a href="/search?tag={{$tag->id}}" class="sharpBox">
                     {{ $tag->name }}
-                </div>
+                </a>
             @endforeach
         </div>
         <div class="d-flex">
