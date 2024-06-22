@@ -25,7 +25,7 @@
         let confAction = data.getAttribute('confAction');
 
         if(confAction == "removeProgress"){
-            document.getElementById('confirmationModalTitle').textContent = "Hapus progress memasak?";
+            document.getElementById('confirmationModalTitle').textContent = "Hapus progres memasak?";
             document.getElementById('confirmationModalP').textContent = "Progress yang sudah dihapus tidak dapat dikembalikan";
             document.getElementById('confirmationModalImg').src = "/assets/chef_trash.png";
         }else if(confAction == "deleteReview"){

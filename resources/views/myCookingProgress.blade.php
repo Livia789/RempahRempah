@@ -18,7 +18,7 @@
     @include('modals.confirmationModal')
     <div class="cookingProgressContainer">
         <div>
-            <h1>Progress Memasak</h1>
+            <h1>Progres Memasak</h1>
         </div>
 
         <div id="findRecipes" style="display:none;">
@@ -31,7 +31,7 @@
         </div>
 
         @foreach($recipes as $recipe)
-            <div class="progressCard" style="text-decoration:none; color:black">
+            <div class="progressCard" style="text-decoration:none; color:black;">
                 <div class="d-flex" style="text-align:center; justify-content:center;">
                     <a href="/recipeDetail/{{$recipe->id}}" style="flex:1; padding-left:25px; color:black">
                         <h5>{{$recipe->name}}</h5>
@@ -39,8 +39,8 @@
                     <img id="btnRemoveProgress" confAction="removeProgress" onclick="showConfirmationModal(this)" recipe_id="{{$recipe->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)" class="trash_closed" src="/assets/icons/trash_closed.png" style="width:25px; height:25px; text-align:right" alt="trash_icon">
                 </div>
                 <a href="/recipeDetail/{{$recipe->id}}" style="color:black">
-                    <div class="d-flex" style="padding-top:30px">
-                        <img src="{{ asset($recipe->img) }}" alt="{{$recipe->name}}" style="height:25%; width:25%; margin-right:20px; border:3px solid black; border-radius:5px">
+                    <div class="d-flex cookingProgressContent" style="padding-top:30px;">
+                        <img src="{{ asset($recipe->img) }}" alt="{{$recipe->name}}" class="myCookingProgressCardImage">
                         <?php
                             $userSteps = $user->recipeStepProgress($recipe->id)->count();
                             $recipeSteps = $recipe->totalSteps();
@@ -54,18 +54,17 @@
                             $recipeTools = $recipe->totalTools();
                             $toolPercentage = $recipeSteps? number_format($userTools/$recipeTools*100, 2) : 100;
                         ?>
-                        <div style="width:100%">
-
+                        <div style="width:100%" class="progressBarCtr">
                             @if($recipeIngredients)
                                 <div class="d-flex">
                                     <div style="width:40%">
-                                        <p>Ingredients Prepared</p>
+                                        <p>Bahan</p>
                                     </div>
                                     <div class="progressBar">
                                         <div class="progressBarFiller" style="width:{{$ingredientPercentage}}%"></div>
                                     </div>
                                     <div>
-                                        <b>{{$userIngredients}}/{{$recipeIngredients}}</b> completed
+                                        <b>{{$userIngredients}}/{{$recipeIngredients}}</b> <span class="webView">selesai</span>
                                     </div>
                                 </div>
                             @endif
@@ -73,13 +72,13 @@
                             @if($recipeTools)
                                 <div class="d-flex">
                                     <div style="width:40%">
-                                        <p>Tools Prepared</p>
+                                        <p>Alat</p>
                                     </div>
                                     <div class="progressBar">
                                         <div class="progressBarFiller" style="width:{{$toolPercentage}}%"></div>
                                     </div>
                                     <div>
-                                        <b>{{$userTools}}/{{$recipeTools}}</b> completed
+                                        <b>{{$userTools}}/{{$recipeTools}}</b> <span class="webView">selesai</span>
                                     </div>
                                 </div>
                             @endif
@@ -87,13 +86,13 @@
                             @if($recipeSteps)
                                 <div class="d-flex">
                                     <div style="width:40%">
-                                        <p>Steps completed</p>
+                                        <p>langkah</p>
                                     </div>
                                     <div class="progressBar">
                                         <div class="progressBarFiller" style="width:{{$stepPercentage}}%"></div>
                                     </div>
                                     <div>
-                                        <b>{{$userSteps}}/{{$recipeSteps}}</b> completed
+                                        <b>{{$userSteps}}/{{$recipeSteps}}</b> <span class="webView">selesai</span>
                                     </div>
                                 </div>
                             @endif

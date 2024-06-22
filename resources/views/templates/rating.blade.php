@@ -1,4 +1,4 @@
-<div class="d-flex rating ratingContainer">
+<div class="d-flex rating ratingContainer align-items-center">
     @for ($i = 1; $i <= 5; $i++)
         @if($i <= $rating_avg || $rating_avg>=$i-0.1)
             <img src="/assets/icons/full_star.png" class="starIcon" alt="star_icon">

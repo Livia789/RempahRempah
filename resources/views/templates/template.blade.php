@@ -66,7 +66,7 @@
                 <ul class="navbar-nav profileButton">
                     <li class="nav-item dropdown">
                         <a href="#" class="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Auth::check() ? asset(Auth::user()->img) : asset('storage/users/default_profile_img.png') }}" alt="profile image">
+                            <img class="nav-link dropdown-toggle" id="profileImg" src="{{ Auth::check() ? asset(Auth::user()->img) : asset('storage/users/default_profile_img.png') }}" alt="profile image" style="border-radius:50%">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             @if (Auth::check())
@@ -77,7 +77,7 @@
                                 @if (Auth::user()->role == 'member')
                                     <li><a class="dropdown-item" href="/myProfile">Edit Profil</a></li>
                                     <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
-                                    <li><a class="dropdown-item" href="/myCookingProgress">Progress Memasak</a></li>
+                                    <li><a class="dropdown-item" href="/myCookingProgress">Progres Memasak</a></li>
                                     <li><a class="dropdown-item" href="/myBookmarks">Markah</a></li>
                                 @else
                                     @if (Auth::user()->role == 'admin')

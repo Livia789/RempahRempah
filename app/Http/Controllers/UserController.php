@@ -227,4 +227,30 @@ class UserController extends Controller
             'otherUserFollowingsCount' => $other_user->followings->count()
         ]);
     }
+
+    public function editProfilePicture(Request $req){
+        $user = Auth::user();
+        $rules = [
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+
+        $messages = [
+            'img.required' => 'Profil belum diunggah',
+            'img.image' => 'Profil harus berupa gambar',
+            'img.mimes' => 'Format profile harus sesuai format gambar',
+            'img.max' => 'Ukuran gambar melebihi 2MB',
+        ];
+
+        $validator = Validator::make($req->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        } else {
+            $profilePicture = $req->file('img');
+            $profilePicture->store('public/users');
+            $user->img = 'storage/users/' . $profilePicture->hashName();
+            $user->save();
+            return back()->with('success', 'Foto profil berhasil diperbaharui!');
+        }
+    }
 }
