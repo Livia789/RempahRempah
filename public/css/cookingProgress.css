@@ -1,42 +1,75 @@
-.cookingProgressContainer{
+.cookingProgressContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:60px;
+    padding: 60px;
 }
 
-.progressCard{
-    background-color:white;
-    border-radius:15px;
-    border:3px solid black;
-    padding:10px;
-    width:75vh;
-    margin:10px;
+.progressCard {
+    background-color: white;
+    border-radius: 15px;
+    border: 3px solid black;
+    padding: 10px;
+    width: 40vw;
+    margin: 10px;
 }
 
-.progressBar{
-    width:150px;
-    height:20px;
-    border:2px solid black;
-    border-radius:10px;
-    margin-right:20px;
+.progressBar {
+    width: 150px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-right: 20px;
 }
 
-.progressBarFiller{
-    background-color:green;
-    width:0%;
-    height:100%;
-    border-radius:10px;
+.progressBarFiller {
+    background-color: green;
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
 }
 
-.btnSearchRecipe{
-    margin:20px auto;
+.btnSearchRecipe {
+    margin: 20px auto;
 }
 
-.btnSearchRecipe:hover::after{
-    content:' 🧑🏻‍🍳 🍽️ →';
-    transition:all 0.3s;
+.btnSearchRecipe:hover::after {
+    content: ' 🧑🏻‍🍳 🍽️ →';
+    transition: all 0.3s;
 }
 
+.myCookingProgressCardImage {
+    height: 25%;
+    width: 25%;
+    margin-right: 20px;
+    border: 3px solid black;
+    border-radius: 5px
+}
 
+@media(max-width:600px) {
+    .cookingProgressContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .webView{
+        display: none;
+    }
+
+    .progressBarCtr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .progressCard {
+        width: 80vw;
+    }
+
+    .myCookingProgressCardImage{
+        height: 50%;
+        width: 50%;
+        margin: 0px 0px 25px 0px;
+    }
+}

@@ -119,7 +119,7 @@
             <div class="d-flex">
                 <div class="sharpBox" onclick="$('#confirmation_resetProgressContainer').modal('show')">
                     <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
-                    Hapus Progress Memasak
+                    Hapus Progres Memasak
                 </div>
         
                 <div class="sharpBox" onclick="showReviewRecipeModal()">

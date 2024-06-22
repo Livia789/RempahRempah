@@ -22,6 +22,7 @@
                 <a href="{{ request()->is('myBookmarks')? '':'myBookmarks' }}" id="{{ request()->is('myBookmarks')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Markah Saya</a>
                 <a href="{{ request()->is('myPreferences')? '':'myPreferences' }}" id="{{ request()->is('myPreferences')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Bahan yang Dihindari</a>
                 <a href="{{ request()->is('myReviews')? '':'myReviews' }}" id="{{ request()->is('myReviews')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Ulasan Saya</a>
+                <a href="{{ request()->is('myCookingProgress')? '':'myCookingProgress' }}" id="{{ request()->is('myCookingProgress')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Progres Memasak Saya</a>
                 <a href="{{ request()->is('myCookingHistory')? '':'myCookingHistory' }}" id="{{ request()->is('myCookingHistory')?'sharpBoxSelected':'' }}" class="sharpBox mx-auto halfWidth">Riwayat Memasak Saya</a>
             </div>
             
@@ -56,11 +57,17 @@
                     Ulasan<br>
                     Saya
                 </a>
+                <a href="{{ request()->is('myCookingProgress')? '':'myCookingProgress' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myCookingProgress')?'profileLinkHpselected':'' }}">
+                    <img src="/assets/icons/cookHistory_icon.png" class="profileButtonIcon" alt="review_icon">
+                    Progres<br>
+                    Memasak
+                </a>
                 <a href="{{ request()->is('myCookingHistory')? '':'myCookingHistory' }}" class="profileLinkHpContainer" style="display:flex; flex-direction:column; padding:5px"  id="{{ request()->is('myCookingHistory')?'profileLinkHpselected':'' }}">
                     <img src="/assets/icons/wok_icon.png" class="profileButtonIcon" alt="review_icon">
                     Riwayat<br>
                     Memasak
                 </a>
+
                 
             </div>
         </div>
