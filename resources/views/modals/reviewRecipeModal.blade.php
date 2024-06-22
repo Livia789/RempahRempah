@@ -32,7 +32,7 @@
                 </div>
                 <div class="col" style="display:flex; flex-direction: column">
                     <label for="img">Unggah foto masakanmu :</label>
-                    <input type="file" id="reviewImg" name="img" accept="image/*"></input>  
+                    <input type="file" id="reviewImg" name="img" onchange="showFileName(this)" accept="image/*"></input>  
                 </div>
                 <button type="button" onclick="submitReviewForm()" class="sharpBox mt-5">
                     <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
@@ -43,14 +43,101 @@
                 <input type="hidden" name="user_id" value="{{$user ? $user->id : -1}}"></input>
             </form>
         </div>
-        
+    </div>
+</div>
+<div class="modal fade" id="cropModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropModalLabel">Menyesuaikan gambar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="cropContainer">
+                    <img id="imgToCrop" src="">
+                </div>
+                <div class="buttons cropper">
+                    <button class="sharpBox" id="zoom-out"><i class="fa fa-search-minus"></i></button>
+                    <button class="sharpBox" id="zoom-in"><i class="fa fa-search-plus"></i></button>
+                    <button class="sharpBox" id="rotate-left"><i class="fa fa-rotate-left"></i></button>
+                    <button class="sharpBox" id="rotate-right"><i class="fa fa-rotate-right"></i></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                <button type="button" class="btn btn-primary" onclick="cropImage()">Simpan</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    function recountTotalChar(inputId, countTextId){
+    function recountTotalChar(inputId, countTextId) {
         var rejectionText = document.getElementById(inputId).value;
         var totalChar = rejectionText.length;
         document.getElementById(countTextId).innerHTML = totalChar;
     }
+
+    let currentInput;
+    let cropper;
+    let file;
+
+    function showFileName(button) {
+        $('#reviewFormContainer').modal('hide');
+        let input = document.getElementById(button.id);
+        file = input.files[0];
+        handleImageUpload(input);
+        $('#cropModal').on('hidden.bs.modal', function () {
+            $('#reviewFormContainer').modal('show');
+        });
+    }
+
+    function handleImageUpload(input) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const image = document.getElementById('imgToCrop');
+            image.src = e.target.result;
+            currentInput = input;
+
+            image.onload = function() {
+                if (cropper) {
+                    cropper.destroy();
+                }
+                cropper = new Cropper(image, {
+                    aspectRatio: 4 / 3,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    cropBoxResizable: false
+                });
+                $('#cropModal').modal('show');
+            };
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function cropImage() {
+        const canvas = cropper.getCroppedCanvas();
+        canvas.toBlob(function(blob) {
+            const dataTransfer = new DataTransfer();
+
+            dataTransfer.items.add(new File([blob], file.name, {
+                type: file.type
+            }));
+            currentInput.files = dataTransfer.files;
+            $('#cropModal').modal('hide');
+        }, file.type);
+    }
+
+    document.getElementById('zoom-in').addEventListener('click', function() {
+        cropper.zoom(0.1);
+    });
+    document.getElementById('zoom-out').addEventListener('click', function() {
+        cropper.zoom(-0.1);
+    });
+    document.getElementById('rotate-left').addEventListener('click', function() {
+        cropper.rotate(-90);
+    });
+    document.getElementById('rotate-right').addEventListener('click', function() {
+        cropper.rotate(90);
+    });
 </script>
