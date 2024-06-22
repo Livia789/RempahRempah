@@ -123,7 +123,7 @@ class PageController extends Controller
         $recommendedRecipes = Recipe::where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->orderBy('created_at', 'desc')->limit(20)->get();
         $fastRecipes = Recipe::where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->where('duration', '<=', 30)->orderBy('duration')->limit(20)->get();
 
-        $topRatedRecipes = Recipe::with('reviews')->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating') ->take(20)->get();
+        $topRatedRecipes = Recipe::with('reviews')->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating')->where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->take(20)->get();
         return view('home', compact('company', 'fastRecipes', 'topRatedRecipes'));
     }
 
