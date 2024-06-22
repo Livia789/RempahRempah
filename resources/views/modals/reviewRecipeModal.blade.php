@@ -32,7 +32,7 @@
                 </div>
                 <div class="col" style="display:flex; flex-direction: column">
                     <label for="img">Unggah foto masakanmu :</label>
-                    <input type="file" id="reviewImg" name="img" onchange="showFileName(this)" accept="image/*"></input>  
+                    <input type="file" id="reviewImg" name="img" onchange="switchModal(this)" accept="image/*"></input>  
                 </div>
                 <button type="button" onclick="submitReviewForm()" class="sharpBox mt-5">
                     <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
@@ -82,17 +82,17 @@
     let cropper;
     let file;
 
-    function showFileName(button) {
+    function switchModal(button) {
         $('#reviewFormContainer').modal('hide');
-        let input = document.getElementById(button.id);
-        file = input.files[0];
-        handleImageUpload(input);
+        handleImageUpload(button);
         $('#cropModal').on('hidden.bs.modal', function () {
             $('#reviewFormContainer').modal('show');
         });
     }
 
     function handleImageUpload(input) {
+        file = input.files[0];
+
         const reader = new FileReader();
         reader.onload = function(e) {
             const image = document.getElementById('imgToCrop');

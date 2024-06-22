@@ -81,6 +81,7 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/updateProfile', [UserController::class, 'updateProfile']);
     Route::get('/myPassword', [PageController::class, 'showMyPasswordPage']);
     Route::post('/updatePassword', [UserController::class, 'updatePassword']);
+    Route::post('/editProfileImage', [UserController::class, 'editProfilePicture']);
 
     Route::get('/myCookingProgress', [PageController::class, 'showMyCookingProgressPage']);
     Route::get('/myReviews', [PageController::class, 'showMyReviewsPage']);
