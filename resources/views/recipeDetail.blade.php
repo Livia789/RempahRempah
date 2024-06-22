@@ -56,7 +56,7 @@
                 @if(!Auth::user() || Auth::user()->role == 'member')
                     <div class="sharpBox" id="bookmarkButton" style="margin-top:0px; margin-bottom:0px">
                         <img src="/assets/icons/{{ $bookmarkImage }}" id="bookmarkImage" class="picon" alt="bookmark_icon">
-                        Bookmark
+                        Markah
                     </div>
                 @endif
                 <div style="margin:auto 10px auto 0px">
@@ -73,7 +73,7 @@
 
             <div class="separatorLine"></div>
 
-            <img src="/assets/icons/empty_heart.png" class="picon mb-auto mt-auto" alt="heart_icon">
+            <img src="/assets/icons/review_icon.png" class="picon mb-auto mt-auto" alt="heart_icon">
             <div class="mt-auto mb-auto ">
                 <b>{{ $reviews->count() }} Ulasan</b>
             </div>
