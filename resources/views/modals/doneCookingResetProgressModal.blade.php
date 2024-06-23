@@ -10,7 +10,7 @@
             <img src="/assets/chef_happy.png" style="border-radius:50%; height:150px; width:auto;" alt="chef_happy">
 
             <br><br><br>
-            <p>Hapus progress memasak pada resep ini?</p>
+            <p>Hapus progres memasak pada resep ini?</p>
             <div style="width:80%; margin:auto">
                 <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(true)">Ya</div>
                 <div class="sharpBox" style="width:100%" onclick="doneCookingResetProgress(false)">Tidak</div>

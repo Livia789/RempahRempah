@@ -3,6 +3,7 @@
 @section('title', 'Rempah Rempah | Ulasan Saya')
 
 <link rel="stylesheet" href="{{ asset('css/profile/myReviews.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     var token = '{{csrf_token()}}';
@@ -13,13 +14,17 @@
 @section('profileContent')
     @include('modals.confirmationModal')
     {{-- judulnya jgn lupa --}}
-    <div style="width:75%" >
+    <div>
         <h1>Ulasan Saya</h1>
-        <div class="profileContentContainer">
+        <div class="profileContentContainer myReviewContainer">
+            <i id="noReviewLbl">Belum ada ulasan</i>
             @foreach($reviews as $review)
                 <?php $recipe = $review->recipe ?>
                 {{--  //TODO: link ke page recipeDetail yg baru nanti kl udah ada --}}
-                <div class="d-flex" id="reviewCard" style="margin-bottom:20px; margin-right:20px; background-color:white; border:3px solid black; border-radius:7px; width:40%; justify-content:space-between">
+                <div class="d-flex myReviewCard" id="reviewCard" style="flex-direction:column; margin-bottom:20px; margin-right:20px; background-color:white; border:3px solid black; border-radius:7px; width:40%;">
+                    <div style="margin-top:10px; margin-left:auto">
+                        <img src="assets/icons/trash_closed.png" alt="trash_icon" class="picon" confAction="deleteReview" onclick="showConfirmationModal(this)" review_id="{{$review->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)">
+                    </div>
                     <a href="/recipeDetail/{{ $recipe->id }}" class="reviewCardContainer">
                         <div class="cardContent">
                             <img src="{{ asset($review->recipe->img) }}" class="recipeImg" alt="recipe img">
@@ -41,20 +46,18 @@
                             <img src="{{ asset($review->recipe->img) }}" class="reviewImg" alt="recipe img">
     
                             {{-- ada bagusnya taro tgl dia post reviewnya jg ga sih di cardnya --}}
-                            @include('templates/rating', ['rating_avg' => $review->recipe->reviews->avg('rating')])
-                            <p>{{$review->comment}}</p>
+                            <div>
+                                @include('templates/rating', ['rating_avg' => $review->recipe->reviews->avg('rating')])
+                            </div>
+                            <p style="text-align: justify">{{$review->comment}}</p>
                         </div>
                     </a>
-                    <div style="margin-top:10px">
-                        <img src="assets/icons/trash_closed.png" alt="trash_icon" class="picon" confAction="deleteReview" onclick="showConfirmationModal(this)" review_id="{{$review->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)">
-                    </div>
                 </div>
             @endforeach
         </div>
         
     </div>
 @endsection
-
 
 <script>
     function deleteReview(trash){
@@ -71,6 +74,10 @@
                 if(res.msg == "success"){
                     progressCard.remove();
                 }
+                let reviewCount = document.getElementsByClassName('myReviewCard').length;
+                if(reviewCount == 0){
+                    $('#noReviewLbl').show();
+                }
             }
         }); 
     }
@@ -81,5 +88,13 @@
 
     function setTrashClosed(trash){
         trash.src = "/assets/icons/trash_closed.png";
-    }
+    }    
+
+    $(document).ready(function () {
+        if(reviewLength == 0){
+            $('#noReviewLbl').show();
+        }else{
+            $('#noReviewLbl').hide();
+        }
+    });
 </script>
