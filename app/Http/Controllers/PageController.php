@@ -257,7 +257,9 @@ class PageController extends Controller
     public function showMyRecipesPage() {
         $user = Auth::user();
         $recipes = $user->recipes;
-        return view('myRecipes', compact('user', 'recipes'));
+        $recipes_public = $recipes->where('type', 'public');
+        $recipes_private = $recipes->where('type', 'private');
+        return view('myRecipes', compact('user', 'recipes_public', 'recipes_private'));
     }
 
     public function showMyProfilePage() {

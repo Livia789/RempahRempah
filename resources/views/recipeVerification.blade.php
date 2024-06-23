@@ -1,15 +1,11 @@
 @extends('templates/template')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/search.css') }}">
-@endsection
-
 @section('title', 'Rempah Rempah | Verifikasi resep')
 
 @section('content')
     <style>
         .content {
-            padding: 20px 60px !important;
+            padding: 20px 30px !important;
         }
     </style>
     @php
@@ -26,13 +22,14 @@
     <div class="section">
         <div class="recipeSection">
             <h3 class="sectionDivider">{{$title_1}}</h3>
-            <div class="row row-cols-1 row-cols-md-4 g-3">
+            {{-- <div class="row row-cols-1 row-cols-md-4 g-3"> --}}
+            <div class="d-flex flex-wrap" style="width:100%;">
                 @forelse ($availableRecipes as $recipe)
-                    <div class="col">
-                        @include('templates/recipeCard', compact('recipe', 'isNeedDue', 'isNeedProcessTrack'))
-                    </div>
+                    {{-- <div class="col"> --}}
+                        @include('templates/recipeCard2', compact('recipe', 'isNeedDue', 'isNeedProcessTrack'))
+                    {{-- </div> --}}
                 @empty
-                    <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
+                    <i class="emptySearch">Belum ada resep yang sesuai</i>
                 @endforelse
                 @php
                     unset($isNeedDue);
@@ -64,13 +61,14 @@
     <div class="section">
         <div class="recipeSection">
             <h3 class="sectionDivider">{{$title_2}}</h3>
-            <div class="row row-cols-1 row-cols-md-4 g-3">
+            <div class="d-flex flex-wrap" style="width:100%;">
+            {{-- <div class="row row-cols-1 row-cols-md-4 g-3"> --}}
                 @forelse ($doneRecipes as $recipe)
-                    <div class="col">
-                        @include('templates/recipeCard', compact('recipe', 'isNeedProcessTrack'))
-                    </div>
+                    {{-- <div class="col"> --}}
+                        @include('templates/recipeCard2', compact('recipe', 'isNeedProcessTrack'))
+                    {{-- </div> --}}
                 @empty
-                    <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
+                    <i class="emptySearch">Belum ada resep yang sesuai</i>
                 @endforelse
             </div>
         </div>

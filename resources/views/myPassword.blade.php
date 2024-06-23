@@ -6,7 +6,7 @@
 
 @section('profileContent')
 <div class="container px-5">
-    <h1>Update Password</h1>
+    <h1>Ubah Kata Sandi</h1>
     @if(session('updatePasswordFailed'))
         <div class="alert alert-danger">
             {{ "Error: ".session('updatePasswordFailed') }}
@@ -34,7 +34,7 @@
         </div>
         <button class="sharpBox mt-5" type="submit" name="btn-submit" value="submit">
             <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
-            Save Password
+            Simpan kata sandi
         </button>
     </form>
 </div>

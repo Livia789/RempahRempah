@@ -6,7 +6,7 @@
 
 @section('profileContent')
 <div class="container px-5">
-    <h1>Update Profile</h1>
+    <h1>Ubah Profil</h1>
     @if (session('updateProfileFailed'))
         <div class="alert alert-danger">
             {{ "Error: ".session('updateProfileFailed') }}
@@ -28,7 +28,7 @@
         </div>
         <button class="sharpBox mt-5" type="submit" name="btn-submit" value="submit">
             <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
-            Save Profile
+            Simpan profil
         </button>
     </form>
 </div>
