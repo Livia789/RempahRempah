@@ -21,11 +21,11 @@
                     @endphp
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen--category{{$index}}" aria-expanded="true" aria-controls="panelsStayOpen--category{{$index}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen--category{{$index}}" aria-expanded="true" aria-controls="panelsStayOpen--category{{$index}}">
                                 {{$unique_ctg_group->class}}
                             </button>
                         </h2>
-                        <div id="panelsStayOpen--category{{$index}}" class="accordion-collapse collapse show">
+                        <div id="panelsStayOpen--category{{$index}}" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 @foreach ($category_all as $ctg)
                                     @if ($ctg->class == $unique_ctg_group->class)
@@ -41,11 +41,11 @@
                 @endforeach
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                             Durasi
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             @foreach ($duration_minutes as $minutes)
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}">
@@ -61,12 +61,12 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <h2 class="accordion-header">
+                    <h2 class="accordion-header collapsed">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                            Tags
+                            Tag
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             @foreach ($tag_all as $tag)
                                 <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}">
@@ -79,22 +79,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 flex-wrap">
             <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" method="GET" id="searchForm">
                 <input type="text" class="form-control me-2 textField whiteBackground" placeholder="Cari resep di sini" id="input_recipe" name="name" value="{{isset($name) ? $name : ""}}" data-type="recipe">
                 <button class="btn btn-outline-success outlinedBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
             </form>
-            <h3 class="sectionDivider">Recommendation</h3>
-            <div class="row row-cols-1 row-cols-md-3 g-3">
+            <h3 class="sectionDivider">Rekomendasi</h3>
+            <div class="d-flex flex-wrap" style="width:100%;">
                 @forelse ($recipes as $recipe)
                     @php
                         $isNeedProcessTrack = Auth::check() && Auth::user()->id == $recipe->user_id;
                     @endphp
-                    <div class="col">
-                        @include('templates/recipeCard', compact('recipe'))
-                    </div>
+                    {{-- <div class="col"> --}}
+                        @include('templates/recipeCard2', compact('recipe'))
+                    {{-- </div> --}}
                 @empty
-                    <h6 class="emptySearch">Belum ada resep yang sesuai.</h6>
+                    <i class="emptySearch">Belum ada resep yang sesuai</i>
                 @endforelse
             </div>
         </div>

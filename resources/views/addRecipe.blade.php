@@ -143,7 +143,7 @@
             <input type="file" name="img" id="img" onchange="showFileName(this)" hidden>
             <div class="d-flex justify-content-start" id="typeSection">
                 <button type="button" class="sharpBox" onclick="document.getElementById('img').click()">
-                    <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
+                    <img src="/assets/icons/cloud_upload.png" class="picon" alt="save_icon">
                     Unggah
                 </button>
                 <span id="fileName_img" class="fileName"></span>
@@ -157,7 +157,7 @@
             <input type="file" name="vid" id="vid" onchange="showFileName(this)" hidden>
             <div class="d-flex justify-content-start" id="typeSection">
                 <button type="button" class="sharpBox" onclick="document.getElementById('vid').click()">
-                    <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
+                    <img src="/assets/icons/cloud_upload.png" class="picon" alt="save_icon">
                     Unggah
                 </button>
                 <span id="fileName_vid" class="fileName"></span>
@@ -268,7 +268,7 @@
                                     <input type="file" name="stepImg[{{$i}}][{{$j}}]" id="stepImg{{$i}}_{{$j}}" onchange="showFileName(this)" hidden>
                                     <div class="d-flex justify-content-start" id="typeSection">
                                         <button type="button" class="sharpBox" onclick="document.getElementById('stepImg{{$i}}_{{$j}}').click()">
-                                            <img src="/assets/icons/cloud_save.png" class="picon" alt="save_icon">
+                                            <img src="/assets/icons/cloud_upload.png" class="picon" alt="save_icon">
                                             Unggah
                                         </button>
                                         <span id="fileName_stepImg{{$i}}_{{$j}}" class="fileName"></span>
