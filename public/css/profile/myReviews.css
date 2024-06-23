@@ -48,6 +48,10 @@
     width:20px !important;
 }
 
+.mwebView{
+    display:none;
+}
+
 @media(max-width:1500px){
     #reviewCard{
         width:100% !important;
@@ -55,18 +59,7 @@
     }
 }
 
-@media(max-width: 1200px){
-    .reviewCardContainer{
-        width:90%;
-    }
-}
-
 @media(max-width: 920px){
-    .reviewCardContainer{
-        width:100%;
-        margin:7px;
-    }
-
     .profileContentContainer{
         width:90%;
     }
@@ -93,12 +86,17 @@
     }
 
     .cardContent{
-        width:45%;
+        width:100%;
     }
 
     #reviewCard .starIcon{
         height:18px !important;
         width:18px !important;
+    }
+
+    .reviewCardContainer .reviewImg{
+        width:50%;
+        height:auto;
     }
 }
 

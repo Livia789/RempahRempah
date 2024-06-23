@@ -1,6 +1,6 @@
 @extends('templates/profile')
 
-@section('title', 'Rempah Rempah | Markah Saya')
+@section('title', 'Rempah Rempah | Riwayat Memasak Saya')
 
 @section('profileContent')
     <div class="">

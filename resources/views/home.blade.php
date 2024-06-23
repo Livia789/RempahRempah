@@ -38,19 +38,19 @@
             </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mb-2">
             <h2 class="sectionTitle" style="margin-right:20px">Rekomendasi</h2>
             <b><a href="/search" class="homeSeeMoreBtn">Lihat lainnya</a></b>
         </div>
 
-        <div class="d-flex" style="margin:0px; overflow-x:scroll">
+        <div class="d-flex mb-4" style="margin:0px; overflow-x:scroll">
             <div class="ganjelan"></div>
             @foreach ($topRatedRecipes as $recipe)
                 @include('templates/recipeCard2', compact('recipe'))
             @endforeach
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mb-2">
             <h2 class="sectionTitle" style="margin-right:20px">Masak Kilat</h2>
             <b><a href="/search?duration=30" class="homeSeeMoreBtn">Lihat lainnya</a></b>
         </div>

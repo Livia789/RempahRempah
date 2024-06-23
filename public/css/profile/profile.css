@@ -103,4 +103,9 @@ a:hover {
     .profileLinksHPContainer{
         width:100%;
     }
+
+    .profileLinkHpContainer{
+        min-width:70px;
+        width:70px;
+    }
 }
