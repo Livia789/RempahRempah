@@ -13,39 +13,41 @@
 
 @section('profileContent')
     @include('modals.confirmationModal')
-    {{-- judulnya jgn lupa --}}
     <div>
         <h1>Ulasan Saya</h1>
         <div class="profileContentContainer myReviewContainer">
             <i id="noReviewLbl">Belum ada ulasan</i>
             @foreach($reviews as $review)
                 <?php $recipe = $review->recipe ?>
-                {{--  //TODO: link ke page recipeDetail yg baru nanti kl udah ada --}}
-                <div class="d-flex myReviewCard" id="reviewCard" style="flex-direction:column; margin-bottom:20px; margin-right:20px; background-color:white; border:3px solid black; border-radius:7px; width:40%;">
-                    <div style="margin-top:10px; margin-left:auto">
+                <div class="d-flex myReviewCard" id="reviewCard" style="flex-direction:column; margin-bottom:20px; margin-right:20px; background-color:white; border:3px solid black; border-radius:7px; width:40%; box-sizing:border-box">
+                    <div style="margin-top:10px; justify-content:space-between" class="d-flex">
+                        <span style="margin-left:10px">
+                            Diulas pada <b>{{$review->created_at->format('d M Y')}}</b>
+                        </span>
                         <img src="assets/icons/trash_closed.png" alt="trash_icon" class="picon" confAction="deleteReview" onclick="showConfirmationModal(this)" review_id="{{$review->id}}" onmouseover="setTrashOpen(this)" onmouseout="setTrashClosed(this)">
                     </div>
                     <a href="/recipeDetail/{{ $recipe->id }}" class="reviewCardContainer">
-                        <div class="cardContent">
+                        <div class="cardContent webView">
                             <img src="{{ asset($review->recipe->img) }}" class="recipeImg" alt="recipe img">
                             <p class="reviewCardTitle"><b>{{ $review->recipe->name }}</b></p>
-                            <div class="d-flex align-items-center">
-                                Resep oleh &nbsp; <b>{{ "@".$review->recipe->creator->name }}</b>
+                            <div class="d-flex flex-wrap mb-2">
+                                <span>Resep oleh</span> &nbsp; <b>{{ "@".$review->recipe->creator->name }}</b>
                             </div>
                             <div class="d-flex align-items-center">
                                 <img src="/assets/icons/time_icon.png" class="picon" alt="time_icon">
                                 <p style="margin:auto 0px">{{ $review->recipe->getDurationStr() }}</p>
                             </div>
                         </div>
-                        <div class="cardDivider"></div>
+                        <div class="cardDivider webView"></div>
+
                         <div class="cardContent" style="margin-right:0px">
-                            <div class="d-flex">
+                            <div class="d-flex" style="flex-direction: column">
+                                <b class="reviewCardTitle mwebView" style="font-size:22px">{{$recipe->name}}</b>
                                 <p style="margin-top:0px;" class="reviewCardTitle">Ulasan Saya</p>
                             </div>
     
                             <img src="{{ asset($review->recipe->img) }}" class="reviewImg" alt="recipe img">
     
-                            {{-- ada bagusnya taro tgl dia post reviewnya jg ga sih di cardnya --}}
                             <div>
                                 @include('templates/rating', ['rating_avg' => $review->recipe->reviews->avg('rating')])
                             </div>
