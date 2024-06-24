@@ -121,7 +121,7 @@
                     <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
                     Hapus Progres Memasak
                 </div>
-        
+
                 <div class="sharpBox" onclick="showReviewRecipeModal()">
                     <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
                     Ulas Resep
@@ -198,7 +198,7 @@
             <div class="mwebView toolGiziContentCtr">
                 <h3><b>Informasi Nilai Gizi</b></h3>
                 <p><i>Jumlah per sajian</i></p>
-                
+
                 @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
                 @else
@@ -217,7 +217,7 @@
                                 <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$recipe->energiDariLemak." kkal"}}</span>
                             </th>
                             </tr>
-                        </thead>  
+                        </thead>
                     </table>
                     <table class="table table-striped" style="width=50%">
                     <thead>
@@ -262,7 +262,7 @@
             <div style="width:45%; margin-right:50px;" class="webView">
                 <h3><b>Informasi Nilai Gizi</b></h3>
                 <p><i>Jumlah per sajian</i></p>
-                
+
                 @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
                 @else
@@ -281,7 +281,7 @@
                                 <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$recipe->energiDariLemak." kkal"}}</span>
                             </th>
                             </tr>
-                        </thead>  
+                        </thead>
                     </table>
                     <table class="table table-striped" style="width=50%">
                     <thead>
@@ -441,7 +441,7 @@
                         <div>
                             @foreach($stepHeader->steps as $step)
                                 <?php
-                                    $progress = $step->stepProgress->first();            
+                                    $progress = $step->stepProgress->first();
                                 ?>
                                 <div class="d-flex m-2 stepDiv progressDiv" progress="{{$progress}}" step_id="{{$step->id}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                                     <div class="box shortBox">
@@ -470,8 +470,8 @@
                                 <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
                             </div>
                             <div class="dropdown-menu dropdown-menu-end" style="margin:40px 30px 0px 0px; border:2px solid black" id="reviewFilterDropdown">
-                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateDesc">Rating terbaru</a>
-                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateAsc">Rating terlama</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateDesc">Ulasan terbaru</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateAsc">Ulasan terlama</a>
                                 <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingDesc">Rating tertinggi</a>
                                 <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingAsc">Rating terendah</a>
                             </div>
