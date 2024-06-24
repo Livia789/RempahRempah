@@ -29,8 +29,8 @@
                             <div class="accordion-body">
                                 @foreach ($category_all as $ctg)
                                     @if ($ctg->class == $unique_ctg_group->class)
-                                        <a class="dropdown-item text-wrap" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}">
-                                            <input type="checkbox" name="category_{{$ctg->id}}" id="category_{{$ctg->id}}" {{isset($categoryGroups[$index]) && in_array($ctg->id, $categoryGroups[$index]) ? "checked" : "" }} class="whiteBackground"onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null)}}';">
+                                        <a class="dropdown-item text-wrap" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null, $filterBy)}}">
+                                            <input type="checkbox" name="category_{{$ctg->id}}" id="category_{{$ctg->id}}" {{isset($categoryGroups[$index]) && in_array($ctg->id, $categoryGroups[$index]) ? "checked" : "" }} class="whiteBackground"onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, $index, $ctg->id, $durations, null, $tags, null, $filterBy)}}';">
                                             {{$ctg->name}}
                                         </a>
                                     @endif
@@ -48,12 +48,12 @@
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             @foreach ($duration_minutes as $minutes)
-                                <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}">
-                                    <input type="checkbox" name="duration_{{$minutes}}" id="duration_{{$minutes}}" {{in_array($minutes, $durations) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null)}}';">
+                                <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null, $filterBy)}}">
+                                    <input type="checkbox" name="duration_{{$minutes}}" id="duration_{{$minutes}}" {{in_array($minutes, $durations) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, $minutes, $tags, null, $filterBy)}}';">
                                     &le;{{$minutes}} menit
                                 </a>
                             @endforeach
-                            <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, -1, $tags, null)}}">
+                            <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, -1, $tags, null, $filterBy)}}">
                                 <input type="checkbox" name="duration_lainnya" id="duration_lainnya" {{in_array(-1, $durations) ? " checked" : "" }} class="whiteBackground">
                                 Lainnya
                             </a>
@@ -69,8 +69,8 @@
                     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             @foreach ($tag_all as $tag)
-                                <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}">
-                                    <input type="checkbox" name="tag_{{$tag->id}}" id="tag_{{$tag->id}}" {{in_array($tag->id, $tags) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id)}}';">
+                                <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id, $filterBy)}}">
+                                    <input type="checkbox" name="tag_{{$tag->id}}" id="tag_{{$tag->id}}" {{in_array($tag->id, $tags) ? " checked" : "" }} class="whiteBackground" onclick="location.href='/search?{{ $functions['buildFilterQuery']($name, $categoryGroups, null, null, $durations, null, $tags, $tag->id, null, $filterBy)}}';">
                                     {{$tag->name}}
                                 </a>
                             @endforeach
@@ -80,9 +80,23 @@
             </div>
         </div>
         <div class="col-md-9 flex-wrap">
-            <form action="/search?{{ $functions['buildFilterQuery'](null, null, null, null, null, null, null, null)}}" class="d-flex" method="GET" id="searchForm">
+            <form action="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, $filterBy)}}" class="d-flex" method="GET" id="searchForm">
                 <input type="text" class="form-control me-2 textField whiteBackground" placeholder="Cari resep di sini" id="input_recipe" name="name" value="{{isset($name) ? $name : ""}}" data-type="recipe">
                 <button class="btn btn-outline-success outlinedBtn whiteBackground" type="submit"><i class='fa fa-search'></i></button>
+                <div class="sharpBox sortBtn" style="margin-right:0px; border-color:white; background-color:black; height:fit-content">
+                    <div id="reviewFilterBtn" class="d-flex">
+                        <p style="color:white; margin:0px 10px 0px 0px" id="sortLabel">Urutkan berdasarkan</p>
+                        <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-end" style="margin:40px 30px 0px 0px; border:2px solid black" id="reviewFilterDropdown">
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'ratingDesc')}}">Rating tertinggi</a>
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'ratingAsc')}}">Rating terendah</a>
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'reviewCountDesc')}}">Ulasan terbanyak</a>
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'reviewCountAsc')}}">Ulasan tersedikit</a>
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'dateDesc')}}">Resep terbaru</a>
+                        <a class="dropdown-item" href="/search?{{ $functions['buildFilterQuery'](null, $categoryGroups, null, null, $durations, null, $tags, null, 'dateAsc')}}">Resep terlama</a>
+                    </div>
+                </div>
             </form>
             <h3 class="sectionDivider">Rekomendasi</h3>
             <div class="d-flex flex-wrap" style="width:100%;">
@@ -121,6 +135,55 @@
         </li>
     </ul>
     <script>
+        $(document).ready(function () {
+            $('#reviewFilterBtn').click(function () {
+                $('#reviewFilterDropdown').toggle();
+            });
+        });
+        function setSortLabel(){
+            let sortLabel = new URLSearchParams(window.location.search).get('filterBy');
+            if(sortLabel){
+                let setLableTo = 'Urutkan berdasarkan';
+                if(sortLabel == 'ratingDesc') setLableTo = 'Rating tertinggi';
+                if(sortLabel == 'ratingAsc') setLableTo = 'Rating terendah';
+                if(sortLabel == 'reviewCountDesc') setLableTo = 'Ulasan terbanyak';
+                if(sortLabel == 'reviewCountAsc') setLableTo = 'Ulasan tersedikit';
+                if(sortLabel == 'dateDesc') setLableTo = 'Resep terbaru';
+                if(sortLabel == 'dateAsc') setLableTo = 'Resep terlama';
+                const sortLabelElement = document.getElementById('sortLabel');
+                sortLabelElement.innerHTML = setLableTo;
+            }
+        }
+        $(document).ready(function () {
+            setSortLabel();
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            function addAccordionClass() {
+                if (window.innerWidth < 992) {
+                    document.querySelectorAll('.accordion-button').forEach(function(element) {
+                        element.classList.add('collapsed');
+                    });
+                    document.querySelectorAll('.accordion-collapse').forEach(function(element) {
+                        element.classList.remove('show');
+                    });
+                } else {
+                    document.querySelectorAll('.accordion-button').forEach(function(element) {
+                        element.classList.remove('collapsed');
+                    });
+                    document.querySelectorAll('.accordion-collapse').forEach(function(element) {
+                        element.classList.add('show');
+                    });
+                }
+            }
+
+            addAccordionClass();
+
+            window.addEventListener('resize', function() {
+                addAccordionClass();
+            });
+        });
+
         $(document).ready(function() {
             $(document).on('keypress', '#input_recipe', function(e) {
                 if (e.which === 13) {
