@@ -80,24 +80,27 @@ class ReviewController extends Controller
     }
 
     public function submitReview(Request $req){
-        $review = new Review;
-        $review->recipe_id = $req->recipe_id;
-        $review->user_id = $req->user_id;
-        $review->rating = $req->rating;
-        $review->comment = $req->comment;
-
-        if ($req->img) {
-            $reviewImg = $req->file('img');
-            $reviewImg->store('public/reviewImages');
-            $review->img = $reviewImg->hashName();
-        }else{
-            $review->img = null;
+        if($req->user_id != $req->creator_id){
+            $review = new Review;
+            $review->recipe_id = $req->recipe_id;
+            $review->user_id = $req->user_id;
+            $review->rating = $req->rating;
+            $review->comment = $req->comment;
+    
+            if ($req->img) {
+                $reviewImg = $req->file('img');
+                $reviewImg->store('public/reviewImages');
+                $review->img = $reviewImg->hashName();
+            }else{
+                $review->img = null;
+            }
+            $review->save();
+    
+            $this->addRecipeToCookingHistory($req);
+    
+            return redirect('recipeDetail/'.$req->recipe_id.'?filter=dateDesc');
         }
-        $review->save();
-
-        $this->addRecipeToCookingHistory($req);
-
-        return redirect('recipeDetail/'.$req->recipe_id.'?filter=dateDesc');
+        return redirect()->back()->with('error', 'User tidak bisa mereview resep sendiri');
     }
 
     public function deleteReview(Request $req){
