@@ -485,9 +485,11 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($reviews as $review)
-                        @include('templates/reviewCard')
-                    @endforeach
+                    <div style="max-height:1000px; overflow-y:scroll">
+                        @foreach($reviews as $review)
+                            @include('templates/reviewCard')
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
