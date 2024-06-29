@@ -4,7 +4,6 @@
             <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon closeModalBtn" style="float:right" onclick="$('#doneCooking_resetProgressContainer').modal('hide')">
         </div>
         <div class="text-center justify-content-center" >
-            <br>
             <h1>Selamat!</h1>
             <p>Anda sudah mengikuti setiap langkah pada resep <b>{{$recipe->name}}</b> ala <b>{{'@'.$recipe->creator->name}}</b></p>
             <img src="/assets/chef_happy.png" style="border-radius:50%; height:150px; width:auto;" alt="chef_happy">
