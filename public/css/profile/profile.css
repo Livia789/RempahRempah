@@ -11,9 +11,9 @@ a:hover {
 }
 
 .profilePicture {
-    width: 40%;
-    height: auto;
-    margin: 10px;
+    width:40%;
+    position:relative;
+    margin:0px auto;
 }
 
 .profileContainer {
@@ -55,6 +55,23 @@ a:hover {
 
 .updateProfileForm{
     width:40%;
+}
+
+.editProfilePictureBtn {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: white;
+    padding: 6px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.editProfilePictureBtn:hover {
+    background-color: rgb(227, 232, 0);
+    cursor: pointer;
 }
 
 @media(max-width: 992px) {
