@@ -12,7 +12,7 @@
                 @csrf
                 <input type="file" name="img" id="img" onchange="handleImageUpload(this)" hidden>
                 <div style="display:flex; flex-direction: column; position:relative;" class="profilePicture">
-                    <img src="{{ asset($user->img) }}" alt="profile_picture" style="border-radius:50%; border:1px solid black; margin:auto; width:100%; height:auto;">
+                    <img src="{{ asset($user->img) }}" alt="profile_picture" style="border-radius:50%; border:2px solid black; margin:auto; width:100%; height:auto;">
                     <div onclick="document.getElementById('img').click()" class="editProfilePictureBtn">
                         <img src="assets/icons/edit_icon.png" style="height:100%; width:100%">
                     </div>
