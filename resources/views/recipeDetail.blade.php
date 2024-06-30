@@ -23,12 +23,12 @@
             <h1><b>{{ $recipe->name }}</b></h1>
             @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
                 @if($recipe->isPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Resep tidak bisa disunting karena telah dirilis ke publik')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa disunting karena telah dirilis ke publik')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
                 @elseif($recipe->isPublicButNotPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Resep tidak bisa disunting karena sedang dalam proses verifikasi')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa disunting karena sedang dalam proses verifikasi')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
@@ -41,7 +41,6 @@
             @endif
         </div>
         <div class="d-flex mt-1 mb-1">
-            {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
             @foreach($recipe->tags as $tag)
                 <a href="/search?tag={{$tag->id}}" class="sharpBox">
                     {{ $tag->name }}
@@ -121,11 +120,20 @@
                     <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
                     Hapus Progres Memasak
                 </div>
+        
+                @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)" onclick="alert('Review tidak dapat dilakukan terhadap resep sendiri')">
+                        <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                        Ulas Resep
+                    </div>
+                @else
+                    <div class="sharpBox" onclick="showReviewRecipeModal()">
+                        <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                        Ulas Resep
+                    </div>
+                @endif
 
-                <div class="sharpBox" onclick="showReviewRecipeModal()">
-                    <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
-                    Ulas Resep
-                </div>
+
             </div>
         @elseif(Auth::user()->role == 'ahli_gizi')
             @if(!$recipe->is_verified_by_admin)
@@ -171,13 +179,13 @@
                             Tolak Resep
                         </div>
                     @else
-                        <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                        <div class="sharpBox" style="background-color:rgb(189, 189, 189)">
                             <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
                             Verifikasi akan dilakukan oleh admin &nbsp;<b>"{{$recipe->admin->name}}"</b>
                         </div>
                     @endif
                 @else
-                    <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)">
                         <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
                         <?php $statusVerifikasiAdmin = $recipe->is_verified_by_admin ? 'DITERIMA' : 'DITOLAK' ?>
                         Resep sudah diverifikasi oleh admin dengan status &nbsp;<b>{{$statusVerifikasiAdmin}}</b>
@@ -477,9 +485,11 @@
                             </div>
                         </div>
                     </div>
-                    @foreach($reviews as $review)
-                        @include('templates/reviewCard')
-                    @endforeach
+                    <div style="max-height:1000px; overflow-y:scroll">
+                        @foreach($reviews as $review)
+                            @include('templates/reviewCard')
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

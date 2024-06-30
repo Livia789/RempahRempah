@@ -10,7 +10,7 @@
                 <img src="/assets/icons/close_icon.png" alt="close_icon" class="picon closeModalBtn" style="float:right; margin-right:15px;" onclick="$('#addNutritionModalContainer').modal('hide')">
             </div>
             <div class="modalContainerContent">
-                <form action="/addNutrition" id="addNutritionForm" style="padding:30px;" method="POST">
+                <form action="/addNutrition" id="addNutritionForm" style="padding:30px; padding-top:0px" method="POST">
                     @csrf
                     <b><h2>Nilai Gizi Per Sajian</h2></b>
                     <br><br>
