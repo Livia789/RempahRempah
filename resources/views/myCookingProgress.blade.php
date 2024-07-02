@@ -1,9 +1,7 @@
-@extends('templates/template')
+@extends('templates/profile')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/cookingProgress.css') }}">
-@endsection
+<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+<link rel="stylesheet" href="{{ asset('css/cookingProgress.css') }}">
 
 @section('title', 'Rempah Rempah | Progress Memasak')
 
@@ -14,7 +12,7 @@
     var recipeCount = '{{count($recipes)}}';
     var user_id = '{{$user ? $user->id : -1}}';
 </script>
-@section('content')
+@section('profileContent')
     @include('modals.confirmationModal')
     <div class="cookingProgressContainer">
         <div>
