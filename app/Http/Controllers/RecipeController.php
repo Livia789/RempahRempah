@@ -21,7 +21,7 @@ class RecipeController extends Controller
 {
     public function addRecipe(Request $req) {
         $rules = [
-            'name' => 'required|min:5',
+            'name' => 'required|min:3|max:50',
             'description' => 'required|min:10',
             'category_id' => 'required',
             'duration' => 'required|numeric|min:1',
@@ -42,6 +42,7 @@ class RecipeController extends Controller
 
         $messages = [
             'name.required' => 'Nama belum diisi.',
+            'name.max' => 'Nama maksimal :max karakter.',
             'name.min' => 'Nama minimal :min karakter.',
             'description.required' => 'Deskripsi belum diisi.',
             'description.min' => 'Deskripsi minimal :min karakter.',
@@ -276,5 +277,17 @@ class RecipeController extends Controller
             app('App\\Http\\Controllers\\EmailController')->sendRecipeUpdateMail($email, $recipe->name, null, 'admin', true);
         }
         return redirect()->back();
+    }
+
+    public function deleteRecipe(Request $req) {
+        $recipe = Recipe::find($req->recipe_id);
+        if(!Auth::user() || Auth::user()->id != $recipe->user_id){
+            return response()->json([
+                'message' => 'Gagal menghapus resep'
+            ]);
+        }
+
+        $recipe->delete();
+        return redirect('/')->with('successMessage', 'Resep berhasil dihapus.');
     }
 }
