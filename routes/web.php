@@ -96,6 +96,8 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
     Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
+
+    Route::post('/deleteRecipe/{recipe_id}', [RecipeController::class, 'deleteRecipe']);
 });
 
 Route::group(['middleware' => ['admin']], function () {

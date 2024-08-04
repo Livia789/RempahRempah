@@ -24,7 +24,7 @@
             <h5>{{$public_profile->name}}</h5>
             <div class="d-flex" style="margin:15px 0px; width:300px; justify-content:space-between">
                 @if($public_profile->id == $user->id)
-                    <a href="/myProfile" style="color:black" class="sharpBox">Edit Profile</a>
+                    <a href="/myProfile" style="color:black" class="sharpBox">Edit Profil</a>
                 @else
                     <div class="sharpBox" id="btnFollow" onclick="toggleFollow()">
                         @if(Auth::user()->followings->contains($public_profile->id))
