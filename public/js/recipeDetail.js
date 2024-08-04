@@ -313,6 +313,36 @@ function showReviewRecipeModal(){
     else alert("Anda harus login untuk bisa memberikan review");
 }
 
+function deleteReview(trash){
+    var review_id = trash.getAttribute('review_id');
+    var progressCard = trash.closest('#reviewCard');
+    $.ajax({
+        url: '/deleteReview',
+        type: 'POST',
+        data: {
+            review_id: review_id,
+            _token: token
+        },
+        success: function(res){
+            if(res.msg == "success"){
+                progressCard.remove();
+            }
+            let reviewCount = document.getElementsByClassName('myReviewCard').length;
+            if(reviewCount == 0){
+                $('#noReviewLbl').show();
+            }
+        }
+    }); 
+}
+
+function setTrashOpen(trash){
+    trash.src = "/assets/icons/trash_open.png";
+}
+
+function setTrashClosed(trash){
+    trash.src = "/assets/icons/trash_closed.png";
+}    
+
 $(document).ready(function () {
     setHighlight();
     setSortLabel();
