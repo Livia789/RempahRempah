@@ -70,7 +70,7 @@ class CategorySeeder extends Seeder
                 "class" => "Daerah"
             ],
             [
-                "name" => "Tiongkok",
+                "name" => "Papua",
                 "class" => "Daerah"
             ],
             [

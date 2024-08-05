@@ -38,6 +38,23 @@
                         Edit Resep
                     </a>
                 @endif
+
+                @if($recipe->isPublished())
+                    <a class="sharpBox" style="margin-left:10px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa dihapus karena telah dirilis ke publik')">
+                        <img src="/assets/icons/trash_closed.png" class="picon" alt="edit_icon">
+                        Hapus Resep
+                    </a>
+                @else
+                    <form action="/deleteRecipe/{{$recipe->id}}" method="POST">
+                        @csrf
+                        <input type="text" name="recipeId" value="{{$recipe->id}}" hidden>
+                        <button class="sharpBox" style="margin-left:10px;" type="submit">
+                            <img src="/assets/icons/trash_closed.png" class="picon" alt="edit_icon">
+                            Hapus Resep
+                        </button>
+                    </form>
+                @endif
+
             @endif
         </div>
         <div class="d-flex mt-1 mb-1">

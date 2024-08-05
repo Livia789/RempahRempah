@@ -66,6 +66,7 @@ Route::group(['middleware' => ['adminormember']], function () {
     Route::post('/addRecipe', [RecipeController::class, 'addRecipe']);
     Route::get('/showResultInputTag', [PageController::class, 'showResultInputTag']);
     Route::post('/updateSelected', [PageController::class, 'updateSelected']);
+    Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
 });
 
 Route::group(['middleware' => ['adminorahligizi']], function () {
@@ -95,7 +96,8 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/dislikeReview', [ReviewController::class, 'dislikeReview']);
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
-    Route::post('/deleteReview', [ReviewController::class, 'deleteReview']);
+
+    Route::post('/deleteRecipe/{recipe_id}', [RecipeController::class, 'deleteRecipe']);
 });
 
 Route::group(['middleware' => ['admin']], function () {
