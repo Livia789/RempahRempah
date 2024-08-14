@@ -22,6 +22,10 @@
     background-color: rgb(227, 232, 0);
 }
 
+.btnSkip {
+    margin-left: 15px;
+}
+
 .searchField {
     margin-top: 5px;
     margin-bottom: 15px;

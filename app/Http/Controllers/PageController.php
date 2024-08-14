@@ -304,10 +304,6 @@ class PageController extends Controller
     }
 
     public function showSearchPage(Request $req) {
-        if (Auth::check() && Auth::user()->accountStatus == 'new') {
-            return redirect('welcome');
-        }
-
         $results = Recipe::query();
         if (Auth::check()) {
             $user_id = Auth::user()->id;
@@ -438,9 +434,6 @@ class PageController extends Controller
     }
 
     public function showAboutUsPage(Request $req) {
-        if (Auth::check() && Auth::user()->accountStatus == 'new') {
-            return redirect('welcome');
-        }
         return view('aboutUs');
     }
 

@@ -55,10 +55,15 @@ dd(session()->all());
                         </div>
                     @endforeach
                 </div>
-                <button class="sharpBox" type="submit" id="saveButton" name="btn-submit">
-                    <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
-                    Simpan
-                </button>
+                <div class="d-flex">
+                    <button class="sharpBox" type="submit" id="saveButton" name="btn-submit">
+                        <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
+                        Simpan
+                    </button>
+                    <button class="sharpBox btnSkip" type="submit" id="saveButton" name="btn-submit">
+                        Lewati
+                    </button>
+                </div>
             </form>
         </div>
     </div>
