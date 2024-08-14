@@ -466,8 +466,8 @@ class PageController extends Controller
         if (Auth::check() && Auth::user()->accountStatus == 'new') {
             return redirect('welcome');
         }
-        $user = Auth::user();
         $public_profile = User::find($public_profile_id);
+        $user = Auth::user();
         return view('publicProfile', compact('user', 'public_profile'));
     }
 
