@@ -176,11 +176,6 @@ class UserController extends Controller
     public function updatePreferences(Request $req) {
         $user = Auth::user();
         $src = parse_url(url()->previous(), PHP_URL_PATH);
-        if ($src == '/welcome') {
-            $user->accountStatus = 'regular';
-            $user->save();
-        }
-
         $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
         $selected_ingredients = collect($req->input('selected_ingredients'))->map(function ($ingredient) {
             return strtolower($ingredient);
@@ -198,11 +193,19 @@ class UserController extends Controller
             $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
         }
 
-        Session::forget('selected_ingredients');
-        if ($src == '/welcome') {
-            return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
+        if (!$selected_ingredients->isEmpty()) {
+            if ($src == '/welcome') {
+                $user->accountStatus = 'regular';
+                $user->save();
+            }
+            Session::forget('selected_ingredients');
+            if ($src == '/welcome') {
+                return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
+            } else {
+                return back()->with('updateSuccess', 'Data berhasil disimpan.');
+            }
         } else {
-            return back()->with('updateSuccess', 'Data berhasil disimpan.');
+            return redirect('/welcome');
         }
     }
 
