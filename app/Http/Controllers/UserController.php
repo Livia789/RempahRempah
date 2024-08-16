@@ -193,19 +193,19 @@ class UserController extends Controller
             $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
         }
 
-        if (!$selected_ingredients->isEmpty()) {
-            if ($src == '/welcome') {
-                $user->accountStatus = 'regular';
-                $user->save();
-            }
+        if ($src == '/welcome' && ($req->skipBtn === 'skip' || !$selected_ingredients->isEmpty())) {
+            $user->accountStatus = 'regular';
+            $user->save();
+        }
+        if ($src !== '/welcome') {
+            return back()->with('updateSuccess', 'Data berhasil disimpan.');
+        } else {
             Session::forget('selected_ingredients');
-            if ($src == '/welcome') {
+            if ($req->skipBtn === 'skip' || !$selected_ingredients->isEmpty()) {
                 return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
             } else {
-                return back()->with('updateSuccess', 'Data berhasil disimpan.');
+                return redirect('/welcome');
             }
-        } else {
-            return redirect('/welcome');
         }
     }
 
