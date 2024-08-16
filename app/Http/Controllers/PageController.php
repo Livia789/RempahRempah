@@ -299,7 +299,7 @@ class PageController extends Controller
         if ($recipe->isPublished() || (isset($user) && ($recipe->user_id === $user->id || $user->role == 'ahli_gizi' || $user->role == 'admin' ))) {
             return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
         } else {
-            echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
+            return redirect('/');
         }
     }
 
