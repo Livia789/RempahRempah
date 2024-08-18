@@ -12,7 +12,7 @@
 <script>
     var token = '{{csrf_token()}}';
     var public_profile_id = '{{$public_profile->id}}';
-    var user_id = '{{$user->id}}';
+    var user_id = '{{$user? $user->id : null}}';
 </script>
 
 <div>
@@ -23,11 +23,11 @@
         <div class="profileInfoContainer">
             <h5>{{$public_profile->name}}</h5>
             <div class="d-flex" style="margin:15px 0px; width:300px; justify-content:space-between">
-                @if($public_profile->id == $user->id)
+                @if(Auth::user() && $public_profile->id == Auth::user()->id)
                     <a href="/myProfile" style="color:black" class="sharpBox">Edit Profile</a>
                 @else
                     <div class="sharpBox" id="btnFollow" onclick="toggleFollow()">
-                        @if(Auth::user()->followings->contains($public_profile->id))
+                        @if(Auth::user() && Auth::user()->followings->contains($public_profile->id))
                             Unfollow
                         @else
                             Follow
@@ -56,21 +56,25 @@
 <script>
 
     function toggleFollow(){
-        $.ajax({
-            url: '/toggleFollowUser',
-            type: 'POST',
-            data: {
-                user_id: user_id,
-                other_user_id: public_profile_id,
-                _token: token
-            },
-            success: function(res){
-                document.getElementById('followerCount').textContent = res.otherUserFollowersCount,
-                document.getElementById('followingCount').textContent = res.otherUserFollowingsCount,
-                document.getElementById('btnFollow').textContent = res.isFollowing ? 'Unfollow' : 'Follow'
-            },
-        });
-    }
+        if(!user_id){
+            alert("You need to login to follow other users")
+        }else{
+                $.ajax({
+                    url: '/toggleFollowUser',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        other_user_id: public_profile_id,
+                        _token: token
+                    },
+                    success: function(res){
+                        document.getElementById('followerCount').textContent = res.otherUserFollowersCount,
+                        document.getElementById('followingCount').textContent = res.otherUserFollowingsCount,
+                        document.getElementById('btnFollow').textContent = res.isFollowing ? 'Unfollow' : 'Follow'
+                    },
+                });
+            }
+        }
 </script>
 
 @endsection

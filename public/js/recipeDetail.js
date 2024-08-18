@@ -18,10 +18,10 @@ function setSortLabel(){
     let sortLabel = new URLSearchParams(window.location.search).get('filter');
     if(sortLabel){
         let setLableTo = 'Urutkan ';
-        if(sortLabel == 'dateDesc') setLableTo = 'Review Terbaru';
-        if(sortLabel == 'dateAsc') setLableTo = 'Review Terlama';
-        if(sortLabel == 'ratingDesc') setLableTo = 'Review Tertinggi';
-        if(sortLabel == 'ratingAsc') setLableTo = 'Review Terendah';
+        if(sortLabel == 'dateDesc') setLableTo = 'Ulasan terbaru';
+        if(sortLabel == 'dateAsc') setLableTo = 'Ulasan terlama';
+        if(sortLabel == 'ratingDesc') setLableTo = 'Rating tertinggi';
+        if(sortLabel == 'ratingAsc') setLableTo = 'Rating terendah';
         const sortLabelElement = document.getElementById('sortLabel');
         sortLabelElement.innerHTML = setLableTo;
     }
@@ -117,7 +117,7 @@ function likeReview(btnLike, btnDislike) {
 
             var likeSrc = response.isLiked ? '/assets/icons/like_black.png' : '/assets/icons/like_empty.png';
             $(btnLike).find("img").attr('src', likeSrc);
-            
+
             var dislikeSrc = response.isDisliked ? '/assets/icons/dislike_black.png' : '/assets/icons/dislike_empty.png';
             $(btnDislike).find("img").attr('src', dislikeSrc);
         },
@@ -142,7 +142,7 @@ function dislikeReview(btnLike, btnDislike) {
             console.log(response);
             $(btnDislike).find('#dislikeCount').text(response.dislikeCount);
             $(btnLike).find('#likeCount').text(response.likeCount);
-            
+
             var likeSrc = response.isLiked ? '/assets/icons/like_black.png' : '/assets/icons/like_empty.png';
             $(btnLike).find("img").attr('src', likeSrc);
             var dislikeSrc = response.isDisliked ? '/assets/icons/dislike_black.png' : '/assets/icons/dislike_empty.png';
@@ -261,7 +261,7 @@ function adjustStar(rating){
         } else {
             star.src = '/assets/icons/empty_star.png';
         }
-    }  
+    }
 }
 
 function submitReviewForm(){
@@ -312,6 +312,36 @@ function showReviewRecipeModal(){
     if(user_id != -1) $('#reviewFormContainer').modal('show');
     else alert("Anda harus login untuk bisa memberikan review");
 }
+
+function deleteReview(trash){
+    var review_id = trash.getAttribute('review_id');
+    var progressCard = trash.closest('#reviewCard');
+    $.ajax({
+        url: '/deleteReview',
+        type: 'POST',
+        data: {
+            review_id: review_id,
+            _token: token
+        },
+        success: function(res){
+            if(res.msg == "success"){
+                progressCard.remove();
+            }
+            let reviewCount = document.getElementsByClassName('myReviewCard').length;
+            if(reviewCount == 0){
+                $('#noReviewLbl').show();
+            }
+        }
+    }); 
+}
+
+function setTrashOpen(trash){
+    trash.src = "/assets/icons/trash_open.png";
+}
+
+function setTrashClosed(trash){
+    trash.src = "/assets/icons/trash_closed.png";
+}    
 
 $(document).ready(function () {
     setHighlight();

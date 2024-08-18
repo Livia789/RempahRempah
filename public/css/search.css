@@ -35,3 +35,19 @@
 .emptySearch {
     width: auto;
 }
+
+#searchForm {
+    height: 60px;
+}
+
+.sortBtn {
+    margin: 0px;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+@media(max-width:600px){
+    .content{
+        padding:20px !important;
+    }
+}

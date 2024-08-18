@@ -25,12 +25,12 @@
         <div class="exclusiveMenuContainerContainer">
             <div class="exclusiveMenuContainer">
                 <div class="d-flex">
-                    <h4 class="sectionTitle" style="color:white">Menu Spesial oleh</h4>
-                    <img src="{{ asset($company->img_logo) }}"
-                        style="height:30px; width:auto; margin:auto 10px;" alt="RempahRempah Logo">
+                    <h2 style="color:white">Menu Spesial oleh</h2>
+                    <img src="{{ asset($company->img_logo) }}" style="height:30px; width:auto; margin:auto 10px;"
+                        alt="RempahRempah Logo">
                 </div>
                 <img src="{{ asset($company->img_banner) }}" class="companyBanner" alt="exclusive_recipe_banner">
-                <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
+                <div class="d-flex" style="margin:10px 0px; overflow-x:scroll">
                     @foreach ($company->recipes as $recipe)
                         @include('templates/recipeCard2', compact('recipe'))
                     @endforeach
@@ -38,17 +38,24 @@
             </div>
         </div>
 
-        <h1 class="sectionTitle">Rekomendasi</h1>
+        <div class="d-flex align-items-center mb-2">
+            <h2 class="sectionTitle" style="margin-right:20px">Rekomendasi</h2>
+            <b><a href="/search" class="homeSeeMoreBtn">Lihat lainnya</a></b>
+        </div>
 
-        <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
+        <div class="d-flex mb-4" style="margin:0px; overflow-x:scroll">
+            <div class="ganjelan"></div>
             @foreach ($topRatedRecipes as $recipe)
                 @include('templates/recipeCard2', compact('recipe'))
             @endforeach
         </div>
 
-        <h1 class="sectionTitle">Masak Kilat</h1>
-
-        <div class="d-flex" style="margin:10px 0px; overflow-y:scroll">
+        <div class="d-flex align-items-center mb-2">
+            <h2 class="sectionTitle" style="margin-right:20px">Masak Kilat</h2>
+            <b><a href="/search?duration=30" class="homeSeeMoreBtn">Lihat lainnya</a></b>
+        </div>
+        <div class="d-flex" style="margin:0px; overflow-x:scroll">
+            <div class="ganjelan"></div>
             @foreach ($fastRecipes as $recipe)
                 @include('templates/recipeCard2', compact('recipe'))
             @endforeach

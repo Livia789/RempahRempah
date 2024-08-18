@@ -221,11 +221,27 @@ form .outlinedBtn:hover, form .outlinedBtn:focus {
 .modalContainerContent{
     overflow-y:auto;
     padding:20px;
+    padding-top:0px;
+}
+
+.closeModalBtn{
+    height:35px;
+    width:35px;
 }
 
 .closeModalBtn:hover{
     cursor: pointer;
 }
+
+.btnSearchRecipe{
+    margin:20px auto;
+}
+
+.btnSearchRecipe:hover::after{
+    content:' 🧑🏻‍🍳 🍽️ →';
+    transition:all 0.3s;
+}
+
 
 @media (max-width: 992px) {
     .company-logo {

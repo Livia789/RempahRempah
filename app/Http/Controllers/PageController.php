@@ -61,7 +61,7 @@ class PageController extends Controller
         View::share('top_ingredients', $this->top_ingredients);
 
         View::share('functions', [
-            'buildFilterQuery' => function ($name, $categoryGroups, $index, $curr_ctg_id, $durations, $duration_new, $tags, $tag_new) {
+            'buildFilterQuery' => function ($name, $categoryGroups, $index, $curr_ctg_id, $durations, $duration_new, $tags, $tag_new, $filterBy) {
                 $query_str = "";
                 if (isset($name) && $name != null) {
                     $query_str .= "name=".$name."&";
@@ -113,6 +113,10 @@ class PageController extends Controller
                 } elseif (isset($tag_new)) {
                     $query_str .= "tag=".$tag_new.'&';
                 }
+                if (isset($filterBy)) {
+                    $query_str .= "filterBy=".$filterBy;
+                }
+                // dd([$query_str, str_replace('%', '%25', $query_str)]);
                 return str_replace('%', '%25', $query_str);
             }
         ]);
@@ -123,7 +127,7 @@ class PageController extends Controller
         $recommendedRecipes = Recipe::where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->orderBy('created_at', 'desc')->limit(20)->get();
         $fastRecipes = Recipe::where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->where('duration', '<=', 30)->orderBy('duration')->limit(20)->get();
 
-        $topRatedRecipes = Recipe::with('reviews')->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating') ->take(20)->get();
+        $topRatedRecipes = Recipe::with('reviews')->withAvg('reviews', 'rating')->orderByDesc('reviews_avg_rating')->where('is_verified_by_admin', true)->where('is_verified_by_ahli_gizi', true)->where('type', 'public')->take(20)->get();
         return view('home', compact('company', 'fastRecipes', 'topRatedRecipes'));
     }
 
@@ -257,7 +261,9 @@ class PageController extends Controller
     public function showMyRecipesPage() {
         $user = Auth::user();
         $recipes = $user->recipes;
-        return view('myRecipes', compact('user', 'recipes'));
+        $recipes_public = $recipes->where('type', 'public');
+        $recipes_private = $recipes->where('type', 'private');
+        return view('myRecipes', compact('user', 'recipes_public', 'recipes_private'));
     }
 
     public function showMyProfilePage() {
@@ -293,15 +299,11 @@ class PageController extends Controller
         if ($recipe->isPublished() || (isset($user) && ($recipe->user_id === $user->id || $user->role == 'ahli_gizi' || $user->role == 'admin' ))) {
             return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
         } else {
-            echo "You are not authorized to view this recipe. TODO: handle ini pagenya mau gimana";
+            return redirect('/');
         }
     }
 
     public function showSearchPage(Request $req) {
-        if (Auth::check() && Auth::user()->accountStatus == 'new') {
-            return redirect('welcome');
-        }
-
         $results = Recipe::query();
         if (Auth::check()) {
             $user_id = Auth::user()->id;
@@ -371,8 +373,25 @@ class PageController extends Controller
             });
         }
 
-        $recipes = $results->orderBy('type', 'asc')->paginate(15);
-        return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags'));
+        $filterBy = $req->input('filterBy');
+        $recipes = $results->orderBy('type', 'asc');
+        if ($filterBy) {
+            if ($filterBy == 'dateAsc') {
+                $recipes = $recipes->orderBy('updated_at', 'asc');
+            } else if ($filterBy == 'dateDesc') {
+                $recipes = $recipes->orderBy('updated_at', 'desc');
+            } else if ($filterBy == 'ratingAsc') {
+                $recipes = $recipes->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating', 'asc');
+            } else if ($filterBy == 'ratingDesc') {
+                $recipes = $recipes->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating', 'desc');
+            } else if ($filterBy == 'reviewCountAsc') {
+                $recipes = $recipes->withCount('reviews')->orderBy('reviews_count', 'asc');
+            } else if ($filterBy == 'reviewCountDesc') {
+                $recipes = $recipes->withCount('reviews')->orderBy('reviews_count', 'desc');
+            }
+        }
+        $recipes = $recipes->paginate(15);
+        return view('search', compact('recipes', 'name', 'categoryGroups', 'durations', 'tags', 'filterBy'));
     }
 
     public function showAddRecipePage(Request $req) {
@@ -415,9 +434,6 @@ class PageController extends Controller
     }
 
     public function showAboutUsPage(Request $req) {
-        if (Auth::check() && Auth::user()->accountStatus == 'new') {
-            return redirect('welcome');
-        }
         return view('aboutUs');
     }
 
@@ -450,8 +466,8 @@ class PageController extends Controller
         if (Auth::check() && Auth::user()->accountStatus == 'new') {
             return redirect('welcome');
         }
-        $user = Auth::user();
         $public_profile = User::find($public_profile_id);
+        $user = Auth::user();
         return view('publicProfile', compact('user', 'public_profile'));
     }
 

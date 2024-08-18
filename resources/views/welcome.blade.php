@@ -26,6 +26,7 @@ dd(session()->all());
             </span>
             <form action="/updatePreferences" method="POST" class="preferenceForm">
                 @csrf
+                <input type="hidden" name="skipBtn" id="skipBtn" value="">
                 <div class="row row-cols-2 row-cols-sm-4 row-cols-md-6 g-3" id="selectedSection">
                     @foreach(session('selected_ingredients') == null ? [] : session('selected_ingredients') as $item)
                         <div class="col">
@@ -55,10 +56,15 @@ dd(session()->all());
                         </div>
                     @endforeach
                 </div>
-                <button class="sharpBox" type="submit" id="saveButton" name="btn-submit">
-                    <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
-                    Simpan
-                </button>
+                <div class="d-flex">
+                    <button class="sharpBox" type="submit" id="saveButton" name="btn-submit">
+                        <img src="/assets/icons/save_icon.png" class="picon" alt="save_icon">
+                        Simpan
+                    </button>
+                    <button class="sharpBox skipBtn" type="submit" id="saveButton" name="btn-submit" onclick="handleSkipClick()">
+                        Lewati
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -145,5 +151,9 @@ dd(session()->all());
                 });
             }
         });
+
+        function handleSkipClick() {
+            document.getElementById('skipBtn').value = 'skip';
+        }
     </script>
 @endsection

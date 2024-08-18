@@ -176,11 +176,6 @@ class UserController extends Controller
     public function updatePreferences(Request $req) {
         $user = Auth::user();
         $src = parse_url(url()->previous(), PHP_URL_PATH);
-        if ($src == '/welcome') {
-            $user->accountStatus = 'regular';
-            $user->save();
-        }
-
         $avoided_ingredients = $user->avoidedIngredients->pluck('ingredient_name');
         $selected_ingredients = collect($req->input('selected_ingredients'))->map(function ($ingredient) {
             return strtolower($ingredient);
@@ -198,11 +193,19 @@ class UserController extends Controller
             $user->avoidedIngredients->where('ingredient_name', $ingredient)->first()->delete();
         }
 
-        Session::forget('selected_ingredients');
-        if ($src == '/welcome') {
-            return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
-        } else {
+        if ($src == '/welcome' && ($req->skipBtn === 'skip' || !$selected_ingredients->isEmpty())) {
+            $user->accountStatus = 'regular';
+            $user->save();
+        }
+        if ($src !== '/welcome') {
             return back()->with('updateSuccess', 'Data berhasil disimpan.');
+        } else {
+            Session::forget('selected_ingredients');
+            if ($req->skipBtn === 'skip' || !$selected_ingredients->isEmpty()) {
+                return redirect('/')->with('successMessage', 'Data berhasil disimpan.');
+            } else {
+                return redirect('/welcome');
+            }
         }
     }
 
@@ -226,5 +229,31 @@ class UserController extends Controller
             'otherUserFollowersCount' => $other_user->followers->count(),
             'otherUserFollowingsCount' => $other_user->followings->count()
         ]);
+    }
+
+    public function editProfilePicture(Request $req){
+        $user = Auth::user();
+        $rules = [
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+
+        $messages = [
+            'img.required' => 'Profil belum diunggah',
+            'img.image' => 'Profil harus berupa gambar',
+            'img.mimes' => 'Format profile harus sesuai format gambar',
+            'img.max' => 'Ukuran gambar melebihi 2MB',
+        ];
+
+        $validator = Validator::make($req->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->with('error', $validator->errors()->first());
+        } else {
+            $profilePicture = $req->file('img');
+            $profilePicture->store('public/users');
+            $user->img = 'storage/users/' . $profilePicture->hashName();
+            $user->save();
+            return back()->with('success', 'Foto profil berhasil diperbaharui!');
+        }
     }
 }

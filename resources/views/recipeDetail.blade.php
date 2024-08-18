@@ -19,18 +19,16 @@
 
 @section('content')
     <div class="recipeDetailContainer">
-        {{--  TODO  --}}
-        <p>Path 1 > Path 2 > Path 3</p>
         <div class="d-flex">
             <h1><b>{{ $recipe->name }}</b></h1>
             @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
                 @if($recipe->isPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang telah dirilis ke publik dapat menyebabkan anemia')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa disunting karena telah dirilis ke publik')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
                 @elseif($recipe->isPublicButNotPublished())
-                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(210, 210, 210)" onclick="alert('Menyunting resep yang dalam proses verifikasi dapat menyebabkan hipertensi')">
+                    <a class="sharpBox" style="margin-left:30px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa disunting karena sedang dalam proses verifikasi')">
                         <img src="/assets/icons/edit_icon.png" class="picon" alt="edit_icon">
                         Edit Resep
                     </a>
@@ -40,14 +38,30 @@
                         Edit Resep
                     </a>
                 @endif
+
+                @if($recipe->isPublished())
+                    <a class="sharpBox" style="margin-left:10px; background-color:rgb(189, 189, 189)" onclick="alert('Resep tidak bisa dihapus karena telah dirilis ke publik')">
+                        <img src="/assets/icons/trash_closed.png" class="picon" alt="edit_icon">
+                        Hapus Resep
+                    </a>
+                @else
+                    <form action="/deleteRecipe/{{$recipe->id}}" method="POST">
+                        @csrf
+                        <input type="text" name="recipeId" value="{{$recipe->id}}" hidden>
+                        <button class="sharpBox" style="margin-left:10px;" type="submit">
+                            <img src="/assets/icons/trash_closed.png" class="picon" alt="edit_icon">
+                            Hapus Resep
+                        </button>
+                    </form>
+                @endif
+
             @endif
         </div>
         <div class="d-flex mt-1 mb-1">
-            {{--  TODO: tanya pak bos, ini bs diklik apa mejeng doang? ap mau bikin bs ke search sesuai tagnya, misal "asin" tampilin smua resep yg ada tag asin  --}}
             @foreach($recipe->tags as $tag)
-                <div class="sharpBox">
+                <a href="/search?tag={{$tag->id}}" class="sharpBox">
                     {{ $tag->name }}
-                </div>
+                </a>
             @endforeach
         </div>
         <div class="d-flex">
@@ -58,7 +72,7 @@
                 @if(!Auth::user() || Auth::user()->role == 'member')
                     <div class="sharpBox" id="bookmarkButton" style="margin-top:0px; margin-bottom:0px">
                         <img src="/assets/icons/{{ $bookmarkImage }}" id="bookmarkImage" class="picon" alt="bookmark_icon">
-                        Bookmark
+                        Markah
                     </div>
                 @endif
                 <div style="margin:auto 10px auto 0px">
@@ -69,12 +83,13 @@
                 </div>
             </div>
         </div>
-        <div class="sharpBox recipeDetailSummaryCtr">
+        <div class="sharpBox recipeDetailSummaryCtr webView">
+
             @include('templates/rating', ['rating_avg' => $reviews->avg('rating')])
 
             <div class="separatorLine"></div>
 
-            <img src="/assets/icons/empty_heart.png" class="picon mb-auto mt-auto" alt="heart_icon">
+            <img src="/assets/icons/review_icon.png" class="picon mb-auto mt-auto" alt="heart_icon">
             <div class="mt-auto mb-auto ">
                 <b>{{ $reviews->count() }} Ulasan</b>
             </div>
@@ -94,20 +109,48 @@
 
             <img src="/assets/icons/dish_icon.png" class="picon mb-auto mt-auto" alt="dish_icon">
             <b class="mb-auto mt-auto">{{ $recipe->serving }}&nbsp;sajian</b>
+        </div>
 
+        <div class="sharpBox recipeDetailSummaryCtr mwebView">
+            @include('templates/miniRating', ['rating_avg' => $reviews->avg('rating')])
+            <div class="phoneSeparatorLine"></div>
+
+            <img src="/assets/icons/empty_heart.png" class="picon mb-auto mt-auto" alt="heart_icon">
+            <div class="mt-auto mb-auto ">
+                <b>{{ $reviews->count() }} ulasan </b>
+            </div>
+        </div>
+
+        <div class="sharpBox recipeDetailSummaryCtr mwebView">
+            <img src="/assets/icons/time_icon.png" class="picon mb-auto mt-auto" alt="time_icon">
+            <b class="mb-auto mt-auto">{{ $recipe->getDurationStr() }}</b>
+
+            <div class="phoneSeparatorLine"></div>
+
+            <img src="/assets/icons/dish_icon.png" class="picon mb-auto mt-auto" alt="dish_icon">
+            <b class="mb-auto mt-auto">{{ $recipe->serving }} sajian</b>
         </div>
 
         @if(!Auth::user() || Auth::user()->role == 'member')
             <div class="d-flex">
                 <div class="sharpBox" onclick="$('#confirmation_resetProgressContainer').modal('show')">
                     <img src="/assets/icons/reset_icon.png" class="picon" alt="reset_icon">
-                    Hapus Progress Memasak
+                    Hapus Progres Memasak
                 </div>
         
-                <div class="sharpBox" onclick="showReviewRecipeModal()">
-                    <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
-                    Ulas Resep
-                </div>
+                @if(Auth::user() && Auth::user()->id == $recipe->creator->id)
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)" onclick="alert('Review tidak dapat dilakukan terhadap resep sendiri')">
+                        <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                        Ulas Resep
+                    </div>
+                @else
+                    <div class="sharpBox" onclick="showReviewRecipeModal()">
+                        <img src="/assets/icons/review_icon.png" class="picon" alt="review_icon">
+                        Ulas Resep
+                    </div>
+                @endif
+
+
             </div>
         @elseif(Auth::user()->role == 'ahli_gizi')
             @if(!$recipe->is_verified_by_admin)
@@ -153,13 +196,13 @@
                             Tolak Resep
                         </div>
                     @else
-                        <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                        <div class="sharpBox" style="background-color:rgb(189, 189, 189)">
                             <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
                             Verifikasi akan dilakukan oleh admin &nbsp;<b>"{{$recipe->admin->name}}"</b>
                         </div>
                     @endif
                 @else
-                    <div class="sharpBox" style="background-color:rgb(187, 187, 187)">
+                    <div class="sharpBox" style="background-color:rgb(189, 189, 189)">
                         <img src="/assets/icons/verification_icon.png" class="picon" alt="verification_icon">
                         <?php $statusVerifikasiAdmin = $recipe->is_verified_by_admin ? 'DITERIMA' : 'DITOLAK' ?>
                         Resep sudah diverifikasi oleh admin dengan status &nbsp;<b>{{$statusVerifikasiAdmin}}</b>
@@ -170,14 +213,58 @@
 
         <div class="d-flex imgDescContainer">
             <img src="{{ asset($recipe->img) }}" class="recipeImage" alt="recipe_image">
-            <div>
+            <div style="text-align:justify">
                 <h3><b>Deskripsi Resep</b></h3>
                 {{ $recipe->description }}
             </div>
         </div>
 
-        <div class="d-flex">
-            <div style="width:45%; margin-right:50px;">
+        <div class="d-flex toolGiziCtr">
+            <div class="mwebView toolGiziContentCtr">
+                <h3><b>Informasi Nilai Gizi</b></h3>
+                <p><i>Jumlah per sajian</i></p>
+
+                @if($recipe->nutrition->count() == 0)
+                    <i>Tidak ada data nilai gizi untuk resep ini</i>
+                @else
+                    <table class="table table-striped" style="width=50%">
+                        <thead>
+                            <tr>
+                            <th scope="col">
+                                <span>Energi Total</span>
+                                <br>
+                                <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Energi dari lemak</span>
+                            </th>
+                            <th></th>
+                            <th scope="col" class="text-end">
+                                <span>{{$recipe->energiTotal." kkal"}}</span>
+                                <br>
+                                <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$recipe->energiDariLemak." kkal"}}</span>
+                            </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table class="table table-striped" style="width=50%">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nilai Gizi  </th>
+                        <th scope="col">Berat</th>
+                        <th scope="col">%AKG</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($recipe->nutrition as $nutrition)
+                            <tr>
+                                <td>{{ $nutrition->name }}</td>
+                                <td>{{ $nutrition->pivot->quantity.' '.$nutrition->pivot->unit }}</td>
+                                <td>{{ number_format($nutrition->pivot->akgPercentage, 2).' %' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
+                @endif
+            </div>
+            <div class="toolGiziContentCtr">
                 <h3><b>Alat</b></h3>
                 @if($recipe->tools->count() == 0)
                     <i>Tidak ada data alat untuk resep ini</i>
@@ -197,10 +284,10 @@
                     @endforeach
                 @endif
             </div>
-            <div style="width:45%">
+            <div style="width:45%; margin-right:50px;" class="webView">
                 <h3><b>Informasi Nilai Gizi</b></h3>
                 <p><i>Jumlah per sajian</i></p>
-                
+
                 @if($recipe->nutrition->count() == 0)
                     <i>Tidak ada data nilai gizi untuk resep ini</i>
                 @else
@@ -219,7 +306,7 @@
                                 <span style="font-weight:normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$recipe->energiDariLemak." kkal"}}</span>
                             </th>
                             </tr>
-                        </thead>  
+                        </thead>
                     </table>
                     <table class="table table-striped" style="width=50%">
                     <thead>
@@ -242,10 +329,9 @@
                 @endif
             </div>
         </div>
-
         <br><br>
 
-        <div>
+        <div class="webView">
             <h3><b>Bahan</b></h3>
             @if($recipe->ingredientHeaders->count() == 0)
                 <i>Tidak ada data bahan untuk resep ini</i>
@@ -322,8 +408,40 @@
 
         </div>
 
-        <div class="d-flex">
-            <div style="width:45%; margin-right:50px">
+        <div class="mwebView" style="flex-direction:column">
+            @foreach($recipe->ingredientHeaders as $ingredientHeader)
+                <div class="d-flex m-2">
+                    <div class="box longBox">
+                        <b>
+                            {{ $ingredientHeader->name }}
+                        </b>
+                    </div>
+                </div>
+                <div>
+                    @foreach($ingredientHeader->ingredients as $ingredient)
+                    <?php
+                        $progress = Auth::user()? $user_ingredients->where('ingredient_id', $ingredient->id)->first() : null;
+                    ?>
+                    <div class="d-flex m-2 progressDiv ingredientDiv" ingredient_id="{{$ingredient->id}}" progress="{{$progress}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
+                        <div class="box shortBox">
+                            <img src="/assets/icons/check_grey.png" id="check_{{ $loop->iteration }}" class="stepCheckIcon" alt="grey_check">
+                        </div>
+                        <div class="box longbox">
+                            @if($ingredient->pivot->unit)
+                                {{ $ingredient->pivot->quantity.' '.$ingredient->pivot->unit.' '.$ingredient->name }}
+                            @else
+                                {{ $ingredient->name.' '.$ingredient->pivot->quantity }}
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <br>
+            @endforeach
+        </div>
+
+        <div class="d-flex stepReviewCtr">
+            <div style="margin-right:50px" class="stepReviewContentCtr">
                 <h3><b>Video Tutorial</b></h3>
 
                 @if($recipe->vid != NULL)
@@ -348,7 +466,7 @@
                         <div>
                             @foreach($stepHeader->steps as $step)
                                 <?php
-                                    $progress = $step->stepProgress->first();            
+                                    $progress = $step->stepProgress->first();
                                 ?>
                                 <div class="d-flex m-2 stepDiv progressDiv" progress="{{$progress}}" step_id="{{$step->id}}" onclick="toggleHighlight(this)" onmouseover="hoverHighlight(this)" onmouseout="hoverHighlight(this)">
                                     <div class="box shortBox">
@@ -367,7 +485,7 @@
                 @endforeach
                 </div>
             </div>
-            <div id="reviewSection" style="width:45%; background-color:black; padding:30px; border-radius:15px;">
+            <div id="reviewSection" style="background-color:black; padding:30px; border-radius:15px;" class="stepReviewContentCtr">
                 <div>
                     <div class="d-flex" style="justify-content:space-between; margin-bottom:30px; flex:1; overflow-y:auto;">
                         <h3><b style="color:white; ">Penilaian</b></h3>
@@ -377,16 +495,18 @@
                                 <img src="/assets/icons/dropdown_white.png" style="width:25px; height:25px;" alt="dropdown_icon">
                             </div>
                             <div class="dropdown-menu dropdown-menu-end" style="margin:40px 30px 0px 0px; border:2px solid black" id="reviewFilterDropdown">
-                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateDesc">Rating terbaru</a>
-                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateAsc">Rating terlama</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateDesc">Ulasan terbaru</a>
+                                <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=dateAsc">Ulasan terlama</a>
                                 <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingDesc">Rating tertinggi</a>
                                 <a class="dropdown-item" href="/recipeDetail/{{$recipe->id}}?filter=ratingAsc">Rating terendah</a>
                             </div>
                         </div>
                     </div>
-                    @foreach($reviews as $review)
-                        @include('templates/reviewCard')
-                    @endforeach
+                    <div style="max-height:1000px; overflow-y:scroll">
+                        @foreach($reviews as $review)
+                            @include('templates/reviewCard')
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
