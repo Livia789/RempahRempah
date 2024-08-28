@@ -20,7 +20,7 @@ class CommentSeeder extends Seeder
             [
                 "user_id" => 5,
                 "recipe_id" => 1,
-                "message" => "Ini ayamnya boleh disuir ga ya?",
+                "message" => "Ayamnya boleh diganti jagung?",
                 "created_at" => Carbon::now()
             ],
             [

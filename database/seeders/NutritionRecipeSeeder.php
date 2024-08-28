@@ -1107,7 +1107,63 @@ class NutritionRecipeSeeder extends Seeder
                 'quantity' => '1',
                 'unit' => 'gr',
                 'akgPercentage' => '15'
-            ]
+            ],
+            [
+                'recipe_id' => '36',
+                'nutrition_id' => '1',
+                'quantity' => '32',
+                'unit' => 'gr',
+                'akgPercentage' => '20'
+            ],
+            [
+                'recipe_id' => '36',
+                'nutrition_id' => '2',
+                'quantity' => '43',
+                'unit' => 'gr',
+                'akgPercentage' => '70'
+            ],
+            [
+                'recipe_id' => '36',
+                'nutrition_id' => '3',
+                'quantity' => '65',
+                'unit' => 'gr',
+                'akgPercentage' => '100'
+            ],
+            [
+                'recipe_id' => '36',
+                'nutrition_id' => '4',
+                'quantity' => '1',
+                'unit' => 'gr',
+                'akgPercentage' => '15'
+            ],
+            [
+                'recipe_id' => '37',
+                'nutrition_id' => '1',
+                'quantity' => '32',
+                'unit' => 'gr',
+                'akgPercentage' => '20'
+            ],
+            [
+                'recipe_id' => '37',
+                'nutrition_id' => '2',
+                'quantity' => '43',
+                'unit' => 'gr',
+                'akgPercentage' => '70'
+            ],
+            [
+                'recipe_id' => '37',
+                'nutrition_id' => '3',
+                'quantity' => '65',
+                'unit' => 'gr',
+                'akgPercentage' => '100'
+            ],
+            [
+                'recipe_id' => '37',
+                'nutrition_id' => '4',
+                'quantity' => '1',
+                'unit' => 'gr',
+                'akgPercentage' => '15'
+            ],
         ]);
     }
 }

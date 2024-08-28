@@ -890,150 +890,150 @@ class ReviewSeeder extends Seeder
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now()
             ],
-            // [
-            //     "user_id" => "9",
-            //     "recipe_id" => "36",
-            //     "comment" => "Resep lodeh ini luar biasa! Rasanya autentik dan kaya rempah-rempah. Saya sangat suka dengan paduan santan yang lezat dan sayuran yang empuk. Sangat cocok disantap bersama nasi hangat.",
-            //     "rating" => "5",
-            //     "img" => "review36.png",
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "10",
-            //     "recipe_id" => "36",
-            //     "comment" => "Saya baru saja mencoba resep sayur lodeh ini dan saya terkesan! Tekstur sayurannya begitu lembut dan kuah santannya begitu gurih. Mudah dan cepat untuk disiapkan, cocok untuk hidangan sehari-hari.",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "5",
-            //     "recipe_id" => "36",
-            //     "comment" => "Wow! Resep lodeh yang sangat menggugah selera. Kombinasi berbagai bumbu membuatnya begitu sedap. Ini benar-benar sayuran yang lezat dan sehat. Sangat direkomendasikan untuk yang ingin mencoba hidangan tradisional yang lezat!",
-            //     "rating" => "4",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "6",
-            //     "recipe_id" => "37",
-            //     "comment" => "Resep cumi saus Padang ini sangat lezat! Cumi yang digoreng tepung disiram dengan saus Padang yang pedas dan gurih, menciptakan paduan cita rasa yang menggoda.",
-            //     "rating" => "5",
-            //     "img" => "review37.png",
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "3",
-            //     "recipe_id" => "37",
-            //     "comment" => "Sajian cumi saus Padang ini menghadirkan sensasi kuliner yang autentik. Rasa pedas dari saus Padangnya sangat pas dengan kelezatan cumi yang empuk dan renyah.",
-            //     "rating" => "4",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "4",
-            //     "recipe_id" => "37",
-            //     "comment" => "Menu cumi saus Padang ini merupakan pilihan yang tepat untuk penggemar masakan seafood dengan cita rasa khas Indonesia. Saus Padang yang kental dan bumbu rempahnya membuatnya begitu menggugah selera.",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "5",
-            //     "recipe_id" => "37",
-            //     "comment" => "Cumi saus Padang ini cocok disajikan sebagai hidangan utama di meja makan. Kelezatan cumi yang disiram dengan saus Padang yang kaya rasa membuatnya menjadi favorit di keluarga.",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "6",
-            //     "recipe_id" => "37",
-            //     "comment" => "Dengan resep cumi saus Padang yang mudah dan praktis, Anda bisa menyiapkan hidangan spesial dengan cepat di rumah. Rasakan kelezatan cita rasa khas Padang dalam setiap suapan cumi yang juicy dan lezat.",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "7",
-            //     "recipe_id" => "38",
-            //     "comment" => "Resep cuanki sehat ini benar-benar menyegarkan! Dengan paduan aneka sayuran segar dan bumbu rempah yang khas, cuanki ini memberikan cita rasa yang luar biasa. Cocok untuk disantap sebagai hidangan hangat di hari-hari yang sejuk.",
-            //     "rating" => "4",
-            //     "img" => "review38.png",
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "8",
-            //     "recipe_id" => "38",
-            //     "comment" => "Cuanki sehat ini merupakan pilihan sempurna bagi yang menginginkan hidangan lezat dan bergizi. Dengan tambahan berbagai jenis bahan, seperti tahu, bakso, dan jamur, resep ini menawarkan sensasi makan yang memuaskan dan bergizi tanpa harus khawatir akan kesehatan.",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "9",
-            //     "recipe_id" => "39",
-            //     "comment" => "Dalam resep ini, mie celor disajikan dengan bahan-bahan vegan yang menggugah selera. Sayuran segar seperti tauge, wortel, dan kubis, dicampur dengan saus lezat berbahan dasar santan, membuat hidangan ini kaya akan rasa dan gizi. Cocok bagi yang mencari opsi makanan yang ramah lingkungan dan menyehatkan.",
-            //     "rating" => "4",
-            //     "img" => "review39.png",
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "10",
-            //     "recipe_id" => "39",
-            //     "comment" => "Mie celor vegan ini menghadirkan cita rasa yang autentik namun tetap memperhatikan prinsip kesehatan dan kepedulian terhadap lingkungan. Dengan penggunaan bahan-bahan nabati seperti susu kelapa dan sayuran-sayuran segar, hidangan ini memberikan variasi yang menyenangkan bagi para vegan dan non-vegan yang ingin mencoba sesuatu yang baru.",
-            //     "rating" => "4",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "5",
-            //     "recipe_id" => "40",
-            //     "comment" => "Semur daging ini enak banget! Dagingnya empuk dan bumbunya meresap sempurna. Cocok banget disantap dengan nasi hangat di hari-hari yang sejuk.",
-            //     "rating" => "5",
-            //     "img" => "review40.png",
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "6",
-            //     "recipe_id" => "40",
-            //     "comment" => "Resep semur daging yang praktis dan mudah diikuti. Rasanya begitu lezat dan gurih. Saya pasti akan membuatnya lagi untuk keluarga!",
-            //     "rating" => "5",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "3",
-            //     "recipe_id" => "40",
-            //     "comment" => "Saya suka dengan semur daging ini karena bumbunya meresap sempurna ke dalam daging. Ditambah dengan tambahan kentang dan wortel, membuatnya semakin menggugah selera.",
-            //     "rating" => "4",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
-            // [
-            //     "user_id" => "4",
-            //     "recipe_id" => "40",
-            //     "comment" => "Semur daging yang saya buat dengan resep ini menjadi favorit keluarga! Dagingnya lembut dan berpadu sempurna dengan kuah yang kental dan gurih. Pasti akan saya masak lagi!",
-            //     "rating" => "4",
-            //     "img" => null,
-            //     "created_at" => Carbon::now(),
-            //     "updated_at" => Carbon::now()
-            // ],
+            [
+                "user_id" => "9",
+                "recipe_id" => "36",
+                "comment" => "Resep lodeh ini luar biasa! Rasanya autentik dan kaya rempah-rempah. Saya sangat suka dengan paduan santan yang lezat dan sayuran yang empuk. Sangat cocok disantap bersama nasi hangat.",
+                "rating" => "5",
+                "img" => "review36.png",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "10",
+                "recipe_id" => "36",
+                "comment" => "Saya baru saja mencoba resep sayur lodeh ini dan saya terkesan! Tekstur sayurannya begitu lembut dan kuah santannya begitu gurih. Mudah dan cepat untuk disiapkan, cocok untuk hidangan sehari-hari.",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "5",
+                "recipe_id" => "36",
+                "comment" => "Wow! Resep lodeh yang sangat menggugah selera. Kombinasi berbagai bumbu membuatnya begitu sedap. Ini benar-benar sayuran yang lezat dan sehat. Sangat direkomendasikan untuk yang ingin mencoba hidangan tradisional yang lezat!",
+                "rating" => "4",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "6",
+                "recipe_id" => "37",
+                "comment" => "Resep cumi saus Padang ini sangat lezat! Cumi yang digoreng tepung disiram dengan saus Padang yang pedas dan gurih, menciptakan paduan cita rasa yang menggoda.",
+                "rating" => "5",
+                "img" => "review37.png",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "3",
+                "recipe_id" => "37",
+                "comment" => "Sajian cumi saus Padang ini menghadirkan sensasi kuliner yang autentik. Rasa pedas dari saus Padangnya sangat pas dengan kelezatan cumi yang empuk dan renyah.",
+                "rating" => "4",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "4",
+                "recipe_id" => "37",
+                "comment" => "Menu cumi saus Padang ini merupakan pilihan yang tepat untuk penggemar masakan seafood dengan cita rasa khas Indonesia. Saus Padang yang kental dan bumbu rempahnya membuatnya begitu menggugah selera.",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "5",
+                "recipe_id" => "37",
+                "comment" => "Cumi saus Padang ini cocok disajikan sebagai hidangan utama di meja makan. Kelezatan cumi yang disiram dengan saus Padang yang kaya rasa membuatnya menjadi favorit di keluarga.",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "6",
+                "recipe_id" => "37",
+                "comment" => "Dengan resep cumi saus Padang yang mudah dan praktis, Anda bisa menyiapkan hidangan spesial dengan cepat di rumah. Rasakan kelezatan cita rasa khas Padang dalam setiap suapan cumi yang juicy dan lezat.",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "7",
+                "recipe_id" => "38",
+                "comment" => "Resep cuanki sehat ini benar-benar menyegarkan! Dengan paduan aneka sayuran segar dan bumbu rempah yang khas, cuanki ini memberikan cita rasa yang luar biasa. Cocok untuk disantap sebagai hidangan hangat di hari-hari yang sejuk.",
+                "rating" => "4",
+                "img" => "review38.png",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "8",
+                "recipe_id" => "38",
+                "comment" => "Cuanki sehat ini merupakan pilihan sempurna bagi yang menginginkan hidangan lezat dan bergizi. Dengan tambahan berbagai jenis bahan, seperti tahu, bakso, dan jamur, resep ini menawarkan sensasi makan yang memuaskan dan bergizi tanpa harus khawatir akan kesehatan.",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "9",
+                "recipe_id" => "39",
+                "comment" => "Dalam resep ini, mie celor disajikan dengan bahan-bahan vegan yang menggugah selera. Sayuran segar seperti tauge, wortel, dan kubis, dicampur dengan saus lezat berbahan dasar santan, membuat hidangan ini kaya akan rasa dan gizi. Cocok bagi yang mencari opsi makanan yang ramah lingkungan dan menyehatkan.",
+                "rating" => "4",
+                "img" => "review39.png",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "10",
+                "recipe_id" => "39",
+                "comment" => "Mie celor vegan ini menghadirkan cita rasa yang autentik namun tetap memperhatikan prinsip kesehatan dan kepedulian terhadap lingkungan. Dengan penggunaan bahan-bahan nabati seperti susu kelapa dan sayuran-sayuran segar, hidangan ini memberikan variasi yang menyenangkan bagi para vegan dan non-vegan yang ingin mencoba sesuatu yang baru.",
+                "rating" => "4",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "5",
+                "recipe_id" => "40",
+                "comment" => "Semur daging ini enak banget! Dagingnya empuk dan bumbunya meresap sempurna. Cocok banget disantap dengan nasi hangat di hari-hari yang sejuk.",
+                "rating" => "5",
+                "img" => "review40.png",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "6",
+                "recipe_id" => "40",
+                "comment" => "Resep semur daging yang praktis dan mudah diikuti. Rasanya begitu lezat dan gurih. Saya pasti akan membuatnya lagi untuk keluarga!",
+                "rating" => "5",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "3",
+                "recipe_id" => "40",
+                "comment" => "Saya suka dengan semur daging ini karena bumbunya meresap sempurna ke dalam daging. Ditambah dengan tambahan kentang dan wortel, membuatnya semakin menggugah selera.",
+                "rating" => "4",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
+            [
+                "user_id" => "4",
+                "recipe_id" => "40",
+                "comment" => "Semur daging yang saya buat dengan resep ini menjadi favorit keluarga! Dagingnya lembut dan berpadu sempurna dengan kuah yang kental dan gurih. Pasti akan saya masak lagi!",
+                "rating" => "4",
+                "img" => null,
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now()
+            ],
         ]);
     }
 }
