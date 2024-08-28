@@ -883,8 +883,8 @@ class RecipeSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 "company_id" => null,
                 "serving" => "7",
-                "energiTotal" => "546",
-                "energiDariLemak" => "52",
+                "energiTotal" => null,
+                "energiDariLemak" => null,
                 "rejectionReason" => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

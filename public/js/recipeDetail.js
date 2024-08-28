@@ -335,14 +335,6 @@ function deleteReview(trash){
     }); 
 }
 
-function appendReplyTextbox(replyBtn){
-    var review_id = replyBtn.getAttribute('review_id');
-    var replyContainer = replyBtn.closest('#replyContainer');
-    var replyTextbox = replyContainer.getElementsByClassName('replyTextbox')[0];
-    replyTextbox.style.display = 'block';
-    replyTextbox.setAttribute('review_id', review_id);
-}
-
 function setTrashOpen(trash){
     trash.src = "/assets/icons/trash_open.png";
 }
