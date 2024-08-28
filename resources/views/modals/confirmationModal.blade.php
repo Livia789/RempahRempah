@@ -32,8 +32,15 @@
             document.getElementById('confirmationModalTitle').textContent = "Hapus ulasan?";
             document.getElementById('confirmationModalP').textContent = "Ulasan yang sudah dihapus tidak dapat dikembalikan";
             document.getElementById('confirmationModalImg').src = "/assets/chef_trash.png";
+        }else if(confAction == "deleteComment"){
+            document.getElementById('confirmationModalTitle').textContent = "Hapus pesan pada forum?";
+            document.getElementById('confirmationModalP').textContent = "Pesan yang sudah dihapus tidak dapat dikembalikan";
+            document.getElementById('confirmationModalImg').src = "/assets/chef_trash.png";
+        }else if(confAction == "deleteReply"){
+            document.getElementById('confirmationModalTitle').textContent = "Hapus balasan pada forum?";
+            document.getElementById('confirmationModalP').textContent = "Balasan yang sudah dihapus tidak dapat dikembalikan";
+            document.getElementById('confirmationModalImg').src = "/assets/chef_trash.png";
         }
-
 
         document.getElementById('confirmationTrue').onclick = function(){
             if(confAction){
@@ -41,6 +48,10 @@
                     removeProgress(data);
                 }else if(confAction == "deleteReview"){
                     deleteReview(data);
+                }else if(confAction == "deleteComment"){
+                    deleteComment(data);
+                }else if(confAction == "deleteReply"){
+                    deleteReply(data);
                 }
             }
             $('#confirmationModal').modal('hide');

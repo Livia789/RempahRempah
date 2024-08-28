@@ -157,6 +157,26 @@ form label{
     width:45%;
 }
 
+#commentSectionCtr{
+   background-color:black; 
+   padding:30px; 
+   border-radius:15px;
+}
+
+.replyCtr{
+    padding-left:75px;
+}
+
+.addCommentCtr{
+    padding:30px;
+    border-radius:15px;
+    background-color: white;
+}
+
+#replyBtn:hover{
+    cursor:pointer;
+}
+
 @media(max-width:600px){
     .recipeDetailContainer{
         padding: 10px;

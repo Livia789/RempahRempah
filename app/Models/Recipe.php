@@ -97,4 +97,8 @@ class Recipe extends Model
         if ($totalMinute > 0) $durationStr .= $totalMinute." menit";
         return $durationStr;
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

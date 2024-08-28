@@ -14,6 +14,7 @@ use App\Http\Controllers\UserIngredientProgressController;
 use App\Http\Controllers\UserToolProgressController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\NutritionController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +99,10 @@ Route::group(['middleware' => ['member']], function () {
     Route::post('/toggleFollowUser', [UserController::class, 'toggleFollowUser']);
 
     Route::post('/deleteRecipe/{recipe_id}', [RecipeController::class, 'deleteRecipe']);
+    Route::post('/addComment', [CommentController::class, 'addComment']);
+    Route::post('/addReply', [CommentController::class, 'addReply']);
+    Route::post('/deleteComment', [CommentController::class, 'deleteComment']);
+    Route::post('/deleteReply', [CommentController::class, 'deleteReply']);
 });
 
 Route::group(['middleware' => ['admin']], function () {
