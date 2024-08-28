@@ -15,6 +15,7 @@
     var token = '{{csrf_token()}}';
     var recipe_id = '{{$recipe->id}}';
     var user_id = '{{$user ? $user->id : -1}}';
+    var scrollTo = @json(session('scrollTo'));
 </script>
 
 @section('content')
@@ -150,6 +151,10 @@
                     </div>
                 @endif
 
+                <div class="sharpBox" onclick="scrollToCommentSection()">
+                    <img src="/assets/icons/comment_icon.png" class="picon" alt="comment_icon">
+                    Komentar
+                </div>
 
             </div>
         @elseif(Auth::user()->role == 'ahli_gizi')
@@ -509,6 +514,36 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <br>
+        <div id="commentSectionCtr">
+            <h3 style="color:white">Forum</h3>
+
+            @if(Auth::user())
+                <div class="addCommentCtr">
+                    <h4>Tambahkan Pesan</h4>
+                    <form id="addCommentForm" action="/addComment" method="POST">
+                        @csrf
+                        <input type="text" name="recipe_id" value="{{$recipe->id}}" hidden>
+                        <textarea id="addCommentMsg" name="message" rows="4" style="width:100%; padding:5px 10px;"></textarea>
+                        <p id="addCommentErrorMsg" style="display:none; margin:0px; color:rgb(255, 57, 57)">asdasd</p>
+                        <button class="sharpBox" type="submit">
+                            Unggah
+                        </button>
+                    </form>
+                </div>
+                <br>
+            @else
+                <i>
+                    <a style="color:white" href="/login"><u>Login sekarang</u></a>
+                    <span style="color:white"> untuk dapat menambahkan pesan di forum</span>
+                </i>
+                <br><br>
+            @endif
+
+            @foreach($comments as $comment)
+                @include('templates/commentCard')
+            @endforeach
         </div>
     </div>
 

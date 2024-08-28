@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
             UserToolProgressSeeder::class,
             FollowsSeeder::class,
             CookingHistorySeeder::class,
+            CommentSeeder::class,
+            ReplySeeder::class
         ]);
     }
 }

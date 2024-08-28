@@ -18,8 +18,8 @@
 
     <div class="d-flex" style="justify-content:space-between">
         <div class="d-flex">
-            <img src="{{ Auth::check() ? asset(Auth::user()->img) : asset('storage/users/default_profile_img.png') }}" alt="profile image" style="width:50px; height:50px; margin:auto 0px;" alt="profile_image">
-        <p style="margin:auto 0px auto 20px"><b>{{$review->user->name}}</b></p>
+            <img src="{{ asset($review->user->img) }}" alt="profile image" style="width:50px; height:50px; margin:auto 0px;" alt="profile_image">
+            <p style="margin:auto 0px auto 20px"><b>{{$review->user->name}}</b></p>
         </div>
 
         @if(Auth::user() && (Auth::user()->id == $review->user_id || Auth::user()->role == 'admin'))
