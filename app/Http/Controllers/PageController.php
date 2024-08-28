@@ -296,8 +296,9 @@ class PageController extends Controller
         $reviews = $recipe->reviews($req->input('filter'))->get();
         $user_ingredients = $user? UserIngredientProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
         $user_tools = $user? UserToolProgress::where('user_id', $user->id)->where('recipe_id', $recipe_id)->get() : null;
+        $comments = $recipe->comments()->orderBy('created_at', 'desc')->get();
         if ($recipe->isPublished() || (isset($user) && ($recipe->user_id === $user->id || $user->role == 'ahli_gizi' || $user->role == 'admin' ))) {
-            return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools'));
+            return view('recipeDetail', compact('recipe', 'user', 'reviews', 'user_ingredients', 'user_tools', 'comments'));
         } else {
             return redirect('/');
         }

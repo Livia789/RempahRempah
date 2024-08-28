@@ -335,6 +335,14 @@ function deleteReview(trash){
     }); 
 }
 
+function appendReplyTextbox(replyBtn){
+    var review_id = replyBtn.getAttribute('review_id');
+    var replyContainer = replyBtn.closest('#replyContainer');
+    var replyTextbox = replyContainer.getElementsByClassName('replyTextbox')[0];
+    replyTextbox.style.display = 'block';
+    replyTextbox.setAttribute('review_id', review_id);
+}
+
 function setTrashOpen(trash){
     trash.src = "/assets/icons/trash_open.png";
 }
@@ -343,7 +351,57 @@ function setTrashClosed(trash){
     trash.src = "/assets/icons/trash_closed.png";
 }    
 
+function scrollToCommentSection(){
+    var sectionTop = document.getElementById('commentSectionCtr').getBoundingClientRect().top;
+    window.scrollBy({top: sectionTop - 100});
+}
+
+function showReplyForm(replyBtn){
+    var commentId = $(replyBtn).attr('commentId');
+    var replyForm = $('#replyForm' + commentId);
+
+    if (replyForm.is(':visible')) {
+        replyForm.hide();
+    } else {
+        replyForm.css('display', 'block');
+    }
+}
+
+function deleteComment(trash){
+    var comment_id = trash.getAttribute('comment_id');
+    var commentCard = trash.closest('#commentCard');
+    $.ajax({
+        url: '/deleteComment',
+        type: 'POST',
+        data: {
+            comment_id: comment_id,
+            _token: token
+        },
+        success: function(res){
+            commentCard.remove();
+        }
+    }); 
+}
+
+function deleteReply(trash){
+    var reply_id = trash.getAttribute('reply_id');
+    var replyCtr = trash.closest('.replyCtr');
+    $.ajax({
+        url: '/deleteReply',
+        type: 'POST',
+        data: {
+            reply_id: reply_id,
+            _token: token
+        },
+        success: function(){
+            replyCtr.remove();
+        }
+    });
+}
+
 $(document).ready(function () {
     setHighlight();
     setSortLabel();
+
+    if(scrollTo == 'commentSection') scrollToCommentSection();
 });
