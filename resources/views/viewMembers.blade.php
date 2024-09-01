@@ -118,7 +118,7 @@
                         <td> <a href="/publicProfile/{{$user->id}}">{{ $user->name }}</a>
                             <br> {{$user->email}}
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if ($user->lastLog !== null)
                                 @if ($user->lastLog->diffInYears($currentTime) > 0)
                                     {{ $user->lastLog->diffInYears($currentTime) }} tahun
@@ -137,7 +137,7 @@
                                 <p class="text-center">-</p>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if ($user->created_at->diffInYears($currentTime) > 0)
                                 {{ $user->created_at->diffInYears($currentTime) }} tahun
                             @endif
