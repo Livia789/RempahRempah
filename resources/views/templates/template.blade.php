@@ -81,7 +81,8 @@
                                     <li><a class="dropdown-item" href="/myBookmarks">Markah</a></li>
                                 @else
                                     @if (Auth::user()->role == 'admin')
-                                        <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
+                                    <li><a class="dropdown-item" href="/addRecipe">Tambah Resep</a></li>
+                                    <li><a class="dropdown-item" href="/viewMembers">Daftar Pengguna</a></li>
                                     @endif
                                     <li><a class="dropdown-item" href="/recipeVerification">Verifikasi Resep</a></li>
                                 @endif

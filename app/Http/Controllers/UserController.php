@@ -26,6 +26,9 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($credentials, true)) {
+            $user = User::where('email', $req->email)->first();
+            $user->lastLog = Carbon::now();
+            $user->save();
             return redirect('/')->with('successMessage', 'Selamat datang kembali, '.Auth::user()->name.'!');
         } else {
             return back()->with('loginFailed', 'Email atau kata sandi salah.');
@@ -62,7 +65,7 @@ class UserController extends Controller
             $user->name = $req->name;
             $user->email = $req->email;
             $user->password = bcrypt($req->password);
-
+            $user->lastLog = Carbon::now();
             $user->save();
 
             Auth::attempt([
