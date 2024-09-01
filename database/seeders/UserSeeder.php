@@ -115,5 +115,15 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Ahli Gizi 2',
+            'email' => 'ahligizi2@gmail.com',
+            'password' => bcrypt('wadimor'),
+            'role' => 'ahli_gizi',
+            'accountStatus' => 'verified',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }
