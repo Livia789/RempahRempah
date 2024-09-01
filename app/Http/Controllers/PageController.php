@@ -477,4 +477,41 @@ class PageController extends Controller
         $recipes = $user->cookingHistoryRecipes();
         return view('myCookingHistory', compact('user', 'recipes'));
     }
+
+    public function showViewMembersPage() {
+        $userMembers = User::where('role', 'member');
+        $currentTime = Carbon::now();
+
+        // $sort = $req->input('sort', 'name');
+        // $direction = $req->input('direction', 'asc');
+
+        // if ($sort == 'last_active') {
+        //     $userMembers->orderBy('lastLog', $direction);
+        // } else if ($sort == 'account_age') {
+        //     $userMembers->orderBy('created_at', $direction);
+        // } else if ($sort == 'private') {
+        //     $userMembers->withCount([
+        //         'recipes as private_count' => function ($query) {
+        //             $query->where('type', 'private');
+        //         }
+        //     ])->orderBy('private_count', $direction);
+        // } else if ($sort == 'public_unverified') {
+        //     $userMembers->withCount([
+        //         'recipes as public_unverified_count' => function ($query) {
+        //             $query->where('type', 'public')->where('is_verified_by_ahli_gizi', false);
+        //         }
+        //     ])->orderBy('public_unverified_count', $direction);
+        // } else if ($sort == 'public_verified') {
+        //     $userMembers->withCount([
+        //         'recipes as public_verified_count' => function ($query) {
+        //             $query->where('type', 'public')->where('is_verified_by_ahli_gizi', true);
+        //         }
+        //     ])->orderBy('public_verified_count', $direction);
+        // } else {
+        //     $userMembers->withCount('recipes')->orderBy('recipes_count', $direction);
+        // }
+
+        $userMembers = $userMembers->paginate(10);
+        return view('viewMembers', compact('userMembers', 'currentTime'));
+    }
 }

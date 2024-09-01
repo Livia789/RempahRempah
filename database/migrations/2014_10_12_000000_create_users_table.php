@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default('member');
             $table->string('accountStatus')->default('new');
             $table->string('img')->default('storage/users/default_profile_img.png');
+            $table->timestamp('lastLog')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
