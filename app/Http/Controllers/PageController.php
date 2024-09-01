@@ -514,4 +514,11 @@ class PageController extends Controller
         $userMembers = $userMembers->paginate(10);
         return view('viewMembers', compact('userMembers', 'currentTime'));
     }
+
+    public function showViewAhliGiziPage(){
+        $userAhliGizis = User::where('role', 'ahli_gizi')->paginate(10);
+        $currentTime = Carbon::now();
+        $totalRecipeVerified = Recipe::where('is_verified_by_ahli_gizi', true)->count();
+        return view('viewAhliGizi', compact('userAhliGizis', 'currentTime', 'totalRecipeVerified'));
+    }
 }

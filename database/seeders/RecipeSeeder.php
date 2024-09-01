@@ -21,7 +21,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "3",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => null,
@@ -45,7 +45,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "4",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "8",
@@ -69,7 +69,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "5",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => "6",
                 "sub_category_2_id" => null,
@@ -96,7 +96,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "6",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => null,
@@ -120,7 +120,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "7",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -144,7 +144,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "8",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -168,7 +168,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "9",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "9",
@@ -192,7 +192,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "10",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "9",
@@ -216,7 +216,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "11",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -240,7 +240,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "12",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -264,7 +264,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "3",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => "5",
                 "sub_category_2_id" => "13",
@@ -288,7 +288,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "4",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -312,7 +312,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "5",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -336,7 +336,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "6",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -360,7 +360,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "7",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -384,7 +384,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "8",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "13",
@@ -408,7 +408,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "9",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "2",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "8",
@@ -432,7 +432,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "10",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "1",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "10",
@@ -456,7 +456,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "11",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "11",
@@ -480,7 +480,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "12",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "3",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -867,7 +867,7 @@ class RecipeSeeder extends Seeder
             [
                 "user_id" => "8",
                 "admin_id" => "1",
-                "ahli_gizi_id" => "2",
+                "ahli_gizi_id" => "13",
                 "category_id" => "4",
                 "sub_category_1_id" => null,
                 "sub_category_2_id" => "12",
@@ -926,7 +926,7 @@ class RecipeSeeder extends Seeder
                 "duration" => "30",
                 "img" => "storage/recipeAssets/recipes38/recipes38.png",
                 "vid" => null,
-                "is_verified_by_admin" => false,
+                "is_verified_by_admin" => true,
                 "is_verified_by_ahli_gizi" => false,
                 "type" => "public",
                 "company_id" => null,
