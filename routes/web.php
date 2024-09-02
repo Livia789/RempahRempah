@@ -109,6 +109,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/rejectRecipe', [RecipeController::class, 'rejectRecipe']);
     Route::post('/approveRecipe', [RecipeController::class, 'approveRecipe']);
     Route::get('/viewMembers', [PageController::class, 'showViewMembersPage']);
+    Route::get('/viewAhliGizi', [PageController::class, 'showViewAhliGiziPage']);
 });
 
 Route::group(['middleware' => ['ahligizi']], function () {

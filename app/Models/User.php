@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -42,7 +43,7 @@ class User extends Authenticatable
     protected $casts = [
         'lastLog' => 'datetime',
     ];
-    
+
     public function avoidedIngredients(){
         return $this->hasMany(AvoidedIngredient::class);
     }
@@ -107,5 +108,17 @@ class User extends Authenticatable
 
     public function cookingHistoryRecipes(){
         return $this->belongsToMany(Recipe::class, 'cooking_histories')->withPivot(['created_at'])->orderByDesc('cooking_histories.created_at')->get();
+    }
+
+    public function totalNutritionAdded($user_id){
+        $ahli_gizi = User::find($user_id);
+        $recipes = Recipe::where('ahli_gizi_id', $ahli_gizi->id)->where('is_verified_by_ahli_gizi', true)->get();
+        return $recipes->count();
+    }
+
+    public function totalNutritionToBeAdded($user_id){
+        $ahli_gizi = User::find($user_id);
+        $recipes = Recipe::where('ahli_gizi_id', $ahli_gizi->id)->where('is_verified_by_ahli_gizi', false)->where('is_verified_by_admin', true)->get();
+        return $recipes->count();
     }
 }
